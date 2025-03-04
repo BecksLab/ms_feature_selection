@@ -6,11 +6,16 @@ using SpeciesInteractionNetworks
 
 import SpeciesInteractionNetworks.Mangal
 
+include("lib/_internals.jl");
+
 # query the ID number and other metadata for all ecological networks archived on mangal.io
 
 number_of_networks = count(Mangal.MangalNetwork)
 count_per_page = 100
 number_of_pages = convert(Int, ceil(number_of_networks/count_per_page))
+
+# TODO
+# Need to grab the references of networks we end up using as well
 
 mangal_networks = DataFrame(
     id = Int64[],
@@ -47,18 +52,19 @@ end
 fw = (mangal_networks.predators .+ mangal_networks.herbivores) ./ mangal_networks.links .== 1
 mangal_foodwebs = mangal_networks[fw, :]
 
-# 20 datasets for now just for initial testing
-
 # make a nice 'dataframe' to store network data
 mangal_topology = DataFrame(
-    id = Int64[],
+    id = Any[],
     richness = Int64[],
     links = Int64[],
     connectance = Float64[],
+    diameter = Int64[],
     complexity = Float64[],
     distance = Float64[],
     basal = Float64[],
     top = Float64[],
+    generality = Float64[],
+    vulnerability = Float64[],
     S1 = Float64[],
     S2 = Float64[],
     S4 = Float64[],
@@ -81,27 +87,14 @@ networks = DataFrame(
         N = render(Binary, N) # make binary
 
         d = _network_summary(N)
+        d[:id] = mangal_foodwebs.id[i]
 
-        D = Dict{Symbol,Any}()
-        D[:id] = mangal_foodwebs.id[i]
-        D[:richness] = d[:richness]
-        D[:links] = d[:links]
-        D[:connectance] = d[:connectance]
-        D[:complexity] = d[:complexity]
-        D[:distance] = d[:distance]
-        D[:basal] = d[:basal]
-        D[:top] = d[:top]
-        D[:S1] = d[:S1]
-        D[:S2] = d[:S2]
-        D[:S4] = d[:S4]
-        D[:S5] = d[:S5]
-        push!(mangal_topology, D)
+        # send to df
+        push!(mangal_topology, d)
 end
 
 ## Write networks as object
-save_object("data/raw/mangal/mangal_networks.jlds", networks)
-
-## Write file
-CSV.write("data/processed/mangal_networks_metadata.csv", mangal_foodwebs)
-CSV.write("data/raw/mangal/mangal_networks.csv", networks)
-CSV.write("data/processed/mangal_summary.csv", mangal_topology)
+save_object("code/data/mangal/mangal_networks.jlds", networks)
+## Write files
+CSV.write("code/data/mangal/mangal_networks_metadata.csv", mangal_foodwebs)
+CSV.write("code/data/mangal/mangal_summary.csv", mangal_topology)
