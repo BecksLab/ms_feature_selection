@@ -12,26 +12,29 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
 
     A = _get_matrix(N)
 
+    L = links(N)
+    S = richness(N)
+
     _gen = SpeciesInteractionNetworks.generality(N)
-    gen = collect(values(_gen))
+    gen = (collect(values(_gen)) * (1/(L/S)))
     vul = collect(values(SpeciesInteractionNetworks.vulnerability(N)))
     ind_maxgen = findmax(gen)[2]
 
     D = Dict{Symbol,Any}(
-        :richness => richness(N),
-        :links => links(N),
+        :richness => S,
+        :links => L,
         :connectance => connectance(N),
         :diameter => diameter(N),
         :complexity => complexity(N),
         :distance => distancetobase(N, collect(keys(_gen))[ind_maxgen]),
-        :basal => sum(vec(sum(A, dims = 2) .== 0)),
-        :top => sum(vec(sum(A, dims = 1) .== 0)),
+        :basal => sum(vec(sum(A, dims = 2) .== 0))/S,
+        :top => sum(vec(sum(A, dims = 1) .== 0))/S,
         :generality => std(gen),
         :vulnerability => std(vul),
-        :S1 => length(findmotif(motifs(Unipartite, 3)[1], N)),
-        :S2 => length(findmotif(motifs(Unipartite, 3)[2], N)),
-        :S4 => length(findmotif(motifs(Unipartite, 3)[4], N)),
-        :S5 => length(findmotif(motifs(Unipartite, 3)[5], N)),
+        :S1 => length(findmotif(motifs(Unipartite, 3)[1], N))/S,
+        :S2 => length(findmotif(motifs(Unipartite, 3)[2], N))/S,
+        :S4 => length(findmotif(motifs(Unipartite, 3)[4], N))/S,
+        :S5 => length(findmotif(motifs(Unipartite, 3)[5], N))/S,
     )
 
     return D
