@@ -94,7 +94,7 @@ networks = DataFrame(
 end
 
 ## Write networks as object
-save_object("code/data/mangal/mangal_networks.jlds", networks)
+save_object("data/mangal/mangal_networks.jlds", networks)
 ## Write files
-CSV.write("code/data/mangal/mangal_networks_metadata.csv", mangal_foodwebs)
-CSV.write("code/data/mangal/mangal_summary.csv", mangal_topology)
+CSV.write("data/mangal/mangal_networks_metadata.csv", mangal_foodwebs)
+CSV.write("data/mangal/mangal_summary.csv", mangal_topology)
