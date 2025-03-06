@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.13">
+<meta name="generator" content="quarto-1.7.14">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tanya Strydom">
 <meta name="author" content="Andrew P. Beckerman">
-<meta name="dcterms.date" content="2025-03-05">
+<meta name="dcterms.date" content="2025-03-06">
 <meta name="keywords" content="food web, structure, dimensionality reduction">
 
 <title>Finding the mjor descriptors of species networks</title>
@@ -54,7 +54,7 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-66ab7fd5e73b7f0a764e0d49b3e29ab1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-8c4c3d43a67d5579f14f1e6229e0c929.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-4c3f21f622398162bebe0d2c2d806a7a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -65,6 +65,35 @@ div.csl-indent {
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta name="citation_title" content="Finding the mjor descriptors of species networks">
 <meta name="citation_abstract" content="TODO
@@ -72,10 +101,10 @@ div.csl-indent {
 <meta name="citation_keywords" content="food web,structure,dimensionality reduction">
 <meta name="citation_author" content="Tanya Strydom">
 <meta name="citation_author" content="Andrew P. Beckerman">
-<meta name="citation_publication_date" content="2025-03-05">
-<meta name="citation_cover_date" content="2025-03-05">
+<meta name="citation_publication_date" content="2025-03-06">
+<meta name="citation_cover_date" content="2025-03-06">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-03-05">
+<meta name="citation_online_date" content="2025-03-06">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Major dimensions in food-web structure properties;,citation_abstract=The covariance among a range of 20 network structural properties of food webs plus net primary productivity was assessed for 14 published food webs using principal components analysis. Three primary components explained 84% of the variability in the data sets, suggesting substantial covariance among the properties employed in the literature. The first dimension explained 48% of the variance and could be ascribed to connectance, covarying significantly with the proportion of intermediate species and characteristic path length. The second dimension explained 19% and was related to trophic species richness. The third axis explained 17% and was related to ecosystem net primary productivity. A distinct opposite clustering of connectance, the proportion of intermediate species, and mean trophic level vs. the proportion of top and basal species and path length suggests a dichotomy in food-web structure. Food webs appear either clustered and highly interconnected or elongated with fewer links.;,citation_author=Jan E. Vermaat;,citation_author=Jennifer A. Dunne;,citation_author=Alison J. Gilbert;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;,citation_issue=1;,citation_doi=10.1890/07-0978.1;,citation_issn=1939-9170;,citation_volume=90;,citation_language=en-US;,citation_journal_title=Ecology;">
 </head>
@@ -119,7 +148,7 @@ div.csl-indent {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">March 5, 2025</p>
+              <p class="date">March 6, 2025</p>
             </div>
           </div>
           
@@ -166,6 +195,109 @@ div.csl-indent {
 
 
 <p>Blah blah blah <span class="citation" data-cites="vermaatMajorDimensionsFoodweb2009">Vermaat, Dunne, and Gilbert (<a href="#ref-vermaatMajorDimensionsFoodweb2009" role="doc-biblioref">2009</a>)</span></p>
+<div id="tbl-properties" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: An informative caption about the different network properties
+</figcaption>
+<div aria-describedby="tbl-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Label</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Basal</td>
+<td>Percentage of basal taxa (taxa without resources)</td>
+</tr>
+<tr class="even">
+<td>Connectance</td>
+<td><span class="math inline">\(L/S^2\)</span>, where <span class="math inline">\(S\)</span> is the number of species and <span class="math inline">\(L\)</span> the number of links</td>
+</tr>
+<tr class="odd">
+<td>Cannibal</td>
+<td>Percentage of cannibals</td>
+</tr>
+<tr class="even">
+<td>ChLen</td>
+<td>Mean food chain length, averaged over all species</td>
+</tr>
+<tr class="odd">
+<td>ChSD</td>
+<td>Standard deviation of ChLen</td>
+</tr>
+<tr class="even">
+<td>ChNum</td>
+<td>log number of food chains</td>
+</tr>
+<tr class="odd">
+<td>Clust</td>
+<td>mean clustering coefficient (probability that two taxa linked to the same taxon are also linked)</td>
+</tr>
+<tr class="even">
+<td>GenSD</td>
+<td>Normalized standard deviation of generality of a species standardized by <span class="math inline">\(L/S\)</span></td>
+</tr>
+<tr class="odd">
+<td>Herbivore</td>
+<td>Percentage of herbivores plus detritivores (taxa that feed on basal taxa)</td>
+</tr>
+<tr class="even">
+<td>Intermediate</td>
+<td>percentage of intermediate taxa (with both consumers and resources)LinkSD normalized standard deviation of links (number of consumers plus resources per taxon)</td>
+</tr>
+<tr class="odd">
+<td>Loop</td>
+<td>Percentage of taxa in loops (food chains in which a taxon occurs twice)L/S links per species</td>
+</tr>
+<tr class="even">
+<td>MaxSim</td>
+<td>Mean of the maximum trophic similarity of each taxon to other taxa, the number of predators and prey shared by a pair of species divided by their total number of predators and prey</td>
+</tr>
+<tr class="odd">
+<td>Omnivory</td>
+<td>Percentage of omnivores (taxa that feed on <span class="math inline">\(\geq\)</span> 2 taxa with different trophic levels)</td>
+</tr>
+<tr class="even">
+<td>Path</td>
+<td>characteristic path length, the mean shortest food chain length between species pairs</td>
+</tr>
+<tr class="odd">
+<td>Richness</td>
+<td>Number of trophic species, or taxa</td>
+</tr>
+<tr class="even">
+<td>TL</td>
+<td>Short-weighted trophic level averaged across taxa</td>
+</tr>
+<tr class="odd">
+<td>Top</td>
+<td>Percentage of top taxa (taxa without consumers)</td>
+</tr>
+<tr class="even">
+<td>VulSD</td>
+<td>Normalized standard deviation of vulnerability of a species standardized by <span class="math inline">\(L/S\)</span></td>
+</tr>
+<tr class="odd">
+<td>Links</td>
+<td>The number of links in the network</td>
+</tr>
+<tr class="even">
+<td>Diameter</td>
+<td>Diameter of food web, the longest shortest path between two nodes</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 <section id="references" class="level1 unnumbered">
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
