@@ -60,3 +60,6 @@ PermTrias.Rproj
 
 # User-specific files
 .Ruserdata
+
+# scrap paper
+code/scrap.jl
