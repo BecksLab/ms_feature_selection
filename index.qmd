@@ -52,7 +52,7 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 | Omnivory | Percentage of omnivores (taxa that feed on $\geq$ 2 taxa with different trophic levels) |
 | Path | characteristic path length, the mean shortest food chain length between species pairs |
 | Richness | Number of trophic species, or taxa |
-| TL | Short-weighted trophic level averaged across taxa |
+| TL | prey-weighted trophic level averaged across taxa [@williamsLimitsTrophicLevels2004] |
 | Top | Percentage of top taxa (taxa without consumers) |
 | VulSD | Normalized standard deviation of vulnerability of a species standardized by $L/S$ |
 | Links | The number of links in the network |
