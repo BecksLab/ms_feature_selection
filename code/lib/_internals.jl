@@ -17,9 +17,14 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
 
     _gen = SpeciesInteractionNetworks.generality(N)
     gen = collect(values(_gen))
-    vul = collect(values(SpeciesInteractionNetworks.vulnerability(N)))
+    _vul = SpeciesInteractionNetworks.vulnerability(N)
+    vul = collect(values(_vul))
     ind_maxgen = findmax(gen)[2]
     l_s = L/S
+    top = [k for (k,v) in _vul if v==0]
+    tl = trophic_level(N)
+
+    cl = [v for (k,v) in tl if k ∈ top]
 
     D = Dict{Symbol,Any}(
         :richness => S,
@@ -33,7 +38,10 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :l_S => l_s,
         :generality => std(gen)/l_s,
         :vulnerability => std(vul)/l_s,
-        :trophic_level => mean(collect(values(trophic_level(N)))),
+        :trophic_level => mean(collect(values(tl))),
+        :cl_mean => mean(cl),
+        :cl_std => std(cl),
+        :log_fc => log(length(cl)),
         :S1 => length(findmotif(motifs(Unipartite, 3)[1], N)),
         :S2 => length(findmotif(motifs(Unipartite, 3)[2], N)),
         :S4 => length(findmotif(motifs(Unipartite, 3)[4], N)),
