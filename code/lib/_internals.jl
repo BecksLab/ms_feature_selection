@@ -42,6 +42,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :cl_mean => mean(cl),
         :cl_std => std(cl),
         :log_fc => log(length(cl)),
+        :path => mean(pathlengths(N)),
         :S1 => length(findmotif(motifs(Unipartite, 3)[1], N)),
         :S2 => length(findmotif(motifs(Unipartite, 3)[2], N)),
         :S4 => length(findmotif(motifs(Unipartite, 3)[4], N)),
@@ -130,4 +131,26 @@ function trophic_level(N::SpeciesInteractionNetwork)
     end
     # return trophic level Dict
     return pls  
+end
+
+"""
+pathlengths(N::SpeciesInteractionNetwork)
+
+    Returns the shortest pathlengths between all species pairs for a network
+"""
+function pathlengths(N::SpeciesInteractionNetwork)
+    
+    sp = species(N);
+    path = Any[]
+
+    for i in eachindex(sp)
+
+        _path = collect(values(shortestpath(N, sp[i])))
+
+        if length(_path) > 0
+            append!(path, _path)
+        end
+    end
+
+    return path
 end
