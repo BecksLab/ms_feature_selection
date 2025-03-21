@@ -65,6 +65,7 @@ mangal_topology = DataFrame(
     top = Float64[],
     generality = Float64[],
     vulnerability = Float64[],
+    trophic_level = Float64[],
     S1 = Float64[],
     S2 = Float64[],
     S4 = Float64[],
@@ -80,7 +81,7 @@ networks = DataFrame(
     N = simplify(mangalnetwork(mangal_foodwebs.id[i]))
 
         N_d = Dict{Symbol,Any}()
-        N_d[:id] =mangal_foodwebs.id[i]
+        N_d[:id] = mangal_foodwebs.id[i]
         N_d[:network] = N
         push!(networks, N_d) # push network 'as is'
 
