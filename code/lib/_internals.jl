@@ -31,6 +31,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :top => sum(vec(sum(A, dims = 1) .== 0))/S,
         :generality => std(gen),
         :vulnerability => std(vul),
+        :trophic_level => mean(collect(values(trophic_level(N)))),
         :S1 => length(findmotif(motifs(Unipartite, 3)[1], N))/S,
         :S2 => length(findmotif(motifs(Unipartite, 3)[2], N))/S,
         :S4 => length(findmotif(motifs(Unipartite, 3)[4], N))/S,
@@ -95,3 +96,53 @@ function diameter(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
 end
 
 _parser(x) = parse(Int, x)
+
+"""
+trophic_level(N::SpeciesInteractionNetwork)
+
+    Calculates the prey-averaged trophic level of all species in a network. 
+
+    Williams, Richard J., and Neo D. Martinez. 2004. “Limits to Trophic Levels and Omnivory in Complex Food Webs: Theory and Data.” The American Naturalist 163 (3): 458–68. https://doi.org/10.1086/381964.
+"""
+function trophic_level(N::SpeciesInteractionNetwork)
+
+    sp = species(N);
+    gen = SpeciesInteractionNetworks.generality(N);
+    collect(values(gen));
+
+    basal = [k for (k,v) in gen if v==0];
+
+    # dictionary for path lengths
+    pls = Dict{Any, Any}()
+    # dictionary for trophic levels
+    tl = Dict{Any, Any}()
+
+    for i in eachindex(sp) 
+
+        # for each species find all path length
+        path = shortestpath(N, sp[i]);
+
+        path_basal = [v for (k,v) in path if k ∈ basal]
+
+        if length(path_basal) > 0
+            # find shortest path to a basal species
+            pls[sp[i]] = findmin(path_basal)[1]
+        else
+            pls[sp[i]] = 0.0
+        end
+    end
+
+    for i in eachindex(sp) 
+        # find prey of spp i
+        prey = collect(successors(N, sp[i]))
+
+        if length(prey) > 0
+            # calculate tl of spp i
+            tl[sp[i]] = 1.0 + sum([v for (k,v) in pls if k ∈ prey] .* 1/length(prey))
+        else
+            tl[sp[i]] = 1.0
+        end
+    end
+    # return trophic level Dict
+    return tl  
+end
