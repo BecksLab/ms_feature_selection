@@ -32,10 +32,10 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :generality => std(gen),
         :vulnerability => std(vul),
         :trophic_level => mean(collect(values(trophic_level(N)))),
-        :S1 => length(findmotif(motifs(Unipartite, 3)[1], N))/S,
-        :S2 => length(findmotif(motifs(Unipartite, 3)[2], N))/S,
-        :S4 => length(findmotif(motifs(Unipartite, 3)[4], N))/S,
-        :S5 => length(findmotif(motifs(Unipartite, 3)[5], N))/S,
+        :S1 => length(findmotif(motifs(Unipartite, 3)[1], N)),
+        :S2 => length(findmotif(motifs(Unipartite, 3)[2], N)),
+        :S4 => length(findmotif(motifs(Unipartite, 3)[4], N)),
+        :S5 => length(findmotif(motifs(Unipartite, 3)[5], N)),
     )
 
     return D
