@@ -16,9 +16,10 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
     S = richness(N)
 
     _gen = SpeciesInteractionNetworks.generality(N)
-    gen = (collect(values(_gen)) * (1/(L/S)))
+    gen = collect(values(_gen))
     vul = collect(values(SpeciesInteractionNetworks.vulnerability(N)))
     ind_maxgen = findmax(gen)[2]
+    l_s = L/S
 
     D = Dict{Symbol,Any}(
         :richness => S,
@@ -29,14 +30,17 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :distance => distancetobase(N, collect(keys(_gen))[ind_maxgen]),
         :basal => sum(vec(sum(A, dims = 2) .== 0))/S,
         :top => sum(vec(sum(A, dims = 1) .== 0))/S,
-        :generality => std(gen),
-        :vulnerability => std(vul),
+        :l_S => l_s,
+        :generality => std(gen)/l_s,
+        :vulnerability => std(vul)/l_s,
         :trophic_level => mean(collect(values(trophic_level(N)))),
         :S1 => length(findmotif(motifs(Unipartite, 3)[1], N)),
         :S2 => length(findmotif(motifs(Unipartite, 3)[2], N)),
         :S4 => length(findmotif(motifs(Unipartite, 3)[4], N)),
         :S5 => length(findmotif(motifs(Unipartite, 3)[5], N)),
     )
+
+    D[:intermediate] = 1 - D[:top] - D[:basal]
 
     return D
 end
@@ -107,42 +111,15 @@ trophic_level(N::SpeciesInteractionNetwork)
 function trophic_level(N::SpeciesInteractionNetwork)
 
     sp = species(N);
-    gen = SpeciesInteractionNetworks.generality(N);
-    collect(values(gen));
 
-    basal = [k for (k,v) in gen if v==0];
 
     # dictionary for path lengths
     pls = Dict{Any, Any}()
-    # dictionary for trophic levels
-    tl = Dict{Any, Any}()
 
     for i in eachindex(sp) 
-
-        # for each species find all path length
-        path = shortestpath(N, sp[i]);
-
-        path_basal = [v for (k,v) in path if k ∈ basal]
-
-        if length(path_basal) > 0
-            # find shortest path to a basal species
-            pls[sp[i]] = findmin(path_basal)[1]
-        else
-            pls[sp[i]] = 0.0
-        end
-    end
-
-    for i in eachindex(sp) 
-        # find prey of spp i
-        prey = collect(successors(N, sp[i]))
-
-        if length(prey) > 0
-            # calculate tl of spp i
-            tl[sp[i]] = 1.0 + sum([v for (k,v) in pls if k ∈ prey] .* 1/length(prey))
-        else
-            tl[sp[i]] = 1.0
-        end
+        # find shortest path to a basal species
+        pls[sp[i]] = distancetobase(N, sp[i])
     end
     # return trophic level Dict
-    return tl  
+    return pls  
 end
