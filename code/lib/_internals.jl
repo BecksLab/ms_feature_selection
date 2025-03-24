@@ -209,3 +209,22 @@ function omnivore(N::SpeciesInteractionNetwork)
 
     return omni
 end
+
+"""
+cannibal(N::SpeciesInteractionNetwork)
+
+    Returns a vector of species that are cannibals (feed on themselves)
+"""
+function cannibal(N::SpeciesInteractionNetwork)
+
+    _cannibal = Any[];
+    sp = species(N);
+
+    prey = collect(successors(N, sp[i]))
+
+    if sp[i] ∈ prey
+        push!(_cannibal, sp[i])
+    end
+
+    return _cannibal
+end
