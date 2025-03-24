@@ -36,6 +36,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :basal => sum(vec(sum(A, dims = 2) .== 0))/S,
         :top => sum(vec(sum(A, dims = 1) .== 0))/S,
         :herbivory => length(herbivore(N))/S,
+        :omnivory => length(omnivore(N))/S,
         :l_S => l_s,
         :generality => std(gen)/l_s,
         :vulnerability => std(vul)/l_s,
@@ -181,4 +182,30 @@ function herbivore(N::SpeciesInteractionNetwork)
     end
     
     return herbivores
+end
+
+"""
+omnivore(N::SpeciesInteractionNetwork)
+
+    Returns a vector of species that are omnivores (feed on species of different trophic levels)
+"""
+function omnivore(N::SpeciesInteractionNetwork)
+
+    omni = Any[]
+
+    tl = trophic_level(N)
+    sp = species(N);
+
+    for i in eachindex(sp)
+        prey = collect(successors(N, sp[i]));
+
+        # return trophic level of prey
+        _tls = [v for (k,v) in tl if k ∈ prey];
+
+        if length(prey) > 0 && !allequal(_tls)
+            push!(omni, sp[i])
+        end
+    end
+
+    return omni
 end
