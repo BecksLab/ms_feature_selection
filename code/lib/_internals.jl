@@ -35,6 +35,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :distance => distancetobase(N, collect(keys(_gen))[ind_maxgen]),
         :basal => sum(vec(sum(A, dims = 2) .== 0))/S,
         :top => sum(vec(sum(A, dims = 1) .== 0))/S,
+        :herbivory => length(herbivore(N))/S,
         :l_S => l_s,
         :generality => std(gen)/l_s,
         :vulnerability => std(vul)/l_s,
@@ -154,4 +155,30 @@ function pathlengths(N::SpeciesInteractionNetwork)
     end
 
     return path
+end
+
+"""
+herbivore(N::SpeciesInteractionNetwork)
+
+    Returns a vector of species that are herbivores (only consume basal species)
+"""
+function herbivore(N::SpeciesInteractionNetwork)
+
+    gen = SpeciesInteractionNetworks.generality(N);
+    basal = [k for (k,v) in gen if v==0];
+
+    sp = species(N);
+
+    herbivores = Any[]
+
+    for i in eachindex(sp)
+
+        prey = collect(successors(N, sp[i]))
+
+        if length(prey) > 0 && prey ⊆ basal
+            push!(herbivores, sp[i])
+        end
+    end
+    
+    return herbivores
 end
