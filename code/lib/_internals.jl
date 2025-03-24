@@ -37,6 +37,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :top => sum(vec(sum(A, dims = 1) .== 0))/S,
         :herbivory => length(herbivore(N))/S,
         :omnivory => length(omnivore(N))/S,
+        :cannibal => length(cannibal(N))/S,
         :l_S => l_s,
         :generality => std(gen)/l_s,
         :vulnerability => std(vul)/l_s,
@@ -62,17 +63,17 @@ end
 
 Returns the maximum possible rank of a Network
 """
-function maxrank(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
+function maxrank(N::SpeciesInteractionNetwork)
     return minimum(size(N))
 end
 
 """
-_get_matrix(N::SpeciesInteractionNetwork{<:Partiteness, <:Binary})
+_get_matrix(N::SpeciesInteractionNetwork)
 
     Internal function to return a matrix of interactions from a
     SpeciesInteractionNetwork
 """
-function _get_matrix(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
+function _get_matrix(N::SpeciesInteractionNetwork)
 
     species = richness(N)
     n = zeros(Int64, (species, species))
@@ -88,12 +89,12 @@ function _get_matrix(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
 end
 
 """
-diameter(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
+diameter(N::SpeciesInteractionNetwork)
 
     Calculates the diameter of a food web. Where diameter is the longest 
     shortest path between two nodes
 """
-function diameter(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
+function diameter(N::SpeciesInteractionNetwork)
 
     # extract species names
     spp = species(N)
@@ -220,10 +221,12 @@ function cannibal(N::SpeciesInteractionNetwork)
     _cannibal = Any[];
     sp = species(N);
 
-    prey = collect(successors(N, sp[i]))
+    for i in eachindex(sp)
+        prey = collect(successors(N, sp[i]))
 
-    if sp[i] ∈ prey
-        push!(_cannibal, sp[i])
+        if sp[i] ∈ prey
+            push!(_cannibal, sp[i])
+        end    
     end
 
     return _cannibal
