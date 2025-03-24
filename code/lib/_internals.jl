@@ -164,8 +164,8 @@ herbivore(N::SpeciesInteractionNetwork)
 """
 function herbivore(N::SpeciesInteractionNetwork)
 
-    gen = SpeciesInteractionNetworks.generality(N);
-    basal = [k for (k,v) in gen if v==0];
+    tl = trophic_level(N)
+    basal = [k for (k,v) in tl if v==1.0];
 
     sp = species(N);
 
