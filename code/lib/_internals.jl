@@ -25,6 +25,9 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
     tl = trophic_level(N)
 
     cl = [v for (k,v) in tl if k ∈ top]
+    if length(cl) == 0
+        cl = 0.0
+    end
 
     D = Dict{Symbol,Any}(
         :richness => S,
