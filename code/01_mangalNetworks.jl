@@ -55,21 +55,31 @@ mangal_foodwebs = mangal_networks[fw, :]
 # make a nice 'dataframe' to store network data
 mangal_topology = DataFrame(
     id = Any[],
-    richness = Int64[],
-    links = Int64[],
-    connectance = Float64[],
-    diameter = Int64[],
-    complexity = Float64[],
-    distance = Float64[],
-    basal = Float64[],
-    top = Float64[],
-    generality = Float64[],
-    vulnerability = Float64[],
-    trophic_level = Float64[],
-    S1 = Float64[],
-    S2 = Float64[],
-    S4 = Float64[],
-    S5 = Float64[],
+    richness = Any[],
+    links = Any[],
+    connectance = Any[],
+    diameter = Any[],
+    complexity = Any[],
+    distance = Any[],
+    basal = Any[],
+    top = Any[],
+    intermediate = Any[],
+    herbivory = Any[],
+    omnivory = Any[],
+    cannibal = Any[],
+    l_S = Any[],
+    generality = Any[],
+    vulnerability = Any[],
+    trophic_level = Any[],
+    cl_mean = Any[],
+    cl_std = Any[],
+    log_fc = Any[],
+    path = Any[],
+    link_SD = Any[],
+    S1 = Any[],
+    S2 = Any[],
+    S4 = Any[],
+    S5 = Any[],
 );
 
 # make object to store each network so we can import it later
@@ -85,7 +95,7 @@ networks = DataFrame(
         N_d[:network] = N
         push!(networks, N_d) # push network 'as is'
 
-        N = render(Binary, N) # make binary
+        N = simplify(render(Binary, N)) # make binary
 
         d = _network_summary(N)
         d[:id] = mangal_foodwebs.id[i]
