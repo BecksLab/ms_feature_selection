@@ -107,8 +107,11 @@ function diameter(N::SpeciesInteractionNetwork)
     # get shortest path
     for i in eachindex(spp)
 
-        shortpath[i] = length(shortestpath(N, spp[i]))
+        paths = collect(values(shortestpath(N, spp[i])))
 
+        if length(paths) > 0
+            shortpath[i] = findmax(paths)[1]
+        end
     end
 
     # return max shortest path
