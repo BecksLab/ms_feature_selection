@@ -1,9 +1,11 @@
 ##Load packages
 library(caret)
 library(corrplot)
-library(FactoMineR) 
+library(FactoMineR)
 library(here)
 library(tidyverse)
+
+setwd(here::here("code"))
 
 # import network summary data
 topology_mangal <- read.csv("data/mangal/mangal_summary.csv") %>%
@@ -12,7 +14,7 @@ topology_mangal <- read.csv("data/mangal/mangal_summary.csv") %>%
 # 1: look at correlation first
 
 #scale all features
-topology_scaled <- scale(topology_mangal[1:ncol(topology_mangal)],
+topology_scaled <- scale(topology_mangal[2:ncol(topology_mangal)],
                          center = TRUE, scale = TRUE)
 
 # correlation matrix
@@ -24,7 +26,7 @@ corrplot(cor_matrix, order = "hclust")
 # select the cutoff 
 corr_cutoff <- 0.85
 # subset by cutoff
-hc = findCorrelation(cor_matrix, cutoff = corr_cutoff) 
+hc = findCorrelation(cor_matrix, cutoff = corr_cutoff)
 
 # subset 
 topology_scaled_subset <- topology_scaled[,-hc]

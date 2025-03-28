@@ -37,7 +37,7 @@ corr_vars = [[names(var_df, idx.I[1]); names(var_df, idx.I[2])] for idx in high]
 pca_matrix = Array(var_df)'
 
 # scale
-X = Matrix(fit(ZScoreTransform, pca_matrix; dims=2))
+X = Matrix(fit(ZScoreTransform, pca_matrix; dims = 2))
 StatsBase.transform(X, pca_matrix)
 
 # PCA:
@@ -49,7 +49,15 @@ names(var_df)
 
 df_transformed = projection(M)' * (pca_matrix .- mean(M))
 
-h = plot(df_transformed[1,:], df_transformed[2,:], seriestype=:scatter, label="")
-plot!(xlabel="PC1", ylabel="PC2", framestyle=:box)
-for i=1:4; plot!([0,proj[i,1]], [0,proj[i,2]], arrow=true, label=names(var_df)[i], legend=:bottomleft); end
+h = plot(df_transformed[1, :], df_transformed[2, :], seriestype = :scatter, label = "")
+plot!(xlabel = "PC1", ylabel = "PC2", framestyle = :box)
+for i = 1:4
+    plot!(
+        [0, proj[i, 1]],
+        [0, proj[i, 2]],
+        arrow = true,
+        label = names(var_df)[i],
+        legend = :bottomleft,
+    )
+end
 display(h)

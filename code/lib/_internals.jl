@@ -20,11 +20,11 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
     _vul = SpeciesInteractionNetworks.vulnerability(N)
     vul = collect(values(_vul))
     ind_maxgen = findmax(gen)[2]
-    l_s = L/S
-    top = [k for (k,v) in _vul if v==0]
+    l_s = L / S
+    top = [k for (k, v) in _vul if v == 0]
     tl = trophic_level(N)
 
-    cl = [v for (k,v) in tl if k ∈ top]
+    cl = [v for (k, v) in tl if k ∈ top]
     if length(cl) == 0
         cl = 0.0
     end
@@ -36,20 +36,20 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :diameter => diameter(N),
         :complexity => complexity(N),
         :distance => distancetobase(N, collect(keys(_gen))[ind_maxgen]),
-        :basal => sum(vec(sum(A, dims = 2) .== 0))/S,
-        :top => sum(vec(sum(A, dims = 1) .== 0))/S,
-        :herbivory => length(herbivore(N))/S,
-        :omnivory => length(omnivore(N))/S,
-        :cannibal => length(cannibal(N))/S,
+        :basal => sum(vec(sum(A, dims = 2) .== 0)) / S,
+        :top => sum(vec(sum(A, dims = 1) .== 0)) / S,
+        :herbivory => length(herbivore(N)) / S,
+        :omnivory => length(omnivore(N)) / S,
+        :cannibal => length(cannibal(N)) / S,
         :l_S => l_s,
-        :generality => std(gen)/l_s,
-        :vulnerability => std(vul)/l_s,
+        :generality => std(gen) / l_s,
+        :vulnerability => std(vul) / l_s,
         :trophic_level => mean(collect(values(tl))),
         :cl_mean => mean(cl),
         :cl_std => std(cl),
         :log_fc => log(length(cl)),
         :path => mean(pathlengths(N)),
-        :link_SD => std(values(degree(N)))/l_s,
+        :link_SD => std(values(degree(N))) / l_s,
         :S1 => length(findmotif(motifs(Unipartite, 3)[1], N)),
         :S2 => length(findmotif(motifs(Unipartite, 3)[2], N)),
         :S4 => length(findmotif(motifs(Unipartite, 3)[4], N)),
@@ -126,18 +126,18 @@ trophic_level(N::SpeciesInteractionNetwork)
 """
 function trophic_level(N::SpeciesInteractionNetwork)
 
-    sp = species(N);
+    sp = species(N)
 
 
     # dictionary for path lengths
-    pls = Dict{Any, Any}()
+    pls = Dict{Any,Any}()
 
-    for i in eachindex(sp) 
+    for i in eachindex(sp)
         # find shortest path to a basal species
         pls[sp[i]] = distancetobase(N, sp[i])
     end
     # return trophic level Dict
-    return pls  
+    return pls
 end
 
 """
@@ -146,8 +146,8 @@ pathlengths(N::SpeciesInteractionNetwork)
     Returns the shortest pathlengths between all species pairs for a network
 """
 function pathlengths(N::SpeciesInteractionNetwork)
-    
-    sp = species(N);
+
+    sp = species(N)
     path = Any[]
 
     for i in eachindex(sp)
@@ -170,9 +170,9 @@ herbivore(N::SpeciesInteractionNetwork)
 function herbivore(N::SpeciesInteractionNetwork)
 
     tl = trophic_level(N)
-    basal = [k for (k,v) in tl if v==1.0];
+    basal = [k for (k, v) in tl if v == 1.0]
 
-    sp = species(N);
+    sp = species(N)
 
     herbivores = Any[]
 
@@ -184,7 +184,7 @@ function herbivore(N::SpeciesInteractionNetwork)
             push!(herbivores, sp[i])
         end
     end
-    
+
     return herbivores
 end
 
@@ -198,13 +198,13 @@ function omnivore(N::SpeciesInteractionNetwork)
     omni = Any[]
 
     tl = trophic_level(N)
-    sp = species(N);
+    sp = species(N)
 
     for i in eachindex(sp)
-        prey = collect(successors(N, sp[i]));
+        prey = collect(successors(N, sp[i]))
 
         # return trophic level of prey
-        _tls = [v for (k,v) in tl if k ∈ prey];
+        _tls = [v for (k, v) in tl if k ∈ prey]
 
         if length(prey) > 0 && !allequal(_tls)
             push!(omni, sp[i])
@@ -221,15 +221,15 @@ cannibal(N::SpeciesInteractionNetwork)
 """
 function cannibal(N::SpeciesInteractionNetwork)
 
-    _cannibal = Any[];
-    sp = species(N);
+    _cannibal = Any[]
+    sp = species(N)
 
     for i in eachindex(sp)
         prey = collect(successors(N, sp[i]))
 
         if sp[i] ∈ prey
             push!(_cannibal, sp[i])
-        end    
+        end
     end
 
     return _cannibal
