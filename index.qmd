@@ -35,6 +35,9 @@ number-sections: true
 
 Blah blah blah @vermaatMajorDimensionsFoodweb2009
 
+*"It is incumbent on network ecologists to establish clearly the independence and uniqueness of the descriptive metrics used."* - @lauEcologicalNetworkMetrics2017
+
+
 | Label | Definition |
 |----|----|
 | Basal | Percentage of basal taxa (taxa without resources) |
