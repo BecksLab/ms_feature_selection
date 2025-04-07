@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.20">
+<meta name="generator" content="quarto-1.7.21">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tanya Strydom">
 <meta name="author" content="Andrew P. Beckerman">
-<meta name="dcterms.date" content="2025-04-03">
+<meta name="dcterms.date" content="2025-04-07">
 <meta name="keywords" content="food web, structure, dimensionality reduction">
 
 <title>Finding the mjor descriptors of species networks</title>
@@ -54,7 +54,7 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-6bb072e51ab976e338d8fd19b221fbe5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b2bd955b7378b94aa8c2ba4fafa553c9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-3633567391c49fee829cf872490df673.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -101,12 +101,13 @@ window.Quarto = {
 <meta name="citation_keywords" content="food web,structure,dimensionality reduction">
 <meta name="citation_author" content="Tanya Strydom">
 <meta name="citation_author" content="Andrew P. Beckerman">
-<meta name="citation_publication_date" content="2025-04-03">
-<meta name="citation_cover_date" content="2025-04-03">
+<meta name="citation_publication_date" content="2025-04-07">
+<meta name="citation_cover_date" content="2025-04-07">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-04-03">
+<meta name="citation_online_date" content="2025-04-07">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=What Do Interaction Network Metrics Tell Us About Specialization and Biological Traits;,citation_abstract=The structure of ecological interaction networks is often interpreted as a product of meaningful ecological and evolutionary mechanisms that shape the degree of specialization in community associations. However, here we show that both unweighted network metrics (connectance, nestedness, and degree distribution) and weighted network metrics (interaction evenness, interaction strength asymmetry) are strongly constrained and biased by the number of observations. Rarely observed species are inevitably regarded as “specialists,” irrespective of their actual associations, leading to biased estimates of specialization. Consequently, a skewed distribution of species observation records (such as the lognormal), combined with a relatively low sampling density typical for ecological data, already generates a “nested” and poorly “connected” network with “asymmetric interaction strengths” when interactions are neutral. This is confirmed by null model simulations of bipartite networks, assuming that partners associate randomly in the absence of any specialization and any variation in the correspondence of biological traits between associated species (trait matching). Variation in the skewness of the frequency distribution fundamentally changes the outcome of network metrics. Therefore, interpretation of network metrics in terms of fundamental specialization and trait matching requires an appropriate control for such severe constraints imposed by information deficits. When using an alternative approach that controls for these effects, most natural networks of mutualistic or antagonistic systems show a significantly higher degree of reciprocal specialization (exclusiveness) than expected under neutral conditions. A higher exclusiveness is coherent with a tighter coevolution and suggests a lower ecological redundancy than implied by nested networks.;,citation_author=Nico Blüthgen;,citation_author=Jochen Fründ;,citation_author=Diego P. Vázquez;,citation_author=Florian Menzel;,citation_publication_date=2008;,citation_cover_date=2008;,citation_year=2008;,citation_issue=12;,citation_doi=10.1890/07-2121.1;,citation_issn=1939-9170;,citation_volume=89;,citation_language=en-US;,citation_journal_title=Ecology;">
+<meta name="citation_reference" content="citation_title=Analysing ecological networks of species interactions;,citation_abstract=Network approaches to ecological questions have been increasingly used, particularly in recent decades. The abstraction of ecological systems – such as communities – through networks of interactions between their components indeed provides a way to summarize this information with single objects. The methodological framework derived from graph theory also provides numerous approaches and measures to analyze these objects and can offer new perspectives on established ecological theories as well as tools to address new challenges. However, prior to using these methods to test ecological hypotheses, it is necessary that we understand, adapt, and use them in ways that both allow us to deliver their full potential and account for their limitations. Here, we attempt to increase the accessibility of network approaches by providing a review of the tools that have been developed so far, with – what we believe to be – their appropriate uses and potential limitations. This is not an exhaustive review of all methods and metrics, but rather, an overview of tools that are robust, informative, and ecologically sound. After providing a brief presentation of species interaction networks and how to build them in order to summarize ecological information of different types, we then classify methods and metrics by the types of ecological questions that they can be used to answer from global to local scales, including methods for hypothesis testing and future perspectives. Specifically, we show how the organization of species interactions in a community yields different network structures (e.g., more or less dense, modular or nested), how different measures can be used to describe and quantify these emerging structures, and how to compare communities based on these differences in structures. Within networks, we illustrate metrics that can be used to describe and compare the functional and dynamic roles of species based on their position in the network and the organization of their interactions as well as associated new methods to test the significance of these results. Lastly, we describe potential fruitful avenues for new methodological developments to address novel ecological questions.;,citation_author=Eva Delmas;,citation_author=Mathilde Besson;,citation_author=Marie-Hélène Brice;,citation_author=Laura A. Burkle;,citation_author=Giulio V. Dalla Riva;,citation_author=Marie-Josée Fortin;,citation_author=Dominique Gravel;,citation_author=Paulo R. Guimarães;,citation_author=David H. Hembry;,citation_author=Erica A. Newman;,citation_author=Jens M. Olesen;,citation_author=Mathias M. Pires;,citation_author=Justin D. Yeakel;,citation_author=Timothée Poisot;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_issue=1;,citation_doi=10.1111/brv.12433;,citation_issn=1469-185X;,citation_volume=94;,citation_language=en-US;,citation_journal_title=Biological Reviews;">
 <meta name="citation_reference" content="citation_title=Ecological network metrics: Opportunities for synthesis;,citation_abstract=Network ecology provides a systems basis for approaching ecological questions, such as factors that influence biological diversity, the role of particular species or particular traits in structuring ecosystems, and long-term ecological dynamics (e.g., stability). Whereas the introduction of network theory has enabled ecologists to quantify not only the degree, but also the architecture of ecological complexity, these advances have come at the cost of introducing new challenges, including new theoretical concepts and metrics, and increased data complexity and computational intensity. Synthesizing recent developments in the network ecology literature, we point to several potential solutions to these issues: integrating network metrics and their terminology across sub-disciplines; benchmarking new network algorithms and models to increase mechanistic understanding; and improving tools for sharing ecological network research, in particular “model” data provenance, to increase the reproducibility of network models and analyses. We propose that applying these solutions will aid in synthesizing ecological sub-disciplines and allied fields by improving the accessibility of network methods and models.;,citation_author=Matthew K. Lau;,citation_author=Stuart R. Borrett;,citation_author=Benjamin Baiser;,citation_author=Nicholas J. Gotelli;,citation_author=Aaron M. Ellison;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_issue=8;,citation_doi=10.1002/ecs2.1900;,citation_issn=2150-8925;,citation_volume=8;,citation_language=en-US;,citation_journal_title=Ecosphere;">
 <meta name="citation_reference" content="citation_title=Major dimensions in food-web structure properties;,citation_abstract=The covariance among a range of 20 network structural properties of food webs plus net primary productivity was assessed for 14 published food webs using principal components analysis. Three primary components explained 84% of the variability in the data sets, suggesting substantial covariance among the properties employed in the literature. The first dimension explained 48% of the variance and could be ascribed to connectance, covarying significantly with the proportion of intermediate species and characteristic path length. The second dimension explained 19% and was related to trophic species richness. The third axis explained 17% and was related to ecosystem net primary productivity. A distinct opposite clustering of connectance, the proportion of intermediate species, and mean trophic level vs. the proportion of top and basal species and path length suggests a dichotomy in food-web structure. Food webs appear either clustered and highly interconnected or elongated with fewer links.;,citation_author=Jan E. Vermaat;,citation_author=Jennifer A. Dunne;,citation_author=Alison J. Gilbert;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;,citation_issue=1;,citation_doi=10.1890/07-0978.1;,citation_issn=1939-9170;,citation_volume=90;,citation_language=en-US;,citation_journal_title=Ecology;">
 <meta name="citation_reference" content="citation_title=Limits to Trophic Levels and Omnivory in Complex Food Webs: Theory and Data;,citation_abstract=While trophic levels have found broad application throughout ecology, they are also in much contention on analytical and empirical grounds. Here, we use a new generation of data and theory to examine long-standing questions about trophic-level limits and degrees of omnivory. The data include food webs of the Chesapeake Bay, U.S.A., the island of Saint Martin, a U.K. grassland, and a Florida seagrass community, which appear to be the most trophically complete food webs available in the primary literature due to their inclusion of autotrophs and empirically derived estimates of the relative energetic contributions of each trophic link. We show that most (54%) of the 212 species in the four food webs can be unambiguously assigned to a discrete trophic level. Omnivory among the remaining species appears to be quite limited, as judged by the standard deviation of omnivores’ energy-weighted food-chain lengths. This allows simple algorithms based on binary food webs without energetic details to yield surprisingly accurate estimates of species’ trophic and omnivory levels. While maximum trophic levels may plausibly exceed historically asserted limits, our analyses contradict both recent empirical claims that these limits are exceeded and recent theoretical claims that rampant omnivory eliminates the scientific utility of the trophic-level concept.;,citation_author=Richard J. Williams;,citation_author=Neo D. Martinez;,citation_publication_date=2004-03;,citation_cover_date=2004-03;,citation_year=2004;,citation_issue=3;,citation_doi=10.1086/381964;,citation_issn=0003-0147, 1537-5323;,citation_volume=163;,citation_language=en-US;,citation_journal_title=The American Naturalist;">
@@ -151,7 +152,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">April 3, 2025</p>
+              <p class="date">April 7, 2025</p>
             </div>
           </div>
           
@@ -207,103 +208,169 @@ Table&nbsp;1: An informative caption about the different network properties
 <div aria-describedby="tbl-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 20%">
+<col style="width: 47%">
+<col style="width: 16%">
+<col style="width: 16%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Label</th>
 <th>Definition</th>
+<th>“Function”</th>
+<th>Reference (for maths), can make footnotes probs</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Basal</td>
 <td>Percentage of basal taxa (taxa without resources)</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>Connectance</td>
 <td><span class="math inline">\(L/S^2\)</span>, where <span class="math inline">\(S\)</span> is the number of species and <span class="math inline">\(L\)</span> the number of links</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Cannibal</td>
 <td>Percentage of cannibals</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>ChLen</td>
 <td>Mean food chain length, averaged over all species</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>ChSD</td>
 <td>Standard deviation of ChLen</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>ChNum</td>
 <td>log number of food chains</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Clust</td>
 <td>mean clustering coefficient (probability that two taxa linked to the same taxon are also linked)</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>GenSD</td>
 <td>Normalized standard deviation of generality of a species standardized by <span class="math inline">\(L/S\)</span></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Herbivore</td>
 <td>Percentage of herbivores plus detritivores (taxa that feed on basal taxa)</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>Intermediate</td>
 <td>percentage of intermediate taxa (with both consumers and resources)</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>LinkSD</td>
 <td>normalized standard deviation of links (number of consumers plus resources per taxon)</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>Loop</td>
 <td>Percentage of taxa in loops (food chains in which a taxon occurs twice)</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>L/S</td>
 <td>links per species</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>MaxSim</td>
 <td>Mean of the maximum trophic similarity of each taxon to other taxa, the number of predators and prey shared by a pair of species divided by their total number of predators and prey</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Omnivory</td>
 <td>Percentage of omnivores (taxa that feed on <span class="math inline">\(\geq\)</span> 2 taxa with different trophic levels)</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>Path</td>
 <td>characteristic path length, the mean shortest food chain length between species pairs</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Richness</td>
 <td>Number of trophic species, or taxa</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>TL</td>
 <td>prey-weighted trophic level averaged across taxa <span class="citation" data-cites="williamsLimitsTrophicLevels2004">(<a href="#ref-williamsLimitsTrophicLevels2004" role="doc-biblioref">Williams and Martinez 2004</a>)</span></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Top</td>
 <td>Percentage of top taxa (taxa without consumers)</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>VulSD</td>
 <td>Normalized standard deviation of vulnerability of a species standardized by <span class="math inline">\(L/S\)</span></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Links</td>
 <td>The number of links in the network</td>
+<td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>Diameter</td>
-<td>Diameter of food web, the longest shortest path between two nodes</td>
+<td>Diameter can also be measured as the average of the distances between each pair of nodes in the network</td>
+<td></td>
+<td><span class="citation" data-cites="delmasAnalysingEcologicalNetworks2019">Delmas et al. (<a href="#ref-delmasAnalysingEcologicalNetworks2019" role="doc-biblioref">2019</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Nestedness</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Modularity</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Centrality</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -313,6 +380,9 @@ Table&nbsp;1: An informative caption about the different network properties
 <section id="references" class="level1 unnumbered">
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-delmasAnalysingEcologicalNetworks2019" class="csl-entry" role="listitem">
+Delmas, Eva, Mathilde Besson, Marie-Hélène Brice, Laura A. Burkle, Giulio V. Dalla Riva, Marie-Josée Fortin, Dominique Gravel, et al. 2019. <span>“Analysing Ecological Networks of Species Interactions.”</span> <em>Biological Reviews</em> 94 (1): 16–36. <a href="https://doi.org/10.1111/brv.12433">https://doi.org/10.1111/brv.12433</a>.
+</div>
 <div id="ref-lauEcologicalNetworkMetrics2017" class="csl-entry" role="listitem">
 Lau, Matthew K., Stuart R. Borrett, Benjamin Baiser, Nicholas J. Gotelli, and Aaron M. Ellison. 2017. <span>“Ecological Network Metrics: Opportunities for Synthesis.”</span> <em>Ecosphere</em> 8 (8): e01900. <a href="https://doi.org/10.1002/ecs2.1900">https://doi.org/10.1002/ecs2.1900</a>.
 </div>

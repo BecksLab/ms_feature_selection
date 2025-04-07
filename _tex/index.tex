@@ -208,7 +208,7 @@
 1%
 }%
 }
-\date{2025-04-03}
+\date{2025-04-07}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -257,8 +257,10 @@ independence and uniqueness of the descriptive metrics used.''} - Lau et
 al. (2017)
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2027}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4730}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1622}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1622}}@{}}
 \caption{An informative caption about the different network
 properties}\label{tbl-properties}\tabularnewline
 \toprule\noalign{}
@@ -266,6 +268,10 @@ properties}\label{tbl-properties}\tabularnewline
 Label
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+``Function''
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reference (for maths), can make footnotes probs
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
@@ -274,47 +280,54 @@ Definition
 Label
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+``Function''
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reference (for maths), can make footnotes probs
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Basal & Percentage of basal taxa (taxa without resources) \\
+Basal & Percentage of basal taxa (taxa without resources) & & \\
 Connectance & \(L/S^2\), where \(S\) is the number of species and \(L\)
-the number of links \\
-Cannibal & Percentage of cannibals \\
-ChLen & Mean food chain length, averaged over all species \\
-ChSD & Standard deviation of ChLen \\
-ChNum & log number of food chains \\
+the number of links & & \\
+Cannibal & Percentage of cannibals & & \\
+ChLen & Mean food chain length, averaged over all species & & \\
+ChSD & Standard deviation of ChLen & & \\
+ChNum & log number of food chains & & \\
 Clust & mean clustering coefficient (probability that two taxa linked to
-the same taxon are also linked) \\
+the same taxon are also linked) & & \\
 GenSD & Normalized standard deviation of generality of a species
-standardized by \(L/S\) \\
+standardized by \(L/S\) & & \\
 Herbivore & Percentage of herbivores plus detritivores (taxa that feed
-on basal taxa) \\
+on basal taxa) & & \\
 Intermediate & percentage of intermediate taxa (with both consumers and
-resources) \\
+resources) & & \\
 LinkSD & normalized standard deviation of links (number of consumers
-plus resources per taxon) \\
+plus resources per taxon) & & \\
 Loop & Percentage of taxa in loops (food chains in which a taxon occurs
-twice) \\
-L/S & links per species \\
+twice) & & \\
+L/S & links per species & & \\
 MaxSim & Mean of the maximum trophic similarity of each taxon to other
 taxa, the number of predators and prey shared by a pair of species
-divided by their total number of predators and prey \\
+divided by their total number of predators and prey & & \\
 Omnivory & Percentage of omnivores (taxa that feed on \(\geq\) 2 taxa
-with different trophic levels) \\
+with different trophic levels) & & \\
 Path & characteristic path length, the mean shortest food chain length
-between species pairs \\
-Richness & Number of trophic species, or taxa \\
+between species pairs & & \\
+Richness & Number of trophic species, or taxa & & \\
 TL & prey-weighted trophic level averaged across taxa (Williams \&
-Martinez, 2004) \\
-Top & Percentage of top taxa (taxa without consumers) \\
+Martinez, 2004) & & \\
+Top & Percentage of top taxa (taxa without consumers) & & \\
 VulSD & Normalized standard deviation of vulnerability of a species
-standardized by \(L/S\) \\
-Links & The number of links in the network \\
-Diameter & Diameter of food web, the longest shortest path between two
-nodes \\
+standardized by \(L/S\) & & \\
+Links & The number of links in the network & & \\
+Diameter & Diameter can also be measured as the average of the distances
+between each pair of nodes in the network & & Delmas et al. (2019) \\
+Nestedness & & & \\
+Modularity & & & \\
+Centrality & & & \\
 \end{longtable}
 
 \section*{References}\label{references}
@@ -322,6 +335,13 @@ nodes \\
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-delmasAnalysingEcologicalNetworks2019}
+Delmas, E., Besson, M., Brice, M.-H., Burkle, L. A., Riva, G. V. D.,
+Fortin, M.-J., Gravel, D., Guimarães, P. R., Hembry, D. H., Newman, E.
+A., Olesen, J. M., Pires, M. M., Yeakel, J. D., \& Poisot, T. (2019).
+Analysing ecological networks of species interactions. \emph{Biological
+Reviews}, \emph{94}(1), 16--36. \url{https://doi.org/10.1111/brv.12433}
+
 \bibitem[\citeproctext]{ref-lauEcologicalNetworkMetrics2017}
 Lau, M. K., Borrett, S. R., Baiser, B., Gotelli, N. J., \& Ellison, A.
 M. (2017). Ecological network metrics: Opportunities for synthesis.
