@@ -37,31 +37,33 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 
 *"It is incumbent on network ecologists to establish clearly the independence and uniqueness of the descriptive metrics used."* - @lauEcologicalNetworkMetrics2017
 
-
-| Label | Definition |
-|----|----|
-| Basal | Percentage of basal taxa (taxa without resources) |
-| Connectance | $L/S^2$, where $S$ is the number of species and $L$ the number of links |
-| Cannibal | Percentage of cannibals |
-| ChLen | Mean food chain length, averaged over all species |
-| ChSD | Standard deviation of ChLen |
-| ChNum | log number of food chains |
-| Clust | mean clustering coefficient (probability that two taxa linked to the same taxon are also linked) |
-| GenSD | Normalized standard deviation of generality of a species standardized by $L/S$ |
-| Herbivore | Percentage of herbivores plus detritivores (taxa that feed on basal taxa) |
-| Intermediate | percentage of intermediate taxa (with both consumers and resources) |
-| LinkSD | normalized standard deviation of links (number of consumers plus resources per taxon) |
-| Loop | Percentage of taxa in loops (food chains in which a taxon occurs twice) |
-| L/S | links per species |
-| MaxSim | Mean of the maximum trophic similarity of each taxon to other taxa, the number of predators and prey shared by a pair of species divided by their total number of predators and prey |
-| Omnivory | Percentage of omnivores (taxa that feed on $\geq$ 2 taxa with different trophic levels) |
-| Path | characteristic path length, the mean shortest food chain length between species pairs |
-| Richness | Number of trophic species, or taxa |
-| TL | prey-weighted trophic level averaged across taxa [@williamsLimitsTrophicLevels2004] |
-| Top | Percentage of top taxa (taxa without consumers) |
-| VulSD | Normalized standard deviation of vulnerability of a species standardized by $L/S$ |
-| Links | The number of links in the network |
-| Diameter | Diameter of food web, the longest shortest path between two nodes |
+| Label | Definition | "Function" | Reference (for maths), can make footnotes probs |
+|---------------|-----------------------------------|------------|------------|
+| Basal | Percentage of basal taxa (taxa without resources) |  |  |
+| Connectance | $L/S^2$, where $S$ is the number of species and $L$ the number of links |  |  |
+| Cannibal | Percentage of cannibals |  |  |
+| ChLen | Mean food chain length, averaged over all species |  |  |
+| ChSD | Standard deviation of ChLen |  |  |
+| ChNum | log number of food chains |  |  |
+| Clust | mean clustering coefficient (probability that two taxa linked to the same taxon are also linked) |  |  |
+| GenSD | Normalized standard deviation of generality of a species standardized by $L/S$ |  |  |
+| Herbivore | Percentage of herbivores plus detritivores (taxa that feed on basal taxa) |  |  |
+| Intermediate | percentage of intermediate taxa (with both consumers and resources) |  |  |
+| LinkSD | normalized standard deviation of links (number of consumers plus resources per taxon) |  |  |
+| Loop | Percentage of taxa in loops (food chains in which a taxon occurs twice) |  |  |
+| L/S | links per species |  |  |
+| MaxSim | Mean of the maximum trophic similarity of each taxon to other taxa, the number of predators and prey shared by a pair of species divided by their total number of predators and prey |  |  |
+| Omnivory | Percentage of omnivores (taxa that feed on $\geq$ 2 taxa with different trophic levels) |  |  |
+| Path | characteristic path length, the mean shortest food chain length between species pairs |  |  |
+| Richness | Number of trophic species, or taxa |  |  |
+| TL | prey-weighted trophic level averaged across taxa [@williamsLimitsTrophicLevels2004] |  |  |
+| Top | Percentage of top taxa (taxa without consumers) |  |  |
+| VulSD | Normalized standard deviation of vulnerability of a species standardized by $L/S$ |  |  |
+| Links | The number of links in the network |  |  |
+| Diameter | Diameter can also be measured as the average of the distances between each pair of nodes in the network |  | @delmasAnalysingEcologicalNetworks2019 |
+| Nestedness |  |  |  |
+| Modularity |  |  |  |
+| Centrality |  |  |  |
 
 : An informative caption about the different network properties {#tbl-properties}
 
