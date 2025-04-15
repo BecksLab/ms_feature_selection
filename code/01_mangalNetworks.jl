@@ -14,9 +14,6 @@ number_of_networks = count(Mangal.MangalNetwork)
 count_per_page = 100
 number_of_pages = convert(Int, ceil(number_of_networks / count_per_page))
 
-# TODO
-# Need to grab the references of networks we end up using as well
-
 mangal_networks = DataFrame(
     id = Int64[],
     species = Int64[],
@@ -25,6 +22,7 @@ mangal_networks = DataFrame(
     herbivores = Int64[],
     latitude = Any[],
     longitude = Any[],
+    reference = Any[],
 );
 
 @showprogress "Paging networks" for page = 1:number_of_pages
@@ -45,6 +43,7 @@ mangal_networks = DataFrame(
             D[:latitude] = current_network.position[1]
             D[:longitude] = current_network.position[2]
         end
+        D[:reference] = current_network.dataset.reference.bibtex
         push!(mangal_networks, D)
     end
 end
@@ -105,10 +104,14 @@ networks = DataFrame(id = Any[], network = Any[]);
     push!(mangal_topology, d)
 end
 
+# subset the initial networks query to only food webs used in `networks`
+# this will act as the metadata
+filter!(:id => x -> x ∈ networks.id, mangal_networks)
+
 ## Write networks as object
 save_object("data/mangal/mangal_networks.jlds", networks)
 ## Write files
-CSV.write("data/mangal/mangal_networks_metadata.csv", mangal_foodwebs)
+CSV.write("data/mangal/mangal_networks_metadata.csv", mangal_networks)
 CSV.write("data/mangal/mangal_summary.csv", mangal_topology)
 
 ## Get references of networks used
