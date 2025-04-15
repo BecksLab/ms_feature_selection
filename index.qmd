@@ -38,7 +38,7 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 *"It is incumbent on network ecologists to establish clearly the independence and uniqueness of the descriptive metrics used."* - @lauEcologicalNetworkMetrics2017
 
 | Label | Definition | "Function" | Reference (for maths), can make footnotes probs |
-|---------------|-----------------------------------|------------|------------|
+|--------------|-----------------------------|--------------|--------------|
 | Basal | Percentage of basal taxa (taxa without resources) |  |  |
 | Connectance | $L/S^2$, where $S$ is the number of species and $L$ the number of links |  |  |
 | Cannibal | Percentage of cannibals |  |  |
@@ -63,7 +63,7 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 | Diameter | Diameter can also be measured as the average of the distances between each pair of nodes in the network |  | @delmasAnalysingEcologicalNetworks2019 |
 | Nestedness |  |  |  |
 | Modularity |  |  |  |
-| Centrality |  |  |  |
+| Centrality | Centrality is a measure of how ‘influential’ a species is, under various definitions of ‘influence’... |  |  |
 
 : An informative caption about the different network properties {#tbl-properties}
 
