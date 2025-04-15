@@ -113,13 +113,3 @@ save_object("data/mangal/mangal_networks.jlds", networks)
 ## Write files
 CSV.write("data/mangal/mangal_networks_metadata.csv", mangal_networks)
 CSV.write("data/mangal/mangal_summary.csv", mangal_topology)
-
-## Get references of networks used
-x = Mangal.reference(15)
-
-y = Mangal.datasets("type" => "food web")
-
-mangalnetwork(y[1])
-
-Mangal.dataset(mangalnetwork(current_network.id))
-Mangal.dataset(mangalnetwork(3259))
