@@ -1,0 +1,114 @@
+name,code,corrected_name
+acanthina monodon,NUCELLA,Acanthina monodon
+acanthocyclus gayi,ACA_GAYI,Acanthocyclus gayi
+acanthocyclus hassleri,ACA_HASS,Acanthocyclus hassleri
+acanthopleura echinata,ACANTH_EC,Acanthopleura echinata
+chaetopleura peruviana,CHAE_PER,Chaetopleura peruviana
+chiton  cummingii,CHIT_CUM,Chiton cumingsii
+chiton  granosus,CHIT_GRA,Chiton granosus
+chiton  latus,CHIT_LAT,Chiton latus
+lottia  orbigny,COL_ORB,Lottia orbignyi
+concholepas concholepas,CONCHOLE,Concholepas concholepas
+enoplochiton  niger,ENOPLOCH,Enoplochiton niger
+fissurella  costata,FIS_COST,Fissurella costata
+fissurella  crassa,FIS_CRAS,Fissurella crassa
+fissurella  cummingii,FIS_CUM,Fissurella cumingi
+fissurella  limbata,FIS_LIMB,Fissurella limbata
+fissurella  maxima,FIS_MAX,Fissurella maxima
+fissurella  picta,FIS_PICT,Fissurella picta
+fissurella  puhlcra,FIS_PULC,Fissurella pulchra
+heliaster helianthus,HELIASTE,Heliaster helianthus
+scurria  araucana,SCU_ARAU,Scurria araucana
+scurria  ceciliana,SCU_BOHE,Scurria ceciliana
+scurria  ceciliana,SCU_CECI,Scurria ceciliana
+scurria  plana,SCU_PLAN,Scurria plana
+scurria scurra,SCU_SCUR,Scurria scurra
+scurria variabilis,SCU_FRAG,Scurria variabilis
+scurria variabilis,SCU_VARI,Scurria variabilis
+scurria variabilis,SCU_PARA,Scurria variabilis
+scurria variabilis,COL_PARA,Scurria variabilis
+scurria viridula,SCU_VIRI,Scurria viridula
+scurria zebrina,SCU_ZEBR,Scurria zebrina
+siphonaria lesoni,SIPHONAR,Siphonaria lessonii
+stichaster striatus,STICHAS,Stichaster striatus
+tegula atra,TEG_ATRA,Tegula atra
+tonicia  benaventii,TON_BENA,Tonicia lineolata
+tonicia  chilensis,TON_CHIL,Tonicia chilensis
+tonicia  elegans,TON_ELEG,Tonicia elegans
+adenocystis utricularis,ADENOCY,Adenocystis utricularis
+ahnfeltiopsis spp.,AHNPSIS,Ahnfeltiopsis spp.
+anthotoe spp.,ANTHOTOE,Anthothoe spp.
+austromegabalanus psittacus,AUSTROMEG,Austromegabalanus psittacus
+balanus laevis,BALAN_LA,Balanus laevis
+benthic_diatoms,DIATOMS,Benthic diatoms
+brachidontes granulata,BRACHIDO,Brachidontes granulatus
+bryopsis_spp,BRYOPSIS,Bryopsis spp.
+bunodactis spp.,BUNODACT,Bunodactis spp.
+centroceras spp.,CENTROC,Centroceras spp.
+ceramium spp.,CERAMIUM,Ceramium spp.
+chaetomorpha_spp,CHAETOMO,Chaetomorpha spp.
+chondrus  canaliculatus,CHONDRUS,Chondrus canaliculatus
+cladophora spp.,CLADOPH,Cladophora spp.
+codium dimorpha,CODIUM,Codium dimorphum
+colpomenia phaeodactyla,COLP_PHA,Colpomenia phaeodactyla
+colpomenia sinuosa,COLP_SIN,Colpomenia sinuosa
+corallina offcinalis var. chilensis,CORALLIN,Corallina officinalis (var. chilensis)
+durvillaea antarctica,DURV_ANT,Durvillaea antarctica
+durvillaea antarctica,DURV_PRI,Durvillaea antarctica
+ectocarpus silicosus,ECTOCARP,Ectocarpus siliculosus
+enteromorpha compressa,ENTEROMO,Enteromorpha compressa
+gelidium rex,GEL_REX,Gelidium rex
+gelidium spp.,GEL_SP,Gelidium spp.
+glossophora kunthii,GLOSSOPH,Glossophora kunthii
+grateloupia,GRATELOU,Grateloupia doryphora
+gymnogongrus furcellatus,GYMNOG,Gymnogongrus furcellatus
+halopteris funicularis,HALO_FUN,Halopteris funicularis
+hildenbrandia lecanelieri,HILDENB,Hildenbrandia lecannellieri
+isolauctis spp.,ISOLAUCT,Oulactis concinnata
+jhelius cirratus,JHELIUS,Jehlius cirratus
+laurencia chilensis,LAURENC,Laurencia chilensis
+lessonia nigrescens,LESS_NIG,Lessonia nigrescens
+lessonia nigrescens,LESS_PRI,Lessonia nigrescens
+lithothamnion spp.,LITHOTH,Lithothamnion spp.
+mazzaella laminarioides,MAZZAE,Mazzaella laminarioides
+montemaria horridula,MONTEMAR,Montemaria horridula
+nothobalanus flosculus,BALAN_FL,Notobalanus flosculus
+nothobalanus flosculus,BALAN_SP,Notobalanus flosculus
+nothochthamalus scabrosus,NOTHOCHT,Notochthamalus scabrosus
+nothogenia,NOTHOGE,Nothogenia fastigiata
+parantheopsis,PARANTHEO,Parantheopsis spp.
+perumytilus purpuratus,PERUMYTI,Perumytilus purpuratus
+petalonia fascia,PETALONI,Petalonia fascia
+petroglossum spp.,PETROGLO,Petroglossum pacificum
+peysonella spp.,PEYSO,Peyssonnelia spp.
+phragmatopoma spp.,PHRAGMET,Phragmatopoma spp.
+phymactis spp.,PHYMACTI,Phymactis spp.
+plocamium cartilageneum,PLOCAM,Plocamium cartilagineum
+polysiphonia_spp,POLYSIPH,Polysiphonia spp.
+porphyra_spp,PORPHYRA,Pyropia spp.
+prionitis spp,PRIONIT,Prionitis decipiens
+pyura chilensis,PYURA,Pyura chilensis
+ralfsia californica,RALFSIA,Ralfsia californica
+rama novazelandensis,RAMA,Rama novae-zelandiae
+rhizoclonium cilindricum,RIZHOCL,Rhizoclonium ambiguum
+rhodymenia sp,NA,Rhodymenia spp.
+sarcothalia,SARCOTH,Sarcothalia crispata
+schottera nicaensis,SCHOTTE,Schottera nicaeensis
+schyzimenia doryophora,SCHYZIMENIA,Schizymenia pacifica
+scythosiphon lomentaria,SCYTHOSI,Scytosiphon lomentaria
+semimytilus algosus,SEMIMYTI,Semimytilus algosus
+trematocarpus,TREMATO,Trematocarpus dichotomus
+ulva rigida,ULVA_SP,Ulva rigida
+ulvella spp.,ULV_CRU,Ulvella spp.
+plankton,PLANKTON,Plankton
+gulls,NA,Seagulls
+cincloides,NA,Cinclodes nigrofumosus
+nodolittorina peruviana,LITT_PERU,Echinolittorina peruviana
+austrolittorina araucana,LITT_ARAU,Austrolittorina araucana
+onchidella,NA,Onchidella spp.
+petrolisthes punctatus,NA,Allopetrolisthes punctatus
+petrolisthes spinifrons,NA,Allopetrolisthes spinifrons
+petrolisthes angulosus,NA,Allopetrolisthes angulosus
+petrolisthes tuberculatus,NA,Petrolisthes tuberculatus
+petrolisthes tuberculosus,NA,Petrolisthes tuberculosus
+trimusculus peruvianus,TRIMUSCU,Trimusculus peruvianus
