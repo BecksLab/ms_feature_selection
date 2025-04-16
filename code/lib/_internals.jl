@@ -50,10 +50,10 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :log_fc => log(length(cl)),
         :path => mean(pathlengths(N)),
         :link_SD => std(values(degree(N))) / l_s,
-        :S1 => length(findmotif(motifs(Unipartite, 3)[1], N)),
-        :S2 => length(findmotif(motifs(Unipartite, 3)[2], N)),
-        :S4 => length(findmotif(motifs(Unipartite, 3)[4], N)),
-        :S5 => length(findmotif(motifs(Unipartite, 3)[5], N)),
+        :S1 => log(length(findmotif(motifs(Unipartite, 3)[1], N))),
+        :S2 => log(length(findmotif(motifs(Unipartite, 3)[2], N))),
+        :S4 => log(length(findmotif(motifs(Unipartite, 3)[4], N))),
+        :S5 => log(length(findmotif(motifs(Unipartite, 3)[5], N))),
     )
 
     D[:intermediate] = 1 - D[:top] - D[:basal]
