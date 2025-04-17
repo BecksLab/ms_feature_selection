@@ -246,13 +246,24 @@ Returns the percentage of species involved in a loop (motif S3)
 """
 function loops(N::SpeciesInteractionNetwork)
     
+    # all possible motifs that contain a form of looping
     S3 = findmotif(motifs(Unipartite, 3)[3], N)
+    D2 = findmotif(motifs(Unipartite, 3)[7], N)
+    D5 = findmotif(motifs(Unipartite, 3)[10], N)
+    D6 = findmotif(motifs(Unipartite, 3)[11], N)
+    D7 = findmotif(motifs(Unipartite, 3)[12], N)
 
-    if length(S3) > 0
-        spp_in_motif = reduce(vcat,collect.(S3))
-
+    # combine all tuples
+    all_motif = vcat(S3, D2, D5, D6, D7)
+    
+    # only continue if therw are species in list
+    if length(all_motif) > 0
+        # reduce tuples to single vector
+        spp_in_motif = reduce(vcat,collect.(all_motif))
+        # remove duplicated
         spp_in_loops = length(unique(spp_in_motif))
     
+        # return as percentage
         return spp_in_loops/richness(N)*100
     else
         return 0.0
