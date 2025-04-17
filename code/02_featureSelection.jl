@@ -11,6 +11,7 @@ network_struct = DataFrame(CSV.File("data/mangal/mangal_summary.csv"))
 
 # select only the relevant variables
 var_df = select(network_struct, Not([:id]))
+filter!(row -> all(x -> !(x isa Number && isnan(x)), row), var_df)
 
 ## check for high number of zeros
 
