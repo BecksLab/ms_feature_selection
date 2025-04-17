@@ -3,18 +3,30 @@ library(caret)
 library(corrplot)
 library(FactoMineR)
 library(here)
+library(psych)
 library(tidyverse)
 
 setwd(here::here())
 
 # import network summary data
 topology_mangal <- read.csv("data/mangal/mangal_summary.csv") %>%
+  select(-id)
+
+# get an idea of the number of NA vals
+sapply(topology_mangal, function(x) sum(is.na(x))) / nrow(topology_mangal) * 100
+
+# same for prop of zeros
+colSums(topology_mangal==0, na.rm = TRUE)/nrow(topology_mangal)*100
+
+topology_mangal_subset <-
+  topology_mangal %>%
+  select(-c(cl_std, cannibal, S2)) %>%
   na.omit()
 
 # 1: look at correlation first
 
 #scale all features
-topology_scaled <- scale(topology_mangal[2:ncol(topology_mangal)],
+topology_scaled <- scale(topology_mangal_subset,
                          center = TRUE, scale = TRUE)
 
 # correlation matrix
@@ -35,6 +47,23 @@ cor_mat_subset <- cor(topology_scaled_subset)
 
 corrplot(cor_mat_subset, order = "hclust")
 
+#KMO Test
+
+KMO(topology_scaled_subset)
+cortest.bartlett(topology_scaled_subset)
+
+# Determine number of factors to extract
+ev <- eigen(cor(topology_scaled_subset)) # get eigenvalues
+ev$values
+
+scree(topology_scaled_subset, pc=FALSE)
+
+fa.parallel(topology_scaled_subset, fa="fa")
+
+Nfacs <- 4  # This is for four factors. You can change this as needed.
+
+fit <- factanal(topology_scaled_subset, Nfacs, rotation="promax")
+
 # 2: look at correlation first
 
 pca <- PCA(topology_scaled)
@@ -45,7 +74,7 @@ dim_num <- pca$eig %>%
   filter(`cumulative percentage of variance` < 90) %>%
   nrow() %>% as.numeric()
 
-dim_descrip <- dimdesc(pca, axes = 1:5)
+dim_descrip <- dimdesc(pca, axes = 1:3)
 
 dim_descrip$Dim.1 %>%
   as.data.frame() %>%
@@ -53,6 +82,8 @@ dim_descrip$Dim.1 %>%
   rbind(dim_descrip$Dim.2 %>%
           as.data.frame() %>%
           filter(abs(quanti.correlation) > 0.8))
+
+
 
 # assign broader categories
 
