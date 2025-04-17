@@ -22,6 +22,7 @@ mangal_networks = DataFrame(
     herbivores = Int64[],
     latitude = Any[],
     longitude = Any[],
+    description = Any[],
     reference = Any[],
 );
 
@@ -43,6 +44,7 @@ mangal_networks = DataFrame(
             D[:latitude] = current_network.position[1]
             D[:longitude] = current_network.position[2]
         end
+        D[:description] = current_network.description
         D[:reference] = current_network.dataset.reference.bibtex
         push!(mangal_networks, D)
     end
