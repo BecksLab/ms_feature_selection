@@ -56,6 +56,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :S5 => length(findmotif(motifs(Unipartite, 3)[5], N)),
         :ρ => spectralradius(N),
         :centrality => mean(collect(values(centrality(N)))),
+        :loops => loops(N)
     )
 
     D[:intermediate] = 1 - D[:top] - D[:basal]
@@ -238,4 +239,22 @@ function cannibal(N::SpeciesInteractionNetwork)
     end
 
     return _cannibal
+end
+
+"""
+Returns the percentage of species involved in a loop (motif S3)
+"""
+function loops(N::SpeciesInteractionNetwork)
+    
+    S3 = findmotif(motifs(Unipartite, 3)[3], N)
+
+    if length(S3) > 0
+        spp_in_motif = reduce(vcat,collect.(S3))
+
+        spp_in_loops = length(unique(spp_in_motif))
+    
+        return spp_in_loops/richness(N)*100
+    else
+        return 0.0
+    end
 end

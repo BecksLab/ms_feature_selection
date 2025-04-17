@@ -84,6 +84,7 @@ mangal_topology = DataFrame(
     S5 = Any[],
     ρ = Any[],
     centrality = Any[],
+    loops = Any[],
 );
 
 # make object to store each network so we can import it later
