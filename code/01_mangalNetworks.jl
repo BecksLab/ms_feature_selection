@@ -16,6 +16,7 @@ number_of_pages = convert(Int, ceil(number_of_networks / count_per_page))
 
 mangal_networks = DataFrame(
     id = Int64[],
+    dataset_id = Int64[],
     species = Int64[],
     links = Int64[],
     predators = Int64[],
@@ -31,6 +32,7 @@ mangal_networks = DataFrame(
     @showprogress "Counting items" for current_network in networks_in_page
         D = Dict{Symbol,Any}()
         D[:id] = current_network.id
+        D[:dataset_id] = current_network.dataset.id
         D[:species] = count(Mangal.MangalNode, current_network)
         D[:links] = count(Mangal.MangalInteraction, current_network)
         D[:predators] =
