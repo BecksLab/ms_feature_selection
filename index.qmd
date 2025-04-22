@@ -50,7 +50,7 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 | Herbivore | Percentage of herbivores plus detritivores (taxa that feed only on basal taxa) |  |  |
 | Intermediate | Percentage of intermediate taxa (with both consumers and resources) |  |  |
 | LinkSD | Normalized standard deviation of links (number of consumers plus resources per taxon) |  |  |
-| Loop | Percentage of taxa in loops (food chains in which a taxon occurs twice) |  | **TODO** |
+| Loop | Percentage of taxa in loops (food chains in which a taxon occurs twice) |  | |
 | L/S | links per species |  |  |
 | MaxSim | Mean of the maximum trophic similarity of each taxon to other taxa, the number of predators and prey shared by a pair of species divided by their total number of predators and prey |  | **TODO** |
 | Omnivory | Percentage of omnivores (taxa that feed on $\geq$ 2 taxa with different trophic levels) |  |  |

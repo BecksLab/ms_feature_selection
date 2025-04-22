@@ -249,13 +249,14 @@ function loops(N::SpeciesInteractionNetwork)
     # all possible motifs that contain a form of looping
     S3 = findmotif(motifs(Unipartite, 3)[3], N)
     D2 = findmotif(motifs(Unipartite, 3)[7], N)
+    D4 = findmotif(motifs(Unipartite, 3)[9], N)
     D5 = findmotif(motifs(Unipartite, 3)[10], N)
     D6 = findmotif(motifs(Unipartite, 3)[11], N)
     D7 = findmotif(motifs(Unipartite, 3)[12], N)
 
     # combine all tuples
-    all_motif = vcat(S3, D2, D5, D6, D7)
-    
+    all_motif = vcat(S3, D2, D4, D5, D6, D7)
+
     # only continue if therw are species in list
     if length(all_motif) > 0
         # reduce tuples to single vector
