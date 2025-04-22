@@ -20,7 +20,7 @@ colSums(topology_mangal==0, na.rm = TRUE)/nrow(topology_mangal)*100
 
 topology_mangal_subset <-
   topology_mangal %>%
-  select(-c(cl_std, cannibal, S2)) %>%
+  select(-c(ChSD, cannibal)) %>%
   na.omit()
 
 # 1: look at correlation first
@@ -41,7 +41,8 @@ corr_cutoff <- 0.85
 hc = findCorrelation(cor_matrix, cutoff = corr_cutoff)
 
 # subset 
-topology_scaled_subset <- topology_scaled[,-hc]
+topology_scaled_subset <- topology_scaled[,-hc] %>%
+  as.data.frame()
 
 cor_mat_subset <- cor(topology_scaled_subset)
 
@@ -66,7 +67,7 @@ fit <- factanal(topology_scaled_subset, Nfacs, rotation="promax")
 
 # 2: look at correlation first
 
-pca <- PCA(topology_scaled)
+pca <- PCA(topology_scaled_subset)
 
 # find number of dims describing 90 % of variance
 dim_num <- pca$eig %>%
@@ -74,14 +75,23 @@ dim_num <- pca$eig %>%
   filter(`cumulative percentage of variance` < 90) %>%
   nrow() %>% as.numeric()
 
-dim_descrip <- dimdesc(pca, axes = 1:3)
+dim_descrip <- dimdesc(pca, axes = 1:5)
 
 dim_descrip$Dim.1 %>%
   as.data.frame() %>%
-  filter(abs(quanti.correlation) > 0.8) %>%
+  filter(abs(quanti.correlation) > 0.75) %>%
   rbind(dim_descrip$Dim.2 %>%
           as.data.frame() %>%
-          filter(abs(quanti.correlation) > 0.8))
+          filter(abs(quanti.correlation) > 0.75)) %>%
+  rbind(dim_descrip$Dim.3 %>%
+          as.data.frame() %>%
+          filter(abs(quanti.correlation) > 0.75)) %>%
+  rbind(dim_descrip$Dim.4 %>%
+          as.data.frame() %>%
+          filter(abs(quanti.correlation) > 0.75)) %>%
+  rbind(dim_descrip$Dim.5 %>%
+          as.data.frame() %>%
+          filter(abs(quanti.correlation) > 0.75))
 
 
 
@@ -90,13 +100,13 @@ dim_descrip$Dim.1 %>%
 grps <- 
   tibble(var = row.names(pca[["var"]][["coord"]])) %>%
   reframe(cat = case_when(var %in% c("S1", "S2", "S5", "S4") ~ "Motif",
-                          var %in% c("richness", "links", "connectance", "complexity", "l_S") ~ "Structure",
-                          var %in% c("diameter", "trophic_level", "path", "cl_mean", "cl_std", "log_fc", "top", "basal", "distance") ~ "Energy",
-                          var %in% c("generality", "vulnerability", "link_SD", "cannibal", "omnivory", "herbivory", "intermediate", "") ~ "Node"))
+                          var %in% c("richness", "links", "connectance", "complexity", "l_S", "ρ") ~ "Structure",
+                          var %in% c("diameter", "TL", "path", "ChLen", "ChNum", "top", "basal", "distance") ~ "Energy",
+                          var %in% c("GenSD", "VulSD", "omnivory", "herbivory", "intermediate", "centrality") ~ "Node"))
 
 variance = pca$eig %>%
   as.data.frame() %>%
-  pull(`cumulative percentage of variance`)
+  pull(`percentage of variance`)
 
 # try plot as points
 
