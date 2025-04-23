@@ -10,7 +10,8 @@ setwd(here::here())
 
 # import network summary data
 topology_mangal <- read.csv("data/mangal/mangal_summary.csv") %>%
-  select(-id)
+  select(-id) %>%
+  select(-c(links, S1, S2, S4, S5, diameter, ρ, centrality, complexity))
 
 # get an idea of the number of NA vals
 sapply(topology_mangal, function(x) sum(is.na(x))) / nrow(topology_mangal) * 100
@@ -53,6 +54,7 @@ corrplot(cor_mat_subset, order = "hclust")
 KMO(topology_scaled_subset)
 cortest.bartlett(topology_scaled_subset)
 
+
 # Determine number of factors to extract
 ev <- eigen(cor(topology_scaled_subset)) # get eigenvalues
 ev$values
@@ -61,9 +63,24 @@ scree(topology_scaled_subset, pc=FALSE)
 
 fa.parallel(topology_scaled_subset, fa="fa")
 
-Nfacs <- 4  # This is for four factors. You can change this as needed.
+Nfacs <- 3  # This is for four factors. You can change this as needed.
 
 fit <- factanal(topology_scaled_subset, Nfacs, rotation="promax")
+
+ggplot() +
+  geom_point(aes(x = fit$loadings[, 1],
+                 y = fit$loadings[, 2])) +
+  geom_vline(xintercept = 0) +
+  geom_hline(yintercept = 0) +
+  geom_text(aes(x = fit$loadings[, 1],
+                y = fit$loadings[, 2],
+                label = names(fit$loadings[, 1])),
+            nudge_y = 0.1) +
+  theme_classic() +
+  labs(x = "Factor 1",
+       y = "Factor 2") +
+  lims(x= c(-1.2, 1.2), 
+       y = c(-1.2, 1.2))
 
 # 2: look at correlation first
 
