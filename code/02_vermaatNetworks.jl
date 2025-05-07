@@ -47,35 +47,41 @@ networks = DataFrame(id = Any[], network = Any[]);
 
 for i in eachindex(web_names)
 
-web = web_names[i]
+    web = web_names[i]
 
-# import data frame
-df = DataFrame(CSV.File(joinpath("data/vermaat_2009/raw", "$web"), header = ["consumer", "resource"], types = Symbol))
+    # import data frame
+    df = DataFrame(
+        CSV.File(
+            joinpath("data/vermaat_2009/raw", "$web"),
+            header = ["consumer", "resource"],
+            types = Symbol,
+        ),
+    )
 
-# get unique species (both consumer and resource)
-spp_list = unique(vcat(df.consumer, df.resource))
+    # get unique species (both consumer and resource)
+    spp_list = unique(vcat(df.consumer, df.resource))
 
-nodes = Unipartite(spp_list)
-edges = Binary(zeros(Bool, length(spp_list), length(spp_list)))
-N = SpeciesInteractionNetwork(nodes, edges)
+    nodes = Unipartite(spp_list)
+    edges = Binary(zeros(Bool, length(spp_list), length(spp_list)))
+    N = SpeciesInteractionNetwork(nodes, edges)
 
-# add interactions using interactions_all
-for j in 1:nrow(df)
-    N[(df.consumer[j], df.resource[j])...] = true
-end
+    # add interactions using interactions_all
+    for j = 1:nrow(df)
+        N[(df.consumer[j], df.resource[j])...] = true
+    end
 
-# push networl
-N_d = Dict{Symbol,Any}()
-N_d[:id] = replace.(web, ".csv" => "")
-N_d[:network] = N
-push!(networks, N_d)
+    # push networl
+    N_d = Dict{Symbol,Any}()
+    N_d[:id] = replace.(web, ".csv" => "")
+    N_d[:network] = N
+    push!(networks, N_d)
 
-# push network summary
-d = _network_summary(N)
+    # push network summary
+    d = _network_summary(N)
     d[:id] = replace.(web, ".csv" => "")
 
-# send to df
-push!(vermaat_topology, d)
+    # send to df
+    push!(vermaat_topology, d)
 
 end
 

@@ -56,7 +56,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :S5 => length(findmotif(motifs(Unipartite, 3)[5], N)),
         :ρ => spectralradius(N),
         :centrality => mean(collect(values(centrality(N)))),
-        :loops => loops(N)
+        :loops => loops(N),
     )
 
     D[:intermediate] = 1 - D[:top] - D[:basal]
@@ -245,7 +245,7 @@ end
 Returns the percentage of species involved in a loop (motif S3)
 """
 function loops(N::SpeciesInteractionNetwork)
-    
+
     # all possible motifs that contain a form of looping
     S3 = findmotif(motifs(Unipartite, 3)[3], N)
     D2 = findmotif(motifs(Unipartite, 3)[7], N)
@@ -260,12 +260,12 @@ function loops(N::SpeciesInteractionNetwork)
     # only continue if therw are species in list
     if length(all_motif) > 0
         # reduce tuples to single vector
-        spp_in_motif = reduce(vcat,collect.(all_motif))
+        spp_in_motif = reduce(vcat, collect.(all_motif))
         # remove duplicated
         spp_in_loops = length(unique(spp_in_motif))
-    
+
         # return as percentage
-        return spp_in_loops/richness(N)*100
+        return spp_in_loops / richness(N) * 100
     else
         return 0.0
     end
