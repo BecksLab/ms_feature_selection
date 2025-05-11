@@ -9,25 +9,25 @@ library(tidyverse)
 setwd(here::here())
 
 # import network summary data
-topology_mangal <- read.csv("data/mangal/mangal_summary.csv") %>%
+topology_vermaat <- read.csv("data/vermaat_2009/vermaat_summary.csv") %>%
   select(-id) %>%
   select(-c(links, S1, S2, S4, S5, diameter, ρ, centrality, complexity))
 
 # get an idea of the number of NA vals
-sapply(topology_mangal, function(x) sum(is.na(x))) / nrow(topology_mangal) * 100
+sapply(topology_vermaat, function(x) sum(is.na(x))) / nrow(topology_vermaat) * 100
 
 # same for prop of zeros
-colSums(topology_mangal==0, na.rm = TRUE)/nrow(topology_mangal)*100
+colSums(topology_vermaat==0, na.rm = TRUE)/nrow(topology_vermaat)*100
 
-topology_mangal_subset <-
-  topology_mangal %>%
-  select(-c(ChSD, cannibal)) %>%
+topology_vermaat_subset <-
+  topology_vermaat %>%
+  select(-c(loops)) %>%
   na.omit()
 
 # 1: look at correlation first
 
 #scale all features
-topology_scaled <- scale(topology_mangal_subset,
+topology_scaled <- scale(topology_vermaat_subset,
                          center = TRUE, scale = TRUE)
 
 # correlation matrix
@@ -37,13 +37,14 @@ corrplot(cor_matrix, order = "hclust")
 
 # remove highly correlated vars
 # select the cutoff 
-corr_cutoff <- 0.85
+corr_cutoff <- 0.8
 # subset by cutoff
-hc = findCorrelation(cor_matrix, cutoff = corr_cutoff)
+hc = findCorrelation(cor_matrix, cutoff = corr_cutoff, names = TRUE)
 
 # subset 
-topology_scaled_subset <- topology_scaled[,-hc] %>%
-  as.data.frame()
+topology_subset <- select(topology_vermaat_subset,-all_of(hc))
+topology_scaled_subset <- scale(topology_subset,
+                                center = TRUE, scale = TRUE)
 
 cor_mat_subset <- cor(topology_scaled_subset)
 
@@ -51,8 +52,8 @@ corrplot(cor_mat_subset, order = "hclust")
 
 #KMO Test
 
-KMO(topology_scaled_subset)
-cortest.bartlett(topology_scaled_subset)
+KMO(topology_subset)
+cortest.bartlett(topology_vermaat_subset)
 
 
 # Determine number of factors to extract
@@ -65,7 +66,7 @@ fa.parallel(topology_scaled_subset, fa="fa")
 
 Nfacs <- 3  # This is for four factors. You can change this as needed.
 
-fit <- factanal(topology_scaled_subset, Nfacs, rotation="promax")
+fit <- factanal(topology_scaled_subset, Nfacs, rotation = "promax")
 
 ggplot() +
   geom_point(aes(x = fit$loadings[, 1],
@@ -84,7 +85,7 @@ ggplot() +
 
 # 2: look at correlation first
 
-pca <- PCA(topology_scaled_subset)
+pca <- PCA(topology_vermaat_subset)
 
 # find number of dims describing 90 % of variance
 dim_num <- pca$eig %>%
@@ -93,24 +94,6 @@ dim_num <- pca$eig %>%
   nrow() %>% as.numeric()
 
 dim_descrip <- dimdesc(pca, axes = 1:5)
-
-dim_descrip$Dim.1 %>%
-  as.data.frame() %>%
-  filter(abs(quanti.correlation) > 0.75) %>%
-  rbind(dim_descrip$Dim.2 %>%
-          as.data.frame() %>%
-          filter(abs(quanti.correlation) > 0.75)) %>%
-  rbind(dim_descrip$Dim.3 %>%
-          as.data.frame() %>%
-          filter(abs(quanti.correlation) > 0.75)) %>%
-  rbind(dim_descrip$Dim.4 %>%
-          as.data.frame() %>%
-          filter(abs(quanti.correlation) > 0.75)) %>%
-  rbind(dim_descrip$Dim.5 %>%
-          as.data.frame() %>%
-          filter(abs(quanti.correlation) > 0.75))
-
-
 
 # assign broader categories
 
