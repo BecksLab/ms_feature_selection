@@ -1,0 +1,90 @@
+---
+title: "Finding the mjor descriptors of species networks"
+author:
+  - name: Tanya Strydom
+    id: ts
+    orcid: 0000-0001-6067-1349
+    corresponding: true
+    email: t.strydom@sheffield.ac.uk
+    role: 
+    - conceptualization: lead
+    - methodology: supporting
+    affiliation:
+      - id: sheffield
+        name: School of Biosciences, University of Sheffield, Sheffield, UK
+  - name: Andrew P. Beckerman
+    id: apb
+    orcid: 0000-0002-7859-8394
+    corresponding: false
+    role: 
+    - conceptualization: lead
+    - methodology: supporting
+    affiliations:
+      - ref: sheffield
+funding: "The author(s) received no specific funding for this work. Well they did I just haven't done the homework"
+keywords:
+  - food web
+  - structure
+  - dimensionality reduction
+abstract: |
+  TODO
+date: last-modified
+bibliography: references.bib
+number-sections: true
+---
+
+Blah blah blah @vermaatMajorDimensionsFoodweb2009
+
+*"It is incumbent on network ecologists to establish clearly the independence and uniqueness of the descriptive metrics used."* - @lauEcologicalNetworkMetrics2017
+
+| Label | Definition | "Function" | Reference (for maths), can make footnotes probs |
+|----------------|--------------------------|----------------|----------------|
+| Basal | Percentage of basal taxa, defined as species who have a vulnerability of zero |  |  |
+| Connectance | $L/S^2$, where $S$ is the number of species and $L$ the number of links |  |  |
+| Cannibal | Percentage of species that are cannibals |  |  |
+| ChLen | Mean food chain length, averaged over all species (where a food chain is defined as a continuous path from a 'basal' to a 'top' species) |  |  |
+| ChSD | Standard deviation of ChLen |  |  |
+| ChNum | log number of food chains |  |  |
+| Clust | mean clustering coefficient (probability that two taxa linked to the same taxon are also linked) |  | **TODO** |
+| GenSD | Normalized standard deviation of generality of a species standardized by $L/S$ |  | @williamsSuccessItsLimits2008a |
+| Herbivore | Percentage of herbivores plus detritivores (taxa that feed only on basal taxa) |  |  |
+| Intermediate | Percentage of intermediate taxa (with both consumers and resources) |  |  |
+| LinkSD | Normalized standard deviation of links (number of consumers plus resources per taxon) |  |  |
+| Loop | Percentage of taxa in loops (food chains in which a taxon occurs twice) |  | |
+| L/S | links per species |  |  |
+| MaxSim | Mean of the maximum trophic similarity of each taxon to other taxa, the number of predators and prey shared by a pair of species divided by their total number of predators and prey |  | **TODO** |
+| Omnivory | Percentage of omnivores (taxa that feed on $\geq$ 2 taxa with different trophic levels) |  |  |
+| Path | characteristic path length, the mean shortest food chain length between species pairs |  |  |
+| Richness | Number of nodes in the network |  |  |
+| TL | Prey-weighted trophic level averaged across taxa |  | @williamsLimitsTrophicLevels2004 |
+| Top | Percentage of top taxa (taxa without consumers) |  |  |
+| VulSD | Normalized standard deviation of vulnerability of a species standardized by $L/S$ |  |  |
+| Links | The number of links in the network |  |  |
+| Diameter | Diameter can also be measured as the average of the distances between each pair of nodes in the network |  | @delmasAnalysingEcologicalNetworks2019 |
+| $\rho$ | Spectral radius is a a conceptual analog to nestedness (and more appropriate for unipartite networks). It is defined as the absolute value of the largest real part of the eigenvalues of the *undirected* adjacency matrix |  | @staniczenkoGhostNestednessEcological2013 |
+| Complexity | SVD complexity of a network, defined as the Pielou entropy of its singular values | Something about structural v behavioural complexity being captured | @strydomSVDEntropyReveals2021 |
+| Centrality | Centrality is a measure of how ‘influential’ a species is, under various definitions of ‘influence’... | Centrality can help in quantifying the importance of species in a network |  |
+| S1 | Number of linear chains |  | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
+| S2 | Number of omnivory motifs |  | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
+| S4 | Number of apparent competition motifs |  | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
+| S5 | Number of direct competition motifs |  | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
+| Intervality |  |  | **TODO** @stoufferRobustMeasureFood2006a |
+
+: An informative caption about the different network properties {#tbl-properties}
+
+
+```{r}
+#| label: tbl-corr
+#| tbl-cap: "Here is a table showing the correlation of the different network properties with the first three dimensions of the PCA"
+library(knitr)
+library(tidyverse)
+
+dat = readr::read_csv("tables/vermaat_corr.csv")
+
+kable(dat)
+```
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
