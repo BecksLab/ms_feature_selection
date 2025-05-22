@@ -72,6 +72,18 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 
 : An informative caption about the different network properties {#tbl-properties}
 
+
+```{r}
+#| label: tbl-corr
+#| tbl-cap: "Here is a table showing the correlation of the different network properties with the first three dimensions of the PCA"
+library(knitr)
+library(tidyverse)
+
+dat = readr::read_csv("tables/vermaat_corr.csv")
+
+kable(dat)
+```
+
 # References {.unnumbered}
 
 ::: {#refs}
