@@ -100,23 +100,23 @@ dim_descrip <- dimdesc(pca, axes = 1:3)
 signif_corrs <- 
   dim_descrip[["Dim.1"]] %>%
   as.data.frame() %>%
-  rownames_to_column(., var = "var") %>%
+  rownames_to_column(., var = "Property") %>%
   mutate(dimension = "Dim.1") %>%
   rbind(dim_descrip[["Dim.2"]] %>%
           as.data.frame() %>%
-          rownames_to_column(., var = "var") %>%
+          rownames_to_column(., var = "Property") %>%
           mutate(dimension = "Dim.2")) %>%
   rbind(dim_descrip[["Dim.3"]] %>%
           as.data.frame() %>%
-          rownames_to_column(., var = "var") %>%
+          rownames_to_column(., var = "Property") %>%
           mutate(dimension = "Dim.3")) %>%
   mutate(quanti.correlation = round(quanti.correlation, digits = 2))
 
 pca$var$cor %>%
   as.data.frame() %>%
-  rownames_to_column(., var = "var") %>%
-  select(var, Dim.1, Dim.2, Dim.3) %>%
-  pivot_longer(!var,
+  rownames_to_column(., var = "Property") %>%
+  select(Property, Dim.1, Dim.2, Dim.3) %>%
+  pivot_longer(!Property,
                names_to = "dimension",
                values_to = "quanti.correlation") %>%
   mutate(quanti.correlation = round(quanti.correlation, digits = 2)) %>%
