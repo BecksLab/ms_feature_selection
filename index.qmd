@@ -79,7 +79,7 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 library(knitr)
 library(tidyverse)
 
-dat = readr::read_csv("tables/vermaat_corr.csv")
+dat = readr::read_csv("tables/allNetworks_corr_complete.csv")
 
 kable(dat)
 ```

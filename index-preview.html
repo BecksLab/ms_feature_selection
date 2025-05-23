@@ -529,12 +529,12 @@ Table&nbsp;1: An informative caption about the different network properties
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/vermaat_corr.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"tables/allNetworks_corr_complete.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 19 Columns: 4
+<pre><code>Rows: 28 Columns: 4
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (3): Property, PCA 1 (42%), PCA 2 (24%)
+chr (3): Property, PCA 1 (27%), PCA 2 (24%)
 dbl (1): PCA 3 (11%)
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
@@ -552,7 +552,7 @@ Table&nbsp;2: Here is a table showing the correlation of the different network p
 <thead>
 <tr class="header">
 <th style="text-align: left;">Property</th>
-<th style="text-align: left;">PCA 1 (42%)</th>
+<th style="text-align: left;">PCA 1 (27%)</th>
 <th style="text-align: left;">PCA 2 (24%)</th>
 <th style="text-align: right;">PCA 3 (11%)</th>
 </tr>
@@ -560,117 +560,171 @@ Table&nbsp;2: Here is a table showing the correlation of the different network p
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">richness</td>
-<td style="text-align: left;">0.63</td>
-<td style="text-align: left;">0.49</td>
-<td style="text-align: right;">0.18</td>
+<td style="text-align: left;"><strong>0.8</strong></td>
+<td style="text-align: left;">0.46</td>
+<td style="text-align: right;">-0.11</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">links</td>
+<td style="text-align: left;"><strong>0.89</strong></td>
+<td style="text-align: left;">0.14</td>
+<td style="text-align: right;">-0.16</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">connectance</td>
-<td style="text-align: left;">-0.92</td>
-<td style="text-align: left;">-0.08</td>
+<td style="text-align: left;">0.05</td>
+<td style="text-align: left;">-0.9</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">diameter</td>
+<td style="text-align: left;"><strong>0.81</strong></td>
+<td style="text-align: left;">-0.06</td>
 <td style="text-align: right;">0.14</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">complexity</td>
+<td style="text-align: left;">-0.28</td>
+<td style="text-align: left;">0.48</td>
+<td style="text-align: right;">0.41</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">distance</td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;"><strong>0.83</strong></td>
-<td style="text-align: right;">0.29</td>
+<td style="text-align: left;">0.41</td>
+<td style="text-align: left;">0.13</td>
+<td style="text-align: right;">-0.03</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">basal</td>
-<td style="text-align: left;">0.47</td>
-<td style="text-align: left;">-0.04</td>
-<td style="text-align: right;">0.66</td>
+<td style="text-align: left;">-0.29</td>
+<td style="text-align: left;">0.38</td>
+<td style="text-align: right;">-0.73</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">top</td>
-<td style="text-align: left;"><strong>0.8</strong></td>
 <td style="text-align: left;">-0.24</td>
-<td style="text-align: right;">-0.50</td>
+<td style="text-align: left;">0.59</td>
+<td style="text-align: right;">0.55</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">intermediate</td>
-<td style="text-align: left;">-0.9</td>
-<td style="text-align: left;">0.2</td>
-<td style="text-align: right;">-0.10</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">herbivory</td>
-<td style="text-align: left;">0.64</td>
-<td style="text-align: left;">-0.02</td>
-<td style="text-align: right;">0.49</td>
+<td style="text-align: left;">0.4</td>
+<td style="text-align: left;">-0.68</td>
+<td style="text-align: right;">0.32</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">omnivory</td>
-<td style="text-align: left;">-0.88</td>
-<td style="text-align: left;">0.29</td>
-<td style="text-align: right;">-0.32</td>
+<td style="text-align: left;">herbivory</td>
+<td style="text-align: left;">-0.29</td>
+<td style="text-align: left;">0.51</td>
+<td style="text-align: right;">0.13</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">omnivory</td>
+<td style="text-align: left;">0.52</td>
+<td style="text-align: left;">-0.71</td>
+<td style="text-align: right;">0.18</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">cannibal</td>
-<td style="text-align: left;">-0.85</td>
-<td style="text-align: left;">-0.12</td>
+<td style="text-align: left;">0.29</td>
+<td style="text-align: left;">-0.72</td>
+<td style="text-align: right;">-0.19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">l_S</td>
+<td style="text-align: left;"><strong>0.78</strong></td>
+<td style="text-align: left;">-0.33</td>
+<td style="text-align: right;">-0.18</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GenSD</td>
+<td style="text-align: left;">-0.1</td>
+<td style="text-align: left;">0.42</td>
+<td style="text-align: right;">-0.80</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">VulSD</td>
+<td style="text-align: left;">-0.05</td>
+<td style="text-align: left;"><strong>0.76</strong></td>
+<td style="text-align: right;">0.31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TL</td>
+<td style="text-align: left;">0.59</td>
+<td style="text-align: left;">-0.13</td>
+<td style="text-align: right;">0.39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ChLen</td>
+<td style="text-align: left;">0.17</td>
+<td style="text-align: left;">0.45</td>
+<td style="text-align: right;">0.30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ChSD</td>
+<td style="text-align: left;">0.42</td>
+<td style="text-align: left;">0.05</td>
+<td style="text-align: right;">0.15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ChNum</td>
+<td style="text-align: left;">0.19</td>
+<td style="text-align: left;"><strong>0.69</strong></td>
+<td style="text-align: right;">0.42</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">path</td>
+<td style="text-align: left;">0.66</td>
+<td style="text-align: left;">0.09</td>
+<td style="text-align: right;">0.17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LinkSD</td>
+<td style="text-align: left;">0.04</td>
+<td style="text-align: left;">0.63</td>
+<td style="text-align: right;">-0.54</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S1</td>
+<td style="text-align: left;"><strong>0.82</strong></td>
+<td style="text-align: left;">0.29</td>
 <td style="text-align: right;">0.00</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">l_S</td>
-<td style="text-align: left;">-0.5</td>
-<td style="text-align: left;">0.27</td>
-<td style="text-align: right;">0.38</td>
-</tr>
 <tr class="odd">
-<td style="text-align: left;">GenSD</td>
-<td style="text-align: left;">0.64</td>
-<td style="text-align: left;">0.18</td>
-<td style="text-align: right;">0.59</td>
+<td style="text-align: left;">S2</td>
+<td style="text-align: left;"><strong>0.84</strong></td>
+<td style="text-align: left;">0.12</td>
+<td style="text-align: right;">-0.06</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">VulSD</td>
-<td style="text-align: left;"><strong>0.86</strong></td>
-<td style="text-align: left;">-0.14</td>
-<td style="text-align: right;">-0.38</td>
+<td style="text-align: left;">S4</td>
+<td style="text-align: left;"><strong>0.74</strong></td>
+<td style="text-align: left;">0.43</td>
+<td style="text-align: right;">-0.13</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">TL</td>
-<td style="text-align: left;">-0.25</td>
-<td style="text-align: left;"><strong>0.86</strong></td>
-<td style="text-align: right;">-0.09</td>
+<td style="text-align: left;">S5</td>
+<td style="text-align: left;"><strong>0.76</strong></td>
+<td style="text-align: left;">0.39</td>
+<td style="text-align: right;">-0.22</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ChLen</td>
-<td style="text-align: left;">0.45</td>
-<td style="text-align: left;">0.61</td>
-<td style="text-align: right;">0.06</td>
+<td style="text-align: left;">ρ</td>
+<td style="text-align: left;">0.14</td>
+<td style="text-align: left;">-0.82</td>
+<td style="text-align: right;">-0.24</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ChSD</td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;"><strong>0.86</strong></td>
-<td style="text-align: right;">-0.29</td>
+<td style="text-align: left;">centrality</td>
+<td style="text-align: left;">-0.49</td>
+<td style="text-align: left;">-0.29</td>
+<td style="text-align: right;">0.21</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ChNum</td>
-<td style="text-align: left;"><strong>0.9</strong></td>
-<td style="text-align: left;">0.02</td>
-<td style="text-align: right;">-0.29</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">path</td>
-<td style="text-align: left;">-0.04</td>
-<td style="text-align: left;"><strong>0.92</strong></td>
-<td style="text-align: right;">-0.17</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">LinkSD</td>
-<td style="text-align: left;"><strong>0.85</strong></td>
-<td style="text-align: left;">0.17</td>
-<td style="text-align: right;">-0.25</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">loops</td>
-<td style="text-align: left;">0.17</td>
-<td style="text-align: left;"><strong>0.79</strong></td>
-<td style="text-align: right;">-0.08</td>
+<td style="text-align: left;">0.45</td>
+<td style="text-align: left;">0.12</td>
+<td style="text-align: right;">0.07</td>
 </tr>
 </tbody>
 </table>
