@@ -135,18 +135,39 @@ pca$var$cor %>%
             row.names = FALSE)
 
 # plot pca
-ggplot(data = pca[["var"]][["coord"]]) +
+pca$var$cor %>%
+  as.data.frame() %>%
+  rownames_to_column(., var = "Property") %>%
+  select(Property, Dim.1, Dim.2, Dim.3) %>%
+  pivot_longer(!Property,
+               names_to = "dimension",
+               values_to = "quanti.correlation") %>%
+  mutate(quanti.correlation = round(quanti.correlation, digits = 2)) %>%
+  full_join(signif_corrs) %>%
+  filter(dimension != "Dim.3") %>%
+  mutate(colour = case_when(quanti.correlation > 0.53 & quanti.correlation <= 0.53 & quanti.p.value <= 0.05 ~ "red",
+                            quanti.correlation > 0.66 & quanti.p.value <= 0.01 ~ "red",
+                            .default = "black")) %>%
+  select(Property, dimension, colour) %>%
+  pivot_wider(names_from = dimension,
+              values_from = colour) %>%
+  mutate(significant = if_else(Dim.1 == "red" | Dim.2 == "red", "signif", "non-signif")) %>%
+  select(Property, significant) %>%
+  full_join(.,
+            pca[["var"]][["coord"]] %>%
+              as.data.frame() %>%
+              rownames_to_column(., var = "Property")) %>%
+  ggplot(.,
+         aes(x = Dim.1,
+             y = Dim.2)) +
   geom_hline(yintercept = 0,
              colour = "grey60",
              linetype = 2) +
   geom_vline(xintercept = 0,
              colour = "grey60",
              linetype = 2) +
-  geom_point(aes(x = Dim.1,
-                 y = Dim.2)) +
-  geom_text_repel(aes(x = Dim.1,
-                      y = Dim.2,
-                      label = row.names(pca[["var"]][["coord"]]))) +
+  geom_point(aes(colour = significant)) +
+  geom_text_repel(aes(label = Property)) +
   theme_classic() +
   lims(x= c(-1, 1), y = c(-1, 1)) +
   labs(x = paste("PCA 1 (", round(variance[1]), "%)",sep = ""),
