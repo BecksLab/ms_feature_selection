@@ -65,15 +65,6 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
 end
 
 """
-    maxrank(N::SpeciesInteractionNetwork{<:Partiteness, <:Binary}}
-
-Returns the maximum possible rank of a Network
-"""
-function maxrank(N::SpeciesInteractionNetwork)
-    return minimum(size(N))
-end
-
-"""
 _get_matrix(N::SpeciesInteractionNetwork)
 
     Internal function to return a matrix of interactions from a
@@ -242,7 +233,7 @@ function cannibal(N::SpeciesInteractionNetwork)
 end
 
 """
-Returns the percentage of species involved in a loop (motif S3)
+Returns the percentage of species involved in a loop (motifs S3, D2, D4, D5, D6, D7)
 """
 function loops(N::SpeciesInteractionNetwork)
 
@@ -257,7 +248,7 @@ function loops(N::SpeciesInteractionNetwork)
     # combine all tuples
     all_motif = vcat(S3, D2, D4, D5, D6, D7)
 
-    # only continue if therw are species in list
+    # only continue if there are species in list
     if length(all_motif) > 0
         # reduce tuples to single vector
         spp_in_motif = reduce(vcat, collect.(all_motif))
