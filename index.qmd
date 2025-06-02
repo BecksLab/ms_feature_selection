@@ -85,7 +85,7 @@ kable(dat)
 
 ![VERMAAT networks only](figures/pca_vermaat.png)
 
-![All networks](figures/pca_allNetworks.png)
+![All networks. Vermaat subset = using only the structural measures from Vermaat](figures/pca_allNetworks.png)
 
 # References {.unnumbered}
 
