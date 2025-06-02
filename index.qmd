@@ -38,7 +38,7 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 *"It is incumbent on network ecologists to establish clearly the independence and uniqueness of the descriptive metrics used."* - @lauEcologicalNetworkMetrics2017
 
 | Label | Definition | "Function" | Reference (for maths), can make footnotes probs |
-|----------------|--------------------------|----------------|----------------|
+|----------------|-----------------------|----------------|----------------|
 | Basal | Percentage of basal taxa, defined as species who have a vulnerability of zero |  |  |
 | Connectance | $L/S^2$, where $S$ is the number of species and $L$ the number of links |  |  |
 | Cannibal | Percentage of species that are cannibals |  |  |
@@ -50,7 +50,7 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 | Herbivore | Percentage of herbivores plus detritivores (taxa that feed only on basal taxa) |  |  |
 | Intermediate | Percentage of intermediate taxa (with both consumers and resources) |  |  |
 | LinkSD | Normalized standard deviation of links (number of consumers plus resources per taxon) |  |  |
-| Loop | Percentage of taxa in loops (food chains in which a taxon occurs twice) |  | |
+| Loop | Percentage of taxa in loops (food chains in which a taxon occurs twice) |  |  |
 | L/S | links per species |  |  |
 | MaxSim | Mean of the maximum trophic similarity of each taxon to other taxa, the number of predators and prey shared by a pair of species divided by their total number of predators and prey |  | **TODO** |
 | Omnivory | Percentage of omnivores (taxa that feed on $\geq$ 2 taxa with different trophic levels) |  |  |
@@ -72,7 +72,6 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 
 : An informative caption about the different network properties {#tbl-properties}
 
-
 ```{r}
 #| label: tbl-corr
 #| tbl-cap: "Here is a table showing the correlation of the different network properties with the first three dimensions of the PCA"
@@ -83,6 +82,10 @@ dat = readr::read_csv("tables/allNetworks_corr_complete.csv")
 
 kable(dat)
 ```
+
+![VERMAAT networks only](figures/pca_vermaat.png)
+
+![All networks](figures/pca_allNetworks.png)
 
 # References {.unnumbered}
 

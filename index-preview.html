@@ -7,7 +7,7 @@
 
     <meta name="author" content="Tanya Strydom">
     <meta name="author" content="Andrew P. Beckerman">
-    <meta name="dcterms.date" content="2025-05-23">
+    <meta name="dcterms.date" content="2025-06-02">
     <meta name="keywords" content="food web, structure, dimensionality reduction">
 
     <title>Finding the mjor descriptors of species networks</title>
@@ -183,6 +183,9 @@
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-4f15e34fd272a5a1117e5e78c98d3e39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
      <script async="" src="https://hypothes.is/embed.js"></script>
 <script>
   window.document.addEventListener("DOMContentLoaded", function (_event) {
@@ -195,10 +198,10 @@
 <meta name="citation_keywords" content="food web,structure,dimensionality reduction">
 <meta name="citation_author" content="Tanya Strydom">
 <meta name="citation_author" content="Andrew P. Beckerman">
-<meta name="citation_publication_date" content="2025-05-23">
-<meta name="citation_cover_date" content="2025-05-23">
+<meta name="citation_publication_date" content="2025-06-02">
+<meta name="citation_cover_date" content="2025-06-02">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-05-23">
+<meta name="citation_online_date" content="2025-06-02">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=What Do Interaction Network Metrics Tell Us About Specialization and Biological Traits;,citation_abstract=The structure of ecological interaction networks is often interpreted as a product of meaningful ecological and evolutionary mechanisms that shape the degree of specialization in community associations. However, here we show that both unweighted network metrics (connectance, nestedness, and degree distribution) and weighted network metrics (interaction evenness, interaction strength asymmetry) are strongly constrained and biased by the number of observations. Rarely observed species are inevitably regarded as “specialists,” irrespective of their actual associations, leading to biased estimates of specialization. Consequently, a skewed distribution of species observation records (such as the lognormal), combined with a relatively low sampling density typical for ecological data, already generates a “nested” and poorly “connected” network with “asymmetric interaction strengths” when interactions are neutral. This is confirmed by null model simulations of bipartite networks, assuming that partners associate randomly in the absence of any specialization and any variation in the correspondence of biological traits between associated species (trait matching). Variation in the skewness of the frequency distribution fundamentally changes the outcome of network metrics. Therefore, interpretation of network metrics in terms of fundamental specialization and trait matching requires an appropriate control for such severe constraints imposed by information deficits. When using an alternative approach that controls for these effects, most natural networks of mutualistic or antagonistic systems show a significantly higher degree of reciprocal specialization (exclusiveness) than expected under neutral conditions. A higher exclusiveness is coherent with a tighter coevolution and suggests a lower ecological redundancy than implied by nested networks.;,citation_author=Nico Blüthgen;,citation_author=Jochen Fründ;,citation_author=Diego P. Vázquez;,citation_author=Florian Menzel;,citation_publication_date=2008;,citation_cover_date=2008;,citation_year=2008;,citation_issue=12;,citation_doi=10.1890/07-2121.1;,citation_issn=1939-9170;,citation_volume=89;,citation_language=en-US;,citation_journal_title=Ecology;">
 <meta name="citation_reference" content="citation_title=Latitudinal gradients in biotic niche breadth vary across ecosystem types;,citation_abstract=Several properties of food webs—the networks of feeding links between species—are known to vary systematically with the species richness of the underlying community. Under the ’latitude–niche breadth hypothesis’, which predicts that species in the tropics will tend to evolve narrower niches, one might expect that these scaling relationships could also be affected by latitude. To test this hypothesis, we analysed the scaling relationships between species richness and average generality, vulnerability and links per species across a set of 196 empirical food webs. In estuarine, marine and terrestrial food webs there was no effect of latitude on any scaling relationship, suggesting constant niche breadth in these habitats. In freshwater communities, on the other hand, there were strong effects of latitude on scaling relationships, supporting the latitude–niche breadth hypothesis. These contrasting findings indicate that it may be more important to account for habitat than latitude when exploring gradients in food-web structure.;,citation_author=Alyssa R. Cirtwill;,citation_author=Daniel B. Stouffer;,citation_author=Tamara N. Romanuk;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=https://www.jstor.org/stable/24761314;,citation_issue=1819;,citation_issn=0962-8452;,citation_volume=282;,citation_journal_title=Proceedings: Biological Sciences;,citation_publisher=Royal Society;">
@@ -264,7 +267,7 @@
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">May 23, 2025</p>
+              <p class="date">June 2, 2025</p>
             </div>
           </div>
           
@@ -315,10 +318,10 @@ Table&nbsp;1: An informative caption about the different network properties
 <div aria-describedby="tbl-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 21%">
-<col style="width: 35%">
-<col style="width: 21%">
-<col style="width: 21%">
+<col style="width: 22%">
+<col style="width: 32%">
+<col style="width: 22%">
+<col style="width: 22%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -733,6 +736,18 @@ Table&nbsp;2: Here is a table showing the correlation of the different network p
 </figure>
 </div></div></div>
 </div></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figures/pca_vermaat.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="VERMAAT networks only"><img src="figures/pca_vermaat.png" class="img-fluid figure-img" alt="VERMAAT networks only"></a></p>
+<figcaption>VERMAAT networks only</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="figures/pca_allNetworks.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="All networks"><img src="figures/pca_allNetworks.png" class="img-fluid figure-img" alt="All networks"></a></p>
+<figcaption>All networks</figcaption>
+</figure>
+</div>
 <section id="references" class="level1 unnumbered">
 <h1 class="unnumbered">References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
@@ -1167,6 +1182,37 @@ Williams, Richard J., and Neo D. Martinez. 2004. <span>“Limits to <span>Trophi
       }
     }
   });
-  </script>  </div> <!-- /content --> 
+  </script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script> 
   
 </body></html>
