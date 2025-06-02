@@ -67,22 +67,22 @@ fa.parallel(topology_scaled_subset, fa="fa")
 
 Nfacs <- 3  # This is for four factors. You can change this as needed.
 
-fit <- factanal(topology_scaled_subset, Nfacs, rotation = "promax")
+#fit <- factanal(topology_scaled_subset, Nfacs, rotation = "promax")
 
-ggplot() +
-  geom_point(aes(x = fit$loadings[, 1],
-                 y = fit$loadings[, 2])) +
-  geom_vline(xintercept = 0) +
-  geom_hline(yintercept = 0) +
-  geom_text(aes(x = fit$loadings[, 1],
-                y = fit$loadings[, 2],
-                label = names(fit$loadings[, 1])),
-            nudge_y = 0.1) +
-  theme_classic() +
-  labs(x = "Factor 1",
-       y = "Factor 2") +
-  lims(x= c(-1.2, 1.2), 
-       y = c(-1.2, 1.2))
+#ggplot() +
+#  geom_point(aes(x = fit$loadings[, 1],
+#                 y = fit$loadings[, 2])) +
+#  geom_vline(xintercept = 0) +
+#  geom_hline(yintercept = 0) +
+#  geom_text(aes(x = fit$loadings[, 1],
+#                y = fit$loadings[, 2],
+#                label = names(fit$loadings[, 1])),
+#            nudge_y = 0.1) +
+#  theme_classic() +
+#  labs(x = "Factor 1",
+#       y = "Factor 2") +
+#  lims(x= c(-1.2, 1.2), 
+#       y = c(-1.2, 1.2))
 
 # 2: look at correlation first
 
@@ -124,8 +124,8 @@ pca$var$cor %>%
   mutate(dimension = case_when(dimension == "Dim.1" ~ paste("PCA 1 (", round(variance[1]), "%)", sep = ""),
                                dimension == "Dim.2" ~ paste("PCA 2 (", round(variance[2]), "%)", sep = ""),
                                dimension == "Dim.3" ~ paste("PCA 3 (", round(variance[3]), "%)", sep = "")),
-         quanti.correlation = case_when(quanti.correlation > 0.53 & quanti.correlation <= 0.53 & quanti.p.value <= 0.05 ~ paste("**", quanti.correlation, "**", sep = ""),
-                                        quanti.correlation > 0.66 & quanti.p.value <= 0.01 ~ paste("**", quanti.correlation, "**", sep = ""),
+         quanti.correlation = case_when(abs(quanti.correlation) > 0.53 & abs(quanti.correlation) <= 0.53 & quanti.p.value <= 0.05 ~ paste("**", quanti.correlation, "**", sep = ""),
+                                        abs(quanti.correlation) > 0.66 & quanti.p.value <= 0.01 ~ paste("**", quanti.correlation, "**", sep = ""),
                                         .default = as.character(quanti.correlation))) %>%
   select(!quanti.p.value) %>%
   pivot_wider(names_from = dimension,
@@ -145,8 +145,8 @@ pca$var$cor %>%
   mutate(quanti.correlation = round(quanti.correlation, digits = 2)) %>%
   full_join(signif_corrs) %>%
   filter(dimension != "Dim.3") %>%
-  mutate(colour = case_when(quanti.correlation > 0.53 & quanti.correlation <= 0.53 & quanti.p.value <= 0.05 ~ "red",
-                            quanti.correlation > 0.66 & quanti.p.value <= 0.01 ~ "red",
+  mutate(colour = case_when(abs(quanti.correlation) > 0.53 & abs(quanti.correlation) <= 0.53 & quanti.p.value <= 0.05 ~ "red",
+                            abs(quanti.correlation) > 0.66 & quanti.p.value <= 0.01 ~ "red",
                             .default = "black")) %>%
   select(Property, dimension, colour) %>%
   pivot_wider(names_from = dimension,

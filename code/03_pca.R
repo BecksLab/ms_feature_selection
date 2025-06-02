@@ -79,8 +79,8 @@ for (i in 1:length(data_list)) {
     mutate(dimension = case_when(dimension == "Dim.1" ~ paste("PCA 1 (", round(variance[1]), "%)", sep = ""),
                                  dimension == "Dim.2" ~ paste("PCA 2 (", round(variance[2]), "%)", sep = ""),
                                  dimension == "Dim.3" ~ paste("PCA 3 (", round(variance[3]), "%)", sep = "")),
-           quanti.correlation = case_when(quanti.correlation > 0.53 & quanti.correlation <= 0.53 & quanti.p.value <= 0.05 ~ paste("**", quanti.correlation, "**", sep = ""),
-                                          quanti.correlation > 0.66 & quanti.p.value <= 0.01 ~ paste("**", quanti.correlation, "**", sep = ""),
+           quanti.correlation = case_when(abs(quanti.correlation) > 0.53 & abs(quanti.correlation) <= 0.53 & quanti.p.value <= 0.05 ~ paste("**", quanti.correlation, "**", sep = ""),
+                                          abs(quanti.correlation) > 0.66 & quanti.p.value <= 0.01 ~ paste("**", quanti.correlation, "**", sep = ""),
                                           .default = as.character(quanti.correlation))) %>%
     select(!quanti.p.value) %>%
     pivot_wider(names_from = dimension,
@@ -103,8 +103,8 @@ for (i in 1:length(data_list)) {
     mutate(quanti.correlation = round(quanti.correlation, digits = 2)) %>%
     full_join(signif_corrs) %>%
     filter(dimension != "Dim.3") %>%
-    mutate(colour = case_when(quanti.correlation > 0.53 & quanti.correlation <= 0.53 & quanti.p.value <= 0.05 ~ "red",
-                              quanti.correlation > 0.66 & quanti.p.value <= 0.01 ~ "red",
+    mutate(colour = case_when(abs(quanti.correlation) > 0.53 & abs(quanti.correlation) <= 0.53 & quanti.p.value <= 0.05 ~ "red",
+                              abs(quanti.correlation) > 0.66 & quanti.p.value <= 0.01 ~ "red",
                               .default = "black")) %>%
     select(Property, dimension, colour) %>%
     pivot_wider(names_from = dimension,
