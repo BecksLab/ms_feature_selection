@@ -1,0 +1,18 @@
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{figures/pca_vermaat.png}}
+
+}
+
+\caption{VERMAAT networks only}
+
+\end{figure}%%
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{figures/pca_allNetworks.png}}
+
+}
+
+\caption{All networks}
+
+\end{figure}
