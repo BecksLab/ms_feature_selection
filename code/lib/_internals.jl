@@ -117,25 +117,44 @@ _parser(x) = parse(Int, x)
 """
 trophic_level(N::SpeciesInteractionNetwork)
 
-    Calculates the prey-averaged trophic level of all species in a network. 
+    Calculates the trophic level of all species in a network using the average 
+    shortest path from the prey of species 𝑖 to a basal species (prey-averaged)
 
-    Williams, Richard J., and Neo D. Martinez. 2004. “Limits to Trophic Levels and Omnivory in Complex Food Webs: Theory and Data.” The American Naturalist 163 (3): 458–68. https://doi.org/10.1086/381964.
+    Williams, Richard J., and Neo D. Martinez. 2004. “Limits to Trophic Levels 
+    and Omnivory in Complex Food Webs: Theory and Data.” The American Naturalist 
+    163 (3): 458–68. https://doi.org/10.1086/381964.
 """
 function trophic_level(N::SpeciesInteractionNetwork)
 
     sp = species(N)
 
-
     # dictionary for path lengths
     pls = Dict{Any,Any}()
 
     for i in eachindex(sp)
-        # find shortest path to a basal species
-        pls[sp[i]] = distancetobase(N, sp[i])
+
+        # prey of spp i
+        preys = collect(successors(N, sp[i]))
+
+        # only continue if species has preys...
+        if length(preys) > 0
+            # for summing each path length
+            pl_temp = 0
+            for j in eachindex(preys)
+
+                pl_temp += distancetobase(N, preys[j])
+
+                pls[sp[i]] = 2 + (1/length(sp)) * pl_temp
+
+            end
+        else
+            pls[sp[i]] = 2
+        end
     end
     # return trophic level Dict
     return pls
 end
+
 
 """
 pathlengths(N::SpeciesInteractionNetwork)
