@@ -13,7 +13,8 @@ setwd(here::here())
 # import network summary data
 topology <- read.csv("data/vermaat_2009/vermaat_summary.csv") %>%
   rbind(read.csv("data/mangal/mangal_summary.csv")) %>%
-  select(!id)
+  select(!id) %>%
+  na.omit()
 
 # create subset that only uses the Vermaat vars...
 topology_subset <- topology %>%
