@@ -1,5 +1,8 @@
 library(tidyverse)
 library(vegan)
+library(psych)
+library(FactoMineR)
+library(factoextra)
 
 # import network summary data
 topology <- read_csv("data/vermaat_2009/vermaat_summary.csv") %>%
@@ -37,3 +40,20 @@ out |>
 out |> 
   select(PC4) |> 
   filter(abs(PC4)>0.6)
+
+##-- factor analysis attemp
+tp_scaled <- scale(tp)
+fa.parallel(tp_scaled, # perform parallel analysis
+            fa = "fa",
+            fm = "pa",
+            show.legend = TRUE,
+            main = "Scree Plot and Parallel Analysis")
+
+efa_promax3 <- fa(tp_scaled, # perform EFA with 3 factors
+                  nfactors=3,
+                  rotate="promax",
+                  fm="pa")
+fa.diagram(efa_promax3)
+
+# --factominer
+
