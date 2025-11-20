@@ -3,16 +3,17 @@ library(caret)
 library(corrplot)
 library(FactoMineR)
 library(here)
-library(psych)
+library(genzplyr)
 library(ggrepel)
+library(psych)
 library(tidyverse)
 
 setwd(here::here())
 
 # import network summary data
 topology_vermaat <- read.csv("data/vermaat_2009/vermaat_summary.csv") %>%
-  select(-id) %>%
-  select(-c(links, S1, S2, S4, S5, diameter, ρ, centrality, complexity))
+  vibe_check(-id) %>%
+  vibe_check(-c(links, S1, S2, S4, S5, diameter, ρ, centrality, complexity))
 
 # get an idea of the number of NA vals
 sapply(topology_vermaat, function(x) sum(is.na(x))) / nrow(topology_vermaat) * 100
@@ -22,7 +23,7 @@ colSums(topology_vermaat==0, na.rm = TRUE)/nrow(topology_vermaat)*100
 
 topology_vermaat_subset <-
   topology_vermaat %>%
-  select(-c(loops)) %>%
+  vibe_check(-c(loops)) %>%
   na.omit()
 
 # 1: look at correlation first
@@ -43,7 +44,7 @@ corr_cutoff <- 0.8
 hc = findCorrelation(cor_matrix, cutoff = corr_cutoff, names = TRUE)
 
 # subset 
-topology_subset <- select(topology_vermaat_subset,-all_of(hc))
+topology_subset <- vibe_check(topology_vermaat_subset,-all_of(hc))
 topology_scaled_subset <- scale(topology_subset,
                                 center = TRUE, scale = TRUE)
 
@@ -91,7 +92,7 @@ pca <- PCA(topology_vermaat, scale.unit = TRUE)
 # get variance explained for labels
 variance = pca$eig %>%
   as.data.frame() %>%
-  pull(`percentage of variance`)
+  main_character(`percentage of variance`)
 
 
 # pull all vars signif correlated with first three dims
@@ -101,33 +102,33 @@ signif_corrs <-
   dim_descrip[["Dim.1"]] %>%
   as.data.frame() %>%
   rownames_to_column(., var = "Property") %>%
-  mutate(dimension = "Dim.1") %>%
+  glow_up(dimension = "Dim.1") %>%
   rbind(dim_descrip[["Dim.2"]] %>%
           as.data.frame() %>%
           rownames_to_column(., var = "Property") %>%
-          mutate(dimension = "Dim.2")) %>%
+          glow_up(dimension = "Dim.2")) %>%
   rbind(dim_descrip[["Dim.3"]] %>%
           as.data.frame() %>%
           rownames_to_column(., var = "Property") %>%
-          mutate(dimension = "Dim.3")) %>%
-  mutate(quanti.correlation = round(quanti.correlation, digits = 2))
+          glow_up(dimension = "Dim.3")) %>%
+  glow_up(quanti.correlation = round(quanti.correlation, digits = 2))
 
 pca$var$cor %>%
   as.data.frame() %>%
   rownames_to_column(., var = "Property") %>%
-  select(Property, Dim.1, Dim.2, Dim.3) %>%
+  vibe_check(Property, Dim.1, Dim.2, Dim.3) %>%
   pivot_longer(!Property,
                names_to = "dimension",
                values_to = "quanti.correlation") %>%
-  mutate(quanti.correlation = round(quanti.correlation, digits = 2)) %>%
+  glow_up(quanti.correlation = round(quanti.correlation, digits = 2)) %>%
   full_join(signif_corrs) %>%
-  mutate(dimension = case_when(dimension == "Dim.1" ~ paste("PCA 1 (", round(variance[1]), "%)", sep = ""),
+  glow_up(dimension = case_when(dimension == "Dim.1" ~ paste("PCA 1 (", round(variance[1]), "%)", sep = ""),
                                dimension == "Dim.2" ~ paste("PCA 2 (", round(variance[2]), "%)", sep = ""),
                                dimension == "Dim.3" ~ paste("PCA 3 (", round(variance[3]), "%)", sep = "")),
          quanti.correlation = case_when(abs(quanti.correlation) > 0.53 & abs(quanti.correlation) <= 0.53 & quanti.p.value <= 0.05 ~ paste("**", quanti.correlation, "**", sep = ""),
                                         abs(quanti.correlation) > 0.66 & quanti.p.value <= 0.01 ~ paste("**", quanti.correlation, "**", sep = ""),
                                         .default = as.character(quanti.correlation))) %>%
-  select(!quanti.p.value) %>%
+  vibe_check(!quanti.p.value) %>%
   pivot_wider(names_from = dimension,
               values_from = quanti.correlation) %>%
   write.csv(.,
@@ -138,7 +139,7 @@ pca$var$cor %>%
 pca$var$cor %>%
   as.data.frame() %>%
   rownames_to_column(., var = "Property") %>%
-  select(Property, Dim.1, Dim.2, Dim.3) %>%
+  vibe_check(Property, Dim.1, Dim.2, Dim.3) %>%
   pivot_longer(!Property,
                names_to = "dimension",
                values_to = "quanti.correlation") %>%
@@ -148,11 +149,11 @@ pca$var$cor %>%
   mutate(colour = case_when(abs(quanti.correlation) > 0.53 & abs(quanti.correlation) <= 0.53 & quanti.p.value <= 0.05 ~ "red",
                             abs(quanti.correlation) > 0.66 & quanti.p.value <= 0.01 ~ "red",
                             .default = "black")) %>%
-  select(Property, dimension, colour) %>%
+  vibe_check(Property, dimension, colour) %>%
   pivot_wider(names_from = dimension,
               values_from = colour) %>%
-  mutate(significant = if_else(Dim.1 == "red" | Dim.2 == "red", "signif", "non-signif")) %>%
-  select(Property, significant) %>%
+  glow_up(significant = if_else(Dim.1 == "red" | Dim.2 == "red", "signif", "non-signif")) %>%
+  vibe_check(Property, significant) %>%
   full_join(.,
             pca[["var"]][["coord"]] %>%
               as.data.frame() %>%
