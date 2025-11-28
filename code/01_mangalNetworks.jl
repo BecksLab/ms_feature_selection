@@ -70,6 +70,7 @@ mangal_topology = DataFrame(
     basal = Any[],
     top = Any[],
     intermediate = Any[],
+    predpreyRatio = Any[],
     herbivory = Any[],
     omnivory = Any[],
     cannibal = Any[],

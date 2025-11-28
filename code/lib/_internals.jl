@@ -22,7 +22,9 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
     vul = collect(values(_vul))
     ind_maxgen = findmax(gen)[2]
     l_s = L / S
-    top = [k for (k, v) in _vul if v == 0]
+    top = sum(vec(sum(A, dims = 1) .== 0))
+    basal = sum(vec(sum(A, dims = 2) .== 0))
+    int = (S - (basal + top))
     tl = trophic_level(N)
 
     cl = [v for (k, v) in tl if k ∈ top]
@@ -37,11 +39,13 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :diameter => diameter(N),
         :complexity => complexity(N),
         :distance => distancetobase(N, collect(keys(_gen))[ind_maxgen]),
-        :basal => sum(vec(sum(A, dims = 2) .== 0)) / S,
-        :top => sum(vec(sum(A, dims = 1) .== 0)) / S,
+        :basal => basal / S,
+        :top => top / S,
+        :intermediate => int / S,
         :herbivory => length(herbivore(N)) / S,
         :omnivory => length(omnivore(N)) / S,
         :cannibal => length(cannibal(N)) / S,
+        :predpreyRatio => (basal + int)/(top + int),
         :l_S => l_s,
         :GenSD => std(gen) / l_s,
         :VulSD => std(vul) / l_s,
@@ -71,8 +75,6 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :centrality => mean(collect(values(centrality(N)))),
         :loops => loops(N),
     )
-
-    D[:intermediate] = 1 - D[:top] - D[:basal]
 
     return D
 end
@@ -198,17 +200,18 @@ herbivore(N::SpeciesInteractionNetwork)
 """
 function herbivore(N::SpeciesInteractionNetwork)
 
-    tl = trophic_level(N)
-    basal = [k for (k, v) in tl if v == 1.0]
+    # find basal species
+    gen = SpeciesInteractionNetworks.generality(N)
+    basal = collect(keys(filter(((k, v),) -> v == 0, gen)))
 
     sp = species(N)
-
     herbivores = Any[]
 
     for i in eachindex(sp)
 
         prey = collect(successors(N, sp[i]))
 
+        # is the prey a subset of or equal to
         if length(prey) > 0 && prey ⊆ basal
             push!(herbivores, sp[i])
         end
