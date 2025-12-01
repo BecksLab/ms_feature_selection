@@ -27,7 +27,8 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
     int = (S - (basal + top))
     tl = trophic_level(N)
 
-    cl = [v for (k, v) in tl if k ∈ top]
+    top2 = [k for (k, v) in _vul if v == 0]
+    cl = [v for (k, v) in tl if k ∈ top2]
     if length(cl) == 0
         cl = 0.0
     end
@@ -74,7 +75,8 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :ρ => spectralradius(N),
         :centrality => mean(collect(values(centrality(N)))),
         :loops => loops(N),
-    )
+        :robustness => robustness(N; threshold = 50,
+                                remove_disconnected = true))
 
     return D
 end

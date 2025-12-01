@@ -21,6 +21,7 @@ vermaat_topology = DataFrame(
     basal = Any[],
     top = Any[],
     intermediate = Any[],
+    predpreyRatio = Any[],
     herbivory = Any[],
     omnivory = Any[],
     cannibal = Any[],
@@ -40,6 +41,7 @@ vermaat_topology = DataFrame(
     ρ = Any[],
     centrality = Any[],
     loops = Any[],
+    robustness = Any[],
 );
 
 # dataframe to store networks

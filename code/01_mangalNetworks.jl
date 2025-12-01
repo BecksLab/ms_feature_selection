@@ -1,5 +1,6 @@
 using CSV
 using DataFrames
+using Extinctions
 using JLD2
 using ProgressMeter
 using SpeciesInteractionNetworks
@@ -90,6 +91,7 @@ mangal_topology = DataFrame(
     ρ = Any[],
     centrality = Any[],
     loops = Any[],
+    robustness = Any[],
 );
 
 # make object to store each network so we can import it later
@@ -104,6 +106,12 @@ networks = DataFrame(id = Any[], network = Any[]);
     push!(networks, N_d) # push network 'as is'
 
     N = simplify(render(Binary, N)) # make binary
+    # convert away from Unipartite{Mangal.MangalNode}
+    # janky but I can't be arsed at this point
+    A = _get_matrix(N)
+    edges = Binary(A)
+    nodes = Unipartite(Symbol.(species(N)))
+    N = SpeciesInteractionNetworks.SpeciesInteractionNetwork(nodes, edges)
 
     d = _network_summary(N)
     d[:id] = mangal_foodwebs.id[i]
