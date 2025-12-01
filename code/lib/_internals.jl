@@ -1,5 +1,6 @@
 # General sundry internal functions
 
+using Extinctions
 using LinearAlgebra
 using SpeciesInteractionNetworks
 using Statistics
@@ -131,47 +132,31 @@ end
 
 _parser(x) = parse(Int, x)
 
+
 """
 trophic_level(N::SpeciesInteractionNetwork)
 
     Calculates the trophic level of all species in a network using the average 
     shortest path from the prey of species 𝑖 to a basal species (prey-averaged)
 
-    Williams, Richard J., and Neo D. Martinez. 2004. “Limits to Trophic Levels 
-    and Omnivory in Complex Food Webs: Theory and Data.” The American Naturalist 
-    163 (3): 458–68. https://doi.org/10.1086/381964.
+
 """
 function trophic_level(N::SpeciesInteractionNetwork)
 
-    sp = species(N)
+    A = _get_matrix(N) # Ensure A is dense for inversion.
+    S = size(A, 1) # Species richness.
+    out_degree = sum(A; dims = 2)
+    D = -(A ./ out_degree) # Diet matrix.
+    D[isnan.(D)] .= 0.0
+    D[diagind(D)] .= 1.0 .- D[diagind(D)]
+    # Solve with the inverse matrix.
+    inverse = iszero(det(D)) ? pinv : inv
+    tls = inverse(D) * ones(S)
 
-    # dictionary for path lengths
-    pls = Dict{Any,Any}()
+    # create dictionary
+    Dict(zip(species(N),tls))
 
-    for i in eachindex(sp)
-
-        # prey of spp i
-        preys = collect(successors(N, sp[i]))
-
-        # only continue if species has preys...
-        if length(preys) > 0
-            # for summing each path length
-            pl_temp = 0
-            for j in eachindex(preys)
-
-                pl_temp += distancetobase(N, preys[j])
-
-                pls[sp[i]] = 2 + (1/length(sp)) * pl_temp
-
-            end
-        else
-            pls[sp[i]] = 2
-        end
-    end
-    # return trophic level Dict
-    return pls
 end
-
 
 """
 pathlengths(N::SpeciesInteractionNetwork)
@@ -225,7 +210,8 @@ end
 """
 omnivore(N::SpeciesInteractionNetwork)
 
-    Returns a vector of species that are omnivores (feed on species of different trophic levels)
+    Returns a vector of species that are omnivores (feed on  > 1 species of different 
+    trophic levels)
 """
 function omnivore(N::SpeciesInteractionNetwork)
 
@@ -240,7 +226,7 @@ function omnivore(N::SpeciesInteractionNetwork)
         # return trophic level of prey
         _tls = [v for (k, v) in tl if k ∈ prey]
 
-        if length(prey) > 0 && !allequal(_tls)
+        if length(prey) > 1 && !allequal(_tls)
             push!(omni, sp[i])
         end
     end
