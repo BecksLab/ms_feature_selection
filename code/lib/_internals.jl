@@ -1,6 +1,7 @@
 # General sundry internal functions
 
 using Extinctions
+using Graphs
 using LinearAlgebra
 using SpeciesInteractionNetworks
 using Statistics
@@ -56,7 +57,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :ChSD => std(cl),
         :ChNum => log(length(cl)),
         :path => mean(pathlengths(N)),
-        :LinkSD => std(values(degree(N))) / l_s,
+        :LinkSD => std(values(SpeciesInteractionNetworks.degree(N))) / l_s,
         :S1 =>
             length(
                 findmotif(motifs(Unipartite, 3)[1], remove_cannibals(N)),
@@ -75,7 +76,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
             )/(richness(N)^2),
         :ρ => spectralradius(N),
         :centrality => mean(collect(values(centrality(N)))),
-        :loops => loops(N),
+        :loops => length(loops(N)),
         :robustness => robustness(N; threshold = 50,
                                 remove_disconnected = true))
 
@@ -260,29 +261,30 @@ Returns the percentage of species involved in a loop (motifs S3, D2, D4, D5, D6,
 """
 function loops(N::SpeciesInteractionNetwork)
 
-    # all possible motifs that contain a form of looping
-    S3 = findmotif(motifs(Unipartite, 3)[3], N)
-    D2 = findmotif(motifs(Unipartite, 3)[7], N)
-    D4 = findmotif(motifs(Unipartite, 3)[9], N)
-    D5 = findmotif(motifs(Unipartite, 3)[10], N)
-    D6 = findmotif(motifs(Unipartite, 3)[11], N)
-    D7 = findmotif(motifs(Unipartite, 3)[12], N)
+    if richness(N) < 121
 
-    # combine all tuples
-    all_motif = vcat(S3, D2, D4, D5, D6, D7)
+        # Create a directed graph (e.g., with richness of N)
+        g = SimpleDiGraph(richness(N))
 
-    # only continue if there are species in list
-    if length(all_motif) > 0
-        # reduce tuples to single vector
-        spp_in_motif = reduce(vcat, collect.(all_motif))
-        # remove duplicated
-        spp_in_loops = length(unique(spp_in_motif))
+        # Build Di Graph
+        # get matrix
+        A = _get_matrix(N)
 
-        # return as percentage
-        return spp_in_loops / richness(N) * 100
+        # for every interaction pair that exists we push to DiGraph
+        for x in axes(A, 1)
+            for y in axes(A, 2)
+                if A[x, y] == 1
+                    add_edge!(g, x, y)
+                end
+            end   
+        end
+
+        # Find all simple cycles in the graph
+        return simplecycles(g)
     else
-        return 0.0
+        return Vector{Int64}[]
     end
+
 end
 
 """
