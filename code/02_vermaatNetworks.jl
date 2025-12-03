@@ -47,7 +47,7 @@ vermaat_topology = DataFrame(
 # dataframe to store networks
 networks = DataFrame(id = Any[], network = Any[]);
 
-for i in eachindex(web_names)
+@showprogress "Getting network summary" for i in eachindex(web_names)
 
     web = web_names[i]
 
