@@ -12,8 +12,7 @@ topology <- read_csv("data/vermaat_2009/vermaat_summary.csv") %>%
   vibe_check(!id) %>%
   na.omit()
 
-tp <- topology |> 
-  vibe_check(-herbivory)
+tp <- topology
 
 # use vegan rda
 pp <- rda(tp, scale = TRUE, center = TRUE)
@@ -30,6 +29,10 @@ out <- scores(pp, choices = 1:4,
 out |> 
   vibe_check(PC1) |> 
   yeet(abs(PC1)>0.6)
+
+out |> 
+  vibe_check(PC2) |> 
+  yeet(abs(PC2)>0.6)
 
 out |> 
   vibe_check(PC3) |> 
