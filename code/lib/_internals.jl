@@ -76,7 +76,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
             )/(richness(N)^2),
         :ρ => spectralradius(N),
         :centrality => mean(collect(values(centrality(N)))),
-        :loops => length(loops(N)),
+        :loops => length(loops(N)) / S,
         :robustness => robustness(N; threshold = 50,
                                 remove_disconnected = true))
 
@@ -261,30 +261,26 @@ Returns the percentage of species involved in a loop (motifs S3, D2, D4, D5, D6,
 """
 function loops(N::SpeciesInteractionNetwork)
 
-    if richness(N) < 121
+    A = _get_matrix(N)
 
-        # Create a directed graph (e.g., with richness of N)
-        g = SimpleDiGraph(richness(N))
+    # empty vector to puch spp index (proxy for id) to
+    in_loop_spp = Any[]
 
-        # Build Di Graph
-        # get matrix
-        A = _get_matrix(N)
+    # look at loops that expand all the way to richness of network
+    for i in 3:richness(N)
+        # get the diagonal of the power transformed adj mat (indication of loops)
+        _diag = diag(A^i)
+        # get indices of spp with val > 0
+        spp_ind = findall(!=(0), _diag)
 
-        # for every interaction pair that exists we push to DiGraph
-        for x in axes(A, 1)
-            for y in axes(A, 2)
-                if A[x, y] == 1
-                    add_edge!(g, x, y)
-                end
-            end   
+        # add to master list
+        if length(spp_ind) > 0
+            append!(in_loop_spp, spp_ind)
         end
-
-        # Find all simple cycles in the graph
-        return simplecycles(g)
-    else
-        return Vector{Int64}[]
     end
 
+    # return unique numbers (indices)
+    return unique(in_loop_spp)
 end
 
 """
