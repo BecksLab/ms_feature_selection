@@ -6,6 +6,9 @@ using LinearAlgebra
 using SpeciesInteractionNetworks
 using Statistics
 
+# import other scripts with functions
+include("intervality.jl")
+
 """
 _network_summary(N::SpeciesInteractionNetwork{<:Partiteness, <:Binary})
 
@@ -78,7 +81,8 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :centrality => mean(collect(values(centrality(N)))),
         :loops => length(loops(N)) / S,
         :robustness => robustness(N; threshold = 50,
-                                remove_disconnected = true))
+                                remove_disconnected = true),
+        :intervals => intervality(A))
 
     return D
 end
