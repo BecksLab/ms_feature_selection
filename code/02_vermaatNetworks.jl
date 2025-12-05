@@ -42,6 +42,7 @@ vermaat_topology = DataFrame(
     centrality = Any[],
     loops = Any[],
     robustness = Any[],
+    intervals = Any[],
 );
 
 # dataframe to store networks
