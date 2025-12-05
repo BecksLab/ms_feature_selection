@@ -68,9 +68,11 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 | S2 | Number of omnivory motifs |  | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
 | S4 | Number of apparent competition motifs |  | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
 | S5 | Number of direct competition motifs |  | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
-| Intervality |  |  | **TODO** @stoufferRobustMeasureFood2006a |
+| Intervality | The degree to which the prey in a food web can be ordered so that all species can be placed along a single dimension |  | **TODO** @stoufferRobustMeasureFood2006a |
+| Prey:predator | Ratio of prey (basal + intermediate) to predators (top + intermediate) | A measure of food web 'shape'. Values <1 imply an inverted structure and might indicate instability |  |
+| Robustness | Minimum level of secondary extinction that occurs in response to a particular perturbation |  |  |
 
-: An informative caption about the different network properties {#tbl-properties}
+: An informative caption about the different network properties. We use a combination of metrics from both the original @vermaae paper as well as including those that have been identified by @thompsonFoodWebsReconciling2012 and have been linked to emerging ecosystem properties such as stability {#tbl-properties}
 
 ```{r}
 #| label: tbl-corr
