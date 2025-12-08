@@ -12,7 +12,8 @@ topology <- read_csv("data/vermaat_2009/vermaat_summary.csv") %>%
   vibe_check(!id) %>%
   na.omit()
 
-tp <- topology
+tp <- topology %>%
+  vibe_check(!diameter)
 
 # use vegan rda
 pp <- rda(tp, scale = TRUE, center = TRUE)
