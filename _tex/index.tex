@@ -208,7 +208,7 @@
 1%
 }%
 }
-\date{2025-12-03}
+\date{2025-12-08}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -261,8 +261,11 @@ al. (2017)
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3239}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2254}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2254}}@{}}
-\caption{An informative caption about the different network
-properties}\label{tbl-properties}\tabularnewline
+\caption{An informative caption about the different network properties.
+We use a combination of metrics from both the original Vermaat et al.
+(2009) paper as well as including those that have been identified by
+Thompson et al. (2012) and have been linked to emerging ecosystem
+properties such as stability}\label{tbl-properties}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Label
@@ -346,10 +349,17 @@ S4 & Number of apparent competition motifs & & Stouffer et al. (2007)
 Milo et al. (2002) \\
 S5 & Number of direct competition motifs & & Stouffer et al. (2007) Milo
 et al. (2002) \\
-Intervality & & & \textbf{TODO} Stouffer et al. (2006) \\
+Intervality & The degree to which the prey in a food web can be ordered
+so that all species can be placed along a single dimension & & Stouffer
+et al. (2006) \\
+Prey:predator & Ratio of prey (basal + intermediate) to predators (top +
+intermediate) & A measure of food web `shape'. Values \textless1 imply
+an inverted structure and might indicate instability & \\
+Robustness & Minimum level of secondary extinction that occurs in
+response to a particular perturbation & & Jonsson et al. (2015) \\
 \end{longtable}
 
-\begin{longtable}[]{@{}lllr@{}}
+\begin{longtable}[]{@{}llll@{}}
 
 \caption{\label{tbl-corr}Here is a table showing the correlation of the
 different network properties with the first three dimensions of the PCA}
@@ -357,39 +367,41 @@ different network properties with the first three dimensions of the PCA}
 \tabularnewline
 
 \toprule\noalign{}
-Property & PCA 1 (27\%) & PCA 2 (24\%) & PCA 3 (11\%) \\
+Property & PCA 1 (30\%) & PCA 2 (21\%) & PCA 3 (17\%) \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-richness & \textbf{0.8} & 0.46 & -0.11 \\
-links & \textbf{0.89} & 0.14 & -0.16 \\
-connectance & 0.05 & -0.9 & 0.02 \\
-diameter & \textbf{0.81} & -0.06 & 0.14 \\
-complexity & -0.28 & 0.48 & 0.41 \\
-distance & 0.41 & 0.13 & -0.03 \\
-basal & -0.29 & 0.38 & -0.73 \\
-top & -0.24 & 0.59 & 0.55 \\
-intermediate & 0.4 & -0.68 & 0.32 \\
-herbivory & -0.29 & 0.51 & 0.13 \\
-omnivory & 0.52 & -0.71 & 0.18 \\
-cannibal & 0.29 & -0.72 & -0.19 \\
-l\_S & \textbf{0.78} & -0.33 & -0.18 \\
-GenSD & -0.1 & 0.42 & -0.80 \\
-VulSD & -0.05 & \textbf{0.76} & 0.31 \\
-TL & 0.59 & -0.13 & 0.39 \\
-ChLen & 0.17 & 0.45 & 0.30 \\
-ChSD & 0.42 & 0.05 & 0.15 \\
-ChNum & 0.19 & \textbf{0.69} & 0.42 \\
-path & 0.66 & 0.09 & 0.17 \\
-LinkSD & 0.04 & 0.63 & -0.54 \\
-S1 & \textbf{0.82} & 0.29 & 0.00 \\
-S2 & \textbf{0.84} & 0.12 & -0.06 \\
-S4 & \textbf{0.74} & 0.43 & -0.13 \\
-S5 & \textbf{0.76} & 0.39 & -0.22 \\
-ρ & 0.14 & -0.82 & -0.24 \\
-centrality & -0.49 & -0.29 & 0.21 \\
-loops & 0.45 & 0.12 & 0.07 \\
+richness & 0.29 & \textbf{0.82} & 0.35 \\
+links & 0.63 & \textbf{0.68} & 0.1 \\
+connectance & 0.5 & -0.5 & -0.61 \\
+diameter & 0.55 & 0.47 & 0.35 \\
+complexity & -0.48 & -0.08 & 0.46 \\
+distance & 0.02 & 0.34 & -0.11 \\
+basal & -0.46 & 0.45 & \textbf{-0.69} \\
+top & -0.56 & 0.17 & 0.28 \\
+intermediate & \textbf{0.67} & -0.47 & 0.44 \\
+predpreyRatio & -0.24 & 0.42 & \textbf{-0.73} \\
+herbivory & -0.5 & 0.24 & -0.06 \\
+omnivory & \textbf{0.77} & -0.27 & 0.23 \\
+cannibal & \textbf{0.73} & 0.12 & -0.29 \\
+l\_S & \textbf{0.83} & 0.5 & -0.13 \\
+GenSD & -0.37 & \textbf{0.67} & -0.32 \\
+VulSD & -0.4 & 0.52 & 0.38 \\
+TL & 0.5 & -0.41 & \textbf{0.71} \\
+ChLen & 0.48 & -0.54 & 0.53 \\
+ChSD & 0.32 & 0.1 & 0.46 \\
+ChNum & -0.19 & \textbf{0.74} & 0.48 \\
+path & 0.28 & 0.34 & 0.41 \\
+LinkSD & -0.25 & \textbf{0.68} & 0.4 \\
+S1 & \textbf{0.92} & 0.02 & 0.01 \\
+S2 & \textbf{0.85} & 0.01 & -0.35 \\
+S4 & 0.62 & 0.53 & -0.19 \\
+S5 & \textbf{0.67} & 0.49 & -0.42 \\
+ρ & 0.56 & -0.3 & -0.55 \\
+centrality & -0.23 & -0.63 & -0.35 \\
+loops & \textbf{0.81} & 0.29 & -0.05 \\
+robustness & 0.07 & 0.16 & -0.51 \\
 
 \end{longtable}
 
@@ -430,6 +442,12 @@ A., Olesen, J. M., Pires, M. M., Yeakel, J. D., \& Poisot, T. (2019).
 Analysing ecological networks of species interactions. \emph{Biological
 Reviews}, \emph{94}(1), 16--36. \url{https://doi.org/10.1111/brv.12433}
 
+\bibitem[\citeproctext]{ref-jonssonReliabilityR50Measure2015}
+Jonsson, T., Berg, S., Pimenov, A., Palmer, C., \& Emmerson, M. (2015).
+The reliability of {R50} as a measure of vulnerability of food webs to
+sequential species deletions. \emph{Oikos}, \emph{124}(4), 446--457.
+\url{https://doi.org/10.1111/oik.01588}
+
 \bibitem[\citeproctext]{ref-lauEcologicalNetworkMetrics2017}
 Lau, M. K., Borrett, S. R., Baiser, B., Gotelli, N. J., \& Ellison, A.
 M. (2017). Ecological network metrics: Opportunities for synthesis.
@@ -465,6 +483,14 @@ Strydom, T., Dalla Riva, G. V., \& Poisot, T. (2021). {SVD Entropy
 Reveals} the {High Complexity} of {Ecological Networks}. \emph{Frontiers
 in Ecology and Evolution}, \emph{9}.
 \url{https://doi.org/10.3389/fevo.2021.623141}
+
+\bibitem[\citeproctext]{ref-thompsonFoodWebsReconciling2012}
+Thompson, R. M., Brose, U., Dunne, J., Hall, R. O., Hladyz, S.,
+Kitching, R. L., Martinez, N. D., Rantala, H., Romanuk, T. N., Stouffer,
+D. B., \& Tylianakis, J. M. (2012). Food webs: Reconciling the structure
+and function of biodiversity. \emph{Trends in Ecology \& Evolution},
+\emph{27}(12), 689--697.
+\url{https://doi.org/10.1016/j.tree.2012.08.005}
 
 \bibitem[\citeproctext]{ref-vermaatMajorDimensionsFoodweb2009}
 Vermaat, J. E., Dunne, J. A., \& Gilbert, A. J. (2009). Major dimensions
