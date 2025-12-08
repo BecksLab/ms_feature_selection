@@ -72,7 +72,7 @@ Blah blah blah @vermaatMajorDimensionsFoodweb2009
 | Prey:predator | Ratio of prey (basal + intermediate) to predators (top + intermediate) | A measure of food web 'shape'. Values <1 imply an inverted structure and might indicate instability |  |
 | Robustness | Minimum level of secondary extinction that occurs in response to a particular perturbation |  | @jonssonReliabilityR50Measure2015 |
 
-: An informative caption about the different network properties. We use a combination of metrics from both the original @vermaae paper as well as including those that have been identified by @thompsonFoodWebsReconciling2012 and have been linked to emerging ecosystem properties such as stability {#tbl-properties}
+: An informative caption about the different network properties. We use a combination of metrics from both the original @vermaatMajorDimensionsFoodweb2009 paper as well as including those that have been identified by @thompsonFoodWebsReconciling2012 and have been linked to emerging ecosystem properties such as stability {#tbl-properties}
 
 ```{r}
 #| label: tbl-corr
