@@ -7,6 +7,7 @@ using SpeciesInteractionNetworks
 using Statistics
 
 # import other scripts with functions
+include("diameter.jl")
 include("intervality.jl")
 
 """
@@ -42,7 +43,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :richness => S,
         :links => L,
         :connectance => connectance(N),
-        :diameter => diameter(N),
+        :diameter => diameter(A),
         :complexity => complexity(N),
         :distance => distancetobase(N, collect(keys(_gen))[ind_maxgen]),
         :basal => basal / S,
