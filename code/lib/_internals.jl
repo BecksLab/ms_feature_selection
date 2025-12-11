@@ -83,8 +83,9 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :loops => length(loops(N)) / S,
         :robustness => robustness(N; threshold = 50,
                                 remove_disconnected = true),
-        :intervals => intervality(A))
-
+        :intervals => intervality(A),
+        :MaxSim => max_sim(N)
+)
     return D
 end
 
@@ -304,4 +305,53 @@ function remove_cannibals(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
     network = SpeciesInteractionNetwork(nodes, edges)
 
     return network
+end
+
+"""
+max_sim(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
+
+    Returns the mean maximum trophic similarity
+"""
+function max_sim(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
+
+    spp = species(N)
+tsi = Any[]
+
+for i in eachindex(spp)
+
+    # we will update this with the actual max sim
+    max_sim_i = 0.0
+
+    # get preds and preys of spp i
+    pred_i = successors(N, spp[i]) 
+    prey_i = predecessors(N, spp[i])
+
+    # cycle through the species in community and get their pred/prey to calc sim
+
+    for j in eachindex(spp)
+        # dont want to compare for same spp combo
+        if j != i
+
+            # get preds and preys of spp j
+            pred_j = successors(N, spp[j]) 
+            prey_j = predecessors(N, spp[j])
+
+            shared_prey = length(collect(prey_i) ∩ collect(prey_j))
+            shared_pred = length(collect(pred_i) ∩ collect(pred_j))
+            all_prey = length(unique(vcat(collect(prey_i), collect(prey_j))))
+            all_pred = length(unique(vcat(collect(pred_i), collect(pred_j))))
+
+            similarity = (shared_prey + shared_pred)/(all_prey + all_pred)
+
+            if similarity > max_sim_i
+                max_sim_i = similarity
+            end
+        end
+    end
+
+    push!(tsi, max_sim_i)
+
+end
+
+    return mean(tsi)
 end
