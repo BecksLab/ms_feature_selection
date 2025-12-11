@@ -84,7 +84,8 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :robustness => robustness(N; threshold = 50,
                                 remove_disconnected = true),
         :intervals => intervality(A),
-        :MaxSim => max_sim(N)
+        :MaxSim => max_sim(N),
+        :Clust => clustering(A)
 )
     return D
 end
@@ -354,4 +355,58 @@ for i in eachindex(spp)
 end
 
     return mean(tsi)
+end
+
+"""
+clustering(A::Matrix{Bool})
+
+    Returns the mean clustering coefficient
+"""
+function clustering(A::Matrix{Bool})
+
+    N = size(A, 1)
+    
+    # Calculate the Undirected Degree (k_i)
+    # K_i is the total number of neighbors (in-degree + out-degree).
+    A_undir = (A + A') .> 0 # A_undir[i,j] = 1 if there is a link i<->j or i->j or i<-j
+
+    # The undirected degree k_i for species i is the sum of the i-th row (or column) of A_undir.
+    k_undir = sum(A_undir, dims=2)[:]
+    
+    # Calculate the Number of Triangles (T_i)
+    # In an undirected graph, the number of triangles T_i involving node i is half the (i, i) entry of A_undir^3.
+    # We can calculate the total number of undirected links between neighbors of i directly.
+    # The element (A_undir^2)_{ij} is the number of 2-paths between i and j.
+    # The number of triangles T_i is the sum of links between the neighbors of i.
+    
+    # Let D be the number of cycles of length 3 (triangles)
+    D = diag(A_undir^3) ./ 2
+
+    # Calculate the Local Clustering Coefficient (C_i)
+    C_values = Float64[] # Store local clustering coefficients
+
+    for i in 1:N
+        k_i = k_undir[i]
+        
+        # Denominator: Number of possible 2-paths (connections between neighbors)
+        # This is the number of pairs of neighbors: k_i * (k_i - 1) / 2
+        denominator = k_i * (k_i - 1) / 2
+        
+        if denominator == 0
+            # Species with degree 0 or 1 cannot be part of a triangle.
+            push!(C_values, 0.0) 
+            continue
+        end
+
+        T_i = D[i] # Number of completed triangles involving node i
+        
+        # Local Clustering Coefficient C_i
+        C_i = T_i / denominator
+        push!(C_values, C_i)
+    end
+    
+    # Calculate the Mean Clustering Coefficient
+    mean_C = mean(C_values)
+    
+    return mean_C
 end
