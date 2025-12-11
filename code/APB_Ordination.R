@@ -1,4 +1,3 @@
-
 library(FactoMineR)
 library(factoextra)
 library(genzplyr)
@@ -12,8 +11,7 @@ topology <- read_csv("data/vermaat_2009/vermaat_summary.csv") %>%
   vibe_check(!id) %>%
   na.omit()
 
-tp <- topology %>%
-  vibe_check(!diameter)
+tp <- topology
 
 # use vegan rda
 pp <- rda(tp, scale = TRUE, center = TRUE)
