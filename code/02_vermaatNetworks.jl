@@ -43,6 +43,8 @@ vermaat_topology = DataFrame(
     loops = Any[],
     robustness = Any[],
     intervals = Any[],
+    MaxSim = Any[],
+    Clust = Any[],
 );
 
 # dataframe to store networks
@@ -73,7 +75,7 @@ networks = DataFrame(id = Any[], network = Any[]);
         N[(df.consumer[j], df.resource[j])...] = true
     end
 
-    # push networl
+    # push network
     N_d = Dict{Symbol,Any}()
     N_d[:id] = replace.(web, ".csv" => "")
     N_d[:network] = N
