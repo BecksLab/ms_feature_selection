@@ -6,7 +6,9 @@
 
 \caption{VERMAAT networks only}
 
-\end{figure}%%
+\end{figure}
+\efloatseparator
+ 
 \begin{figure}[H]
 
 {\centering \pandocbounded{\includegraphics[keepaspectratio]{figures/pca_allNetworks.png}}
