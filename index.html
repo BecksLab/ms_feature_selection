@@ -2,17 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.14">
+<meta name="generator" content="quarto-1.9.17">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tanya Strydom">
 <meta name="author" content="Andrew P. Beckerman">
-<meta name="dcterms.date" content="2025-12-17">
+<meta name="dcterms.date" content="2026-01-29">
 <meta name="keywords" content="food web, structure, dimensionality reduction">
 
-<title>Finding the mjor descriptors of species networks</title>
+<title>Finding the major descriptors of species networks</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -28,7 +31,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -55,7 +57,7 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-4f72c1afe59a4edb82ad8e59b4b7d712.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ce4278342a015d016477ed09bce942c5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-575b51fb5e8da2a7cc0ded7321a6503a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -70,7 +72,7 @@ div.csl-indent {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -99,40 +101,60 @@ window.Quarto = {
 };
 </script>
 
-<meta name="citation_title" content="Finding the mjor descriptors of species networks">
+<meta name="citation_title" content="Finding the major descriptors of species networks">
 <meta name="citation_abstract" content="TODO
 ">
 <meta name="citation_keywords" content="food web,structure,dimensionality reduction">
 <meta name="citation_author" content="Tanya Strydom">
 <meta name="citation_author" content="Andrew P. Beckerman">
-<meta name="citation_publication_date" content="2025-12-17">
-<meta name="citation_cover_date" content="2025-12-17">
-<meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-12-17">
+<meta name="citation_publication_date" content="2026-01-29">
+<meta name="citation_cover_date" content="2026-01-29">
+<meta name="citation_year" content="2026">
+<meta name="citation_online_date" content="2026-01-29">
 <meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=Stability criteria for complex ecosystems;,citation_abstract=Analysis of stability criteria for different types of complex ecological network shows key differences between predator–prey interactions, which are stabilizing, and competitive and mutualistic interactions, which are destabilizing.;,citation_author=Stefano Allesina;,citation_author=Si Tang;,citation_publication_date=2012-03;,citation_cover_date=2012-03;,citation_year=2012;,citation_fulltext_html_url=https://www.nature.com/articles/nature10832;,citation_issue=7388, 7388;,citation_doi=10.1038/nature10832;,citation_issn=1476-4687;,citation_volume=483;,citation_language=en-US;,citation_journal_title=Nature;,citation_publisher=Nature Publishing Group;">
+<meta name="citation_reference" content="citation_title=Spatial Guilds in the Serengeti Food Web Revealed by a Bayesian Group Model;,citation_abstract=Food webs, networks of feeding relationships in an ecosystem, provide fundamental insights into mechanisms that determine ecosystem stability and persistence. A standard approach in food-web analysis, and network analysis in general, has been to identify compartments, or modules, defined by many links within compartments and few links between them. This approach can identify large habitat boundaries in the network but may fail to identify other important structures. Empirical analyses of food webs have been further limited by low-resolution data for primary producers. In this paper, we present a Bayesian computational method for identifying group structure using a flexible definition that can describe both functional trophic roles and standard compartments. We apply this method to a newly compiled plant-mammal food web from the Serengeti ecosystem that includes high taxonomic resolution at the plant level, allowing a simultaneous examination of the signature of both habitat and trophic roles in network structure. We find that groups at the plant level reflect habitat structure, coupled at higher trophic levels by groups of herbivores, which are in turn coupled by carnivore groups. Thus the group structure of the Serengeti web represents a mixture of trophic guild structure and spatial pattern, in contrast to the standard compartments typically identified. The network topology supports recent ideas on spatial coupling and energy channels in ecosystems that have been proposed as important for persistence. Furthermore, our Bayesian approach provides a powerful, flexible framework for the study of network structure, and we believe it will prove instrumental in a variety of biological contexts.;,citation_author=Edward B. Baskerville;,citation_author=Andy P. Dobson;,citation_author=Trevor Bedford;,citation_author=Stefano Allesina;,citation_author=T. Michael Anderson;,citation_author=Mercedes Pascual;,citation_publication_date=2011-12-29;,citation_cover_date=2011-12-29;,citation_year=2011;,citation_fulltext_html_url=https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1002321;,citation_issue=12;,citation_doi=10.1371/journal.pcbi.1002321;,citation_issn=1553-7358;,citation_volume=7;,citation_language=en-US;,citation_journal_title=PLOS Computational Biology;,citation_journal_abbrev=PLOS Computational Biology;,citation_publisher=Public Library of Science;">
 <meta name="citation_reference" content="citation_title=What Do Interaction Network Metrics Tell Us About Specialization and Biological Traits;,citation_abstract=The structure of ecological interaction networks is often interpreted as a product of meaningful ecological and evolutionary mechanisms that shape the degree of specialization in community associations. However, here we show that both unweighted network metrics (connectance, nestedness, and degree distribution) and weighted network metrics (interaction evenness, interaction strength asymmetry) are strongly constrained and biased by the number of observations. Rarely observed species are inevitably regarded as “specialists,” irrespective of their actual associations, leading to biased estimates of specialization. Consequently, a skewed distribution of species observation records (such as the lognormal), combined with a relatively low sampling density typical for ecological data, already generates a “nested” and poorly “connected” network with “asymmetric interaction strengths” when interactions are neutral. This is confirmed by null model simulations of bipartite networks, assuming that partners associate randomly in the absence of any specialization and any variation in the correspondence of biological traits between associated species (trait matching). Variation in the skewness of the frequency distribution fundamentally changes the outcome of network metrics. Therefore, interpretation of network metrics in terms of fundamental specialization and trait matching requires an appropriate control for such severe constraints imposed by information deficits. When using an alternative approach that controls for these effects, most natural networks of mutualistic or antagonistic systems show a significantly higher degree of reciprocal specialization (exclusiveness) than expected under neutral conditions. A higher exclusiveness is coherent with a tighter coevolution and suggests a lower ecological redundancy than implied by nested networks.;,citation_author=Nico Blüthgen;,citation_author=Jochen Fründ;,citation_author=Diego P. Vázquez;,citation_author=Florian Menzel;,citation_publication_date=2008;,citation_cover_date=2008;,citation_year=2008;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1890/07-2121.1;,citation_issue=12;,citation_doi=10.1890/07-2121.1;,citation_issn=1939-9170;,citation_volume=89;,citation_language=en-US;,citation_journal_title=Ecology;">
 <meta name="citation_reference" content="citation_title=Latitudinal gradients in biotic niche breadth vary across ecosystem types;,citation_abstract=Several properties of food webs—the networks of feeding links between species—are known to vary systematically with the species richness of the underlying community. Under the ’latitude–niche breadth hypothesis’, which predicts that species in the tropics will tend to evolve narrower niches, one might expect that these scaling relationships could also be affected by latitude. To test this hypothesis, we analysed the scaling relationships between species richness and average generality, vulnerability and links per species across a set of 196 empirical food webs. In estuarine, marine and terrestrial food webs there was no effect of latitude on any scaling relationship, suggesting constant niche breadth in these habitats. In freshwater communities, on the other hand, there were strong effects of latitude on scaling relationships, supporting the latitude–niche breadth hypothesis. These contrasting findings indicate that it may be more important to account for habitat than latitude when exploring gradients in food-web structure.;,citation_author=Alyssa R. Cirtwill;,citation_author=Daniel B. Stouffer;,citation_author=Tamara N. Romanuk;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=https://www.jstor.org/stable/24761314;,citation_issue=1819;,citation_issn=0962-8452;,citation_volume=282;,citation_journal_title=Proceedings: Biological Sciences;,citation_publisher=Royal Society;">
 <meta name="citation_reference" content="citation_title=Analysing ecological networks of species interactions;,citation_abstract=Network approaches to ecological questions have been increasingly used, particularly in recent decades. The abstraction of ecological systems – such as communities – through networks of interactions between their components indeed provides a way to summarize this information with single objects. The methodological framework derived from graph theory also provides numerous approaches and measures to analyze these objects and can offer new perspectives on established ecological theories as well as tools to address new challenges. However, prior to using these methods to test ecological hypotheses, it is necessary that we understand, adapt, and use them in ways that both allow us to deliver their full potential and account for their limitations. Here, we attempt to increase the accessibility of network approaches by providing a review of the tools that have been developed so far, with – what we believe to be – their appropriate uses and potential limitations. This is not an exhaustive review of all methods and metrics, but rather, an overview of tools that are robust, informative, and ecologically sound. After providing a brief presentation of species interaction networks and how to build them in order to summarize ecological information of different types, we then classify methods and metrics by the types of ecological questions that they can be used to answer from global to local scales, including methods for hypothesis testing and future perspectives. Specifically, we show how the organization of species interactions in a community yields different network structures (e.g., more or less dense, modular or nested), how different measures can be used to describe and quantify these emerging structures, and how to compare communities based on these differences in structures. Within networks, we illustrate metrics that can be used to describe and compare the functional and dynamic roles of species based on their position in the network and the organization of their interactions as well as associated new methods to test the significance of these results. Lastly, we describe potential fruitful avenues for new methodological developments to address novel ecological questions.;,citation_author=Eva Delmas;,citation_author=Mathilde Besson;,citation_author=Marie-Hélène Brice;,citation_author=Laura A. Burkle;,citation_author=Giulio V. Dalla Riva;,citation_author=Marie-Josée Fortin;,citation_author=Dominique Gravel;,citation_author=Paulo R. Guimarães;,citation_author=David H. Hembry;,citation_author=Erica A. Newman;,citation_author=Jens M. Olesen;,citation_author=Mathias M. Pires;,citation_author=Justin D. Yeakel;,citation_author=Timothée Poisot;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=http://onlinelibrary.wiley.com/doi/abs/10.1111/brv.12433;,citation_issue=1;,citation_doi=10.1111/brv.12433;,citation_issn=1469-185X;,citation_volume=94;,citation_language=en-US;,citation_journal_title=Biological Reviews;">
+<meta name="citation_reference" content="citation_title=Food-web structure and network theory: The role of connectance and size;,citation_abstract=Networks from a wide range of physical, biological, and social systems have been recently described as “small-world” and “scale-free.” However, studies disagree whether ecological networks called food webs possess the characteristic path lengths, clustering coefficients, and degree distributions required for membership in these classes of networks. Our analysis suggests that the disagreements are based on selective use of relatively few food webs, as well as analytical decisions that obscure important variability in the data. We analyze a broad range of 16 high-quality food webs, with 25–172 nodes, from a variety of aquatic and terrestrial ecosystems. Food webs generally have much higher complexity, measured as connectance (the fraction of all possible links that are realized in a network), and much smaller size than other networks studied, which have important implications for network topology. Our results resolve prior conflicts by demonstrating that although some food webs have small-world and scale-free structure, most do not if they exceed a relatively low level of connectance. Although food-web degree distributions do not display a universal functional form, observed distributions are systematically related to network connectance and size. Also, although food webs often lack small-world structure because of low clustering, we identify a continuum of real-world networks including food webs whose ratios of observed to random clustering coefficients increase as a power–law function of network size over 7 orders of magnitude. Although food webs are generally not small-world, scale-free networks, food-web topology is consistent with patterns found within those classes of networks.;,citation_author=Jennifer A. Dunne;,citation_author=Richard J. Williams;,citation_author=Neo D. Martinez;,citation_publication_date=2002-10-01;,citation_cover_date=2002-10-01;,citation_year=2002;,citation_fulltext_html_url=https://www.pnas.org/content/99/20/12917;,citation_issue=20;,citation_doi=10.1073/pnas.192407699;,citation_issn=0027-8424, 1091-6490;,citation_volume=99;,citation_language=en-US;,citation_journal_title=Proceedings of the National Academy of Sciences;,citation_journal_abbrev=PNAS;">
+<meta name="citation_reference" content="citation_title=A multitrophic perspective on biodiversity–ecosystem functioning research;,citation_abstract=Concern about the functional consequences of unprecedented loss in biodiversity has prompted biodiversity–ecosystem functioning (BEF) research to become one of the most active fields of ecological research in the past 25 years. Hundreds of experiments have manipulated biodiversity as an independent variable and found compelling support that the functioning of ecosystems increases with the diversity of their ecological communities. This research has also identified some of the mechanisms underlying BEF relationships, some context-dependencies of the strength of relationships, as well as implications for various ecosystem services that mankind depends upon. In this paper, we argue that a multitrophic perspective of biotic interactions in random and non-random biodiversity change scenarios is key to advance future BEF research and to address some of its most important remaining challenges. We discuss that the study and the quantification of multitrophic interactions in space and time facilitates scaling up from small-scale biodiversity manipulations and ecosystem function assessments to management-relevant spatial scales across ecosystem boundaries. We specifically consider multitrophic conceptual frameworks to understand and predict the context-dependency of BEF relationships. Moreover, we highlight the importance of the eco-evolutionary underpinnings of multitrophic BEF relationships. We outline that FAIR data (meeting the standards of findability, accessibility, interoperability, and reusability) and reproducible processing will be key to advance this field of research by making it more integrative. Finally, we show how these BEF insights may be implemented for ecosystem management, society, and policy. Given that human well-being critically depends on the multiple services provided by diverse, multitrophic communities, integrating the approaches of evolutionary ecology, community ecology, and ecosystem ecology in future BEF research will be key to refine conservation targets and develop sustainable management strategies.;,citation_author=Nico Eisenhauer;,citation_author=Holger Schielzeth;,citation_author=Andrew D. Barnes;,citation_author=Kathryn Barry;,citation_author=Aletta Bonn;,citation_author=Ulrich Brose;,citation_author=Helge Bruelheide;,citation_author=Nina Buchmann;,citation_author=François Buscot;,citation_author=Anne Ebeling;,citation_author=Olga Ferlian;,citation_author=Grégoire T. Freschet;,citation_author=Darren P. Giling;,citation_author=Stephan Hättenschwiler;,citation_author=Helmut Hillebrand;,citation_author=Jes Hines;,citation_author=Forest Isbell;,citation_author=Eva Koller-France;,citation_author=Birgitta König-Ries;,citation_author=Hans Kroon;,citation_author=Sebastian T. Meyer;,citation_author=Alexandru Milcu;,citation_author=Jörg Müller;,citation_author=Charles A. Nock;,citation_author=Jana S. Petermann;,citation_author=Christiane Roscher;,citation_author=Christoph Scherber;,citation_author=Michael Scherer-Lorenzen;,citation_author=Bernhard Schmid;,citation_author=Stefan A. Schnitzer;,citation_author=Andreas Schuldt;,citation_author=Teja Tscharntke;,citation_author=Manfred Türke;,citation_author=Nicole M. Dam;,citation_author=Fons Plas;,citation_author=Anja Vogel;,citation_author=Cameron Wagg;,citation_author=David A. Wardle;,citation_author=Alexandra Weigelt;,citation_author=Wolfgang W. Weisser;,citation_author=Christian Wirth;,citation_author=Malte Jochum;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://pmc.ncbi.nlm.nih.gov/articles/PMC6944504/;,citation_doi=10.1016/bs.aecr.2019.06.001;,citation_issn=0065-2504;,citation_volume=61;,citation_journal_title=Advances in ecological research;,citation_journal_abbrev=Adv Ecol Res;">
+<meta name="citation_reference" content="citation_title=Characterization of topological keystone species;,citation_abstract=An important question in the network representation of ecological systems is to determine how direct and indirect interactions between species determine the positional importance of species in the ecosystem. Here we present a quantitative analysis of the similarities and differences of six different topological centrality measures as indicators of keystone species in 17 food webs. These indicators account for local, global and “‘meso-scale’” – intermediate between local and global – topological information about species in the food webs. Using factor analysis we shown that most of these centrality indices share a great deal of topological information, which range from 75% to 96%. A generalized keystone indicator is then proposed by considering the factor loadings of the six-centrality measures, which contains most of the information encoded by these indices. However, the individual ordering of species according to these criteria display significant differences in most food webs. We simulate the effects of species extinction by removing species ranked according to a local and a “‘meso-scale’” centrality indicator. The differences observed on three network characteristics – size, average distance and clustering coefficient of the largest component –after the removal of the most central nodes indicate that the consideration of these indices have different impacts for the ranking of species with conservational biology purposes. The “‘meso-scale’” indicator appears to play an important role in determining the relative importance of species in epidemic spread and parasitism rates.;,citation_author=Ernesto Estrada;,citation_publication_date=2007-03;,citation_cover_date=2007-03;,citation_year=2007;,citation_fulltext_html_url=https://linkinghub.elsevier.com/retrieve/pii/S1476945X07000189;,citation_issue=1–2;,citation_doi=10.1016/j.ecocom.2007.02.018;,citation_issn=1476945X;,citation_volume=4;,citation_language=en-US;,citation_journal_title=Ecological Complexity;,citation_journal_abbrev=Ecological Complexity;">
+<meta name="citation_reference" content="citation_title=Using Network Centrality Measures to Manage Landscape Connectivity;,citation_abstract=We use a graph-theoretical landscape modeling approach to investigate how to identify central patches in the landscape as well as how these central patches influence (1) organism movement within the local neighborhood and (2) the dispersal of organisms beyond the local neighborhood. Organism movements were theoretically estimated based on the spatial configuration of the habitat patches in the studied landscape. We find that centrality depends on the way the graph-theoretical model of habitat patches is constructed, although even the simplest network representation, not taking strength and directionality of potential organisms flows into account, still provides a coarse-grained assessment of the most important patches according to their contribution to landscape connectivity. Moreover, we identify (at least) two general classes of centrality. One accounts for the local flow of organisms in the neighborhood of a patch, and the other accounts for the ability to maintain connectivity beyond the scale of the local neighborhood. Finally, we study how habitat patches with high scores on different network centrality measures are distributed in a fragmented agricultural landscape in Madagascar. Results show that patches with high degree and betweenness centrality are widely spread, while patches with high subgraph and closeness centrality are clumped together in dense clusters. This finding may enable multispecies analyses of single-species network models.;,citation_author=Ernesto Estrada;,citation_author=Örjan Bodin;,citation_publication_date=2008;,citation_cover_date=2008;,citation_year=2008;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1890/07-1419.1;,citation_issue=7;,citation_doi=10.1890/07-1419.1;,citation_issn=1939-5582;,citation_volume=18;,citation_language=en-US;,citation_journal_title=Ecological Applications;">
+<meta name="citation_reference" content="citation_title=The meaning of functional trait composition of food webs for ecosystem functioning;,citation_abstract=There is a growing interest in using trait-based approaches to characterize the functional structure of animal communities. Quantitative methods have been derived mostly for plant ecology, but it is now common to characterize the functional composition of various systems such as soils, coral reefs, pelagic food webs or terrestrial vertebrate communities. With the everincreasing availability of distribution and trait data, a quantitative method to represent the different roles of animals in a community promise to find generalities that will facilitate cross-system comparisons. There is, however, currently no theory relating the functional composition of food webs to their dynamics and properties. The intuitive interpretation that more functional diversity leads to higher resource exploitation and better ecosystem functioning was brought from plant ecology and does not apply readily to food webs. Here we appraise whether there are interprétable metrics to describe the functional composition of food webs that could foster a better understanding of their structure and functioning. We first distinguish the various roles that traits have on food web topology, resource extraction (bottom-up effects), trophic regulation (top-down effects), and the ability to keep energy and materials within the community. We then discuss positive effects of functional trait diversity on food webs, such as niche construction and bottom-up effects. We follow with a discussion on the negative effects of functional diversity, such as enhanced competition (both exploitation and apparent) and topdown control. Our review reveals that most of our current understanding of the impact of functional trait diversity on food web properties and functioning comes from an over-simplistic representation of network structure with well-defined levels. We, therefore, conclude with propositions for new research avenues for both theoreticians and empiricists.;,citation_author=Dominique Gravel;,citation_author=Camille Albouy;,citation_author=Wilfried Thuiller;,citation_publication_date=2016;,citation_cover_date=2016;,citation_year=2016;,citation_fulltext_html_url=http://www.jstor.org/stable/24768743;,citation_issue=1694;,citation_issn=0962-8436;,citation_volume=371;,citation_journal_title=Philosophical Transactions: Biological Sciences;,citation_publisher=Royal Society;">
+<meta name="citation_reference" content="citation_title=Towards an Integration of Biodiversity–Ecosystem Functioning and Food Web Theory to Evaluate Relationships between Multiple Ecosystem Services;,citation_abstract=Ecosystem responses to changes in species diversity are often studied individually. However, changes in species diversity can simultaneously influence multiple interdependent ecosystem functions. Therefore, an important challenge is to determine when and how changes in species diversity that influence one function will also drive changes in other functions. By providing the underlying structure of species interactions, ecological networks can quantify connections between biodiversity and multiple ecosystem functions. Here, we review parallels in the conceptual development of biodiversity–ecosystem functioning (BEF) and food web theory (FWT) research. Subsequently, we evaluate three common principles that unite these two research areas by explaining the patterns, concentrations, and direction of the flux of nutrients and energy through the species in diverse interaction webs. We give examples of combined BEF–FWT approaches that can be used to identify vulnerable species and habitats and to evaluate links that drive trade-offs between multiple ecosystems functions. These combined approaches reflect promising trends towards better management of biodiversity in landscapes that provide essential ecosystem services supporting human well-being.;,citation_author=Jes Hines;,citation_author=Wim H. Van Der Putten;,citation_author=Gerlinde B. De Deyn;,citation_author=Cameron Wagg;,citation_author=Winfried Voigt;,citation_author=Christian Mulder;,citation_author=Wolfgang W. Weisser;,citation_author=Jan Engel;,citation_author=Carlos Melian;,citation_author=Stefan Scheu;,citation_author=Klaus Birkhofer;,citation_author=Anne Ebeling;,citation_author=Christoph Scherber;,citation_author=Nico Eisenhauer;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=https://linkinghub.elsevier.com/retrieve/pii/S0065250415000252;,citation_doi=10.1016/bs.aecr.2015.09.001;,citation_isbn=978-0-12-803885-7;,citation_volume=53;,citation_language=en-US;,citation_inbook_title=Advances in Ecological Research;">
+<meta name="citation_reference" content="citation_title=Stability and Diversity of Ecosystems;,citation_abstract=Understanding the relationship between diversity and stability requires a knowledge of how species interact with each other and how each is affected by the environment. The relationship is also complex, because the concept of stability is multifaceted; different types of stability describing different properties of ecosystems lead to multiple diversity-stability relationships. A growing number of empirical studies demonstrate positive diversity-stability relationships. These studies, however, have emphasized only a few types of stability, and they rarely uncover the mechanisms responsible for stability. Because anthropogenic changes often affect stability and diversity simultaneously, diversity-stability relationships cannot be understood outside the context of the environmental drivers affecting both. This shifts attention away from diversity-stability relationships toward the multiple factors, including diversity, that dictate the stability of ecosystems.;,citation_author=Anthony R. Ives;,citation_author=Stephen R. Carpenter;,citation_publication_date=2007-07-06;,citation_cover_date=2007-07-06;,citation_year=2007;,citation_fulltext_html_url=https://www.science.org/doi/10.1126/science.1133258;,citation_issue=5834;,citation_doi=10.1126/science.1133258;,citation_issn=0036-8075, 1095-9203;,citation_volume=317;,citation_language=en-US;,citation_journal_title=Science;,citation_journal_abbrev=Science;">
 <meta name="citation_reference" content="citation_title=The reliability of R50 as a measure of vulnerability of food webs to sequential species deletions;,citation_abstract=Recent studies predict elevated and accelerating rates of species extinctions over the 21st century, due to climate change and habitat loss. Considering that such primary species loss may initiate cascades of secondary extinctions and push systems towards critical tipping points, we urgently need to increase our understanding of if certain sequences of species extinctions can be expected to be more devastating than others Most theoretical studies addressing this question have used a topological (non-dynamical) approach to analyse the probability that food webs will collapse, below a fixed threshold value in species richness, when subjected to different sequences of species loss. Typically, these studies have neither considered the possibility of dynamical responses of species, nor that conclusions may depend on the value of the collapse threshold. Here we analyse how sensitive conclusions on the importance of different species are to the threshold value of food web collapse. Using dynamical simulations, where we expose model food webs to a range of extinction sequences, we evaluate the reliability of the most frequently used index, R50, as a measure of food web robustness. In general, we find that R50 is a reliable measure and that identification of destructive deletion sequences is fairly robust, within a moderate range of collapse thresholds. At the same time, however, focusing on R50 only hides a lot of interesting information on the disassembly process and can, in some cases, lead to incorrect conclusions on the relative importance of species in food webs.;,citation_author=Tomas Jonsson;,citation_author=Sofia Berg;,citation_author=Alexander Pimenov;,citation_author=Catherine Palmer;,citation_author=Mark Emmerson;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/oik.01588;,citation_issue=4;,citation_doi=10.1111/oik.01588;,citation_issn=1600-0706;,citation_volume=124;,citation_language=en-US;,citation_journal_title=Oikos;">
 <meta name="citation_reference" content="citation_title=Synthesising the Relationships Between Food Web Structure and Robustness;,citation_abstract=For many decades, ecologists have sought to understand the extent to which species losses lead to secondary extinctions—that is, the additional loss of species that occurs when resources or key interactions are lost (i.e. robustness). In particular, ecologists aim to identify generalisable rules that explain which types of food webs are more or less robust to secondary extinctions. Food web structure, or the patterns formed by species and their interactions, has been extensively studied as a potential factor that influences robustness to species loss. We systematically reviewed 28 studies to identify the relationships between food web structure and robustness to species loss and how the conclusions depend on methodological differences. Contrary to popular belief and theory, we found relatively consistent, positive relationships between connectance and robustness, among other generalities. Yet, we also found that conflicting conclusions about structure-robustness relationships can be, in part, attributed to differences in the type of data that studies use, particularly studies that use empirical data versus those generated from theoretical models. This review points towards a need to standardise methodology to answer the open question of whether robustness and its relationship with food web structure and to provide applicable insights for managing complex systems.;,citation_author=Aislyn A. Keyes;,citation_author=Allison K. Barner;,citation_author=Laura E. Dee;,citation_publication_date=2024;,citation_cover_date=2024;,citation_year=2024;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.14533;,citation_issue=10;,citation_doi=10.1111/ele.14533;,citation_issn=1461-0248;,citation_volume=27;,citation_language=en-US;,citation_journal_title=Ecology Letters;">
 <meta name="citation_reference" content="citation_title=Food-web structure varies along environmental gradients in a high-latitude marine ecosystem;,citation_abstract=Large-scale patterns in species diversity and community composition are associated with environmental gradients, but the implications of these patterns for food-web structure are still unclear. Here, we investigated how spatial patterns in food-web structure are associated with environmental gradients in the Barents Sea, a highly productive shelf sea of the Arctic Ocean. We compared food webs from 25 subregions in the Barents Sea and examined spatial correlations among food-web metrics, and between metrics and spatial variability in seawater temperature, bottom depth and number of days with ice cover. Several food-web metrics were positively associated with seawater temperature: connectance, level of omnivory, clustering, cannibalism, and high variability in generalism, while other food-web metrics such as modularity and vulnerability were positively associated with sea ice and negatively with temperature. Food-web metrics positively associated with habitat heterogeneity were: number of species, link density, omnivory, path length, and trophic level. This finding suggests that habitat heterogeneity promotes food-web complexity in terms of number of species and link density. Our analyses reveal that spatial variation in food-web structure along the environmental gradients is partly related to species turnover. However, the higher interaction turnover compared to species turnover along these gradients indicates a consistent modification of food-web structure, implying that interacting species may co-vary in space. In conclusion, our study shows how environmental heterogeneity, via environmental filtering, influences not only turnover in species composition, but also the structure of food webs over large spatial scales.;,citation_author=Susanne Kortsch;,citation_author=Raul Primicerio;,citation_author=Michaela Aschan;,citation_author=Sigrid Lind;,citation_author=Andrey V. Dolgov;,citation_author=Benjamin Planque;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/ecog.03443;,citation_issue=2;,citation_doi=10.1111/ecog.03443;,citation_issn=1600-0587;,citation_volume=42;,citation_language=en-US;,citation_journal_title=Ecography;">
+<meta name="citation_reference" content="citation_title=Complexity and stability of ecological networks: A review of the theory;,citation_abstract=Our planet is changing at paces never observed before. Species extinction is happening at faster rates than ever, greatly exceeding the five mass extinctions in the fossil record. Nevertheless, our lives are strongly based on services provided by ecosystems, thus the responses to global change of our natural heritage are of immediate concern. Understanding the relationship between complexity and stability of ecosystems is of key importance for the maintenance of the balance of human growth and the conservation of all the natural services that ecosystems provide. Mathematical network models can be used to simplify the vast complexity of the real world, to formally describe and investigate ecological phenomena, and to understand ecosystems propensity of returning to its functioning regime after a stress or a perturbation. The use of ecological-network models to study the relationship between complexity and stability of natural ecosystems is the focus of this review. The concept of ecological networks and their characteristics are first introduced, followed by central and occasionally contrasting definitions of complexity and stability. The literature on the relationship between complexity and stability in different types of models and in real ecosystems is then reviewed, highlighting the theoretical debate and the lack of consensual agreement. The summary of the importance of this line of research for the successful management and conservation of biodiversity and ecosystem services concludes the review.;,citation_author=Pietro Landi;,citation_author=Henintsoa O. Minoarivelo;,citation_author=Åke Brännström;,citation_author=Cang Hui;,citation_author=Ulf Dieckmann;,citation_publication_date=2018-10-01;,citation_cover_date=2018-10-01;,citation_year=2018;,citation_fulltext_html_url=https://doi.org/10.1007/s10144-018-0628-3;,citation_issue=4;,citation_doi=10.1007/s10144-018-0628-3;,citation_issn=1438-390X;,citation_volume=60;,citation_language=en-US;,citation_journal_title=Population Ecology;,citation_journal_abbrev=Popul Ecol;">
 <meta name="citation_reference" content="citation_title=Ecological network metrics: Opportunities for synthesis;,citation_abstract=Network ecology provides a systems basis for approaching ecological questions, such as factors that influence biological diversity, the role of particular species or particular traits in structuring ecosystems, and long-term ecological dynamics (e.g., stability). Whereas the introduction of network theory has enabled ecologists to quantify not only the degree, but also the architecture of ecological complexity, these advances have come at the cost of introducing new challenges, including new theoretical concepts and metrics, and increased data complexity and computational intensity. Synthesizing recent developments in the network ecology literature, we point to several potential solutions to these issues: integrating network metrics and their terminology across sub-disciplines; benchmarking new network algorithms and models to increase mechanistic understanding; and improving tools for sharing ecological network research, in particular “model” data provenance, to increase the reproducibility of network models and analyses. We propose that applying these solutions will aid in synthesizing ecological sub-disciplines and allied fields by improving the accessibility of network methods and models.;,citation_author=Matthew K. Lau;,citation_author=Stuart R. Borrett;,citation_author=Benjamin Baiser;,citation_author=Nicholas J. Gotelli;,citation_author=Aaron M. Ellison;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1002/ecs2.1900;,citation_issue=8;,citation_doi=10.1002/ecs2.1900;,citation_issn=2150-8925;,citation_volume=8;,citation_language=en-US;,citation_journal_title=Ecosphere;">
 <meta name="citation_reference" content="citation_title=Structure in plant–animal interaction assemblages;,citation_abstract=We present a comprehensive approach to detect pattern in assemblages of plant and animal species linked by interactions such as pollination, frugivory or herbivory. Simple structural models produce gradient, compartmented or nested patterns of interaction; intermediate patterns between a gradient and compartments are possible, and nesting within compartments produces a combined model. Interaction patterns can be visualized and analyzed either as matrices, as bipartite networks or as multivariate sets through correspondence analysis. We argue that differences among patterns represent outcomes of distinct evolutionary and ecological processes in these highly diversified assemblages. Instead of choosing one model a priori, assemblages should be probed for a suite of patterns. A plant–pollinator assemblage exemplifies a simple nested pattern, whereas a plant–herbivore assemblage illustrates a compound pattern with nested structures within compartments. Compartmentation should reflect coevolutionary histories and constraints, whereas differences in species abundance or dispersal may generate nestedness.;,citation_author=Thomas M. Lewinsohn;,citation_author=Paulo Inácio Prado;,citation_author=Pedro Jordano;,citation_author=Jordi Bascompte;,citation_author=Jens M. Olesen;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/j.0030-1299.2006.14583.x;,citation_issue=1;,citation_doi=10.1111/j.0030-1299.2006.14583.x;,citation_issn=1600-0706;,citation_volume=113;,citation_language=en-US;,citation_journal_title=Oikos;">
 <meta name="citation_reference" content="citation_title=Geographical variation of multiplex ecological networks in marine intertidal communities;,citation_abstract=Understanding the drivers of geographical variation in species distributions, and the resulting community structure, constitutes one of the grandest challenges in ecology. Geographical patterns of species richness and composition have been relatively well studied. Less is known about how the entire set of trophic and non-trophic ecological interactions, and the complex networks that they create by gluing species together in complex communities, change across geographical extents. Here, we compiled data of species composition and three types of ecological interactions occurring between species in rocky intertidal communities across a large spatial extent (~970 km of shoreline) of central Chile, and analyzed the geographical variability in these multiplex networks (i.e., comprising several interaction types) of ecological interactions. We calculated nine network summary statistics common across interaction types, and additional network attributes specific to each of the different types of interactions. We then investigated potential environmental drivers of this multivariate network organization. These included variation in sea surface temperature and coastal upwelling, the main drivers of productivity in nearshore waters. Our results suggest that structural properties of multiplex ecological networks are affected by local species richness and modulated by factors influencing productivity and environmental predictability. Our results show that non-trophic negative interactions are more sensitive to spatially structured temporal environmental variation than feeding relationships, with non-trophic positive interactions being the least labile to it. We also show that environmental effects are partly mediated through changes in species richness and partly through direct influences on species interactions, probably associated to changes in environmental predictability and to bottom-up nutrient availability. Our findings highlight the need for a comprehensive picture of ecological interactions and their geographical variability if we are to predict potential effects of environmental changes on ecological communities.;,citation_author=Miguel Lurgi;,citation_author=Núria Galiana;,citation_author=Bernardo R. Broitman;,citation_author=Sonia Kéfi;,citation_author=Evie A. Wieters;,citation_author=Sergio A. Navarrete;,citation_publication_date=2020;,citation_cover_date=2020;,citation_year=2020;,citation_fulltext_html_url=https://www.jstor.org/stable/26998017;,citation_issue=11;,citation_issn=0012-9658;,citation_volume=101;,citation_journal_title=Ecology;,citation_publisher=[Wiley, Ecological Society of America];">
+<meta name="citation_reference" content="citation_title=The diversity–stability debate;,citation_abstract=There exists little doubt that the Earth’s biodiversity is declining. The Nature Conservancy, for example, has documented that one-third of the plant and animal species in the United States are now at risk of extinction. The problem is a monumental one, and forces us to consider in depth how we expect ecosystems, which ultimately are our life-support systems, to respond to reductions in diversity. This issue — commonly referred to as the diversity–stability debate — is the subject of this review, which synthesizes historical ideas with recent advances. Both theory and empirical evidence agree that we should expect declines in diversity to accelerate the simplification of ecological communities.;,citation_author=Kevin Shear McCann;,citation_publication_date=2000-05;,citation_cover_date=2000-05;,citation_year=2000;,citation_fulltext_html_url=https://www.nature.com/articles/35012234;,citation_issue=6783;,citation_doi=10.1038/35012234;,citation_issn=1476-4687;,citation_volume=405;,citation_language=en-US;,citation_journal_title=Nature;,citation_publisher=Nature Publishing Group;">
 <meta name="citation_reference" content="citation_title=A novel semantic theory of the assembly rules of interaction networks;,citation_abstract=In the web of life, every interaction between species tells a story of cooperation, conflict, or chance. For centuries, ecologists have charted these stories to better understand phenomena such as pollination and disease. We have been using the lens of network science to distill them into topological patterns such as nestedness or modularity. Yet, like in the old buddhist parable of the blind monks and the elephant, these separate views have often missed the bigger picture. In this Perspective, we review the history of topological studies of interaction networks, challenge the “black-and-white” paradigm, and point out a way forward: the Integrative Theory of Interaction Networks (ITIN). This theory unveils the logic of how interaction networks assemble through sequential, rule-bound processes shaped mainly by resource dissimilarity and interaction type. We show that compound topologies are likely the norm in function-oriented, taxonomically-inclusive, well-sampled networks. ITIN is deductive, predictive, and testable, mapping from first principles to real-world systems, thus helping us grasp “the whole elephant”. As ecologists confront the polycrisis, from irreparable biodiversity loss to global health threats, ITIN offers a coherent framework to understand, predict, and restore the threads of the web of life.;,citation_author=Marco A. R. Mello;,citation_author=Sharlene Santana;,citation_author=Pierre-Michel Forget;,citation_author=Cristina Kita;,citation_author=Nastaran Lotfi;,citation_author=Isabel Machado;,citation_author=Renata Muylaert;,citation_author=Francisco Rodrigues;,citation_author=Tanja Maria Straka;,citation_author=Carsten F. Dormann;,citation_publication_date=2025-11-26;,citation_cover_date=2025-11-26;,citation_year=2025;,citation_fulltext_html_url=https://ecoevorxiv.org/repository/view/10910/;,citation_language=en-US;,citation_publisher=EcoEvoRxiv;">
 <meta name="citation_reference" content="citation_title=Network Motifs: Simple Building Blocks of Complex Networks;,citation_abstract=Complex networks are studied across many fields of science. To uncover their structural design principles, we defined “network motifs,” patterns of interconnections occurring in complex networks at numbers that are significantly higher than those in randomized networks. We found such motifs in networks from biochemistry, neurobiology, ecology, and engineering. The motifs shared by ecological food webs were distinct from the motifs shared by the genetic networks of Escherichia coli and Saccharomyces cerevisiae or from those found in the World Wide Web. Similar motifs were found in networks that perform information processing, even though they describe elements as different as biomolecules within a cell and synaptic connections between neurons in Caenorhabditis elegans. Motifs may thus define universal classes of networks. This approach may uncover the basic building blocks of most networks.;,citation_author=R. Milo;,citation_author=S. Shen-Orr;,citation_author=S. Itzkovitz;,citation_author=N. Kashtan;,citation_author=D. Chklovskii;,citation_author=U. Alon;,citation_publication_date=2002-10-25;,citation_cover_date=2002-10-25;,citation_year=2002;,citation_fulltext_html_url=https://www.science.org/doi/10.1126/science.298.5594.824;,citation_issue=5594;,citation_doi=10.1126/science.298.5594.824;,citation_volume=298;,citation_journal_title=Science;,citation_publisher=American Association for the Advancement of Science;">
 <meta name="citation_reference" content="citation_title=Stability in Real Food Webs: Weak Links in Long Loops;,citation_abstract=Increasing evidence that the strengths of interactions among populations in biological communities form patterns that are crucial for system stability requires clarification of the precise form of these patterns, how they come about, and why they influence stability. We show that in real food webs, interaction strengths are organized in trophic loops in such a way that long loops contain relatively many weak links. We show and explain mathematically that this patterning enhances stability, because it reduces maximum “loop weight” and thus reduces the amount of intraspecific interaction needed for matrix stability. The patterns are brought about by biomass pyramids, a feature common to most ecosystems. Incorporation of biomass pyramids in 104 food-web descriptions reveals that the low weight of the long loops stabilizes complex food webs. Loop-weight analysis could be a useful tool for exploring the structure and organization of complex communities.;,citation_author=Anje-Margriet Neutel;,citation_author=Johan A. P. Heesterbeek;,citation_author=Peter C. De Ruiter;,citation_publication_date=2002-05-10;,citation_cover_date=2002-05-10;,citation_year=2002;,citation_fulltext_html_url=https://www.science.org/doi/10.1126/science.1068326;,citation_issue=5570;,citation_doi=10.1126/science.1068326;,citation_issn=0036-8075, 1095-9203;,citation_volume=296;,citation_language=en-US;,citation_journal_title=Science;,citation_journal_abbrev=Science;">
 <meta name="citation_reference" content="citation_title=Exploring the temporal variability of a food web using long-term biomonitoring data;,citation_abstract=Ecological communities are constantly being reshaped in the face of environmental change and anthropogenic pressures. Yet, how food webs change over time remains poorly understood. Food web science is characterized by a trade-off between complexity (in terms of the number of species and feeding links) and dynamics. Topological analysis can use complex, highly resolved empirical food web models to explore the architecture of feeding interactions but is limited to a static view, whereas ecosystem models can be dynamic but use highly aggregated food webs. Here, we explore the temporal dynamics of a highly resolved empirical food web over a time period of 18 years, using the German Bight fish and benthic epifauna community as our case study. We relied on long-term monitoring ecosystem surveys (from 1998 to 2015) to build a metaweb, i.e. the meta food web containing all species recorded over the time span of our study. We then combined time series of species abundances with topological network analysis to construct annual food web snapshots. We developed a new approach, “node-weighted” food web metrics by including species abundances to represent the temporal dynamics of food web structure, focusing on generality and vulnerability. Our results suggest that structural food web properties change through time; however, binary food web structural properties may not be as temporally variable as the underlying changes in species composition. Further, the node-weighted metrics enabled us to detect that food web structure was influenced by changes in species composition during the first half of the time series and more strongly by changes in species dominance during the second half. Our results demonstrate how ecosystem surveys can be used to monitor temporal changes in food web structure, which are important ecosystem indicators for building marine management and conservation plans.;,citation_author=Pierre Olivier;,citation_author=Romain Frelat;,citation_author=Erik Bonsdorff;,citation_author=Susanne Kortsch;,citation_author=Ingrid Kröncke;,citation_author=Christian Möllmann;,citation_author=Hermann Neumann;,citation_author=Anne F. Sell;,citation_author=Marie C. Nordström;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/ecog.04461;,citation_issue=12;,citation_doi=10.1111/ecog.04461;,citation_issn=1600-0587;,citation_volume=42;,citation_language=en-US;,citation_journal_title=Ecography;">
+<meta name="citation_reference" content="citation_title=The structure of probabilistic networks;,citation_abstract=There is a growing realization among community ecologists that interactions between species vary across space and time and that this variation needs to be quantified. Our current numerical framework to analyse the structure of species interactions, based on graph-theoretical approaches, usually do not consider the variability of interactions. As this variability has been show to hold valuable ecological information, there is a need to adapt the current measures of network structure so that they can exploit it. We present analytical expressions of key measures of network structured, adapted so that they account for the variability of ecological interactions. We do so by modelling each interaction as a Bernoulli event; using basic calculus allows expressing the expected value, and when mathematically tractable, its variance. When applied to non-probabilistic data, the measures we present give the same results as their non-probabilistic formulations, meaning that they can be generally applied. We present three case studies that highlight how these measures can be used, in re-analysing data that experimentally measured the variability of interactions, to alleviate the computational demands of permutation-based approaches, and to use the frequency at which interactions are observed over several locations to infer the structure of local networks. We provide a free and open-source implementation of these measures. We discuss how both sampling and data representation of ecological networks can be adapted to allow the application of a fully probabilistic numerical network approach.;,citation_author=Timothée Poisot;,citation_author=Alyssa R. Cirtwill;,citation_author=Kévin Cazelles;,citation_author=Dominique Gravel;,citation_author=Marie-Josée Fortin;,citation_author=Daniel B. Stouffer;,citation_publication_date=2016;,citation_cover_date=2016;,citation_year=2016;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1111/2041-210X.12468;,citation_issue=3;,citation_doi=10.1111/2041-210X.12468;,citation_issn=2041-210X;,citation_volume=7;,citation_language=en-US;,citation_journal_title=Methods in Ecology and Evolution;">
 <meta name="citation_reference" content="citation_title=Integrating food web diversity, structure and stability;,citation_author=Neil Rooney;,citation_author=Kevin S. McCann;,citation_publication_date=2012-01;,citation_cover_date=2012-01;,citation_year=2012;,citation_fulltext_html_url=https://linkinghub.elsevier.com/retrieve/pii/S016953471100259X;,citation_issue=1;,citation_doi=10.1016/j.tree.2011.09.001;,citation_issn=01695347;,citation_volume=27;,citation_language=en-US;,citation_journal_title=Trends in Ecology &amp;amp;amp; Evolution;,citation_journal_abbrev=Trends in Ecology &amp;amp; Evolution;">
 <meta name="citation_reference" content="citation_title=The ghost of nestedness in ecological networks;,citation_author=Phillip P. A. Staniczenko;,citation_author=Jason C. Kopp;,citation_author=Stefano Allesina;,citation_publication_date=2013-06;,citation_cover_date=2013-06;,citation_year=2013;,citation_fulltext_html_url=http://www.nature.com/articles/ncomms2422;,citation_issue=1;,citation_doi=10.1038/ncomms2422;,citation_issn=2041-1723;,citation_volume=4;,citation_language=en-US;,citation_journal_title=Nature Communications;,citation_journal_abbrev=Nat Commun;">
+<meta name="citation_reference" content="citation_title=Compartmentalization increases food-web persistence;,citation_abstract=It has recently been noted that empirical food webs are significantly compartmentalized; that is, subsets of species exist that interact more frequently among themselves than with other species in the community. Although the dynamic implications of compartmentalization have been debated for at least four decades, a general answer has remained elusive. Here, we unambiguously demonstrate that compartmentalization acts to increase the persistence of multitrophic food webs. We then identify the mechanisms behind this result. Compartments in food webs act directly to buffer the propagation of extinctions throughout the community and augment the long-term persistence of its constituent species. This contribution to persistence is greater the more complex the food web, which helps to reconcile the simultaneous complexity and stability of natural communities.;,citation_author=Daniel B. Stouffer;,citation_author=Jordi Bascompte;,citation_publication_date=2011-03-01;,citation_cover_date=2011-03-01;,citation_year=2011;,citation_fulltext_html_url=https://www.ncbi.nlm.nih.gov/pubmed/21307311;,citation_issue=9;,citation_doi=10.1073/pnas.1014353108;,citation_issn=1091-6490;,citation_volume=108;,citation_language=en-US;,citation_journal_title=Proceedings of the National Academy of Sciences of the United States of America;,citation_journal_abbrev=Proc Natl Acad Sci U S A;">
 <meta name="citation_reference" content="citation_title=Evidence for the existence of a robust pattern of prey selection in food webs;,citation_abstract=Food webs aim to provide a thorough representation of the trophic interactions found in an ecosystem. The complexity of empirical food webs, however, is leading many ecologists to focus dynamic ecosystem studies on smaller microcosm or mesocosm studies based upon community modules, which comprise three to five species and the interactions likely to have ecological relevance. We provide here a structural counterpart to community modules. We investigate food-web “motifs” which are n-species connected subgraphs found within the food web. Remarkably, we find that the over- and under-representation of three-species motifs in empirical food webs can be understood through comparison to a static food-web model, the niche model. Our result conclusively demonstrates that predation upon species with some “characteristic” niche value is the prey selection mechanism consistent with the structural properties of empirical food webs.;,citation_author=Daniel B Stouffer;,citation_author=Juan Camacho;,citation_author=Wenxin Jiang;,citation_author=Luís A Nunes Amaral;,citation_publication_date=2007-06-13;,citation_cover_date=2007-06-13;,citation_year=2007;,citation_fulltext_html_url=https://royalsocietypublishing.org/doi/10.1098/rspb.2007.0571;,citation_issue=1621;,citation_doi=10.1098/rspb.2007.0571;,citation_volume=274;,citation_journal_title=Proceedings of the Royal Society B: Biological Sciences;,citation_publisher=Royal Society;">
 <meta name="citation_reference" content="citation_title=A robust measure of food web intervality;,citation_abstract=Intervality of a food web is related to the number of trophic dimensions characterizing the niches in a community. We introduce here a mathematically robust measure for food web intervality. It has previously been noted that empirical food webs are not strictly interval; however, upon comparison to suitable null hypotheses, we conclude that empirical food webs actually do exhibit a strong bias toward contiguity of prey, that is, toward intervality. Further, our results strongly suggest that empirically observed species and their diets can be mapped onto a single dimension. This finding validates a critical assumption in the recently proposed static niche model and provides guidance for ongoing efforts to develop dynamic models of ecosystems.;,citation_author=Daniel B. Stouffer;,citation_author=Juan Camacho;,citation_author=Luís A. Nunes Amaral;,citation_publication_date=2006-12-12;,citation_cover_date=2006-12-12;,citation_year=2006;,citation_fulltext_html_url=https://pnas.org/doi/full/10.1073/pnas.0603844103;,citation_issue=50;,citation_doi=10.1073/pnas.0603844103;,citation_issn=0027-8424, 1091-6490;,citation_volume=103;,citation_language=en-US;,citation_journal_title=Proceedings of the National Academy of Sciences;,citation_journal_abbrev=Proc. Natl. Acad. Sci. U.S.A.;">
+<meta name="citation_reference" content="citation_title=Understanding food-web persistence from local to global scales;,citation_author=Daniel B. Stouffer;,citation_author=Jordi Bascompte;,citation_publication_date=2010-02;,citation_cover_date=2010-02;,citation_year=2010;,citation_fulltext_html_url=http://doi.wiley.com/10.1111/j.1461-0248.2009.01407.x;,citation_issue=2;,citation_doi=10.1111/j.1461-0248.2009.01407.x;,citation_issn=1461023X, 14610248;,citation_volume=13;,citation_language=en-US;,citation_journal_title=Ecology Letters;">
+<meta name="citation_reference" content="citation_title=Scaling from Metawebs to Realised Webs: A Hierarchical Approach to Network Ecology;,citation_abstract=Ecological networks provide a critical framework for understanding the architecture of biodiversity and predicting ecosystem responses to environmental change. However, the application of network ecology is often hindered by a lack of clarity regarding the assumptions inherent in different network representations. Here, we present a hierarchical framework that distinguishes between “metawebs” (representing the fundamental feasibility of interactions) and “realised webs” (representing interactions expressed in specific spatiotemporal contexts). We contrast our conceptual approach with recent data-centric reviews, focusing instead on the theoretical gradients that govern network construction. We identify five core processes that drive the transition from potential to realised interactions: evolutionary compatibility and co-occurrence, which define the feasibility of links; and abundance, diet choice, and non-trophic interactions, which determine their realisation. Furthermore, we map these processes onto a methodological spectrum of network construction, distinguishing between inductive approaches (*e.g.,* trait-matching and stochastic models) that infer structure from observation, and deductive approaches (*e.g.,* neutral and optimal foraging models) that generate structure from mechanistic first principles. By making explicit the assumptions and scale-dependent processes underpinning these different representations, this framework clarifies the scope of inference possible with each approach, ultimately facilitating more robust predictions of biodiversity dynamics in the anthropocene.;,citation_author=Tanya Strydom;,citation_author=Alexander M. Dunhill;,citation_author=Jennifer A. Dunne;,citation_author=Timothée Poisot;,citation_author=Andrew P. Beckerman;,citation_publication_date=2026-01-21;,citation_cover_date=2026-01-21;,citation_year=2026;,citation_fulltext_html_url=https://ecoevorxiv.org/repository/view/11514/;,citation_language=en-US;,citation_publisher=EcoEvoRxiv;">
 <meta name="citation_reference" content="citation_title=SVD Entropy Reveals the High Complexity of Ecological Networks;,citation_abstract=Quantifying the complexity of ecological networks has remained elusive. Primarily, complexity has been defined on the basis of the structural (or behavioural) complexity of the system. These definitions ignore the notion of ’physical complexity’, which can measure the amount of information contained in an ecological network, and how difficult it would be to compress. We present relative rank deficiency and SVD entropy as measures of ’external’ and ’internal’ complexity respectively. Using bipartite ecological networks, we find that they all show a very high, almost maximal, physical complexity. Pollination networks, in particular, are more complex when compared to other types of interactions. In addition, we find that SVD entropy relates to other structural measures of complexity (nestedness, connectance, and spectral radius), but does not inform about the resilience of a network when using simulated extinction cascades, which has previously been reported for structural measures of complexity. We argue that SVD entropy provides a fundamentally more ’correct’ measure of network complexity and should be added to the toolkit of descriptors of ecological networks moving forward.;,citation_author=Tanya Strydom;,citation_author=Giulio V. Dalla Riva;,citation_author=Timothée Poisot;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://www.frontiersin.org/articles/10.3389/fevo.2021.623141/full;,citation_doi=10.3389/fevo.2021.623141;,citation_issn=2296-701X;,citation_volume=9;,citation_language=en-US;,citation_journal_title=Frontiers in Ecology and Evolution;,citation_journal_abbrev=Front. Ecol. Evol.;,citation_publisher=Frontiers;">
+<meta name="citation_reference" content="citation_title=Stability of ecological communities and the architecture of mutualistic and trophic networks;,citation_abstract=Research on the relationship between the architecture of ecological networks and community stability has mainly focused on one type of interaction at a time, making difficult any comparison between different network types. We used a theoretical approach to show that the network architecture favoring stability fundamentally differs between trophic and mutualistic networks. A highly connected and nested architecture promotes community stability in mutualistic networks, whereas the stability of trophic networks is enhanced in compartmented and weakly connected architectures. These theoretical predictions are supported by a meta-analysis on the architecture of a large series of real pollination (mutualistic) and herbivory (trophic) networks. We conclude that strong variations in the stability of architectural patterns constrain ecological networks toward different architectures, depending on the type of interaction.;,citation_author=Elisa Thébault;,citation_author=Colin Fontaine;,citation_publication_date=2010-08-13;,citation_cover_date=2010-08-13;,citation_year=2010;,citation_fulltext_html_url=https://www.ncbi.nlm.nih.gov/pubmed/20705861;,citation_issue=5993;,citation_doi=10.1126/science.1188321;,citation_issn=1095-9203;,citation_volume=329;,citation_language=en-US;,citation_journal_title=Science (New York, N.Y.);,citation_journal_abbrev=Science;">
 <meta name="citation_reference" content="citation_title=Food webs: Reconciling the structure and function of biodiversity;,citation_author=Ross M. Thompson;,citation_author=Ulrich Brose;,citation_author=Jennifer Dunne;,citation_author=Robert O. Hall;,citation_author=Sally Hladyz;,citation_author=Roger L. Kitching;,citation_author=Neo D. Martinez;,citation_author=Heidi Rantala;,citation_author=Tamara N. Romanuk;,citation_author=Daniel B. Stouffer;,citation_author=Jason M. Tylianakis;,citation_publication_date=2012-12;,citation_cover_date=2012-12;,citation_year=2012;,citation_issue=12;,citation_doi=10.1016/j.tree.2012.08.005;,citation_volume=27;,citation_journal_title=Trends in Ecology &amp;amp;amp; Evolution;">
+<meta name="citation_reference" content="citation_title=Conservation of species interaction networks;,citation_abstract=Recent work has shown that antagonist (e.g. predator–prey food web) and mutualist (e.g. pollinator–plant) network structure can be altered by global environmental change drivers, and that these alterations may have important ecosystem-level consequences. This has prompted calls for the conservation of network structure, but precisely which attributes of webs should be conserved remains unclear. Further, the extent to which network metrics characterise the spatiotemporally-variable dynamic structure of interacting communities is unknown. Here, we summarise the attributes of web structure that are predicted to confer stability or increased function to a system, as these may be of greatest interest to conservation biologists. However, empirical evaluation of these effects is lacking in most cases, and we discuss whether stability is even desirable in all contexts. The incorporation of web attributes into conservation monitoring requires that changes in these attributes can be recorded (sampled) with relative ease. We contrast the sensitivity of metrics to sampling effort, and highlight those (such as nestedness and connectance) that could easily be incorporated into conservation monitoring. Despite our growing understanding of the characteristics of food webs that confer stability and function, numerous practical challenges need to be overcome before the goal of conserving species interaction networks can be achieved.;,citation_author=Jason M. Tylianakis;,citation_author=Etienne Laliberté;,citation_author=Anders Nielsen;,citation_author=Jordi Bascompte;,citation_publication_date=2010-10-01;,citation_cover_date=2010-10-01;,citation_year=2010;,citation_fulltext_html_url=https://www.sciencedirect.com/science/article/pii/S0006320709005126;,citation_issue=10;,citation_doi=10.1016/j.biocon.2009.12.004;,citation_issn=0006-3207;,citation_volume=143;,citation_journal_title=Biological Conservation;,citation_journal_abbrev=Biological Conservation;,citation_series_title=Conserving complexity: Global change and community-scale interactions;">
+<meta name="citation_reference" content="citation_title=Information theory in ecology;,citation_abstract=The application of information theory (IT) to ecology has occurred along two separate lines: (1) it has been used to quantify the distribution of stocks and numbers of organisms; and (2) it has been employed to quantify the pattern of interactions of trophic processes. By and large, the first endeavor has resulted in relatively few insights into ecosystem dynamics and has generated much ambiguity and disappointment, so that most ecologists remain highly skeptical about the advisability of applying IT to ecology. By contrast, the second, and less well-known application has shed light on the possibility that ecosystem behavior is the most palpable example of a purely natural “infodynamics” that transcends classical dynamics, but remains well within the realm of quantitative description.;,citation_author=Robert E. Ulanowicz;,citation_publication_date=2001-07-01;,citation_cover_date=2001-07-01;,citation_year=2001;,citation_fulltext_html_url=https://www.sciencedirect.com/science/article/pii/S0097848501000730;,citation_issue=4;,citation_doi=10.1016/S0097-8485(01)00073-0;,citation_issn=0097-8485;,citation_volume=25;,citation_journal_title=Computers &amp;amp;amp; Chemistry;,citation_journal_abbrev=Computers &amp;amp; Chemistry;">
 <meta name="citation_reference" content="citation_title=Major dimensions in food-web structure properties;,citation_abstract=The covariance among a range of 20 network structural properties of food webs plus net primary productivity was assessed for 14 published food webs using principal components analysis. Three primary components explained 84% of the variability in the data sets, suggesting substantial covariance among the properties employed in the literature. The first dimension explained 48% of the variance and could be ascribed to connectance, covarying significantly with the proportion of intermediate species and characteristic path length. The second dimension explained 19% and was related to trophic species richness. The third axis explained 17% and was related to ecosystem net primary productivity. A distinct opposite clustering of connectance, the proportion of intermediate species, and mean trophic level vs. the proportion of top and basal species and path length suggests a dichotomy in food-web structure. Food webs appear either clustered and highly interconnected or elongated with fewer links.;,citation_author=Jan E. Vermaat;,citation_author=Jennifer A. Dunne;,citation_author=Alison J. Gilbert;,citation_publication_date=2009;,citation_cover_date=2009;,citation_year=2009;,citation_fulltext_html_url=https://onlinelibrary.wiley.com/doi/abs/10.1890/07-0978.1;,citation_issue=1;,citation_doi=10.1890/07-0978.1;,citation_issn=1939-9170;,citation_volume=90;,citation_language=en-US;,citation_journal_title=Ecology;">
+<meta name="citation_reference" content="citation_title=Collective dynamics of “small-world” networks;,citation_abstract=Networks of coupled dynamical systems have been used to model biological oscillators1,2,3,4, Josephson junction arrays5,6, excitable media7, neural networks8,9,10, spatial games11, genetic control networks12 and many other self-organizing systems. Ordinarily, the connection topology is assumed to be either completely regular or completely random. But many biological, technological and social networks lie somewhere between these two extremes. Here we explore simple models of networks that can be tuned through this middle ground: regular networks “rewired” to introduce increasing amounts of disorder. We find that these systems can be highly clustered, like regular lattices, yet have small characteristic path lengths, like random graphs. We call them “small-world” networks, by analogy with the small-world phenomenon13,14 (popularly known as six degrees of separation15). The neural network of the worm Caenorhabditis elegans, the power grid of the western United States, and the collaboration graph of film actors are shown to be small-world networks. Models of dynamical systems with small-world coupling display enhanced signal-propagation speed, computational power, and synchronizability. In particular, infectious diseases spread more easily in small-world networks than in regular lattices.;,citation_author=Duncan J. Watts;,citation_author=Steven H. Strogatz;,citation_publication_date=1998-06;,citation_cover_date=1998-06;,citation_year=1998;,citation_fulltext_html_url=https://www.nature.com/articles/30918;,citation_issue=6684;,citation_doi=10.1038/30918;,citation_issn=1476-4687;,citation_volume=393;,citation_language=en-US;,citation_journal_title=Nature;,citation_publisher=Nature Publishing Group;">
 <meta name="citation_reference" content="citation_title=Limits to Trophic Levels and Omnivory in Complex Food Webs: Theory and Data;,citation_abstract=While trophic levels have found broad application throughout ecology, they are also in much contention on analytical and empirical grounds. Here, we use a new generation of data and theory to examine long-standing questions about trophic-level limits and degrees of omnivory. The data include food webs of the Chesapeake Bay, U.S.A., the island of Saint Martin, a U.K. grassland, and a Florida seagrass community, which appear to be the most trophically complete food webs available in the primary literature due to their inclusion of autotrophs and empirically derived estimates of the relative energetic contributions of each trophic link. We show that most (54%) of the 212 species in the four food webs can be unambiguously assigned to a discrete trophic level. Omnivory among the remaining species appears to be quite limited, as judged by the standard deviation of omnivores’ energy-weighted food-chain lengths. This allows simple algorithms based on binary food webs without energetic details to yield surprisingly accurate estimates of species’ trophic and omnivory levels. While maximum trophic levels may plausibly exceed historically asserted limits, our analyses contradict both recent empirical claims that these limits are exceeded and recent theoretical claims that rampant omnivory eliminates the scientific utility of the trophic-level concept.;,citation_author=Richard J. Williams;,citation_author=Neo D. Martinez;,citation_publication_date=2004-03;,citation_cover_date=2004-03;,citation_year=2004;,citation_fulltext_html_url=http://www.journals.uchicago.edu/doi/10.1086/381964;,citation_issue=3;,citation_doi=10.1086/381964;,citation_issn=0003-0147, 1537-5323;,citation_volume=163;,citation_language=en-US;,citation_journal_title=The American Naturalist;,citation_journal_abbrev=The American Naturalist;">
 <meta name="citation_reference" content="citation_title=Success and its limits among structural models of complex food webs;,citation_abstract=1. Following the development of the relatively successful niche model, several other simple structural food web models have been proposed. These models predict the detailed structure of complex food webs given only two input parameters, the numbers of species and the number of feeding links among them. 2. The models claim different degrees of success but have not been compared consistently with each other or with the empirical data. We compared the performance of five structural models rigorously against 10 empirical food webs from a variety of aquatic and terrestrial habitats containing 25-92 species and 68-997 links. 3. All models include near-hierarchical ordering of species’ consumption and have identical distributions of the number of prey of each consumer species, but differ in the extent to which species’ diets are required to be contiguous and the rules used to assign feeding links. 4. The models perform similarly on a range of food-web properties, including the fraction of top, intermediate and basal species, the standard deviations of generality and connectivity and the fraction of herbivores and omnivores. 5. For other properties, including the standard deviation of vulnerability, the fraction of cannibals and species in loops, mean trophic level, path length, clustering coefficient, maximum similarity and diet discontinuity, there are significant differences in the performance of the different models. 6. While the empirical data do not support the niche model’s assumption of diet contiguity, models which relax this assumption all have worse overall performance than the niche model. All the models under-estimate severely the fraction of species that are herbivores and exhibit other important failures that need to be addressed in future research.;,citation_author=Richard J. Williams;,citation_author=Neo D. Martinez;,citation_publication_date=2008-05;,citation_cover_date=2008-05;,citation_year=2008;,citation_fulltext_html_url=https://www.ncbi.nlm.nih.gov/pubmed/18284474;,citation_issue=3;,citation_doi=10.1111/j.1365-2656.2008.01362.x;,citation_issn=1365-2656;,citation_volume=77;,citation_language=en-US;,citation_journal_title=The Journal of Animal Ecology;,citation_journal_abbrev=J Anim Ecol;">
 <meta name="citation_reference" content="citation_title=Linking structure and function in food webs: Maximization of different ecological functions generates distinct food web structures;,citation_abstract=1. Trophic interactions are central to ecosystem functioning, but the link between food web structure and ecosystem functioning remains obscure. Regularities (i.e. consistent patterns) in food web structure suggest the possibility of regularities in ecosystem functioning, which might be used to relate structure to function. 2. We introduce a novel, genetic algorithm approach to simulate food webs with maximized throughput (a proxy for ecosystem functioning) and compare the structure of these simulated food webs to real empirical food webs using common metrics of food web structure. We repeat this analysis using robustness to secondary extinctions (a proxy for ecosystem resilience) instead of throughput to determine the relative contributions of ecosystem functioning and ecosystem resilience to food web structure. 3. Simulated food webs that maximized robustness were similar to real food webs when connectance (i.e. levels of interaction across the food web) was high, but this result did not extend to food webs with low connectance. Simulated food webs that maximized throughput or a combination of throughput and robustness were not similar to any real food webs. 4. Simulated maximum-throughput food webs differed markedly from maximum-robustness food webs, which suggests that maximizing different ecological functions can generate distinct food web structures. Based on our results, food web structure would appear to have a stronger relationship with ecosystem resilience than with ecosystem throughput. 5. Our genetic algorithm approach is general and is well suited to large, realistically complex food webs. Genetic algorithms can incorporate constraints on structure and can generate outputs that can be compared directly to empirical data. Our method can be used to explore a range of maximization or minimization hypotheses, providing new perspectives on the links between structure and function in ecological systems.;,citation_author=Jian D. L. Yen;,citation_author=Reniel B. Cabral;,citation_author=Mauricio Cantor;,citation_author=Ian Hatton;,citation_author=Susanne Kortsch;,citation_author=Joana Patrício;,citation_author=Masato Yamamichi;,citation_publication_date=2016;,citation_cover_date=2016;,citation_year=2016;,citation_fulltext_html_url=https://www.jstor.org/stable/24701654;,citation_issue=2;,citation_issn=0021-8790;,citation_volume=85;,citation_journal_title=Journal of Animal Ecology;,citation_publisher=[Wiley, British Ecological Society];">
+<meta name="citation_reference" content="citation_title=In Search of Operational Trophospecies in a Tropical Aquatic Food Web;,citation_abstract=Aggregations of biological species on the basis of trophic similarity (trophospecies) are the basic units of study in food web and ecosystem research, yet little attention has been devoted to articulating objective protocols for defining such aggregations. This study formulates several possible definitions based on alternative measures of similarity and hierarchical clustering. Twenty-four alternative methods were applied to a food web consisting of 116 original trophic entities (OTEs) from a tropical floodplain, for which the relative magnitude of each trophic link was estimated based on dietary data measured as volumetric proportions. The resulting 24 trophic hierarchies were compared based on cophenetic correlation and matrices of OTE pairwise similarity, and patterns were interpreted based on additional ecological analyses for this system. Similarity measures based on topological food web (presence/absence) data yielded slightly greater cophenetic correlations than did measures based on dietary proportions (flow webs), but, overall, OTE pairwise correlations were not greater for one method relative to the other. The difference between these two approaches is driven by the treatment of weak feeding links; at least for the system considered here, distinctions among dietary generalists were obscured when weak links were weighted lightly. Additively combining the predator and resource aspects of each OTE’s trophic role performed better than combining them multiplicatively. In general, there was little correspondence between OTE overlap in resource use and the extent to which predators were shared. Two measures of cluster similarity, one designed by us specifically for food webs (maximum linkage) and the other a standard method (average similarity between clusters), yielded more consistent and ecologically interpretable patterns of aggregation than other measures of cluster similarity considered. In deciding whether two trophospecies should be assigned a trophic link, the maximum linkage convention (in which a link is included if any pair of OTEs, one in each trophospecies, are linked) produced more aggregation than the minimum linkage convention (in which a link is included only if every pair of OTEs, pair members in each of the two trophospecies, is linked). The choice of similarity level for defining trophospecies remained an unresolved issue based on our analysis of this dataset. Perhaps the greatest challenge is posed by sampling bias within empirical datasets, and we ultimately conclude that it is difficult to identify trophospecies in this dataset by strictly objective criteria.;,citation_author=Peter Yodzis;,citation_author=Kirk O. Winemiller;,citation_publication_date=1999;,citation_cover_date=1999;,citation_year=1999;,citation_fulltext_html_url=https://www.jstor.org/stable/3546748;,citation_issue=2;,citation_doi=10.2307/3546748;,citation_issn=0030-1299;,citation_volume=87;,citation_journal_title=Oikos;,citation_publisher=[Nordic Society Oikos, Wiley];">
 </head>
 
 <body class="quarto-light">
@@ -140,7 +162,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Finding the mjor descriptors of species networks</h1>
+      <h1 class="title">Finding the major descriptors of species networks</h1>
           </div>
 
     
@@ -174,7 +196,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">December 17, 2025</p>
+              <p class="date">January 29, 2026</p>
             </div>
           </div>
           
@@ -207,7 +229,9 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#materials-and-methods" id="toc-materials-and-methods" class="nav-link" data-scroll-target="#materials-and-methods"><span class="header-section-number">2</span> Materials and Methods</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="index-preview.html"><i class="bi bi-journal-code"></i>Article Notebook</a></li></ul></div></nav>
 </div>
@@ -220,26 +244,109 @@ window.Quarto = {
   
 
 
-<p>Blah blah blah <span class="citation" data-cites="vermaatMajorDimensionsFoodweb2009">Vermaat, Dunne, and Gilbert (<a href="#ref-vermaatMajorDimensionsFoodweb2009" role="doc-biblioref">2009</a>)</span></p>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>To bridge the gap between the original paper and your new objectives, your introduction could follow this logical flow:</p>
+<p>The Evolution of Ecological Network Theory</p>
+<p>The Hook: Acknowledge the foundational shift from viewing biodiversity as a simple “species count” to viewing it as a complex web of interactions.</p>
+<p>The Baseline: Summarize the core findings of the paper you’re expanding on—specifically, how the architecture (e.g., compartmentalization vs.&nbsp;nestedness) affects stability differently in mutualistic vs.&nbsp;trophic networks.</p>
+<p>The Need for Dimensionality</p>
+<p>The Gap: Argue that while “connectance” and “nestedness” are vital, they don’t capture the full resolution of ecosystem dynamics.</p>
+<p>The Expansion: Introduce the necessity of more nuanced metrics (e.g., motifs, centrality, modularity, and beta-diversity of interactions) to capture the “hidden” stability of diverse networks.</p>
+<p>Linking Structure to Ecosystem Function (EF)</p>
+<p>The Framework: Explicitly connect structural metrics to the “Stability-Complexity” debate.</p>
+<p>The Hypothesis: Propose how specific structural arrangements (like high modularity) act as “firewalls” to prevent the spread of perturbations, thereby maintaining ecosystem function under stress.</p>
+<p>Objectives</p>
+<p>The overarching goal of this study is to move beyond bipartite generalizations and define a comprehensive “structural fingerprint” of ecosystem stability. To achieve this, we address two primary objectives:</p>
+<p><strong>Identification of a Core Structural Subset</strong></p>
+<p>Ecological networks are characterized by a high degree of collinearity among structural descriptors. We aim to determine whether the 31 metrics analyzed in this study can be reduced to a&nbsp;<strong>Minimum Sufficient Set</strong>—a small, non-redundant group of indicators that capture the essential topological features of an ecosystem. By employing multivariate techniques such as&nbsp;<strong>Variable Clustering</strong>&nbsp;and&nbsp;<strong>SVD Complexity</strong>, we seek to move away from arbitrary metric selection toward a data-driven framework for network characterization.</p>
+<p><strong>Mapping the Multi-dimensional Stability Landscape</strong></p>
+<p>Building on the “stability-complexity” debate (McCann 2000, Ives &amp; Carpenter 2007), we aim to map how these diverse structural metrics correlate with different facets of ecosystem health. Specifically, we test the following hypotheses:</p>
+<ul>
+<li><p><strong>The Robustness Hypothesis:</strong>&nbsp;Metrics of redundancy (e.g.,&nbsp;<em>Connectance, MaxSim</em>) will be the primary predictors of resistance to primary species loss.</p></li>
+<li><p><strong>The Containment Hypothesis:</strong>&nbsp;Modular structures (e.g.,&nbsp;<em>Clust, Modularity</em>) will correlate with system-wide resilience by preventing the propagation of local perturbations.</p></li>
+<li><p><strong>The Dynamic Capacity Hypothesis:</strong>&nbsp;Information-theoretic measures (e.g.,&nbsp;<em>SVD Complexity, Spectral Radius</em>) will provide a superior bridge between static topology and the dynamic ability of the system to return to equilibrium.</p></li>
+</ul>
+<p>Clearly state that this study expands the taxonomic and structural scope of previous models to provide a generalized rulebook for network-mediated stability.</p>
+<p>Synthesis: Linking to “Stability”</p>
+<p>In your manuscript, you can group these metrics into&nbsp;<strong>three functional categories</strong>:</p>
+<ol type="1">
+<li><p><strong>Robustness Metrics:</strong>&nbsp;(Richness, Connectance, Robustness, MaxSim) — These describe how many “hits” the network can take before collapsing.</p></li>
+<li><p><strong>Efficiency/Flow Metrics:</strong>&nbsp;(Path, ChLen, TL, Diameter) — These describe how quickly energy or perturbations move through the system.</p></li>
+<li><p><strong>Organization Metrics:</strong>&nbsp;(ρ, Complexity, Modularity/Clust, Intervality) — These describe the “logic” of the arrangement, which dictates whether the system behaves predictably or chaotically.</p></li>
+</ol>
+<p>Blah blah blah <span class="citation" data-cites="vermaatMajorDimensionsFoodweb2009">Vermaat et al. (<a href="#ref-vermaatMajorDimensionsFoodweb2009" role="doc-biblioref">2009</a>)</span></p>
 <p><em>“It is incumbent on network ecologists to establish clearly the independence and uniqueness of the descriptive metrics used.”</em> - <span class="citation" data-cites="lauEcologicalNetworkMetrics2017">Lau et al. (<a href="#ref-lauEcologicalNetworkMetrics2017" role="doc-biblioref">2017</a>)</span></p>
+<table class="caption-top table">
+<caption>Stuff</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimension</th>
+<th>Key Metrics</th>
+<th>Expected Effect on Stability</th>
+<th>Supporting Literature</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Complexity &amp; Redundancy</td>
+<td>Connectance, MaxSim, Links</td>
+<td><strong>Positive:</strong> High redundancy allows for “functional compensation” if one species is lost.</td>
+<td><span class="citation" data-cites="dunneFoodwebStructureNetwork2002">Dunne et al. (<a href="#ref-dunneFoodwebStructureNetwork2002" role="doc-biblioref">2002</a>)</span>; <span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Compartmentalization</td>
+<td>Clust, Modularity,&nbsp;ρ</td>
+<td><strong>Positive:</strong> Limits the spread of perturbations; local collapses don’t become global.</td>
+<td><span class="citation" data-cites="stoufferCompartmentalizationIncreasesFoodweb2011">Stouffer and Bascompte (<a href="#ref-stoufferCompartmentalizationIncreasesFoodweb2011" role="doc-biblioref">2011</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Feedback &amp; Coupling</td>
+<td>Omnivory (S2), Loop, ChLen</td>
+<td><strong>Variable:</strong> Omnivory can stabilize by diffusing energy, but long chains can amplify oscillations.</td>
+<td><span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span>; <span class="citation" data-cites="neutelStabilityRealFood2002">Neutel et al. (<a href="#ref-neutelStabilityRealFood2002" role="doc-biblioref">2002</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Hierarchy &amp; Shape</td>
+<td>Prey:Predator, Basal, Top</td>
+<td><strong>Critical:</strong> “Bottom-heavy” systems are generally more stable; inverted pyramids are fragile.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Information Heterogeneity</td>
+<td>SVD Complexity, LinkSD</td>
+<td><strong>Positive:</strong> Diverse interaction strengths prevent “resonant” instabilities.</td>
+<td><span class="citation" data-cites="ulanowiczInformationTheoryEcology2001">Ulanowicz (<a href="#ref-ulanowiczInformationTheoryEcology2001" role="doc-biblioref">2001</a>)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="materials-and-methods" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Materials and Methods</h1>
 <div id="tbl-properties" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: An informative caption about the different network properties. We use a combination of metrics from both the original <span class="citation" data-cites="vermaatMajorDimensionsFoodweb2009">Vermaat, Dunne, and Gilbert (<a href="#ref-vermaatMajorDimensionsFoodweb2009" role="doc-biblioref">2009</a>)</span> paper as well as including those that have been identified by <span class="citation" data-cites="thompsonFoodWebsReconciling2012">Thompson et al. (<a href="#ref-thompsonFoodWebsReconciling2012" role="doc-biblioref">2012</a>)</span> and have been linked to emerging ecosystem properties such as stability
+Table&nbsp;1: An informative caption about the different network properties. We use a combination of metrics from both the original <span class="citation" data-cites="vermaatMajorDimensionsFoodweb2009">Vermaat et al. (<a href="#ref-vermaatMajorDimensionsFoodweb2009" role="doc-biblioref">2009</a>)</span> paper as well as including those that have been identified by <span class="citation" data-cites="thompsonFoodWebsReconciling2012">Thompson et al. (<a href="#ref-thompsonFoodWebsReconciling2012" role="doc-biblioref">2012</a>)</span> and have been linked to emerging ecosystem properties such as stability
 </figcaption>
 <div aria-describedby="tbl-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 22%">
-<col style="width: 32%">
-<col style="width: 22%">
-<col style="width: 22%">
+<col style="width: 3%">
+<col style="width: 36%">
+<col style="width: 45%">
+<col style="width: 13%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Label</th>
 <th>Definition</th>
-<th>“Function”</th>
+<th>Ecological Significance</th>
 <th>Reference (for maths), can make footnotes probs</th>
 </tr>
 </thead>
@@ -247,7 +354,7 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <tr class="odd">
 <td>Basal</td>
 <td>Percentage of basal taxa, defined as species who have a vulnerability of zero</td>
-<td></td>
+<td>Measures the energy entry points; high basal % suggests a bottom-heavy, potentially more stable energy base.</td>
 <td></td>
 </tr>
 <tr class="even">
@@ -265,13 +372,13 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <tr class="even">
 <td>ChLen</td>
 <td>Mean food chain length, averaged over all species (where a food chain is defined as a continuous path from a ‘basal’ to a ‘top’ species)</td>
-<td></td>
+<td>Reflects energy transfer efficiency. Longer chains may be more prone to top-down trophic cascades.</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>ChSD</td>
 <td>Standard deviation of ChLen</td>
-<td></td>
+<td>High SD indicates a mix of energy pathways, which can buffer the system</td>
 <td></td>
 </tr>
 <tr class="even">
@@ -283,13 +390,14 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <tr class="odd">
 <td>Clust</td>
 <td>mean clustering coefficient (probability that two taxa linked to the same taxon are also linked)</td>
-<td></td>
-<td><strong>TODO</strong></td>
+<td>Quantifies local redundancy; high clustering can buffer the network against the loss of specific interaction pathways.</td>
+<td><p><strong>TODO</strong></p>
+<p><span class="citation" data-cites="wattsCollectiveDynamicsSmallworld1998">Watts and Strogatz (<a href="#ref-wattsCollectiveDynamicsSmallworld1998" role="doc-biblioref">1998</a>)</span></p></td>
 </tr>
 <tr class="even">
 <td>GenSD</td>
 <td>Normalized standard deviation of generality of a species standardized by <span class="math inline">\(L/S\)</span></td>
-<td></td>
+<td>Interaction asymmetry. High variance in how links are distributed often points to the presence of ‘hubs’ (highly connected species), which makes the network robust to random loss but vulnerable to targeted ‘keystone’ removal.</td>
 <td><span class="citation" data-cites="williamsSuccessItsLimits2008a">Williams and Martinez (<a href="#ref-williamsSuccessItsLimits2008a" role="doc-biblioref">2008</a>)</span></td>
 </tr>
 <tr class="odd">
@@ -307,13 +415,13 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <tr class="odd">
 <td>LinkSD</td>
 <td>Normalized standard deviation of links (number of consumers plus resources per taxon)</td>
-<td></td>
+<td>Interaction asymmetry. High variance in how links are distributed often points to the presence of ‘hubs’ (highly connected species), which makes the network robust to random loss but vulnerable to targeted ‘keystone’ removal.</td>
 <td></td>
 </tr>
 <tr class="even">
 <td>Loop</td>
 <td>Percentage of taxa in loops (food chains in which a taxon occurs twice)</td>
-<td></td>
+<td>High percentages of loops can lead to feedback cycles (positive or negative) that either amplify or dampen oscillations, directly impacting local stability.</td>
 <td></td>
 </tr>
 <tr class="odd">
@@ -325,14 +433,15 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <tr class="even">
 <td>MaxSim</td>
 <td>Mean of the maximum trophic similarity of each taxon to other taxa, the number of predators and prey shared by a pair of species divided by their total number of predators and prey</td>
-<td></td>
-<td><strong>TODO</strong></td>
+<td>Indicates functional redundancy; high similarity suggests species are replaceable, increasing robustness to individual extinctions.</td>
+<td><p><strong>TODO</strong></p>
+<p><span class="citation" data-cites="yodzisSearchOperationalTrophospecies1999">Yodzis and Winemiller (<a href="#ref-yodzisSearchOperationalTrophospecies1999" role="doc-biblioref">1999</a>)</span></p></td>
 </tr>
 <tr class="odd">
 <td>Omnivory</td>
 <td>Percentage of omnivores (taxa that feed on <span class="math inline">\(\geq\)</span> 2 taxa with different trophic levels)</td>
-<td></td>
-<td></td>
+<td>Links to coupling of energy channels; historically debated, but often found to stabilize food webs by diffusing top-down pressure.</td>
+<td><span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Path</td>
@@ -361,7 +470,7 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <tr class="even">
 <td>VulSD</td>
 <td>Normalized standard deviation of vulnerability of a species standardized by <span class="math inline">\(L/S\)</span></td>
-<td></td>
+<td>Interaction asymmetry. High variance in how links are distributed often points to the presence of ‘hubs’ (highly connected species), which makes the network robust to random loss but vulnerable to targeted ‘keystone’ removal.</td>
 <td></td>
 </tr>
 <tr class="odd">
@@ -378,51 +487,51 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(\rho\)</span></td>
-<td>Spectral radius is a a conceptual analog to nestedness (and more appropriate for unipartite networks). It is defined as the absolute value of the largest real part of the eigenvalues of the <em>undirected</em> adjacency matrix</td>
-<td></td>
-<td><span class="citation" data-cites="staniczenkoGhostNestednessEcological2013">Staniczenko, Kopp, and Allesina (<a href="#ref-staniczenkoGhostNestednessEcological2013" role="doc-biblioref">2013</a>)</span></td>
+<td>Spectral radius is a a conceptual analog to nestedness. It is defined as the absolute value of the largest real part of the eigenvalues of the <em>undirected</em> adjacency matrix</td>
+<td>Acts as a proxy for system-wide resilience; captures the speed at which a system returns to equilibrium after a small pulse perturbation.</td>
+<td><span class="citation" data-cites="staniczenkoGhostNestednessEcological2013">Staniczenko et al. (<a href="#ref-staniczenkoGhostNestednessEcological2013" role="doc-biblioref">2013</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Complexity</td>
 <td>SVD complexity of a network, defined as the Pielou entropy of its singular values</td>
-<td>Something about structural v behavioural complexity being captured</td>
-<td><span class="citation" data-cites="strydomSVDEntropyReveals2021">Strydom, Dalla Riva, and Poisot (<a href="#ref-strydomSVDEntropyReveals2021" role="doc-biblioref">2021</a>)</span></td>
+<td>Captures structural heterogeneity; distinguishes between a truly complex system and one that is merely large or ‘random’.</td>
+<td><span class="citation" data-cites="strydomSVDEntropyReveals2021">Strydom et al. (<a href="#ref-strydomSVDEntropyReveals2021" role="doc-biblioref">2021</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>Centrality</td>
-<td>Centrality is a measure of how ‘influential’ a species is, under various definitions of ‘influence’…</td>
+<td>Centrality is a measure of how ‘influential’ a species is, under various definitions of ‘influence’.</td>
 <td>Centrality can help in quantifying the importance of species in a network</td>
-<td></td>
+<td><span class="citation" data-cites="estradaUsingNetworkCentrality2008">Estrada and Bodin (<a href="#ref-estradaUsingNetworkCentrality2008" role="doc-biblioref">2008</a>)</span></td>
 </tr>
 <tr class="even">
 <td>S1</td>
 <td>Number of linear chains</td>
-<td></td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td>Building blocks of stability (compartmentalisation, Stouffer and Bascompte?)</td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>S2</td>
 <td>Number of omnivory motifs</td>
-<td></td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td>Building blocks of stability (compartmentalisation, Stouffer and Bascompte?)</td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="even">
 <td>S4</td>
 <td>Number of apparent competition motifs</td>
-<td></td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td>Building blocks of stability (compartmentalisation, Stouffer and Bascompte?)</td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>S5</td>
 <td>Number of direct competition motifs</td>
-<td></td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td>Building blocks of stability (compartmentalisation, Stouffer and Bascompte?)</td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Intervality</td>
 <td>The degree to which the prey in a food web can be ordered so that all species can be placed along a single dimension</td>
-<td></td>
-<td><span class="citation" data-cites="stoufferRobustMeasureFood2006a">Daniel B. Stouffer, Camacho, and Amaral (<a href="#ref-stoufferRobustMeasureFood2006a" role="doc-biblioref">2006</a>)</span></td>
+<td>Measures niche dimension; high intervality suggests a simpler organization where species feeding habits are constrained by a single trait (like body size).</td>
+<td><span class="citation" data-cites="stoufferRobustMeasureFood2006a">Stouffer et al. (<a href="#ref-stoufferRobustMeasureFood2006a" role="doc-biblioref">2006</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>Prey:predator</td>
@@ -454,190 +563,208 @@ Table&nbsp;2: Here is a table showing the correlation of the different network p
 <tr class="header">
 <th style="text-align: left;">Property</th>
 <th style="text-align: left;">PCA 1 (30%)</th>
-<th style="text-align: left;">PCA 2 (21%)</th>
+<th style="text-align: left;">PCA 2 (20%)</th>
 <th style="text-align: left;">PCA 3 (17%)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">richness</td>
-<td style="text-align: left;">0.29</td>
-<td style="text-align: left;"><strong>0.82</strong></td>
-<td style="text-align: left;">0.35</td>
+<td style="text-align: left;">0.3</td>
+<td style="text-align: left;"><strong>0.89</strong></td>
+<td style="text-align: left;">-0.16</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">links</td>
-<td style="text-align: left;">0.63</td>
-<td style="text-align: left;"><strong>0.68</strong></td>
-<td style="text-align: left;">0.1</td>
+<td style="text-align: left;">0.62</td>
+<td style="text-align: left;"><strong>0.72</strong></td>
+<td style="text-align: left;">0.04</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">connectance</td>
-<td style="text-align: left;">0.5</td>
-<td style="text-align: left;">-0.5</td>
-<td style="text-align: left;">-0.61</td>
+<td style="text-align: left;">0.52</td>
+<td style="text-align: left;">-0.62</td>
+<td style="text-align: left;">0.49</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">diameter</td>
-<td style="text-align: left;">0.55</td>
-<td style="text-align: left;">0.47</td>
-<td style="text-align: left;">0.35</td>
+<td style="text-align: left;"><strong>0.74</strong></td>
+<td style="text-align: left;">0.38</td>
+<td style="text-align: left;">-0.3</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">complexity</td>
-<td style="text-align: left;">-0.48</td>
-<td style="text-align: left;">-0.08</td>
-<td style="text-align: left;">0.46</td>
+<td style="text-align: left;">-0.52</td>
+<td style="text-align: left;">0.09</td>
+<td style="text-align: left;">-0.49</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">distance</td>
-<td style="text-align: left;">0.02</td>
-<td style="text-align: left;">0.34</td>
-<td style="text-align: left;">-0.11</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.3</td>
+<td style="text-align: left;">0.18</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">basal</td>
-<td style="text-align: left;">-0.46</td>
-<td style="text-align: left;">0.45</td>
-<td style="text-align: left;"><strong>-0.69</strong></td>
+<td style="text-align: left;">-0.47</td>
+<td style="text-align: left;">0.29</td>
+<td style="text-align: left;"><strong>0.75</strong></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">top</td>
-<td style="text-align: left;">-0.56</td>
-<td style="text-align: left;">0.17</td>
-<td style="text-align: left;">0.28</td>
+<td style="text-align: left;">-0.58</td>
+<td style="text-align: left;">0.2</td>
+<td style="text-align: left;">-0.24</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">intermediate</td>
-<td style="text-align: left;"><strong>0.67</strong></td>
-<td style="text-align: left;">-0.47</td>
-<td style="text-align: left;">0.44</td>
+<td style="text-align: left;"><strong>0.69</strong></td>
+<td style="text-align: left;">-0.35</td>
+<td style="text-align: left;">-0.52</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">predpreyRatio</td>
-<td style="text-align: left;">-0.24</td>
-<td style="text-align: left;">0.42</td>
-<td style="text-align: left;"><strong>-0.73</strong></td>
+<td style="text-align: left;">-0.26</td>
+<td style="text-align: left;">0.27</td>
+<td style="text-align: left;"><strong>0.76</strong></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">herbivory</td>
-<td style="text-align: left;">-0.5</td>
-<td style="text-align: left;">0.24</td>
-<td style="text-align: left;">-0.06</td>
+<td style="text-align: left;">-0.54</td>
+<td style="text-align: left;">0.22</td>
+<td style="text-align: left;">0.07</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">omnivory</td>
-<td style="text-align: left;"><strong>0.77</strong></td>
-<td style="text-align: left;">-0.27</td>
-<td style="text-align: left;">0.23</td>
+<td style="text-align: left;"><strong>0.78</strong></td>
+<td style="text-align: left;">-0.23</td>
+<td style="text-align: left;">-0.21</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">cannibal</td>
-<td style="text-align: left;"><strong>0.73</strong></td>
-<td style="text-align: left;">0.12</td>
-<td style="text-align: left;">-0.29</td>
+<td style="text-align: left;"><strong>0.72</strong></td>
+<td style="text-align: left;">0.07</td>
+<td style="text-align: left;">0.31</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">l_S</td>
 <td style="text-align: left;"><strong>0.83</strong></td>
-<td style="text-align: left;">0.5</td>
-<td style="text-align: left;">-0.13</td>
+<td style="text-align: left;">0.47</td>
+<td style="text-align: left;">0.23</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">GenSD</td>
-<td style="text-align: left;">-0.37</td>
-<td style="text-align: left;"><strong>0.67</strong></td>
-<td style="text-align: left;">-0.32</td>
+<td style="text-align: left;">-0.4</td>
+<td style="text-align: left;">0.58</td>
+<td style="text-align: left;">0.45</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">VulSD</td>
-<td style="text-align: left;">-0.4</td>
-<td style="text-align: left;">0.52</td>
-<td style="text-align: left;">0.38</td>
+<td style="text-align: left;">-0.41</td>
+<td style="text-align: left;">0.58</td>
+<td style="text-align: left;">-0.26</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">TL</td>
-<td style="text-align: left;">0.5</td>
-<td style="text-align: left;">-0.41</td>
-<td style="text-align: left;"><strong>0.71</strong></td>
+<td style="text-align: left;">0.52</td>
+<td style="text-align: left;">-0.24</td>
+<td style="text-align: left;"><strong>-0.77</strong></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ChLen</td>
-<td style="text-align: left;">0.48</td>
-<td style="text-align: left;">-0.54</td>
-<td style="text-align: left;">0.53</td>
+<td style="text-align: left;">0.51</td>
+<td style="text-align: left;">-0.41</td>
+<td style="text-align: left;">-0.62</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ChSD</td>
 <td style="text-align: left;">0.32</td>
-<td style="text-align: left;">0.1</td>
-<td style="text-align: left;">0.46</td>
+<td style="text-align: left;">0.2</td>
+<td style="text-align: left;">-0.45</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ChNum</td>
-<td style="text-align: left;">-0.19</td>
-<td style="text-align: left;"><strong>0.74</strong></td>
-<td style="text-align: left;">0.48</td>
+<td style="text-align: left;">-0.2</td>
+<td style="text-align: left;"><strong>0.8</strong></td>
+<td style="text-align: left;">-0.3</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">path</td>
-<td style="text-align: left;">0.28</td>
-<td style="text-align: left;">0.34</td>
-<td style="text-align: left;">0.41</td>
+<td style="text-align: left;">0.26</td>
+<td style="text-align: left;">0.4</td>
+<td style="text-align: left;">-0.26</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">LinkSD</td>
-<td style="text-align: left;">-0.25</td>
-<td style="text-align: left;"><strong>0.68</strong></td>
-<td style="text-align: left;">0.4</td>
+<td style="text-align: left;">-0.27</td>
+<td style="text-align: left;"><strong>0.74</strong></td>
+<td style="text-align: left;">-0.23</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">S1</td>
-<td style="text-align: left;"><strong>0.92</strong></td>
-<td style="text-align: left;">0.02</td>
-<td style="text-align: left;">0.01</td>
+<td style="text-align: left;"><strong>0.9</strong></td>
+<td style="text-align: left;">0.03</td>
+<td style="text-align: left;">0.03</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">S2</td>
-<td style="text-align: left;"><strong>0.85</strong></td>
-<td style="text-align: left;">0.01</td>
-<td style="text-align: left;">-0.35</td>
+<td style="text-align: left;"><strong>0.84</strong></td>
+<td style="text-align: left;">-0.07</td>
+<td style="text-align: left;">0.36</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">S4</td>
-<td style="text-align: left;">0.62</td>
-<td style="text-align: left;">0.53</td>
-<td style="text-align: left;">-0.19</td>
+<td style="text-align: left;">0.61</td>
+<td style="text-align: left;">0.49</td>
+<td style="text-align: left;">0.28</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">S5</td>
 <td style="text-align: left;"><strong>0.67</strong></td>
+<td style="text-align: left;">0.39</td>
 <td style="text-align: left;">0.49</td>
-<td style="text-align: left;">-0.42</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ρ</td>
-<td style="text-align: left;">0.56</td>
-<td style="text-align: left;">-0.3</td>
-<td style="text-align: left;">-0.55</td>
+<td style="text-align: left;">0.57</td>
+<td style="text-align: left;">-0.43</td>
+<td style="text-align: left;">0.48</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">centrality</td>
-<td style="text-align: left;">-0.23</td>
-<td style="text-align: left;">-0.63</td>
-<td style="text-align: left;">-0.35</td>
+<td style="text-align: left;">-0.24</td>
+<td style="text-align: left;"><strong>-0.67</strong></td>
+<td style="text-align: left;">0.18</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">loops</td>
-<td style="text-align: left;"><strong>0.81</strong></td>
-<td style="text-align: left;">0.29</td>
-<td style="text-align: left;">-0.05</td>
+<td style="text-align: left;"><strong>0.8</strong></td>
+<td style="text-align: left;">0.32</td>
+<td style="text-align: left;">0.12</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">robustness</td>
-<td style="text-align: left;">0.07</td>
-<td style="text-align: left;">0.16</td>
-<td style="text-align: left;">-0.51</td>
+<td style="text-align: left;">0.05</td>
+<td style="text-align: left;">-0.05</td>
+<td style="text-align: left;">0.66</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">intervals</td>
+<td style="text-align: left;">0.45</td>
+<td style="text-align: left;"><strong>0.7</strong></td>
+<td style="text-align: left;">-0.05</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MaxSim</td>
+<td style="text-align: left;">-0.03</td>
+<td style="text-align: left;">-0.17</td>
+<td style="text-align: left;">0.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Clust</td>
+<td style="text-align: left;"><strong>0.69</strong></td>
+<td style="text-align: left;">-0.33</td>
+<td style="text-align: left;">0.06</td>
 </tr>
 </tbody>
 </table>
@@ -658,11 +785,18 @@ Table&nbsp;2: Here is a table showing the correlation of the different network p
 <figcaption>All networks. Vermaat subset = using only the structural measures from Vermaat</figcaption>
 </figure>
 </div>
+</section>
 <section id="references" class="level1 unnumbered">
 <h1 class="unnumbered">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-delmasAnalysingEcologicalNetworks2019" class="csl-entry" role="listitem">
-Delmas, Eva, Mathilde Besson, Marie-Hélène Brice, Laura A. Burkle, Giulio V. Dalla Riva, Marie-Josée Fortin, Dominique Gravel, et al. 2019. <span>“Analysing Ecological Networks of Species Interactions.”</span> <em>Biological Reviews</em> 94 (1): 16–36. <a href="https://doi.org/10.1111/brv.12433">https://doi.org/10.1111/brv.12433</a>.
+Delmas, Eva, Mathilde Besson, Marie-Hélène Brice, et al. 2019. <span>“Analysing Ecological Networks of Species Interactions.”</span> <em>Biological Reviews</em> 94 (1): 16–36. <a href="https://doi.org/10.1111/brv.12433">https://doi.org/10.1111/brv.12433</a>.
+</div>
+<div id="ref-dunneFoodwebStructureNetwork2002" class="csl-entry" role="listitem">
+Dunne, Jennifer A., Richard J. Williams, and Neo D. Martinez. 2002. <span>“Food-Web Structure and Network Theory: <span>The</span> Role of Connectance and Size.”</span> <em>Proceedings of the National Academy of Sciences</em> 99 (20): 12917–22. <a href="https://doi.org/10.1073/pnas.192407699">https://doi.org/10.1073/pnas.192407699</a>.
+</div>
+<div id="ref-estradaUsingNetworkCentrality2008" class="csl-entry" role="listitem">
+Estrada, Ernesto, and Örjan Bodin. 2008. <span>“Using <span>Network Centrality Measures</span> to <span>Manage Landscape Connectivity</span>.”</span> <em>Ecological Applications</em> 18 (7): 1810–25. <a href="https://doi.org/10.1890/07-1419.1">https://doi.org/10.1890/07-1419.1</a>.
 </div>
 <div id="ref-jonssonReliabilityR50Measure2015" class="csl-entry" role="listitem">
 Jonsson, Tomas, Sofia Berg, Alexander Pimenov, Catherine Palmer, and Mark Emmerson. 2015. <span>“The Reliability of <span>R50</span> as a Measure of Vulnerability of Food Webs to Sequential Species Deletions.”</span> <em>Oikos</em> 124 (4): 446–57. <a href="https://doi.org/10.1111/oik.01588">https://doi.org/10.1111/oik.01588</a>.
@@ -670,11 +804,20 @@ Jonsson, Tomas, Sofia Berg, Alexander Pimenov, Catherine Palmer, and Mark Emmers
 <div id="ref-lauEcologicalNetworkMetrics2017" class="csl-entry" role="listitem">
 Lau, Matthew K., Stuart R. Borrett, Benjamin Baiser, Nicholas J. Gotelli, and Aaron M. Ellison. 2017. <span>“Ecological Network Metrics: Opportunities for Synthesis.”</span> <em>Ecosphere</em> 8 (8): e01900. <a href="https://doi.org/10.1002/ecs2.1900">https://doi.org/10.1002/ecs2.1900</a>.
 </div>
+<div id="ref-mccannDiversityStabilityDebate2000" class="csl-entry" role="listitem">
+McCann, Kevin Shear. 2000. <span>“The Diversity–Stability Debate.”</span> <em>Nature</em> 405 (6783): 228–33. <a href="https://doi.org/10.1038/35012234">https://doi.org/10.1038/35012234</a>.
+</div>
 <div id="ref-miloNetworkMotifsSimple2002" class="csl-entry" role="listitem">
 Milo, R., S. Shen-Orr, S. Itzkovitz, N. Kashtan, D. Chklovskii, and U. Alon. 2002. <span>“Network <span>Motifs</span>: <span>Simple Building Blocks</span> of <span>Complex Networks</span>.”</span> <em>Science</em> 298 (5594): 824–27. <a href="https://doi.org/10.1126/science.298.5594.824">https://doi.org/10.1126/science.298.5594.824</a>.
 </div>
+<div id="ref-neutelStabilityRealFood2002" class="csl-entry" role="listitem">
+Neutel, Anje-Margriet, Johan A. P. Heesterbeek, and Peter C. De Ruiter. 2002. <span>“Stability in <span>Real Food Webs</span>: <span>Weak Links</span> in <span>Long Loops</span>.”</span> <em>Science</em> 296 (5570): 1120–23. <a href="https://doi.org/10.1126/science.1068326">https://doi.org/10.1126/science.1068326</a>.
+</div>
 <div id="ref-staniczenkoGhostNestednessEcological2013" class="csl-entry" role="listitem">
 Staniczenko, Phillip P. A., Jason C. Kopp, and Stefano Allesina. 2013. <span>“The Ghost of Nestedness in Ecological Networks.”</span> <em>Nature Communications</em> 4 (1): 1391. <a href="https://doi.org/10.1038/ncomms2422">https://doi.org/10.1038/ncomms2422</a>.
+</div>
+<div id="ref-stoufferCompartmentalizationIncreasesFoodweb2011" class="csl-entry" role="listitem">
+Stouffer, Daniel B., and Jordi Bascompte. 2011. <span>“Compartmentalization Increases Food-Web Persistence.”</span> <em>Proceedings of the National Academy of Sciences of the United States of America</em> 108 (9): 3648–52. <a href="https://doi.org/10.1073/pnas.1014353108">https://doi.org/10.1073/pnas.1014353108</a>.
 </div>
 <div id="ref-stoufferRobustMeasureFood2006a" class="csl-entry" role="listitem">
 Stouffer, Daniel B., Juan Camacho, and Luís A. Nunes Amaral. 2006. <span>“A Robust Measure of Food Web Intervality.”</span> <em>Proceedings of the National Academy of Sciences</em> 103 (50): 19015–20. <a href="https://doi.org/10.1073/pnas.0603844103">https://doi.org/10.1073/pnas.0603844103</a>.
@@ -686,16 +829,25 @@ Stouffer, Daniel B, Juan Camacho, Wenxin Jiang, and Luís A Nunes Amaral. 2007. 
 Strydom, Tanya, Giulio V. Dalla Riva, and Timothée Poisot. 2021. <span>“<span>SVD Entropy Reveals</span> the <span>High Complexity</span> of <span>Ecological Networks</span>.”</span> <em>Frontiers in Ecology and Evolution</em> 9. <a href="https://doi.org/10.3389/fevo.2021.623141">https://doi.org/10.3389/fevo.2021.623141</a>.
 </div>
 <div id="ref-thompsonFoodWebsReconciling2012" class="csl-entry" role="listitem">
-Thompson, Ross M., Ulrich Brose, Jennifer Dunne, Robert O. Hall, Sally Hladyz, Roger L. Kitching, Neo D. Martinez, et al. 2012. <span>“Food Webs: Reconciling the Structure and Function of Biodiversity.”</span> <em>Trends in Ecology &amp; Evolution</em> 27 (12): 689–97. <a href="https://doi.org/10.1016/j.tree.2012.08.005">https://doi.org/10.1016/j.tree.2012.08.005</a>.
+Thompson, Ross M., Ulrich Brose, Jennifer Dunne, et al. 2012. <span>“Food Webs: Reconciling the Structure and Function of Biodiversity.”</span> <em>Trends in Ecology &amp; Evolution</em> 27 (12): 689–97. <a href="https://doi.org/10.1016/j.tree.2012.08.005">https://doi.org/10.1016/j.tree.2012.08.005</a>.
+</div>
+<div id="ref-ulanowiczInformationTheoryEcology2001" class="csl-entry" role="listitem">
+Ulanowicz, Robert E. 2001. <span>“Information Theory in Ecology.”</span> <em>Computers &amp; Chemistry</em> 25 (4): 393–99. <a href="https://doi.org/10.1016/S0097-8485(01)00073-0">https://doi.org/10.1016/S0097-8485(01)00073-0</a>.
 </div>
 <div id="ref-vermaatMajorDimensionsFoodweb2009" class="csl-entry" role="listitem">
 Vermaat, Jan E., Jennifer A. Dunne, and Alison J. Gilbert. 2009. <span>“Major Dimensions in Food-Web Structure Properties.”</span> <em>Ecology</em> 90 (1): 278–82. <a href="https://doi.org/10.1890/07-0978.1">https://doi.org/10.1890/07-0978.1</a>.
+</div>
+<div id="ref-wattsCollectiveDynamicsSmallworld1998" class="csl-entry" role="listitem">
+Watts, Duncan J., and Steven H. Strogatz. 1998. <span>“Collective Dynamics of <span>‘Small-World’</span> Networks.”</span> <em>Nature</em> 393 (6684): 440–42. <a href="https://doi.org/10.1038/30918">https://doi.org/10.1038/30918</a>.
 </div>
 <div id="ref-williamsLimitsTrophicLevels2004" class="csl-entry" role="listitem">
 Williams, Richard J., and Neo D. Martinez. 2004. <span>“Limits to <span>Trophic Levels</span> and <span>Omnivory</span> in <span>Complex Food Webs</span>: <span>Theory</span> and <span>Data</span>.”</span> <em>The American Naturalist</em> 163 (3): 458–68. <a href="https://doi.org/10.1086/381964">https://doi.org/10.1086/381964</a>.
 </div>
 <div id="ref-williamsSuccessItsLimits2008a" class="csl-entry" role="listitem">
-———. 2008. <span>“Success and Its Limits Among Structural Models of Complex Food Webs.”</span> <em>The Journal of Animal Ecology</em> 77 (3): 512–19. <a href="https://doi.org/10.1111/j.1365-2656.2008.01362.x">https://doi.org/10.1111/j.1365-2656.2008.01362.x</a>.
+Williams, Richard J., and Neo D. Martinez. 2008. <span>“Success and Its Limits Among Structural Models of Complex Food Webs.”</span> <em>The Journal of Animal Ecology</em> 77 (3): 512–19. <a href="https://doi.org/10.1111/j.1365-2656.2008.01362.x">https://doi.org/10.1111/j.1365-2656.2008.01362.x</a>.
+</div>
+<div id="ref-yodzisSearchOperationalTrophospecies1999" class="csl-entry" role="listitem">
+Yodzis, Peter, and Kirk O. Winemiller. 1999. <span>“In <span>Search</span> of <span>Operational Trophospecies</span> in a <span>Tropical Aquatic Food Web</span>.”</span> <em>Oikos</em> 87 (2): 327–40. <a href="https://doi.org/10.2307/3546748">https://doi.org/10.2307/3546748</a>.
 </div>
 </div>
 </section>

@@ -65,6 +65,7 @@
 
 
 \usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -182,7 +183,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Finding the mjor descriptors of species networks},
+  pdftitle={Finding the major descriptors of species networks},
   pdfauthor={Tanya Strydom; Andrew P. Beckerman},
   pdfkeywords={food web, structure, dimensionality reduction},
   colorlinks=true,
@@ -194,7 +195,7 @@
 
 
 
-\title{Finding the mjor descriptors of species networks}
+\title{Finding the major descriptors of species networks}
 \author{Tanya Strydom %
 %
 \textsuperscript{%
@@ -208,7 +209,7 @@
 1%
 }%
 }
-\date{2025-12-17}
+\date{2026-01-29}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -220,7 +221,7 @@
 \begin{document}
 
 \thispagestyle{empty}
-{\bfseries\sffamily\Large Finding the mjor descriptors of species
+{\bfseries\sffamily\Large Finding the major descriptors of species
 networks}
 \vfil
 Tanya Strydom %
@@ -250,6 +251,106 @@ dimensionality reduction%
 \linenumbers
 
 
+\section{Introduction}\label{introduction}
+
+To bridge the gap between the original paper and your new objectives,
+your introduction could follow this logical flow:
+
+The Evolution of Ecological Network Theory
+
+The Hook: Acknowledge the foundational shift from viewing biodiversity
+as a simple ``species count'' to viewing it as a complex web of
+interactions.
+
+The Baseline: Summarize the core findings of the paper you're expanding
+on---specifically, how the architecture (e.g., compartmentalization
+vs.~nestedness) affects stability differently in mutualistic vs.~trophic
+networks.
+
+The Need for Dimensionality
+
+The Gap: Argue that while ``connectance'' and ``nestedness'' are vital,
+they don't capture the full resolution of ecosystem dynamics.
+
+The Expansion: Introduce the necessity of more nuanced metrics (e.g.,
+motifs, centrality, modularity, and beta-diversity of interactions) to
+capture the ``hidden'' stability of diverse networks.
+
+Linking Structure to Ecosystem Function (EF)
+
+The Framework: Explicitly connect structural metrics to the
+``Stability-Complexity'' debate.
+
+The Hypothesis: Propose how specific structural arrangements (like high
+modularity) act as ``firewalls'' to prevent the spread of perturbations,
+thereby maintaining ecosystem function under stress.
+
+Objectives
+
+The overarching goal of this study is to move beyond bipartite
+generalizations and define a comprehensive ``structural fingerprint'' of
+ecosystem stability. To achieve this, we address two primary objectives:
+
+\textbf{Identification of a Core Structural Subset}
+
+Ecological networks are characterized by a high degree of collinearity
+among structural descriptors. We aim to determine whether the 31 metrics
+analyzed in this study can be reduced to a~\textbf{Minimum Sufficient
+Set}---a small, non-redundant group of indicators that capture the
+essential topological features of an ecosystem. By employing
+multivariate techniques such as~\textbf{Variable
+Clustering}~and~\textbf{SVD Complexity}, we seek to move away from
+arbitrary metric selection toward a data-driven framework for network
+characterization.
+
+\textbf{Mapping the Multi-dimensional Stability Landscape}
+
+Building on the ``stability-complexity'' debate (McCann 2000, Ives \&
+Carpenter 2007), we aim to map how these diverse structural metrics
+correlate with different facets of ecosystem health. Specifically, we
+test the following hypotheses:
+
+\begin{itemize}
+\item
+  \textbf{The Robustness Hypothesis:}~Metrics of redundancy
+  (e.g.,~\emph{Connectance, MaxSim}) will be the primary predictors of
+  resistance to primary species loss.
+\item
+  \textbf{The Containment Hypothesis:}~Modular structures
+  (e.g.,~\emph{Clust, Modularity}) will correlate with system-wide
+  resilience by preventing the propagation of local perturbations.
+\item
+  \textbf{The Dynamic Capacity Hypothesis:}~Information-theoretic
+  measures (e.g.,~\emph{SVD Complexity, Spectral Radius}) will provide a
+  superior bridge between static topology and the dynamic ability of the
+  system to return to equilibrium.
+\end{itemize}
+
+Clearly state that this study expands the taxonomic and structural scope
+of previous models to provide a generalized rulebook for
+network-mediated stability.
+
+Synthesis: Linking to ``Stability''
+
+In your manuscript, you can group these metrics into~\textbf{three
+functional categories}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Robustness Metrics:}~(Richness, Connectance, Robustness,
+  MaxSim) --- These describe how many ``hits'' the network can take
+  before collapsing.
+\item
+  \textbf{Efficiency/Flow Metrics:}~(Path, ChLen, TL, Diameter) ---
+  These describe how quickly energy or perturbations move through the
+  system.
+\item
+  \textbf{Organization Metrics:}~(ρ, Complexity, Modularity/Clust,
+  Intervality) --- These describe the ``logic'' of the arrangement,
+  which dictates whether the system behaves predictably or chaotically.
+\end{enumerate}
+
 Blah blah blah Vermaat et al. (2009)
 
 \emph{``It is incumbent on network ecologists to establish clearly the
@@ -257,10 +358,62 @@ independence and uniqueness of the descriptive metrics used.''} - Lau et
 al. (2017)
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2254}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3239}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2254}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2254}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\caption{Stuff}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Dimension
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Key Metrics
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Expected Effect on Stability
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Supporting Literature
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Dimension
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Key Metrics
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Expected Effect on Stability
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Supporting Literature
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Complexity \& Redundancy & Connectance, MaxSim, Links &
+\textbf{Positive:} High redundancy allows for ``functional
+compensation'' if one species is lost. & Dunne et al. (2002); McCann
+(2000) \\
+Compartmentalization & Clust, Modularity,~ρ & \textbf{Positive:} Limits
+the spread of perturbations; local collapses don't become global. &
+Stouffer \& Bascompte (2011) \\
+Feedback \& Coupling & Omnivory (S2), Loop, ChLen & \textbf{Variable:}
+Omnivory can stabilize by diffusing energy, but long chains can amplify
+oscillations. & McCann (2000); Neutel et al. (2002) \\
+Hierarchy \& Shape & Prey:Predator, Basal, Top & \textbf{Critical:}
+``Bottom-heavy'' systems are generally more stable; inverted pyramids
+are fragile. & \\
+Information Heterogeneity & SVD Complexity, LinkSD & \textbf{Positive:}
+Diverse interaction strengths prevent ``resonant'' instabilities. &
+Ulanowicz (2001) \\
+\end{longtable}
+
+\section{Materials and Methods}\label{materials-and-methods}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.0322}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3682}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4588}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1368}}@{}}
 \caption{An informative caption about the different network properties.
 We use a combination of metrics from both the original Vermaat et al.
 (2009) paper as well as including those that have been identified by
@@ -272,7 +425,7 @@ Label
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definition
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-``Function''
+Ecological Significance
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Reference (for maths), can make footnotes probs
 \end{minipage} \\
@@ -284,7 +437,7 @@ Label
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definition
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-``Function''
+Ecological Significance
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Reference (for maths), can make footnotes probs
 \end{minipage} \\
@@ -293,33 +446,55 @@ Reference (for maths), can make footnotes probs
 \bottomrule\noalign{}
 \endlastfoot
 Basal & Percentage of basal taxa, defined as species who have a
-vulnerability of zero & & \\
+vulnerability of zero & Measures the energy entry points; high basal \%
+suggests a bottom-heavy, potentially more stable energy base. & \\
 Connectance & \(L/S^2\), where \(S\) is the number of species and \(L\)
 the number of links & & \\
 Cannibal & Percentage of species that are cannibals & & \\
 ChLen & Mean food chain length, averaged over all species (where a food
 chain is defined as a continuous path from a `basal' to a `top' species)
-& & \\
-ChSD & Standard deviation of ChLen & & \\
+& Reflects energy transfer efficiency. Longer chains may be more prone
+to top-down trophic cascades. & \\
+ChSD & Standard deviation of ChLen & High SD indicates a mix of energy
+pathways, which can buffer the system & \\
 ChNum & log number of food chains & & \\
 Clust & mean clustering coefficient (probability that two taxa linked to
-the same taxon are also linked) & & \textbf{TODO} \\
+the same taxon are also linked) & Quantifies local redundancy; high
+clustering can buffer the network against the loss of specific
+interaction pathways. & \textbf{TODO}
+
+Watts \& Strogatz (1998) \\
 GenSD & Normalized standard deviation of generality of a species
-standardized by \(L/S\) & & Williams \& Martinez (2008) \\
+standardized by \(L/S\) & Interaction asymmetry. High variance in how
+links are distributed often points to the presence of `hubs' (highly
+connected species), which makes the network robust to random loss but
+vulnerable to targeted `keystone' removal. & Williams \& Martinez
+(2008) \\
 Herbivore & Percentage of herbivores plus detritivores (taxa that feed
 only on basal taxa) & & \\
 Intermediate & Percentage of intermediate taxa (with both consumers and
 resources) & & \\
 LinkSD & Normalized standard deviation of links (number of consumers
-plus resources per taxon) & & \\
+plus resources per taxon) & Interaction asymmetry. High variance in how
+links are distributed often points to the presence of `hubs' (highly
+connected species), which makes the network robust to random loss but
+vulnerable to targeted `keystone' removal. & \\
 Loop & Percentage of taxa in loops (food chains in which a taxon occurs
-twice) & & \\
+twice) & High percentages of loops can lead to feedback cycles (positive
+or negative) that either amplify or dampen oscillations, directly
+impacting local stability. & \\
 L/S & links per species & & \\
 MaxSim & Mean of the maximum trophic similarity of each taxon to other
 taxa, the number of predators and prey shared by a pair of species
-divided by their total number of predators and prey & & \textbf{TODO} \\
+divided by their total number of predators and prey & Indicates
+functional redundancy; high similarity suggests species are replaceable,
+increasing robustness to individual extinctions. & \textbf{TODO}
+
+Yodzis \& Winemiller (1999) \\
 Omnivory & Percentage of omnivores (taxa that feed on \(\geq\) 2 taxa
-with different trophic levels) & & \\
+with different trophic levels) & Links to coupling of energy channels;
+historically debated, but often found to stabilize food webs by
+diffusing top-down pressure. & McCann (2000) \\
 Path & characteristic path length, the mean shortest food chain length
 between species pairs & & \\
 Richness & Number of nodes in the network & & \\
@@ -327,37 +502,52 @@ TL & Prey-weighted trophic level averaged across taxa & & Williams \&
 Martinez (2004) \\
 Top & Percentage of top taxa (taxa without consumers) & & \\
 VulSD & Normalized standard deviation of vulnerability of a species
-standardized by \(L/S\) & & \\
+standardized by \(L/S\) & Interaction asymmetry. High variance in how
+links are distributed often points to the presence of `hubs' (highly
+connected species), which makes the network robust to random loss but
+vulnerable to targeted `keystone' removal. & \\
 Links & The number of links in the network & & \\
 Diameter & Diameter can also be measured as the average of the distances
 between each pair of nodes in the network & & Delmas et al. (2019) \\
-\(\rho\) & Spectral radius is a a conceptual analog to nestedness (and
-more appropriate for unipartite networks). It is defined as the absolute
-value of the largest real part of the eigenvalues of the
-\emph{undirected} adjacency matrix & & Staniczenko et al. (2013) \\
+\(\rho\) & Spectral radius is a a conceptual analog to nestedness. It is
+defined as the absolute value of the largest real part of the
+eigenvalues of the \emph{undirected} adjacency matrix & Acts as a proxy
+for system-wide resilience; captures the speed at which a system returns
+to equilibrium after a small pulse perturbation. & Staniczenko et al.
+(2013) \\
 Complexity & SVD complexity of a network, defined as the Pielou entropy
-of its singular values & Something about structural v behavioural
-complexity being captured & Strydom et al. (2021) \\
+of its singular values & Captures structural heterogeneity;
+distinguishes between a truly complex system and one that is merely
+large or `random'. & Strydom et al. (2021) \\
 Centrality & Centrality is a measure of how `influential' a species is,
-under various definitions of `influence'\ldots{} & Centrality can help
-in quantifying the importance of species in a network & \\
-S1 & Number of linear chains & & Stouffer et al. (2007) Milo et al.
-(2002) \\
-S2 & Number of omnivory motifs & & Stouffer et al. (2007) Milo et al.
-(2002) \\
-S4 & Number of apparent competition motifs & & Stouffer et al. (2007)
+under various definitions of `influence'. & Centrality can help in
+quantifying the importance of species in a network & Estrada \& Bodin
+(2008) \\
+S1 & Number of linear chains & Building blocks of stability
+(compartmentalisation, Stouffer and Bascompte?) & Stouffer et al. (2007)
 Milo et al. (2002) \\
-S5 & Number of direct competition motifs & & Stouffer et al. (2007) Milo
-et al. (2002) \\
+S2 & Number of omnivory motifs & Building blocks of stability
+(compartmentalisation, Stouffer and Bascompte?) & Stouffer et al. (2007)
+Milo et al. (2002) \\
+S4 & Number of apparent competition motifs & Building blocks of
+stability (compartmentalisation, Stouffer and Bascompte?) & Stouffer et
+al. (2007) Milo et al. (2002) \\
+S5 & Number of direct competition motifs & Building blocks of stability
+(compartmentalisation, Stouffer and Bascompte?) & Stouffer et al. (2007)
+Milo et al. (2002) \\
 Intervality & The degree to which the prey in a food web can be ordered
-so that all species can be placed along a single dimension & & Stouffer
-et al. (2006) \\
+so that all species can be placed along a single dimension & Measures
+niche dimension; high intervality suggests a simpler organization where
+species feeding habits are constrained by a single trait (like body
+size). & Stouffer et al. (2006) \\
 Prey:predator & Ratio of prey (basal + intermediate) to predators (top +
 intermediate) & A measure of food web `shape'. Values \textless1 imply
 an inverted structure and might indicate instability & \\
 Robustness & Minimum level of secondary extinction that occurs in
 response to a particular perturbation & & Jonsson et al. (2015) \\
 \end{longtable}
+
+{
 
 \begin{longtable}[]{@{}llll@{}}
 
@@ -367,43 +557,48 @@ different network properties with the first three dimensions of the PCA}
 \tabularnewline
 
 \toprule\noalign{}
-Property & PCA 1 (30\%) & PCA 2 (21\%) & PCA 3 (17\%) \\
+Property & PCA 1 (30\%) & PCA 2 (20\%) & PCA 3 (17\%) \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-richness & 0.29 & \textbf{0.82} & 0.35 \\
-links & 0.63 & \textbf{0.68} & 0.1 \\
-connectance & 0.5 & -0.5 & -0.61 \\
-diameter & 0.55 & 0.47 & 0.35 \\
-complexity & -0.48 & -0.08 & 0.46 \\
-distance & 0.02 & 0.34 & -0.11 \\
-basal & -0.46 & 0.45 & \textbf{-0.69} \\
-top & -0.56 & 0.17 & 0.28 \\
-intermediate & \textbf{0.67} & -0.47 & 0.44 \\
-predpreyRatio & -0.24 & 0.42 & \textbf{-0.73} \\
-herbivory & -0.5 & 0.24 & -0.06 \\
-omnivory & \textbf{0.77} & -0.27 & 0.23 \\
-cannibal & \textbf{0.73} & 0.12 & -0.29 \\
-l\_S & \textbf{0.83} & 0.5 & -0.13 \\
-GenSD & -0.37 & \textbf{0.67} & -0.32 \\
-VulSD & -0.4 & 0.52 & 0.38 \\
-TL & 0.5 & -0.41 & \textbf{0.71} \\
-ChLen & 0.48 & -0.54 & 0.53 \\
-ChSD & 0.32 & 0.1 & 0.46 \\
-ChNum & -0.19 & \textbf{0.74} & 0.48 \\
-path & 0.28 & 0.34 & 0.41 \\
-LinkSD & -0.25 & \textbf{0.68} & 0.4 \\
-S1 & \textbf{0.92} & 0.02 & 0.01 \\
-S2 & \textbf{0.85} & 0.01 & -0.35 \\
-S4 & 0.62 & 0.53 & -0.19 \\
-S5 & \textbf{0.67} & 0.49 & -0.42 \\
-ρ & 0.56 & -0.3 & -0.55 \\
-centrality & -0.23 & -0.63 & -0.35 \\
-loops & \textbf{0.81} & 0.29 & -0.05 \\
-robustness & 0.07 & 0.16 & -0.51 \\
+richness & 0.3 & \textbf{0.89} & -0.16 \\
+links & 0.62 & \textbf{0.72} & 0.04 \\
+connectance & 0.52 & -0.62 & 0.49 \\
+diameter & \textbf{0.74} & 0.38 & -0.3 \\
+complexity & -0.52 & 0.09 & -0.49 \\
+distance & 0 & 0.3 & 0.18 \\
+basal & -0.47 & 0.29 & \textbf{0.75} \\
+top & -0.58 & 0.2 & -0.24 \\
+intermediate & \textbf{0.69} & -0.35 & -0.52 \\
+predpreyRatio & -0.26 & 0.27 & \textbf{0.76} \\
+herbivory & -0.54 & 0.22 & 0.07 \\
+omnivory & \textbf{0.78} & -0.23 & -0.21 \\
+cannibal & \textbf{0.72} & 0.07 & 0.31 \\
+l\_S & \textbf{0.83} & 0.47 & 0.23 \\
+GenSD & -0.4 & 0.58 & 0.45 \\
+VulSD & -0.41 & 0.58 & -0.26 \\
+TL & 0.52 & -0.24 & \textbf{-0.77} \\
+ChLen & 0.51 & -0.41 & -0.62 \\
+ChSD & 0.32 & 0.2 & -0.45 \\
+ChNum & -0.2 & \textbf{0.8} & -0.3 \\
+path & 0.26 & 0.4 & -0.26 \\
+LinkSD & -0.27 & \textbf{0.74} & -0.23 \\
+S1 & \textbf{0.9} & 0.03 & 0.03 \\
+S2 & \textbf{0.84} & -0.07 & 0.36 \\
+S4 & 0.61 & 0.49 & 0.28 \\
+S5 & \textbf{0.67} & 0.39 & 0.49 \\
+ρ & 0.57 & -0.43 & 0.48 \\
+centrality & -0.24 & \textbf{-0.67} & 0.18 \\
+loops & \textbf{0.8} & 0.32 & 0.12 \\
+robustness & 0.05 & -0.05 & 0.66 \\
+intervals & 0.45 & \textbf{0.7} & -0.05 \\
+MaxSim & -0.03 & -0.17 & 0.6 \\
+Clust & \textbf{0.69} & -0.33 & 0.06 \\
 
 \end{longtable}
+
+}
 
 \textsubscript{Source:
 \href{https://BecksLab.github.io/ms_feature_selection/index.qmd.html}{Article
@@ -433,7 +628,7 @@ measures from Vermaat}
 \section*{References}\label{references}
 \addcontentsline{toc}{section}{References}
 
-\phantomsection\label{refs}
+\protect\phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-delmasAnalysingEcologicalNetworks2019}
 Delmas, E., Besson, M., Brice, M.-H., Burkle, L. A., Riva, G. V. D.,
@@ -441,6 +636,17 @@ Fortin, M.-J., Gravel, D., Guimarães, P. R., Hembry, D. H., Newman, E.
 A., Olesen, J. M., Pires, M. M., Yeakel, J. D., \& Poisot, T. (2019).
 Analysing ecological networks of species interactions. \emph{Biological
 Reviews}, \emph{94}(1), 16--36. \url{https://doi.org/10.1111/brv.12433}
+
+\bibitem[\citeproctext]{ref-dunneFoodwebStructureNetwork2002}
+Dunne, J. A., Williams, R. J., \& Martinez, N. D. (2002). Food-web
+structure and network theory: {The} role of connectance and size.
+\emph{Proceedings of the National Academy of Sciences}, \emph{99}(20),
+12917--12922. \url{https://doi.org/10.1073/pnas.192407699}
+
+\bibitem[\citeproctext]{ref-estradaUsingNetworkCentrality2008}
+Estrada, E., \& Bodin, Ö. (2008). Using {Network Centrality Measures} to
+{Manage Landscape Connectivity}. \emph{Ecological Applications},
+\emph{18}(7), 1810--1825. \url{https://doi.org/10.1890/07-1419.1}
 
 \bibitem[\citeproctext]{ref-jonssonReliabilityR50Measure2015}
 Jonsson, T., Berg, S., Pimenov, A., Palmer, C., \& Emmerson, M. (2015).
@@ -454,16 +660,32 @@ M. (2017). Ecological network metrics: Opportunities for synthesis.
 \emph{Ecosphere}, \emph{8}(8), e01900.
 \url{https://doi.org/10.1002/ecs2.1900}
 
+\bibitem[\citeproctext]{ref-mccannDiversityStabilityDebate2000}
+McCann, K. S. (2000). The diversity--stability debate. \emph{Nature},
+\emph{405}(6783), 228--233. \url{https://doi.org/10.1038/35012234}
+
 \bibitem[\citeproctext]{ref-miloNetworkMotifsSimple2002}
 Milo, R., Shen-Orr, S., Itzkovitz, S., Kashtan, N., Chklovskii, D., \&
 Alon, U. (2002). Network {Motifs}: {Simple Building Blocks} of {Complex
 Networks}. \emph{Science}, \emph{298}(5594), 824--827.
 \url{https://doi.org/10.1126/science.298.5594.824}
 
+\bibitem[\citeproctext]{ref-neutelStabilityRealFood2002}
+Neutel, A.-M., Heesterbeek, J. A. P., \& De Ruiter, P. C. (2002).
+Stability in {Real Food Webs}: {Weak Links} in {Long Loops}.
+\emph{Science}, \emph{296}(5570), 1120--1123.
+\url{https://doi.org/10.1126/science.1068326}
+
 \bibitem[\citeproctext]{ref-staniczenkoGhostNestednessEcological2013}
 Staniczenko, P. P. A., Kopp, J. C., \& Allesina, S. (2013). The ghost of
 nestedness in ecological networks. \emph{Nature Communications},
 \emph{4}(1), 1391. \url{https://doi.org/10.1038/ncomms2422}
+
+\bibitem[\citeproctext]{ref-stoufferCompartmentalizationIncreasesFoodweb2011}
+Stouffer, D. B., \& Bascompte, J. (2011). Compartmentalization increases
+food-web persistence. \emph{Proceedings of the National Academy of
+Sciences of the United States of America}, \emph{108}(9), 3648--3652.
+\url{https://doi.org/10.1073/pnas.1014353108}
 
 \bibitem[\citeproctext]{ref-stoufferRobustMeasureFood2006a}
 Stouffer, D. B., Camacho, J., \& Amaral, L. A. N. (2006). A robust
@@ -492,10 +714,20 @@ and function of biodiversity. \emph{Trends in Ecology \& Evolution},
 \emph{27}(12), 689--697.
 \url{https://doi.org/10.1016/j.tree.2012.08.005}
 
+\bibitem[\citeproctext]{ref-ulanowiczInformationTheoryEcology2001}
+Ulanowicz, R. E. (2001). Information theory in ecology. \emph{Computers
+\& Chemistry}, \emph{25}(4), 393--399.
+\url{https://doi.org/10.1016/S0097-8485(01)00073-0}
+
 \bibitem[\citeproctext]{ref-vermaatMajorDimensionsFoodweb2009}
 Vermaat, J. E., Dunne, J. A., \& Gilbert, A. J. (2009). Major dimensions
 in food-web structure properties. \emph{Ecology}, \emph{90}(1),
 278--282. \url{https://doi.org/10.1890/07-0978.1}
+
+\bibitem[\citeproctext]{ref-wattsCollectiveDynamicsSmallworld1998}
+Watts, D. J., \& Strogatz, S. H. (1998). Collective dynamics of
+{``small-world''} networks. \emph{Nature}, \emph{393}(6684), 440--442.
+\url{https://doi.org/10.1038/30918}
 
 \bibitem[\citeproctext]{ref-williamsLimitsTrophicLevels2004}
 Williams, R. J., \& Martinez, N. D. (2004). Limits to {Trophic Levels}
@@ -508,6 +740,11 @@ Williams, R. J., \& Martinez, N. D. (2008). Success and its limits among
 structural models of complex food webs. \emph{The Journal of Animal
 Ecology}, \emph{77}(3), 512--519.
 \url{https://doi.org/10.1111/j.1365-2656.2008.01362.x}
+
+\bibitem[\citeproctext]{ref-yodzisSearchOperationalTrophospecies1999}
+Yodzis, P., \& Winemiller, K. O. (1999). In {Search} of {Operational
+Trophospecies} in a {Tropical Aquatic Food Web}. \emph{Oikos},
+\emph{87}(2), 327--340. \url{https://doi.org/10.2307/3546748}
 
 \end{CSLReferences}
 
