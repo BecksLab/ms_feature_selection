@@ -1,5 +1,5 @@
 # ================================================
-# 01_data_import_clean.R
+# 03_data_import_clean.R
 # ================================================
 
 library(tidyverse)
@@ -19,9 +19,9 @@ topology_subset <- topology %>%
   vibe_check(-c(links, S1, S2, S4, S5, diameter, ρ, centrality, complexity))
 
 # Save cleaned data
-write.csv(topology, "../data/cleaned/all_networks.csv",
+write.csv(topology, "data/cleaned/all_networks.csv",
             row.names = FALSE)
-write.csv(topology_subset, "../data/cleaned/vermaat_subset.csv",
+write.csv(topology_subset, "data/cleaned/vermaat_subset.csv",
             row.names = FALSE)
 
 # Quick diagnostics
