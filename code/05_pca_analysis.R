@@ -12,18 +12,18 @@ library(here)
 setwd(here::here())
 
 # Load datasets
-metrics <- read.csv("../data/cleaned/all_networks.csv")
-topology_subset <- read.csv("../data/cleaned/vermaat_subset.csv")
-reduced_metrics <- read.csv("../data/cleaned/reduced_metrics.csv")
+metrics <- read.csv("data/cleaned/all_networks.csv")
+topology_subset <- read.csv("data/cleaned/vermaat_subset.csv")
 
-data_list <- list(complete = metrics, subset = topology_subset, reduced = reduced_metrics)
+data_list <- list(complete = metrics, subset = topology_subset)
 data_names <- c("complete", "subset", "reduced")
 plot_list <- vector(mode="list", length=length(data_list))
 
 # Functional categories
-robustness_metrics <- c("richness", "connectance", "MaxSim", "robustness")
-efficiency_metrics <- c("path", "ChLen", "TL", "diameter")
-organization_metrics <- c("ρ", "complexity", "Clust", "intervals")
+behaviour_metrics <- c("ρ", "complexity", "robustness")
+geometry_metrics <- c("connectance", "l_S", "links", "richness", "Clust", "GenSD", "VulSD", "LinkSD", "diameter", "intervals")
+path_metrics <- c("ChLen", "ChSD", "ChNum", "path", "S1", "S2", "S4", "S5", "omnivory", "loops", "predpreyRatio", "distance")
+node_metrics <- c("basal", "top","intermediate", "herbivory", "cannibal", "TL", "centrality", "MaxSim")
 
 for (i in seq_along(data_list)) {
   
@@ -57,9 +57,10 @@ for (i in seq_along(data_list)) {
     as.data.frame() %>%
     rownames_to_column("Property") %>%
     mutate(Category = case_when(
-      Property %in% robustness_metrics ~ "Robustness",
-      Property %in% efficiency_metrics ~ "Efficiency",
-      Property %in% organization_metrics ~ "Organization",
+      Property %in% behaviour_metrics ~ "Behaviour",
+      Property %in% geometry_metrics ~ "Geometry",
+      Property %in% path_metrics ~ "Path",
+      Property %in% node_metrics ~ "Node",
       TRUE ~ "Other"
     ))
   
@@ -70,7 +71,6 @@ for (i in seq_along(data_list)) {
     geom_segment(aes(x=0, y=0, xend=Dim.1, yend=Dim.2, color=Category),
                  arrow = arrow(length=unit(0.1,"inches"))) +
     geom_text_repel(aes(label=Property, color=Category)) +
-    scale_color_manual(values=c("Robustness"="red","Efficiency"="blue","Organization"="green","Other"="grey")) +
     theme_classic() +
     lims(x=c(-1,1), y=c(-1,1)) +
     labs(
@@ -80,8 +80,7 @@ for (i in seq_along(data_list)) {
 }
 
 combined_plot <- (plot_list[[1]] + labs(title="A. Complete")) / 
-                 (plot_list[[2]] + labs(title="B. Vermaat subset")) / 
-                 (plot_list[[3]] + labs(title="C. Reduced metrics"))
+                 (plot_list[[2]] + labs(title="B. Vermaat subset"))
 
 ggsave("../figures/pca_allNetworks.png", combined_plot,
        width=4000, height=6500, units="px", dpi=600)
