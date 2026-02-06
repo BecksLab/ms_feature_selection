@@ -1,5 +1,5 @@
 ---
-title: "Finding the major descriptors of species networks"
+title: "Multiple dimensions of network structure underlie ecological stability"
 author:
   - name: Tanya Strydom
     id: ts
@@ -27,7 +27,7 @@ keywords:
   - structure
   - dimensionality reduction
 abstract: |
-  TODO
+  Ecological network structure is widely invoked to explain patterns of biodiversity and stability, yet decades of research have produced little consensus on which structural descriptors matter most. We argue that this apparent inconsistency arises not from methodological disagreement, but from a conceptual mismatch: network structure encodes multiple, hierarchically organised aspects of energy flow, each relating to different components of stability. Using a compilation of food webs from XXX, we quantified 31 commonly used structural metrics spanning species roles, interaction pathways, network geometry, and emergent system behaviour. We first used variable clustering and dimensionality reduction to identify dominant axes of structural variation and a non-redundant subset of descriptors. We then interpreted these axes through an energy-flow framework linking structural scale to distinct stability mechanisms: persistence (maintenance of energy flow following species loss), resistance (attenuation of perturbation propagation), and return (reorganisation of pathways following disturbance). Our analyses show that metrics often treated as competing predictors of 'stability' instead load onto different structural dimensions and relate to different stability components. Redundancy and species-role metrics primarily align with persistence, pathway and motif-based metrics with resistance, and global organisational measures with return dynamics. By explicitly mapping network structure to stability mechanisms, our results reconcile conflicting findings in the structure–stability literature and provide a principled framework for selecting network metrics based on ecological question and scale, rather than convention.
 date: last-modified
 bibliography: references.bib
 number-sections: true
@@ -35,108 +35,137 @@ number-sections: true
 
 # Introduction
 
-To bridge the gap between the original paper and your new objectives, your introduction could follow this logical flow:
+Ecological networks are commonly characterised using a large and diverse set of structural metrics, yet there remains little consensus on how these metrics should be interpreted or compared across studies (Vermaat et al. 2009; Lau et al. 2017). We argue that this difficulty arises because network structure is not a single property, but a hierarchy of interrelated components that encode different aspects of how energy moves through an ecosystem (Ulanowicz 1986; Thompson et al. 2012). Metrics derived at different structural scales therefore capture different ecological processes and, consequently, relate to different components of stability. Making these distinctions explicit is essential for interpreting patterns of structure–stability relationships.
 
-The Evolution of Ecological Network Theory
+### Structural scale and the organisation of energy flow
 
-The Hook: Acknowledge the foundational shift from viewing biodiversity as a simple "species count" to viewing it as a complex web of interactions.
+We conceptualise food-web structure as organised across four hierarchical structural scales: node-level, path-level, network geometry, and emergent system behaviour (Pimm 1982; Cohen et al. 1990; Vermaat et al. 2009). These scales reflect increasing levels of integration, progressing from individual species roles to whole-network dynamics.
 
-The Baseline: Summarize the core findings of the paper you're expanding on—specifically, how the architecture (e.g., compartmentalization vs. nestedness) affects stability differently in mutualistic vs. trophic networks.
+**Node-level structure:** describes the properties and roles of individual species within the network. Metrics such as trophic position, basal and top species proportions, centrality, and trophic similarity capture how energy enters the system, which species process or redistribute that energy, and the degree of functional redundancy among taxa (Yodzis & Winemiller 1999; Estrada 2007; Allesina & Pascual 2009). At this scale, structure primarily reflects who participates in energy transfer and whether alternative species can compensate for local losses, a long-standing mechanism proposed to underpin persistence in complex ecosystems (McCann 2000).
 
-The Need for Dimensionality
+**Path-level structure**: describes how energy is routed through sequences of interactions linking species. Metrics such as food chain length, omnivory, motifs, loops, and prey–predator ratios capture the coupling of energy channels and the multiplicity of pathways connecting basal resources to higher trophic levels (Pimm & Lawton 1977; McCann et al. 1998; Stouffer & Bascompte 2011). This scale reflects how energy moves through the network and how perturbations may be transmitted across species, with particular pathway configurations either amplifying or diffusing disturbance effects (Neutel et al. 2002; Rooney et al. 2006).
 
-The Gap: Argue that while "connectance" and "nestedness" are vital, they don't capture the full resolution of ecosystem dynamics.
+**Network geometry**: captures the global arrangement and constraints of interactions, including link density, connectance, clustering, modularity, intervality, and network distances (Dunne et al. 2002; Stouffer et al. 2006; Delmas et al. 2019). These properties define the overall “shape” of the food web and constrain which pathways are available for energy flow. Geometric organisation has been shown to influence the containment of perturbations, for example through compartmentalisation that limits the spread of local disturbances [@stoufferCompartmentalizationIncreasesFoodweb2011].
 
-The Expansion: Introduce the necessity of more nuanced metrics (e.g., motifs, centrality, modularity, and beta-diversity of interactions) to capture the "hidden" stability of diverse networks.
+**Emergent system-level behaviour**: reflects the collective dynamical properties that arise from the interaction of nodes, paths, and geometry. Metrics such as spectral radius, SVD complexity, and robustness capture properties that cannot be attributed to individual species or interactions alone, but instead describe the system’s overall capacity to absorb, reorganise, or amplify perturbations (May 1972; Staniczenko et al. 2013; Strydom et al. 2021).
 
-Linking Structure to Ecosystem Function (EF)
+Together, these structural scales form a causal hierarchy: species roles give rise to interaction pathways, which are embedded within a global network geometry, from which emergent dynamical behaviour arises.
 
-The Framework: Explicitly connect structural metrics to the "Stability-Complexity" debate.
+### Stability as a multi-component property
 
-The Hypothesis: Propose how specific structural arrangements (like high modularity) act as "firewalls" to prevent the spread of perturbations, thereby maintaining ecosystem function under stress.
+Stability is often treated as a single outcome, yet ecological theory has long recognised that it comprises multiple, distinct components (Pimm 1984; Ives & Carpenter 2007). Here, we focus on three complementary stability mechanisms that are directly interpretable in terms of energy flow: persistence, resistance, and return.
 
-Objectives
+**Persistence**: refers to the continued ability of the system to sustain energy flow following species loss or disturbance. Structures that promote redundancy, multiple basal inputs, and functional overlap among species enhance persistence by ensuring that energy can continue to enter and circulate within the network even when individual components are removed (McCann 2000; Dunne et al. 2002; Jonsson et al. 2015).
 
-The overarching goal of this study is to move beyond bipartite generalizations and define a comprehensive "structural fingerprint" of ecosystem stability. To achieve this, we address two primary objectives:
+**Resistance**: describes the extent to which perturbations are attenuated or contained rather than propagating through the network. Path-level structures such as omnivory, short chains, motifs, and modular organisation can diffuse or localise disturbances, reducing the likelihood that local perturbations escalate into system-wide effects (McCann et al. 1998; Neutel et al. 2002; Stouffer & Bascompte 2011).
 
-**Identification of a Core Structural Subset**
+**Return**: captures the capacity of the system to reorganise or recover following disturbance, including the re-establishment of interaction pathways and the damping of oscillations. Emergent properties linked to global organisation and heterogeneity, such as spectral radius and structural complexity, reflect constraints on system-wide dynamics and influence the speed and manner with which a system returns to equilibrium or a new stable configuration (May 1972; Ulanowicz 2001; Staniczenko et al. 2013).
 
-Ecological networks are characterized by a high degree of collinearity among structural descriptors. We aim to determine whether the 31 metrics analyzed in this study can be reduced to a **Minimum Sufficient Set**—a small, non-redundant group of indicators that capture the essential topological features of an ecosystem. By employing multivariate techniques such as **Variable Clustering** and **SVD Complexity**, we seek to move away from arbitrary metric selection toward a data-driven framework for network characterization.
+Crucially, these stability components operate at different structural scales and are not expected to respond uniformly to the same network properties.
 
-**Mapping the Multi-dimensional Stability Landscape**
+### Implications for interpreting network metrics
 
-Building on the "stability-complexity" debate (McCann 2000, Ives & Carpenter 2007), we aim to map how these diverse structural metrics correlate with different facets of ecosystem health. Specifically, we test the following hypotheses:
+Within this framework, metrics that are often treated as competing predictors of 'stability' instead emerge as complementary descriptors of different stability mechanisms [@thompsonFoodWebsReconciling2012]. Node-level metrics primarily relate to persistence, path-level metrics to resistance, and global organisational metrics to return dynamics. Some descriptors span multiple scales, reflecting the coupling between structural organisation and emergent behaviour (Allesina & Tang 2012).
 
--   **The Robustness Hypothesis:** Metrics of redundancy (e.g., *Connectance, MaxSim*) will be the primary predictors of resistance to primary species loss.
+This perspective provides a mechanistic explanation for why studies using different network metrics frequently report contrasting structure–stability relationships. Rather than reflecting inconsistency or redundancy, these differences arise because different metrics implicitly target different components of stability [@lauEcologicalNetworkMetrics2017]. By explicitly linking structural scale, energy flow, and stability mechanism, this framework provides a principled basis for interpreting network metrics and for selecting descriptors that align with specific ecological questions.
 
--   **The Containment Hypothesis:** Modular structures (e.g., *Clust, Modularity*) will correlate with system-wide resilience by preventing the propagation of local perturbations.
+| Structural scale | What it encodes | Energy-flow interpretation | Stability component |
+|------------------|------------------|------------------|------------------|
+| Node | Species roles and redundancy | Who handles energy | Persistence (can energy still enter and move?) |
+| Path | Energy routing and coupling | How energy moves | Resistance (does disturbance spread?) |
+| Geometry | Network constraints and organisation | Where energy can go | Containment / buffering |
+| Behaviour | Emergent dynamics | How energy reorganizes | Return / reassembly |
 
--   **The Dynamic Capacity Hypothesis:** Information-theoretic measures (e.g., *SVD Complexity, Spectral Radius*) will provide a superior bridge between static topology and the dynamic ability of the system to return to equilibrium.
+: Words
 
-Clearly state that this study expands the taxonomic and structural scope of previous models to provide a generalized rulebook for network-mediated stability.
+# Materials & Methods
 
-Synthesis: Linking to "Stability"
+## Data Compilation
 
-In your manuscript, you can group these metrics into **three functional categories**:
+We compiled quantitative network data from XX, resulting in a total of XX ecological networks. Each network was characterized using a suite of XX structural metrics [@tbl-properties], including classic descriptors such as richness, connectance, and modularity, as well as information-theoretic measures like spectral radius and SVD complexity. Prior to analysis, networks with missing values were omitted, and all metrics were standardized (mean = 0, SD = 1) to account for differences in scale and units across descriptors.
 
-1.  **Robustness Metrics:** (Richness, Connectance, Robustness, MaxSim) — These describe how many "hits" the network can take before collapsing.
+| Label | Definition | Structural interpretation | Reference |
+|-----------------|-----------------|-----------------------|-----------------|
+| Basal | Proportion of taxa with zero vulnerability (no consumers). | Quantifies the proportion of species representing basal energy inputs to the network. |  |
+| Top | Proportion of taxa with zero generality (no resources). | Describes the relative prevalence of terminal consumers in the network. |  |
+| Intermediate | Proportion of taxa with both consumers and resources. | Captures the proportion of species participating in both upward and downward energy transfer. |  |
+| Richness (S) | Number of taxa (nodes) in the network. | Describes network size. |  |
+| Links (L) | Total number of trophic interactions (edges). | Describes interaction density independent of network size. |  |
+| Connectance | $L/S^2$, where $S$ is the number of species and $L$ the number of links | Measures the proportion of realised interactions relative to all possible interactions. | Dunne et al. 2002 |
+| L/S | Mean number of links per species. | Captures average interaction density per taxon. |  |
+| Cannibal | Proportion of taxa with self-loops. | Quantifies the prevalence of cannibalistic interactions. |  |
+| Herbivore | Proportion of taxa feeding exclusively on basal species. | Describes the representation of primary consumers. |  |
+| Intermediate | Percentage of intermediate taxa (with both consumers and resources) |  |  |
+| Trophic level (TL) | Prey-weighted trophic level averaged across taxa. | Captures the vertical organisation of energy transfer. | @williamsLimitsTrophicLevels2004 |
+| MaxSim | Mean maximum trophic similarity of each taxon to all others. | Quantifies functional similarity based on shared predators and prey. | @yodzisSearchOperationalTrophospecies1999 |
+| Centrality | Node centrality averaged across taxa (definition-dependent). | Captures the distribution of influence or connectivity among species. | @estradaUsingNetworkCentrality2008 |
+| ChLen | Mean length of all food chains from basal to top taxa. | Describes the average number of steps in energy-transfer pathways. |  |
+| ChSD | Standard deviation of food chain length. | Captures variability in pathway lengths. |  |
+| ChNum | Log-transformed number of distinct food chains. | Quantifies the multiplicity of alternative energy pathways. |  |
+| Path | Mean shortest path length between all species pairs. | Describes the average distance between taxa within the network. |  |
+| Diameter | Maximum shortest path length between any two taxa. | Captures the largest network distance between species. |  |
+| Omnivory | Proportion of taxa feeding on resources at multiple trophic levels. | Describes vertical coupling of energy channels. | @mccannDiversityStabilityDebate2000 |
+| Loop | Proportion of taxa involved in trophic loops. | Quantifies the prevalence of cyclic interaction pathways. |  |
+| Prey:Predator | Ratio of prey taxa (basal + intermediate) to predator taxa (intermediate + top). | Describes the overall shape of the trophic structure. |  |
+| Diameter | Diameter can also be measured as the average of the distances between each pair of nodes in the network |  |  |
+| Clust | Mean clustering coefficient. | Measures the tendency for taxa sharing interaction partners to also interact with each other. | @wattsCollectiveDynamicsSmallworld1998 |
+| GenSD | Normalised standard deviation of generality. | Captures heterogeneity in the number of resources per taxon. | @williamsLimitsTrophicLevels2004 |
+| VulSD | Normalised standard deviation of vulnerability. | Captures heterogeneity in the number of consumers per taxon. | @williamsLimitsTrophicLevels2004 |
+| LinkSD | Normalised standard deviation of total links per taxon. | Quantifies variation in species connectivity. |  |
+| Intervality | Degree to which taxa can be ordered along a single niche dimension. | Measures the extent of niche ordering in trophic interactions. | @stoufferRobustMeasureFood2006a |
+| ρ (Spectral radius) | Largest real part of the eigenvalues of the undirected adjacency matrix. | Captures a global property of network organisation related to interaction strength aggregation. |  |
+| Complexity (SVD) | Shannon entropy of the singular value decomposition of the adjacency matrix. | Quantifies heterogeneity in interaction structure. | @strydomSVDEntropyReveals2021 |
+| Robustness | Proportion of secondary extinctions following primary species removal. | Operational measure of tolerance to node loss. | @jonssonReliabilityR50Measure2015 |
+| S1 (Linear chain) | Frequency of three-node linear chains (A → B → C) with no additional links. | Captures the prevalence of simple, unbranched energy-transfer pathways. | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
+| S2 (Omnivory) | Frequency of three-node motifs forming a feed-forward loop (A → B → C, A → C). | Describes vertical coupling of trophic levels within small subnetworks. | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
+| S4 (Apparent competition) | Frequency of motifs where one consumer feeds on two resources (A → B ← C). | Captures the prevalence of shared-predator structures among resources. | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
+| S5 (Direct competition) | Frequency of motifs where two consumers share a single resource (A ← B → C). | Describes the occurrence of shared-resource structures among consumers. | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
 
-2.  **Efficiency/Flow Metrics:** (Path, ChLen, TL, Diameter) — These describe how quickly energy or perturbations move through the system.
+: An informative caption about the different network properties. We use a combination of metrics from both the original @vermaatMajorDimensionsFoodweb2009 paper as well as including those that have been identified by @thompsonFoodWebsReconciling2012 and have been linked to emerging ecosystem properties such as stability {#tbl-properties}
 
-3.  **Organization Metrics:** (ρ, Complexity, Modularity/Clust, Intervality) — These describe the "logic" of the arrangement, which dictates whether the system behaves predictably or chaotically.
+## Identification of dominant structural dimensions
 
-Blah blah blah @vermaatMajorDimensionsFoodweb2009
+Ecological network metrics are frequently correlated, reflecting shared underlying structural properties. To identify dominant dimensions of food-web structure, we applied hierarchical clustering to the absolute correlation matrix of all metrics using average linkage. Cluster stability was assessed using bootstrap resampling (1,000 iterations). From each stable cluster, a single representative metric was selected based on interpretability and prevalence in the literature. This procedure yielded a reduced set of descriptors capturing the primary axes of structural variation across networks.
 
-*"It is incumbent on network ecologists to establish clearly the independence and uniqueness of the descriptive metrics used."* - @lauEcologicalNetworkMetrics2017
+## Linking structure to robustness
+
+To examine how dominant structural dimensions relate to tolerance to species loss, we quantified network robustness as the proportion of secondary extinctions following primary species removal. We related robustness to both PCA scores and individual metrics from the reduced set using linear regression and Random Forest models. Random Forests were used to accommodate potential non-linear relationships and interactions among predictors. Variable importance was assessed using permutation-based measures.
+
+# Results
+
+-   Major axes correspond to:
+-   Redundancy / persistence
+-   Pathway coupling / resistance
+-   Organizational constraint / return
+-   Reduced metric sets retain these axes
+
+# Discussion
+
+-   Why consensus on “the best metric” has failed
+-   Why different studies find different structure–stability relationships
+-   Implications for biodiversity–stability theory
+-   Guidance for metric choice based on question and scale
 
 | Dimension | Key Metrics | Expected Effect on Stability | Supporting Literature |
-|-----------|-------------|------------------------------|-----------------------|
-| Complexity & Redundancy   | Connectance, MaxSim, Links | **Positive:** High redundancy allows for "functional compensation" if one species is lost.          | @dunneFoodwebStructureNetwork2002; @mccannDiversityStabilityDebate2000 |
-| Compartmentalization      | Clust, Modularity, ρ       | **Positive:** Limits the spread of perturbations; local collapses don't become global.              | @stoufferCompartmentalizationIncreasesFoodweb2011                      |
-| Feedback & Coupling       | Omnivory (S2), Loop, ChLen | **Variable:** Omnivory can stabilize by diffusing energy, but long chains can amplify oscillations. | @mccannDiversityStabilityDebate2000; @neutelStabilityRealFood2002      |
-| Hierarchy & Shape         | Prey:Predator, Basal, Top  | **Critical:** "Bottom-heavy" systems are generally more stable; inverted pyramids are fragile.      |                                                                        |
-| Information Heterogeneity | SVD Complexity, LinkSD     | **Positive:** Diverse interaction strengths prevent "resonant" instabilities.                       | @ulanowiczInformationTheoryEcology2001                                 |
+|-----------------|-----------------|---------------------|-----------------|
+| Complexity & Redundancy | Connectance, MaxSim, Links | **Positive:** High redundancy allows for "functional compensation" if one species is lost. | @dunneFoodwebStructureNetwork2002; @mccannDiversityStabilityDebate2000 |
+| Compartmentalization | Clust, Modularity, ρ | **Positive:** Limits the spread of perturbations; local collapses don't become global. | @stoufferCompartmentalizationIncreasesFoodweb2011 |
+| Feedback & Coupling | Omnivory (S2), Loop, ChLen | **Variable:** Omnivory can stabilize by diffusing energy, but long chains can amplify oscillations. | @mccannDiversityStabilityDebate2000; @neutelStabilityRealFood2002 |
+| Hierarchy & Shape | Prey:Predator, Basal, Top | **Critical:** "Bottom-heavy" systems are generally more stable; inverted pyramids are fragile. |  |
+| Information Heterogeneity | SVD Complexity, LinkSD | **Positive:** Diverse interaction strengths prevent "resonant" instabilities. | @ulanowiczInformationTheoryEcology2001 |
 
 : Network properties used for analysis. {#tbl-metrics}
 
-# Materials and Methods
+To better link network structure to ecosystem function, we grouped commonly used food web metrics into four functional categories reflecting their ecological interpretation. Node-level metrics (e.g., basal, top, intermediate, herbivory, cannibal, trophic level, centrality, MaxSim) capture the roles and properties of individual species. Path-level metrics (*e.g.,* food chain lengths, motifs, omnivory, loops, prey-to-predator ratios) describe how energy and interactions flow through the network. Geometry metrics (e.g., connectance, link density, clustering, variation in links, diameter, intervality, spectral radius, SVD complexity) quantify the overall network arrangement and topological organization. Finally, behavioural/system-level metrics (e.g., robustness, spectral radius, SVD complexity) capture emergent properties such as resilience, redundancy, and dynamic stability. This framework provides a transparent, ecologically interpretable mapping from species-level roles and interaction paths to system-level behaviour, facilitates identification of a Minimum Sufficient Set of descriptors, and links network structure to long-standing questions in the stability–complexity debate.
 
-| Label | Definition | Ecological Significance  | Reference |
-|-------|------------|--------------------------|-----------|
-| Basal | Percentage of basal taxa, defined as species who have a vulnerability of zero | Measures the energy entry points; high basal % suggests a bottom-heavy, potentially more stable energy base. | |
-| Connectance   | $L/S^2$, where $S$ is the number of species and $L$ the number of links | | |
-| Cannibal      | Percentage of species that are cannibals | | |
-| ChLen         | Mean food chain length, averaged over all species (where a food chain is defined as a continuous path from a 'basal' to a 'top' species) | Reflects energy transfer efficiency. Longer chains may be more prone to top-down trophic cascades. | |
-| ChSD          | Standard deviation of ChLen | High SD indicates a mix of energy pathways, which can buffer the system | |
-| ChNum         | log number of food chains | | |
-| Clust         | mean clustering coefficient (probability that two taxa linked to the same taxon are also linked) | Quantifies local redundancy; high clustering can buffer the network against the loss of specific interaction pathways. **TODO** | @wattsCollectiveDynamicsSmallworld1998 |                                                              |
-| GenSD         | Normalized standard deviation of generality of a species standardized by $L/S$ | Interaction asymmetry. High variance in how links are distributed often points to the presence of 'hubs' (highly connected species), which makes the network robust to random loss but vulnerable to targeted 'keystone' removal. | @williamsSuccessItsLimits2008a |
-| Herbivore     | Percentage of herbivores plus detritivores (taxa that feed only on basal taxa) | | |
-| Intermediate  | Percentage of intermediate taxa (with both consumers and resources) | | |
-| LinkSD        | Normalized standard deviation of links (number of consumers plus resources per taxon) | Interaction asymmetry. High variance in how links are distributed often points to the presence of 'hubs' (highly connected species), which makes the network robust to random loss but vulnerable to targeted 'keystone' removal. | |
-| Loop          | Percentage of taxa in loops (food chains in which a taxon occurs twice) | High percentages of loops can lead to feedback cycles (positive or negative) that either amplify or dampen oscillations, directly impacting local stability. | |
-| L/S           | links per species | | |
-| MaxSim        | Mean of the maximum trophic similarity of each taxon to other taxa, the number of predators and prey shared by a pair of species divided by their total number of predators and prey | Indicates functional redundancy; high similarity suggests species are replaceable, increasing robustness to individual extinctions. | **TODO** @yodzisSearchOperationalTrophospecies1999 |
-| Omnivory      | Percentage of omnivores (taxa that feed on $\geq$ 2 taxa with different trophic levels) | Links to coupling of energy channels; historically debated, but often found to stabilize food webs by diffusing top-down pressure. | @mccannDiversityStabilityDebate2000 |
-| Path          | characteristic path length, the mean shortest food chain length between species pairs | | |
-| Richness      | Number of nodes in the network | | |
-| TL            | Prey-weighted trophic level averaged across | | @williamsLimitsTrophicLevels2004                                  |
-| Top           | Percentage of top taxa (taxa without consumers) | | |
-| VulSD         | Normalized standard deviation of vulnerability of a species standardized by $L/S$  | Interaction asymmetry. High variance in how links are distributed often points to the presence of 'hubs' (highly connected species), which makes the network robust to random loss but vulnerable to targeted 'keystone' removal. | |
-| Links         | The number of links in the network | | |
-| Diameter      | Diameter can also be measured as the average of the distances between each pair of nodes in the network | | @delmasAnalysingEcologicalNetworks2019 |
-| $\rho$        | Spectral radius is a a conceptual analog to nestedness. It is defined as the absolute value of the largest real part of the eigenvalues of the *undirected* adjacency matrix | Acts as a proxy for system-wide resilience; captures the speed at which a system returns to equilibrium after a small pulse perturbation. | @staniczenkoGhostNestednessEcological2013 |
-| Complexity    | SVD complexity of a network, defined as the Pielou entropy of its singular values                                                                                                    | Captures structural heterogeneity; distinguishes between a truly complex system and one that is merely large or 'random'. | @strydomSVDEntropyReveals2021 |
-| Centrality    | Centrality is a measure of how ‘influential’ a species is, under various definitions of ‘influence’. | Centrality can help in quantifying the importance of species in a network | @estradaUsingNetworkCentrality2008                                |
-| S1            | Number of linear chains | Building blocks of stability (compartmentalisation, Stouffer and Bascompte?) | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
-| S2            | Number of omnivory motifs | Building blocks of stability (compartmentalisation, Stouffer and Bascompte?) | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
-| S4            | Number of apparent competition motifs | Building blocks of stability (compartmentalisation, Stouffer and Bascompte?) | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
-| S5            | Number of direct competition motifs | Building blocks of stability (compartmentalisation, Stouffer and Bascompte?) | @stoufferEvidenceExistenceRobust2007 @miloNetworkMotifsSimple2002 |
-| Intervality   | The degree to which the prey in a food web can be ordered so that all species can be placed along a single dimension | Measures niche dimension; high intervality suggests a simpler organization where species feeding habits are constrained by a single trait (like body size). | @stoufferRobustMeasureFood2006a |
-| Prey:predator | Ratio of prey (basal + intermediate) to predators (top + intermediate) | A measure of food web 'shape'. Values \<1 imply an inverted structure and might indicate instability | |
-| Robustness    | Minimum level of secondary extinction that occurs in response to a particular perturbation | | @jonssonReliabilityR50Measure2015 |
+| Category | Metrics | Rationale |
+|------------------------|------------------------|------------------------|
+| Node-level | basal, top, intermediate, herbivory, cannibal, TL, centrality, MaxSim | Metrics describing individual species and their roles in the network, including trophic position (TL), feeding type (basal, herbivory, cannibal), influence (centrality), and functional redundancy (MaxSim). |
+| Path level | ChLen, ChSD, ChNum, path, S1, S2, S4, S5, omnivory, loops, predpreyRatio, distance | Metrics describing energy flow or interaction paths through the network, including food chain lengths, motifs, omnivory, loops, and prey-predator ratios. Capture how energy and interactions move across nodes. |
+| Geometry/topology | connectance, l_S, links, richness, Clust, GenSD, VulSD, LinkSD, diameter, intervals | Metrics describing **overall network structure**, including density (connectance, links, L/S), size (richness), local clustering, link asymmetry, network distances (diameter), and niche structure (intervals). Capture the ‘shape’ of the network. |
+| Behaviour/system-level | ρ, complexity, robustness | Metrics describing emergent properties of the network, including system-wide stability, resilience, and structural complexity. Capture how the network responds to perturbations or organizes itself at a global level. |
 
-: An informative caption about the different network properties. We use a combination of metrics from both the original @vermaatMajorDimensionsFoodweb2009 paper as well as including those that have been identified by @thompsonFoodWebsReconciling2012 and have been linked to emerging ecosystem properties such as stability {#tbl-properties}
+: Classification of food web metrics into functional categories. Node-level metrics capture species roles; path-level metrics capture energy or interaction flows; geometry metrics describe network structure; and behaviour/system-level metrics capture emergent stability and resilience. {#tbl-classification}
 
 ```{r}
 #| label: tbl-corr
