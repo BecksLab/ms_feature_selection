@@ -19,3 +19,14 @@
 measures from Vermaat}
 
 \end{figure}
+\efloatseparator
+ 
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{figures/metric_hclust.png}}
+
+}
+
+\caption{Cluster}
+
+\end{figure}

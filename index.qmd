@@ -35,6 +35,8 @@ number-sections: true
 
 # Introduction
 
+> Which metrics best represent the distinct stages of the energy-flow hierarchy, and do they capture different components of stability?
+
 Ecological networks are commonly characterised using a large and diverse set of structural metrics, yet there remains little consensus on how these metrics should be interpreted or compared across studies (Vermaat et al. 2009; Lau et al. 2017). We argue that this difficulty arises because network structure is not a single property, but a hierarchy of interrelated components that encode different aspects of how energy moves through an ecosystem (Ulanowicz 1986; Thompson et al. 2012). Metrics derived at different structural scales therefore capture different ecological processes and, consequently, relate to different components of stability. Making these distinctions explicit is essential for interpreting patterns of structure–stability relationships.
 
 ### Structural scale and the organisation of energy flow
@@ -181,6 +183,8 @@ kable(dat)
 ![VERMAAT networks only](figures/pca_vermaat.png)
 
 ![All networks. Vermaat subset = using only the structural measures from Vermaat](figures/pca_allNetworks.png)
+
+![Cluster](figures/metric_hclust.png)
 
 # References {.unnumbered}
 
