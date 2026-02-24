@@ -183,7 +183,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Finding the major descriptors of species networks},
+  pdftitle={Multiple dimensions of network structure underlie ecological stability},
   pdfauthor={Tanya Strydom; Andrew P. Beckerman},
   pdfkeywords={food web, structure, dimensionality reduction},
   colorlinks=true,
@@ -195,7 +195,8 @@
 
 
 
-\title{Finding the major descriptors of species networks}
+\title{Multiple dimensions of network structure underlie ecological
+stability}
 \author{Tanya Strydom %
 %
 \textsuperscript{%
@@ -209,7 +210,7 @@
 1%
 }%
 }
-\date{2026-01-29}
+\date{2026-02-24}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -221,8 +222,8 @@
 \begin{document}
 
 \thispagestyle{empty}
-{\bfseries\sffamily\Large Finding the major descriptors of species
-networks}
+{\bfseries\sffamily\Large Multiple dimensions of network structure
+underlie ecological stability}
 \vfil
 Tanya Strydom %
 %
@@ -239,7 +240,32 @@ Tanya Strydom %
 
 \vfil
 {\small
-\textbf{Abstract:} TODO
+\textbf{Abstract:} Ecological network structure is widely invoked to
+explain patterns of biodiversity and stability, yet decades of research
+have produced little consensus on which structural descriptors matter
+most. We argue that this apparent inconsistency arises not from
+methodological disagreement, but from a conceptual mismatch: network
+structure encodes multiple, hierarchically organised aspects of energy
+flow, each relating to different components of stability. Using a
+compilation of food webs from XXX, we quantified 31 commonly used
+structural metrics spanning species roles, interaction pathways, network
+geometry, and emergent system behaviour. We first used variable
+clustering and dimensionality reduction to identify dominant axes of
+structural variation and a non-redundant subset of descriptors. We then
+interpreted these axes through an energy-flow framework linking
+structural scale to distinct stability mechanisms: persistence
+(maintenance of energy flow following species loss), resistance
+(attenuation of perturbation propagation), and return (reorganisation of
+pathways following disturbance). Our analyses show that metrics often
+treated as competing predictors of `stability' instead load onto
+different structural dimensions and relate to different stability
+components. Redundancy and species-role metrics primarily align with
+persistence, pathway and motif-based metrics with resistance, and global
+organisational measures with return dynamics. By explicitly mapping
+network structure to stability mechanisms, our results reconcile
+conflicting findings in the structure--stability literature and provide
+a principled framework for selecting network metrics based on ecological
+question and scale, rather than convention.
 \vfil
 \textbf{Keywords:} %
 food web, structure, %
@@ -253,116 +279,689 @@ dimensionality reduction%
 
 \section{Introduction}\label{introduction}
 
-To bridge the gap between the original paper and your new objectives,
-your introduction could follow this logical flow:
+\begin{quote}
+Which metrics best represent the distinct stages of the energy-flow
+hierarchy, and do they capture different components of stability?
+\end{quote}
 
-The Evolution of Ecological Network Theory
+Ecological networks are commonly characterised using a large and diverse
+set of structural metrics, yet there remains little consensus on how
+these metrics should be interpreted or compared across studies (Vermaat
+et al.~2009; Lau et al.~2017). We argue that this difficulty arises
+because network structure is not a single property, but a hierarchy of
+interrelated components that encode different aspects of how energy
+moves through an ecosystem (Ulanowicz 1986; Thompson et al.~2012).
+Metrics derived at different structural scales therefore capture
+different ecological processes and, consequently, relate to different
+components of stability. Making these distinctions explicit is essential
+for interpreting patterns of structure--stability relationships.
 
-The Hook: Acknowledge the foundational shift from viewing biodiversity
-as a simple ``species count'' to viewing it as a complex web of
-interactions.
+\subsubsection{Structural scale and the organisation of energy
+flow}\label{structural-scale-and-the-organisation-of-energy-flow}
 
-The Baseline: Summarize the core findings of the paper you're expanding
-on---specifically, how the architecture (e.g., compartmentalization
-vs.~nestedness) affects stability differently in mutualistic vs.~trophic
-networks.
+We conceptualise food-web structure as organised across four
+hierarchical structural scales: node-level, path-level, network
+geometry, and emergent system behaviour (Pimm 1982; Cohen et al.~1990;
+Vermaat et al.~2009). These scales reflect increasing levels of
+integration, progressing from individual species roles to whole-network
+dynamics.
 
-The Need for Dimensionality
+\textbf{Node-level structure:} describes the properties and roles of
+individual species within the network. Metrics such as trophic position,
+basal and top species proportions, centrality, and trophic similarity
+capture how energy enters the system, which species process or
+redistribute that energy, and the degree of functional redundancy among
+taxa (Yodzis \& Winemiller 1999; Estrada 2007; Allesina \& Pascual
+2009). At this scale, structure primarily reflects who participates in
+energy transfer and whether alternative species can compensate for local
+losses, a long-standing mechanism proposed to underpin persistence in
+complex ecosystems (McCann 2000).
 
-The Gap: Argue that while ``connectance'' and ``nestedness'' are vital,
-they don't capture the full resolution of ecosystem dynamics.
+\textbf{Path-level structure}: describes how energy is routed through
+sequences of interactions linking species. Metrics such as food chain
+length, omnivory, motifs, loops, and prey--predator ratios capture the
+coupling of energy channels and the multiplicity of pathways connecting
+basal resources to higher trophic levels (Pimm \& Lawton 1977; McCann et
+al.~1998; Stouffer \& Bascompte 2011). This scale reflects how energy
+moves through the network and how perturbations may be transmitted
+across species, with particular pathway configurations either amplifying
+or diffusing disturbance effects (Neutel et al.~2002; Rooney et
+al.~2006).
 
-The Expansion: Introduce the necessity of more nuanced metrics (e.g.,
-motifs, centrality, modularity, and beta-diversity of interactions) to
-capture the ``hidden'' stability of diverse networks.
+\textbf{Network geometry}: captures the global arrangement and
+constraints of interactions, including link density, connectance,
+clustering, modularity, intervality, and network distances (Dunne et
+al.~2002; Stouffer et al.~2006; Delmas et al.~2019). These properties
+define the overall ``shape'' of the food web and constrain which
+pathways are available for energy flow. Geometric organisation has been
+shown to influence the containment of perturbations, for example through
+compartmentalisation that limits the spread of local disturbances
+(Stouffer \& Bascompte, 2011).
 
-Linking Structure to Ecosystem Function (EF)
+\textbf{Emergent system-level behaviour}: reflects the collective
+dynamical properties that arise from the interaction of nodes, paths,
+and geometry. Metrics such as spectral radius, SVD complexity, and
+robustness capture properties that cannot be attributed to individual
+species or interactions alone, but instead describe the system's overall
+capacity to absorb, reorganise, or amplify perturbations (May 1972;
+Staniczenko et al.~2013; Strydom et al.~2021).
 
-The Framework: Explicitly connect structural metrics to the
-``Stability-Complexity'' debate.
+Together, these structural scales form a causal hierarchy: species roles
+give rise to interaction pathways, which are embedded within a global
+network geometry, from which emergent dynamical behaviour arises.
 
-The Hypothesis: Propose how specific structural arrangements (like high
-modularity) act as ``firewalls'' to prevent the spread of perturbations,
-thereby maintaining ecosystem function under stress.
+\subsubsection{Stability as a multi-component
+property}\label{stability-as-a-multi-component-property}
 
-Objectives
+Stability is often treated as a single outcome, yet ecological theory
+has long recognised that it comprises multiple, distinct components
+(Pimm 1984; Ives \& Carpenter 2007). Here, we focus on three
+complementary stability mechanisms that are directly interpretable in
+terms of energy flow: persistence, resistance, and return.
 
-The overarching goal of this study is to move beyond bipartite
-generalizations and define a comprehensive ``structural fingerprint'' of
-ecosystem stability. To achieve this, we address two primary objectives:
+\textbf{Persistence}: refers to the continued ability of the system to
+sustain energy flow following species loss or disturbance. Structures
+that promote redundancy, multiple basal inputs, and functional overlap
+among species enhance persistence by ensuring that energy can continue
+to enter and circulate within the network even when individual
+components are removed (McCann 2000; Dunne et al.~2002; Jonsson et
+al.~2015).
 
-\textbf{Identification of a Core Structural Subset}
+\textbf{Resistance}: describes the extent to which perturbations are
+attenuated or contained rather than propagating through the network.
+Path-level structures such as omnivory, short chains, motifs, and
+modular organisation can diffuse or localise disturbances, reducing the
+likelihood that local perturbations escalate into system-wide effects
+(McCann et al.~1998; Neutel et al.~2002; Stouffer \& Bascompte 2011).
 
-Ecological networks are characterized by a high degree of collinearity
-among structural descriptors. We aim to determine whether the 31 metrics
-analyzed in this study can be reduced to a~\textbf{Minimum Sufficient
-Set}---a small, non-redundant group of indicators that capture the
-essential topological features of an ecosystem. By employing
-multivariate techniques such as~\textbf{Variable
-Clustering}~and~\textbf{SVD Complexity}, we seek to move away from
-arbitrary metric selection toward a data-driven framework for network
-characterization.
+\textbf{Return}: captures the capacity of the system to reorganise or
+recover following disturbance, including the re-establishment of
+interaction pathways and the damping of oscillations. Emergent
+properties linked to global organisation and heterogeneity, such as
+spectral radius and structural complexity, reflect constraints on
+system-wide dynamics and influence the speed and manner with which a
+system returns to equilibrium or a new stable configuration (May 1972;
+Ulanowicz 2001; Staniczenko et al.~2013).
 
-\textbf{Mapping the Multi-dimensional Stability Landscape}
+Crucially, these stability components operate at different structural
+scales and are not expected to respond uniformly to the same network
+properties.
 
-Building on the ``stability-complexity'' debate (McCann 2000, Ives \&
-Carpenter 2007), we aim to map how these diverse structural metrics
-correlate with different facets of ecosystem health. Specifically, we
-test the following hypotheses:
+\subsubsection{Implications for interpreting network
+metrics}\label{implications-for-interpreting-network-metrics}
 
-\begin{itemize}
-\item
-  \textbf{The Robustness Hypothesis:}~Metrics of redundancy
-  (e.g.,~\emph{Connectance, MaxSim}) will be the primary predictors of
-  resistance to primary species loss.
-\item
-  \textbf{The Containment Hypothesis:}~Modular structures
-  (e.g.,~\emph{Clust, Modularity}) will correlate with system-wide
-  resilience by preventing the propagation of local perturbations.
-\item
-  \textbf{The Dynamic Capacity Hypothesis:}~Information-theoretic
-  measures (e.g.,~\emph{SVD Complexity, Spectral Radius}) will provide a
-  superior bridge between static topology and the dynamic ability of the
-  system to return to equilibrium.
-\end{itemize}
+Within this framework, metrics that are often treated as competing
+predictors of `stability' instead emerge as complementary descriptors of
+different stability mechanisms (Thompson et al., 2012). Node-level
+metrics primarily relate to persistence, path-level metrics to
+resistance, and global organisational metrics to return dynamics. Some
+descriptors span multiple scales, reflecting the coupling between
+structural organisation and emergent behaviour (Allesina \& Tang 2012).
 
-Clearly state that this study expands the taxonomic and structural scope
-of previous models to provide a generalized rulebook for
-network-mediated stability.
-
-Synthesis: Linking to ``Stability''
-
-In your manuscript, you can group these metrics into~\textbf{three
-functional categories}:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  \textbf{Robustness Metrics:}~(Richness, Connectance, Robustness,
-  MaxSim) --- These describe how many ``hits'' the network can take
-  before collapsing.
-\item
-  \textbf{Efficiency/Flow Metrics:}~(Path, ChLen, TL, Diameter) ---
-  These describe how quickly energy or perturbations move through the
-  system.
-\item
-  \textbf{Organization Metrics:}~(ρ, Complexity, Modularity/Clust,
-  Intervality) --- These describe the ``logic'' of the arrangement,
-  which dictates whether the system behaves predictably or chaotically.
-\end{enumerate}
-
-Blah blah blah Vermaat et al. (2009)
-
-\emph{``It is incumbent on network ecologists to establish clearly the
-independence and uniqueness of the descriptive metrics used.''} - Lau et
-al. (2017)
+This perspective provides a mechanistic explanation for why studies
+using different network metrics frequently report contrasting
+structure--stability relationships. Rather than reflecting inconsistency
+or redundancy, these differences arise because different metrics
+implicitly target different components of stability (Lau et al., 2017).
+By explicitly linking structural scale, energy flow, and stability
+mechanism, this framework provides a principled basis for interpreting
+network metrics and for selecting descriptors that align with specific
+ecological questions.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
-\caption{Stuff}\tabularnewline
+\caption{Words}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Structural scale
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What it encodes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Energy-flow interpretation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Stability component
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Structural scale
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What it encodes
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Energy-flow interpretation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Stability component
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Node & Species roles and redundancy & Who handles energy & Persistence
+(can energy still enter and move?) \\
+Path & Energy routing and coupling & How energy moves & Resistance (does
+disturbance spread?) \\
+Geometry & Network constraints and organisation & Where energy can go &
+Containment / buffering \\
+Behaviour & Emergent dynamics & How energy reorganizes & Return /
+reassembly \\
+\end{longtable}
+
+\section{Materials \& Methods}\label{materials-methods}
+
+\subsection{Data Compilation}\label{data-compilation}
+
+We compiled quantitative network data from XX, resulting in a total of
+XX ecological networks. Each network was characterized using a suite of
+XX structural metrics Table~\ref{tbl-properties}, including classic
+descriptors such as richness, connectance, and modularity, as well as
+information-theoretic measures like spectral radius and SVD complexity.
+Prior to analysis, networks with missing values were omitted, and all
+metrics were standardized (mean = 0, SD = 1) to account for differences
+in scale and units across descriptors.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2297}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2297}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3108}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2297}}@{}}
+\caption{An informative caption about the different network properties.
+We use a combination of metrics from both the original Vermaat et al.
+(2009) paper as well as including those that have been identified by
+Thompson et al. (2012) and have been linked to emerging ecosystem
+properties such as stability}\label{tbl-properties}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Label
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Structural interpretation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reference
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Label
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Structural interpretation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Reference
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Basal & Proportion of taxa with zero vulnerability (no consumers). &
+Quantifies the proportion of species representing basal energy inputs to
+the network. & \\
+Top & Proportion of taxa with zero generality (no resources). &
+Describes the relative prevalence of terminal consumers in the network.
+& \\
+Intermediate & Proportion of taxa with both consumers and resources. &
+Captures the proportion of species participating in both upward and
+downward energy transfer. & \\
+Richness (S) & Number of taxa (nodes) in the network. & Describes
+network size. & \\
+Links (L) & Total number of trophic interactions (edges). & Describes
+interaction density independent of network size. & \\
+Connectance & \(L/S^2\), where \(S\) is the number of species and \(L\)
+the number of links & Measures the proportion of realised interactions
+relative to all possible interactions. & Dunne et al.~2002 \\
+L/S & Mean number of links per species. & Captures average interaction
+density per taxon. & \\
+Cannibal & Proportion of taxa with self-loops. & Quantifies the
+prevalence of cannibalistic interactions. & \\
+Herbivore & Proportion of taxa feeding exclusively on basal species. &
+Describes the representation of primary consumers. & \\
+Intermediate & Percentage of intermediate taxa (with both consumers and
+resources) & & \\
+Trophic level (TL) & Prey-weighted trophic level averaged across taxa. &
+Captures the vertical organisation of energy transfer. & Williams \&
+Martinez (2004) \\
+MaxSim & Mean maximum trophic similarity of each taxon to all others. &
+Quantifies functional similarity based on shared predators and prey. &
+Yodzis \& Winemiller (1999) \\
+Centrality & Node centrality averaged across taxa
+(definition-dependent). & Captures the distribution of influence or
+connectivity among species. & Estrada \& Bodin (2008) \\
+ChLen & Mean length of all food chains from basal to top taxa. &
+Describes the average number of steps in energy-transfer pathways. & \\
+ChSD & Standard deviation of food chain length. & Captures variability
+in pathway lengths. & \\
+ChNum & Log-transformed number of distinct food chains. & Quantifies the
+multiplicity of alternative energy pathways. & \\
+Path & Mean shortest path length between all species pairs. & Describes
+the average distance between taxa within the network. & \\
+Diameter & Maximum shortest path length between any two taxa. & Captures
+the largest network distance between species. & \\
+Omnivory & Proportion of taxa feeding on resources at multiple trophic
+levels. & Describes vertical coupling of energy channels. & McCann
+(2000) \\
+Loop & Proportion of taxa involved in trophic loops. & Quantifies the
+prevalence of cyclic interaction pathways. & \\
+Prey:Predator & Ratio of prey taxa (basal + intermediate) to predator
+taxa (intermediate + top). & Describes the overall shape of the trophic
+structure. & \\
+Diameter & Diameter can also be measured as the average of the distances
+between each pair of nodes in the network & & \\
+Clust & Mean clustering coefficient. & Measures the tendency for taxa
+sharing interaction partners to also interact with each other. & Watts
+\& Strogatz (1998) \\
+GenSD & Normalised standard deviation of generality. & Captures
+heterogeneity in the number of resources per taxon. & Williams \&
+Martinez (2004) \\
+VulSD & Normalised standard deviation of vulnerability. & Captures
+heterogeneity in the number of consumers per taxon. & Williams \&
+Martinez (2004) \\
+LinkSD & Normalised standard deviation of total links per taxon. &
+Quantifies variation in species connectivity. & \\
+Intervality & Degree to which taxa can be ordered along a single niche
+dimension. & Measures the extent of niche ordering in trophic
+interactions. & Stouffer et al. (2006) \\
+ρ (Spectral radius) & Largest real part of the eigenvalues of the
+undirected adjacency matrix. & Captures a global property of network
+organisation related to interaction strength aggregation. & \\
+Complexity (SVD) & Shannon entropy of the singular value decomposition
+of the adjacency matrix. & Quantifies heterogeneity in interaction
+structure. & Strydom et al. (2021) \\
+Robustness & Proportion of secondary extinctions following primary
+species removal. & Operational measure of tolerance to node loss. &
+Jonsson et al. (2015) \\
+S1 (Linear chain) & Frequency of three-node linear chains (A → B → C)
+with no additional links. & Captures the prevalence of simple,
+unbranched energy-transfer pathways. & Stouffer et al. (2007) Milo et
+al. (2002) \\
+S2 (Omnivory) & Frequency of three-node motifs forming a feed-forward
+loop (A → B → C, A → C). & Describes vertical coupling of trophic levels
+within small subnetworks. & Stouffer et al. (2007) Milo et al. (2002) \\
+S4 (Apparent competition) & Frequency of motifs where one consumer feeds
+on two resources (A → B ← C). & Captures the prevalence of
+shared-predator structures among resources. & Stouffer et al. (2007)
+Milo et al. (2002) \\
+S5 (Direct competition) & Frequency of motifs where two consumers share
+a single resource (A ← B → C). & Describes the occurrence of
+shared-resource structures among consumers. & Stouffer et al. (2007)
+Milo et al. (2002) \\
+\end{longtable}
+
+\subsection{Statistical Characterisation of Network
+Space}\label{statistical-characterisation-of-network-space}
+
+To identify the dominant axes of structural variation within our
+dataset, we expanded upon the dimensionality reduction approach
+established by Vermaat et al.~(2009). We quantified 31 structural
+metrics for each food web, categorising them into four hierarchical
+scales of energy flow: Node-level (e.g., trophic roles), Path-level
+(e.g., energy sequences), Network Geometry (e.g., global shape), and
+Emergent Behaviour (e.g., system-wide complexity).
+
+\subsubsection{Dimensionality Reduction and Metric
+Selection}\label{dimensionality-reduction-and-metric-selection}
+
+To identify a non-redundant subset of structural descriptors, we
+performed a Principal Component Analysis (PCA) on the scaled structural
+metrics. We excluded stability-related outcomes (\emph{e.g.,}
+robustness, ρ, and SVD complexity) from the PCA to ensure the resulting
+dimensions represented pure physical architecture.
+
+We determined the number of significant structural dimensions using
+Kaiser's Criterion (eigenvalues \textgreater1) and an analysis of the
+scree plot `elbow'. To select a representative anchor for each
+significant dimension, we programmatically identified the metric with
+the highest contribution percentage (cos\^{}2) to each Principal
+Component (PC). In cases where a single metric dominated multiple
+dimensions, the next highest unique contributor was selected to ensure a
+parsimonious yet comprehensive subset of predictors.
+
+\subsection{Linking Structure to Stability
+Components}\label{linking-structure-to-stability-components}
+
+To test the hypothesis that different hierarchical structural scales
+govern distinct aspects of ecological stability, we employed Random
+Forest (RF) models. We defined three response variables representing
+components of Stability:
+
+\begin{itemize}
+\tightlist
+\item
+  Persistence: Quantified as structural Robustness (secondary extinction
+  resistance).
+\item
+  Dampening: Quantified as the Spectral Radius (ρ), representing local
+  stability.
+\item
+  Organization: Quantified as SVD Complexity, representing the
+  informational diversity of energy channels.
+\end{itemize}
+
+\subsubsection{Model Specification and
+Importance}\label{model-specification-and-importance}
+
+Each stability component was modelled as a function of the six
+`Structural Pillars' identified in the PCA phase (S1, Richness,
+PredPreyRatio, Distance, Herbivory, and MaxSim). We used 1,000 trees per
+forest to ensure stable importance estimates. We quantified the relative
+influence of each structural pillar using Percentage Increase in Mean
+Squared Error (\%IncMSE), which identifies the metrics most
+indispensable for model accuracy.
+
+\subsubsection{Directional Effects}\label{directional-effects}
+
+To interpret the ecological nature of these relationships, we generated
+Partial Dependence Plots (PDPs). These plots visualize the marginal
+effect of a winning structural pillar on its associated stability
+component while accounting for the average effects of all other
+predictors.
+
+\subsection{Validation of Structural
+Modularity}\label{validation-of-structural-modularity}
+
+To assess the redundancy and independence of the 31 structural metrics,
+we performed a Hierarchical Variable Clustering analysis using the
+hclust algorithm in R. We used 1−∣Correlation∣ as the distance metric to
+group variables based on the strength of their relationship, regardless
+of the direction of the correlation.
+
+To determine the optimal number of structural modules, we calculated
+Average Silhouette Widths for k=2 to 10. Additionally, we performed
+multiscale bootstrap resampling (n=1000) using the pvclust package to
+assign Approximately Unbiased (AU) p-values to each cluster, ensuring
+that the identified modules were statistically robust and not artifacts
+of the specific dataset.
+
+\section{Results}\label{results}
+
+\subsection{The Six Dimensions of Food Web
+Architecture}\label{the-six-dimensions-of-food-web-architecture}
+
+The PCA revealed a high-dimensional structural space where the first six
+principal components accounted for 84.9\% of the total structural
+variation (Table 1). This indicates that while food web structure is
+complex, it can be effectively distilled into six primary axes of
+architectural variation.
+
+\begin{itemize}
+\tightlist
+\item
+  Dimension 1 (31.6\% variance) was anchored by S1 (the number of
+  pathways from basal species), representing the total volume of energy
+  entry points.
+\item
+  Dimension 2 (21.6\% variance) was dominated by Richness (S),
+  representing the overall scale of the network.
+\item
+  Dimension 3 (15.5\% variance) was defined by the Predator-Prey Ratio,
+  capturing the balance of trophic roles (Node-level).
+\item
+  Dimension 4 (6.8\% variance) was driven by Mean Distance, reflecting
+  the efficiency or tightness of the wiring (Path-level).
+\item
+  Dimension 5 (5.2\% variance) was anchored by Herbivory, identifying
+  the functional dominance of specific energy channels.
+\item
+  Dimension 6 (4.4\% variance) was represented by MaxSim (Maximum
+  Similarity), a measure of trophic redundancy and functional overlap.
+\end{itemize}
+
+\subsection{Alignment with the Energy-Flow
+Hierarchy}\label{alignment-with-the-energy-flow-hierarchy}
+
+The distribution of these representative metrics across the PCA
+dimensions suggests that no single hierarchical scale dominates food-web
+variation. Instead, the network space is composed of a mixture of
+Path-level (S1, Distance), Geometry (Richness), and Node-level
+(PredPreyRatio, Herbivory, MaxSim) properties. Notably, S1 (a Path-level
+metric) explained more variance than Richness, suggesting that the
+arrangement of energy flow pathways is a more fundamental structural
+signature than simple species counts.
+
+\subsubsection{Differential Drivers of Ecological
+Stability}\label{differential-drivers-of-ecological-stability}
+
+The Random Forest models revealed a clear partitioning of structural
+influence, with different `pillars' emerging as the dominant predictors
+for each stability component (Table 2).
+
+Persistence (Robustness) was primarily governed by PredPreyRatio
+(\%IncMSE = 15.98) and Herbivory (\%IncMSE = 10.23). Surprisingly,
+network Richness had no predictive power for persistence (\%IncMSE =
+-2.49), suggesting that the balance of trophic roles is more critical
+for preventing extinction cascades than the total number of species.
+
+Dampening (ρ) was most sensitive to Herbivory (\%IncMSE = 17.28). This
+indicates that the strength and proportion of energy flow originating
+from the basal-consumer interface is the primary regulator of a
+network's local stability.
+
+Organization (SVD Complexity) was uniquely driven by MaxSim (\%IncMSE =
+13.12) and S1 (\%IncMSE = 12.56). This supports the view that
+informational complexity emerges from a combination of unique species
+roles (low similarity) and the total volume of energy entry pathways.
+
+\subsubsection{Directionality and Trophic
+Control}\label{directionality-and-trophic-control}
+
+Partial dependence analysis provided a mechanistic look at how these
+pillars operate:
+
+Trophic Balance: Persistence showed a {[}direction{]} response to the
+PredPreyRatio, indicating an optimal balance between consumers and
+resources is required to maintain structural integrity.
+
+Basal Channels: The system's ability to dampen perturbations (ρ)
+improved as Herbivory {[}increased/decreased{]}, suggesting that
+basal-heavy webs act as a buffer for energy surges.
+
+Specialization: SVD Complexity increased as MaxSim decreased, confirming
+that organised networks are those where species occupy distinct,
+non-overlapping trophic niches rather than redundant ones.
+
+Our multi-stage analysis reveals that food web stability is governed by
+a hierarchical architecture where structural modules serve as
+specialized functional levers. While Principal Component Analysis and
+Silhouette validation (k=10) confirm the high dimensionality of network
+space, the hierarchical clustering identifies four robust, independent
+modules (AU ≥ 0.94) that dictate system behaviour. We find a clear
+decoupling of network scale from network persistence; specifically, the
+Geometric Scale module (containing Richness and Connectance) accounts
+for significant structural variance but fails to predict any component
+of stability. Instead, the Energy Flow Engine (Module 3) and Trophic
+Redundancy (Module 4) emerge as the primary controllers. Specifically,
+node-level balance within the flow engine (PredPreyRatio and Herbivory)
+determines persistence and dampening, while the isolation of species
+roles (MaxSim) dictates organizational complexity. This suggests that
+the stability of an ecosystem is not a product of its size, but of the
+specific configuration of its energy channels and the redundancy of its
+functional roles.
+
+\begin{itemize}
+\tightlist
+\item
+  Redundancy / persistence
+\item
+  Pathway coupling / resistance
+\item
+  Organizational constraint / return
+\item
+  Reduced metric sets retain these axes
+\end{itemize}
+
+\section{Discussion}\label{discussion}
+
+\subsection{Why consensus on ``the best metric'' has remained
+elusive}\label{why-consensus-on-the-best-metric-has-remained-elusive}
+
+For more than four decades, the structure--stability debate has
+oscillated between competing structural descriptors, from connectance
+and complexity to modularity, omnivory, and trophic redundancy. Early
+theoretical work, most notably by May, suggested that increasing
+complexity should destabilise large systems, placing global descriptors
+such as connectance and interaction density at the centre of the debate.
+Subsequent empirical and theoretical studies, however, demonstrated
+stabilising roles for omnivory, weak links, and compartmentalisation
+(e.g.~McCann; Dunne), shifting attention toward pathway-level and
+geometric properties. Our results suggest that this apparent
+inconsistency does not arise because some metrics are ``wrong,'' but
+because they capture different dimensions of a fundamentally
+multi-layered architecture. Food-web structure is not a single axis
+ranging from simple to complex; it is a high-dimensional space in which
+node composition, pathway routing, geometric constraint, and emergent
+organisation vary semi-independently. Metrics that have historically
+been treated as competitors---such as richness, connectance, omnivory,
+and redundancy---are in fact anchors of distinct structural dimensions.
+This explains why no single metric consistently predicts ``stability''
+across studies: stability itself is not singular. When studies measure
+persistence (e.g.~secondary extinctions), node-level balance and
+redundancy dominate. When they measure local stability or damping,
+path-level coupling and basal channel dominance matter more. When they
+measure recovery or informational organisation, global heterogeneity and
+role differentiation become decisive. The search for a universal
+structural predictor of stability has therefore been misguided---not
+because structure is unimportant, but because both structure and
+stability are multidimensional.
+
+\subsection{Reconciling contrasting structure--stability
+relationships}\label{reconciling-contrasting-structurestability-relationships}
+
+A persistent challenge in the literature has been that similar metrics
+sometimes show opposite associations with stability. For example,
+omnivory has been reported as stabilising in some contexts and
+destabilising in others. Within our framework, this variability is
+expected. Path-level coupling (e.g.~omnivory motifs) primarily relates
+to resistance---the containment or diffusion of perturbations---rather
+than persistence per se. A structure that dampens oscillations may not
+prevent extinction cascades, and vice versa. Similarly, our finding that
+richness contributes substantially to structural variance but fails to
+predict any stability component underscores an important decoupling:
+network size is not synonymous with robustness. This result aligns with
+empirical syntheses showing that species richness alone poorly predicts
+secondary extinction resistance unless accompanied by trophic balance or
+redundancy. In our analyses, the predator--prey ratio and
+herbivory---metrics reflecting trophic shape and basal channel
+dominance---were far stronger determinants of persistence and damping
+than richness itself. This helps reconcile why biodiversity--stability
+studies sometimes find positive, neutral, or context-dependent
+relationships. Richness operates primarily as a geometric scaling
+variable. Its effect on stability depends on how additional species
+alter the configuration of energy channels---whether they add
+redundancy, elongate chains, skew trophic balance, or increase coupling.
+Without specifying which structural dimension richness modifies, its
+stability effect is indeterminate.
+
+\subsection{Implications for biodiversity--stability
+theory}\label{implications-for-biodiversitystability-theory}
+
+Our results contribute to a long-standing tension between the
+``complexity begets instability'' argument and more recent views that
+diversity enhances resilience. The resolution lies in recognising that
+different dimensions of complexity influence different stability
+components. Redundancy and trophic similarity (low MaxSim heterogeneity)
+enhance persistence by providing functional compensation following
+species loss. Pathway multiplicity and basal channel dominance regulate
+resistance by shaping how perturbations propagate. Global organisational
+heterogeneity (captured by SVD complexity and spectral properties)
+influences return dynamics by constraining system-wide oscillations and
+reassembly patterns. In this sense, complexity is neither inherently
+stabilising nor destabilising. Instead, distinct forms of complexity map
+onto distinct dynamical outcomes. Connectance, motif structure,
+redundancy, and informational heterogeneity are not interchangeable
+proxies for ``complexity,'' but structurally and mechanistically
+distinct attributes. By explicitly embedding food-web metrics within an
+energy-flow hierarchy, our framework reframes biodiversity--stability
+theory. Stability emerges not from species number alone, but from the
+configuration of energy channels and the distribution of functional
+roles across those channels. A bottom-heavy web with balanced
+predator--prey ratios and differentiated trophic niches may achieve both
+persistence and damping, even at moderate richness. Conversely, a
+species-rich but top-heavy or weakly differentiated web may remain
+fragile.
+
+\subsection{Structural modularity and the minimum sufficient
+set}\label{structural-modularity-and-the-minimum-sufficient-set}
+
+A key practical outcome of our analysis is the identification of six
+structural pillars that capture nearly 85\% of the variation in network
+architecture. Despite starting with 31 commonly used metrics, much of
+their variance collapses into a smaller number of independent axes.
+Hierarchical clustering further revealed robust modules corresponding to
+trophic balance, pathway structure, geometric scale, and redundancy.
+This dimensional reduction has two important implications. First, it
+demonstrates that many commonly reported metrics are statistically
+redundant. Reporting both connectance and L/S, or multiple correlated
+distance measures, adds little new information. Second, it provides a
+principled route toward a minimum sufficient descriptor set tailored to
+ecological questions. Rather than selecting metrics by convention,
+researchers can select representatives of the relevant structural scale.
+
+\subsection{Guidance for metric choice based on ecological
+question}\label{guidance-for-metric-choice-based-on-ecological-question}
+
+If the question concerns extinction cascades or tolerance to species
+loss (persistence): prioritise node-level balance and redundancy metrics
+(e.g.~predator--prey ratio, herbivory, similarity). If the question
+concerns perturbation propagation or damping (resistance): focus on
+path-level and basal-channel metrics (e.g.~pathway multiplicity,
+omnivory, mean distance). If the question concerns recovery dynamics or
+organisational reassembly (return): emphasise global heterogeneity and
+spectral measures (e.g.~SVD complexity, spectral radius). If the
+question concerns comparative architecture across systems: use geometric
+anchors (e.g.~richness) but interpret them as scale descriptors rather
+than stability predictors. This scale-explicit approach shifts the
+emphasis from asking ``Which metric best predicts stability?'' to
+``Which structural dimension corresponds to the stability mechanism of
+interest?''
+
+\subsection{Limitations and future
+directions}\label{limitations-and-future-directions}
+
+While our framework clarifies structural dimensionality, it remains
+grounded in static network topology. Real ecosystems exhibit interaction
+strengths, temporal variability, adaptive rewiring, and environmental
+forcing. Incorporating weighted networks and dynamic simulations would
+strengthen the mechanistic link between structural axes and realised
+dynamics. Additionally, the separation of persistence, resistance, and
+return is analytically useful but biologically intertwined. For example,
+structures that enhance resistance may indirectly support persistence by
+preventing large cascades. Future work could explore how these
+components interact across environmental gradients and disturbance
+regimes. Finally, extending this framework beyond trophic networks to
+mutualistic, host--parasite, or multilayer networks would test its
+generality. The energy-flow hierarchy proposed here may represent a
+broader organising principle of ecological interaction systems.
+
+\section{Conclusion}\label{conclusion}
+
+Food-web stability is not governed by a single structural property, but
+by multiple, hierarchically organised dimensions of network
+architecture. Node composition, pathway routing, geometric constraint,
+and emergent organisation each represent distinct levers through which
+ecosystems maintain persistence, resist perturbation, and reorganise
+following disturbance.
+
+By explicitly mapping structural scale to stability mechanism, we
+reconcile decades of seemingly conflicting findings in the
+structure--stability literature. The key insight is not that one metric
+is superior, but that different metrics answer different ecological
+questions. Recognising and embracing this multidimensionality provides a
+coherent foundation for future biodiversity--stability research and a
+practical framework for selecting network descriptors based on mechanism
+rather than tradition.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2917}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}@{}}
+\caption{Network properties used for
+analysis.}\label{tbl-metrics}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Dimension
@@ -390,9 +989,8 @@ Supporting Literature
 \bottomrule\noalign{}
 \endlastfoot
 Complexity \& Redundancy & Connectance, MaxSim, Links &
-\textbf{Positive:} High redundancy allows for ``functional
-compensation'' if one species is lost. & Dunne et al. (2002); McCann
-(2000) \\
+\textbf{Positive:} High redundancy allows for `functional compensation'
+if one species is lost. & Dunne et al. (2002); McCann (2000) \\
 Compartmentalization & Clust, Modularity,~ρ & \textbf{Positive:} Limits
 the spread of perturbations; local collapses don't become global. &
 Stouffer \& Bascompte (2011) \\
@@ -400,156 +998,88 @@ Feedback \& Coupling & Omnivory (S2), Loop, ChLen & \textbf{Variable:}
 Omnivory can stabilize by diffusing energy, but long chains can amplify
 oscillations. & McCann (2000); Neutel et al. (2002) \\
 Hierarchy \& Shape & Prey:Predator, Basal, Top & \textbf{Critical:}
-``Bottom-heavy'' systems are generally more stable; inverted pyramids
-are fragile. & \\
+`Bottom-heavy' systems are generally more stable; inverted pyramids are
+fragile. & \\
 Information Heterogeneity & SVD Complexity, LinkSD & \textbf{Positive:}
-Diverse interaction strengths prevent ``resonant'' instabilities. &
+Diverse interaction strengths prevent `resonant' instabilities. &
 Ulanowicz (2001) \\
 \end{longtable}
 
-\section{Materials and Methods}\label{materials-and-methods}
+To better link network structure to ecosystem function, we grouped
+commonly used food web metrics into four functional categories
+reflecting their ecological interpretation. Node-level metrics (e.g.,
+basal, top, intermediate, herbivory, cannibal, trophic level,
+centrality, MaxSim) capture the roles and properties of individual
+species. Path-level metrics (\emph{e.g.,} food chain lengths, motifs,
+omnivory, loops, prey-to-predator ratios) describe how energy and
+interactions flow through the network. Geometry metrics (e.g.,
+connectance, link density, clustering, variation in links, diameter,
+intervality, spectral radius, SVD complexity) quantify the overall
+network arrangement and topological organization. Finally,
+behavioural/system-level metrics (e.g., robustness, spectral radius, SVD
+complexity) capture emergent properties such as resilience, redundancy,
+and dynamic stability. This framework provides a transparent,
+ecologically interpretable mapping from species-level roles and
+interaction paths to system-level behaviour, facilitates identification
+of a Minimum Sufficient Set of descriptors, and links network structure
+to long-standing questions in the stability--complexity debate.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.0322}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3682}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4588}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1368}}@{}}
-\caption{An informative caption about the different network properties.
-We use a combination of metrics from both the original Vermaat et al.
-(2009) paper as well as including those that have been identified by
-Thompson et al. (2012) and have been linked to emerging ecosystem
-properties such as stability}\label{tbl-properties}\tabularnewline
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\caption{Classification of food web metrics into functional categories.
+Node-level metrics capture species roles; path-level metrics capture
+energy or interaction flows; geometry metrics describe network
+structure; and behaviour/system-level metrics capture emergent stability
+and resilience.}\label{tbl-classification}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-Label
+Category
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Definition
+Metrics
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Ecological Significance
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Reference (for maths), can make footnotes probs
+Rationale
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-Label
+Category
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Definition
+Metrics
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Ecological Significance
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Reference (for maths), can make footnotes probs
+Rationale
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Basal & Percentage of basal taxa, defined as species who have a
-vulnerability of zero & Measures the energy entry points; high basal \%
-suggests a bottom-heavy, potentially more stable energy base. & \\
-Connectance & \(L/S^2\), where \(S\) is the number of species and \(L\)
-the number of links & & \\
-Cannibal & Percentage of species that are cannibals & & \\
-ChLen & Mean food chain length, averaged over all species (where a food
-chain is defined as a continuous path from a `basal' to a `top' species)
-& Reflects energy transfer efficiency. Longer chains may be more prone
-to top-down trophic cascades. & \\
-ChSD & Standard deviation of ChLen & High SD indicates a mix of energy
-pathways, which can buffer the system & \\
-ChNum & log number of food chains & & \\
-Clust & mean clustering coefficient (probability that two taxa linked to
-the same taxon are also linked) & Quantifies local redundancy; high
-clustering can buffer the network against the loss of specific
-interaction pathways. & \textbf{TODO}
-
-Watts \& Strogatz (1998) \\
-GenSD & Normalized standard deviation of generality of a species
-standardized by \(L/S\) & Interaction asymmetry. High variance in how
-links are distributed often points to the presence of `hubs' (highly
-connected species), which makes the network robust to random loss but
-vulnerable to targeted `keystone' removal. & Williams \& Martinez
-(2008) \\
-Herbivore & Percentage of herbivores plus detritivores (taxa that feed
-only on basal taxa) & & \\
-Intermediate & Percentage of intermediate taxa (with both consumers and
-resources) & & \\
-LinkSD & Normalized standard deviation of links (number of consumers
-plus resources per taxon) & Interaction asymmetry. High variance in how
-links are distributed often points to the presence of `hubs' (highly
-connected species), which makes the network robust to random loss but
-vulnerable to targeted `keystone' removal. & \\
-Loop & Percentage of taxa in loops (food chains in which a taxon occurs
-twice) & High percentages of loops can lead to feedback cycles (positive
-or negative) that either amplify or dampen oscillations, directly
-impacting local stability. & \\
-L/S & links per species & & \\
-MaxSim & Mean of the maximum trophic similarity of each taxon to other
-taxa, the number of predators and prey shared by a pair of species
-divided by their total number of predators and prey & Indicates
-functional redundancy; high similarity suggests species are replaceable,
-increasing robustness to individual extinctions. & \textbf{TODO}
-
-Yodzis \& Winemiller (1999) \\
-Omnivory & Percentage of omnivores (taxa that feed on \(\geq\) 2 taxa
-with different trophic levels) & Links to coupling of energy channels;
-historically debated, but often found to stabilize food webs by
-diffusing top-down pressure. & McCann (2000) \\
-Path & characteristic path length, the mean shortest food chain length
-between species pairs & & \\
-Richness & Number of nodes in the network & & \\
-TL & Prey-weighted trophic level averaged across taxa & & Williams \&
-Martinez (2004) \\
-Top & Percentage of top taxa (taxa without consumers) & & \\
-VulSD & Normalized standard deviation of vulnerability of a species
-standardized by \(L/S\) & Interaction asymmetry. High variance in how
-links are distributed often points to the presence of `hubs' (highly
-connected species), which makes the network robust to random loss but
-vulnerable to targeted `keystone' removal. & \\
-Links & The number of links in the network & & \\
-Diameter & Diameter can also be measured as the average of the distances
-between each pair of nodes in the network & & Delmas et al. (2019) \\
-\(\rho\) & Spectral radius is a a conceptual analog to nestedness. It is
-defined as the absolute value of the largest real part of the
-eigenvalues of the \emph{undirected} adjacency matrix & Acts as a proxy
-for system-wide resilience; captures the speed at which a system returns
-to equilibrium after a small pulse perturbation. & Staniczenko et al.
-(2013) \\
-Complexity & SVD complexity of a network, defined as the Pielou entropy
-of its singular values & Captures structural heterogeneity;
-distinguishes between a truly complex system and one that is merely
-large or `random'. & Strydom et al. (2021) \\
-Centrality & Centrality is a measure of how `influential' a species is,
-under various definitions of `influence'. & Centrality can help in
-quantifying the importance of species in a network & Estrada \& Bodin
-(2008) \\
-S1 & Number of linear chains & Building blocks of stability
-(compartmentalisation, Stouffer and Bascompte?) & Stouffer et al. (2007)
-Milo et al. (2002) \\
-S2 & Number of omnivory motifs & Building blocks of stability
-(compartmentalisation, Stouffer and Bascompte?) & Stouffer et al. (2007)
-Milo et al. (2002) \\
-S4 & Number of apparent competition motifs & Building blocks of
-stability (compartmentalisation, Stouffer and Bascompte?) & Stouffer et
-al. (2007) Milo et al. (2002) \\
-S5 & Number of direct competition motifs & Building blocks of stability
-(compartmentalisation, Stouffer and Bascompte?) & Stouffer et al. (2007)
-Milo et al. (2002) \\
-Intervality & The degree to which the prey in a food web can be ordered
-so that all species can be placed along a single dimension & Measures
-niche dimension; high intervality suggests a simpler organization where
-species feeding habits are constrained by a single trait (like body
-size). & Stouffer et al. (2006) \\
-Prey:predator & Ratio of prey (basal + intermediate) to predators (top +
-intermediate) & A measure of food web `shape'. Values \textless1 imply
-an inverted structure and might indicate instability & \\
-Robustness & Minimum level of secondary extinction that occurs in
-response to a particular perturbation & & Jonsson et al. (2015) \\
+Node-level & basal, top, intermediate, herbivory, cannibal, TL,
+centrality, MaxSim & Metrics describing individual species and their
+roles in the network, including trophic position (TL), feeding type
+(basal, herbivory, cannibal), influence (centrality), and functional
+redundancy (MaxSim). \\
+Path level & ChLen, ChSD, ChNum, path, S1, S2, S4, S5, omnivory, loops,
+predpreyRatio, distance & Metrics describing energy flow or interaction
+paths through the network, including food chain lengths, motifs,
+omnivory, loops, and prey-predator ratios. Capture how energy and
+interactions move across nodes. \\
+Geometry/topology & connectance, l\_S, links, richness, Clust, GenSD,
+VulSD, LinkSD, diameter, intervals & Metrics describing~\textbf{overall
+network structure}, including density (connectance, links, L/S), size
+(richness), local clustering, link asymmetry, network distances
+(diameter), and niche structure (intervals). Capture the `shape' of the
+network. \\
+Behaviour/system-level & ρ, complexity, robustness & Metrics describing
+emergent properties of the network, including system-wide stability,
+resilience, and structural complexity. Capture how the network responds
+to perturbations or organizes itself at a global level. \\
 \end{longtable}
 
 {
 
-\begin{longtable}[]{@{}llll@{}}
+\begin{longtable}[]{@{}llrr@{}}
 
 \caption{\label{tbl-corr}Here is a table showing the correlation of the
 different network properties with the first three dimensions of the PCA}
@@ -557,44 +1087,221 @@ different network properties with the first three dimensions of the PCA}
 \tabularnewline
 
 \toprule\noalign{}
-Property & PCA 1 (30\%) & PCA 2 (20\%) & PCA 3 (17\%) \\
+Property & dimension & quanti.correlation & quanti.p.value \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-richness & 0.3 & \textbf{0.89} & -0.16 \\
-links & 0.62 & \textbf{0.72} & 0.04 \\
-connectance & 0.52 & -0.62 & 0.49 \\
-diameter & \textbf{0.74} & 0.38 & -0.3 \\
-complexity & -0.52 & 0.09 & -0.49 \\
-distance & 0 & 0.3 & 0.18 \\
-basal & -0.47 & 0.29 & \textbf{0.75} \\
-top & -0.58 & 0.2 & -0.24 \\
-intermediate & \textbf{0.69} & -0.35 & -0.52 \\
-predpreyRatio & -0.26 & 0.27 & \textbf{0.76} \\
-herbivory & -0.54 & 0.22 & 0.07 \\
-omnivory & \textbf{0.78} & -0.23 & -0.21 \\
-cannibal & \textbf{0.72} & 0.07 & 0.31 \\
-l\_S & \textbf{0.83} & 0.47 & 0.23 \\
-GenSD & -0.4 & 0.58 & 0.45 \\
-VulSD & -0.41 & 0.58 & -0.26 \\
-TL & 0.52 & -0.24 & \textbf{-0.77} \\
-ChLen & 0.51 & -0.41 & -0.62 \\
-ChSD & 0.32 & 0.2 & -0.45 \\
-ChNum & -0.2 & \textbf{0.8} & -0.3 \\
-path & 0.26 & 0.4 & -0.26 \\
-LinkSD & -0.27 & \textbf{0.74} & -0.23 \\
-S1 & \textbf{0.9} & 0.03 & 0.03 \\
-S2 & \textbf{0.84} & -0.07 & 0.36 \\
-S4 & 0.61 & 0.49 & 0.28 \\
-S5 & \textbf{0.67} & 0.39 & 0.49 \\
-ρ & 0.57 & -0.43 & 0.48 \\
-centrality & -0.24 & \textbf{-0.67} & 0.18 \\
-loops & \textbf{0.8} & 0.32 & 0.12 \\
-robustness & 0.05 & -0.05 & 0.66 \\
-intervals & 0.45 & \textbf{0.7} & -0.05 \\
-MaxSim & -0.03 & -0.17 & 0.6 \\
-Clust & \textbf{0.69} & -0.33 & 0.06 \\
+richness & Dim.1 & 0.38 & NA \\
+richness & Dim.2 & 0.84 & NA \\
+richness & Dim.3 & -0.27 & NA \\
+richness & Dim.4 & 0.04 & NA \\
+richness & Dim.5 & -0.05 & NA \\
+links & Dim.1 & 0.68 & NA \\
+links & Dim.2 & 0.68 & NA \\
+links & Dim.3 & 0.01 & NA \\
+links & Dim.4 & 0.03 & NA \\
+links & Dim.5 & 0.12 & NA \\
+connectance & Dim.1 & 0.40 & NA \\
+connectance & Dim.2 & -0.56 & NA \\
+connectance & Dim.3 & 0.60 & NA \\
+connectance & Dim.4 & -0.04 & NA \\
+connectance & Dim.5 & 0.10 & NA \\
+diameter & Dim.1 & 0.80 & NA \\
+diameter & Dim.2 & 0.27 & NA \\
+diameter & Dim.3 & -0.24 & NA \\
+diameter & Dim.4 & 0.02 & NA \\
+diameter & Dim.5 & 0.11 & NA \\
+distance & Dim.1 & -0.01 & NA \\
+distance & Dim.2 & 0.33 & NA \\
+distance & Dim.3 & 0.08 & NA \\
+distance & Dim.4 & 0.59 & NA \\
+distance & Dim.5 & 0.40 & NA \\
+basal & Dim.1 & -0.52 & NA \\
+basal & Dim.2 & 0.44 & NA \\
+basal & Dim.3 & 0.65 & NA \\
+basal & Dim.4 & 0.22 & NA \\
+basal & Dim.5 & -0.19 & NA \\
+top & Dim.1 & -0.54 & NA \\
+top & Dim.2 & 0.21 & NA \\
+top & Dim.3 & -0.38 & NA \\
+top & Dim.4 & -0.55 & NA \\
+top & Dim.5 & 0.09 & NA \\
+intermediate & Dim.1 & 0.72 & NA \\
+intermediate & Dim.2 & -0.48 & NA \\
+intermediate & Dim.3 & -0.35 & NA \\
+intermediate & Dim.4 & 0.10 & NA \\
+intermediate & Dim.5 & 0.11 & NA \\
+predpreyRatio & Dim.1 & -0.31 & NA \\
+predpreyRatio & Dim.2 & 0.39 & NA \\
+predpreyRatio & Dim.3 & 0.71 & NA \\
+predpreyRatio & Dim.4 & 0.31 & NA \\
+predpreyRatio & Dim.5 & -0.27 & NA \\
+herbivory & Dim.1 & -0.51 & NA \\
+herbivory & Dim.2 & 0.27 & NA \\
+herbivory & Dim.3 & 0.02 & NA \\
+herbivory & Dim.4 & -0.17 & NA \\
+herbivory & Dim.5 & 0.55 & NA \\
+omnivory & Dim.1 & 0.77 & NA \\
+omnivory & Dim.2 & -0.31 & NA \\
+omnivory & Dim.3 & -0.14 & NA \\
+omnivory & Dim.4 & 0.05 & NA \\
+omnivory & Dim.5 & -0.15 & NA \\
+cannibal & Dim.1 & 0.69 & NA \\
+cannibal & Dim.2 & 0.07 & NA \\
+cannibal & Dim.3 & 0.40 & NA \\
+cannibal & Dim.4 & -0.39 & NA \\
+cannibal & Dim.5 & 0.00 & NA \\
+l\_S & Dim.1 & 0.84 & NA \\
+l\_S & Dim.2 & 0.45 & NA \\
+l\_S & Dim.3 & 0.26 & NA \\
+l\_S & Dim.4 & -0.09 & NA \\
+l\_S & Dim.5 & 0.03 & NA \\
+GenSD & Dim.1 & -0.39 & NA \\
+GenSD & Dim.2 & 0.67 & NA \\
+GenSD & Dim.3 & 0.33 & NA \\
+GenSD & Dim.4 & 0.21 & NA \\
+GenSD & Dim.5 & -0.32 & NA \\
+VulSD & Dim.1 & -0.34 & NA \\
+VulSD & Dim.2 & 0.56 & NA \\
+VulSD & Dim.3 & -0.42 & NA \\
+VulSD & Dim.4 & -0.46 & NA \\
+VulSD & Dim.5 & 0.17 & NA \\
+TL & Dim.1 & 0.57 & NA \\
+TL & Dim.2 & -0.40 & NA \\
+TL & Dim.3 & -0.66 & NA \\
+TL & Dim.4 & -0.05 & NA \\
+TL & Dim.5 & -0.08 & NA \\
+ChLen & Dim.1 & 0.54 & NA \\
+ChLen & Dim.2 & -0.54 & NA \\
+ChLen & Dim.3 & -0.49 & NA \\
+ChLen & Dim.4 & 0.12 & NA \\
+ChLen & Dim.5 & -0.16 & NA \\
+ChSD & Dim.1 & 0.37 & NA \\
+ChSD & Dim.2 & 0.11 & NA \\
+ChSD & Dim.3 & -0.45 & NA \\
+ChSD & Dim.4 & 0.40 & NA \\
+ChSD & Dim.5 & -0.10 & NA \\
+ChNum & Dim.1 & -0.11 & NA \\
+ChNum & Dim.2 & 0.76 & NA \\
+ChNum & Dim.3 & -0.47 & NA \\
+ChNum & Dim.4 & -0.24 & NA \\
+ChNum & Dim.5 & -0.15 & NA \\
+path & Dim.1 & 0.31 & NA \\
+path & Dim.2 & 0.34 & NA \\
+path & Dim.3 & -0.36 & NA \\
+path & Dim.4 & 0.54 & NA \\
+path & Dim.5 & 0.35 & NA \\
+LinkSD & Dim.1 & -0.19 & NA \\
+LinkSD & Dim.2 & 0.72 & NA \\
+LinkSD & Dim.3 & -0.39 & NA \\
+LinkSD & Dim.4 & -0.05 & NA \\
+LinkSD & Dim.5 & -0.29 & NA \\
+S1 & Dim.1 & 0.90 & NA \\
+S1 & Dim.2 & -0.03 & NA \\
+S1 & Dim.3 & 0.14 & NA \\
+S1 & Dim.4 & -0.07 & NA \\
+S1 & Dim.5 & 0.08 & NA \\
+S2 & Dim.1 & 0.79 & NA \\
+S2 & Dim.2 & -0.06 & NA \\
+S2 & Dim.3 & 0.47 & NA \\
+S2 & Dim.4 & -0.26 & NA \\
+S2 & Dim.5 & -0.06 & NA \\
+S4 & Dim.1 & 0.62 & NA \\
+S4 & Dim.2 & 0.48 & NA \\
+S4 & Dim.3 & 0.28 & NA \\
+S4 & Dim.4 & -0.26 & NA \\
+S4 & Dim.5 & 0.18 & NA \\
+S5 & Dim.1 & 0.66 & NA \\
+S5 & Dim.2 & 0.42 & NA \\
+S5 & Dim.3 & 0.52 & NA \\
+S5 & Dim.4 & -0.08 & NA \\
+S5 & Dim.5 & 0.00 & NA \\
+centrality & Dim.1 & -0.30 & NA \\
+centrality & Dim.2 & -0.61 & NA \\
+centrality & Dim.3 & 0.26 & NA \\
+centrality & Dim.4 & 0.07 & NA \\
+centrality & Dim.5 & 0.46 & NA \\
+loops & Dim.1 & 0.81 & NA \\
+loops & Dim.2 & 0.28 & NA \\
+loops & Dim.3 & 0.17 & NA \\
+loops & Dim.4 & -0.09 & NA \\
+loops & Dim.5 & 0.12 & NA \\
+intervals & Dim.1 & 0.51 & NA \\
+intervals & Dim.2 & 0.65 & NA \\
+intervals & Dim.3 & -0.11 & NA \\
+intervals & Dim.4 & 0.24 & NA \\
+intervals & Dim.5 & 0.18 & NA \\
+MaxSim & Dim.1 & -0.12 & NA \\
+MaxSim & Dim.2 & -0.07 & NA \\
+MaxSim & Dim.3 & 0.57 & NA \\
+MaxSim & Dim.4 & -0.14 & NA \\
+MaxSim & Dim.5 & 0.21 & NA \\
+Clust & Dim.1 & 0.64 & NA \\
+Clust & Dim.2 & -0.35 & NA \\
+Clust & Dim.3 & 0.16 & NA \\
+Clust & Dim.4 & 0.01 & NA \\
+Clust & Dim.5 & -0.40 & NA \\
+S1 & Dim.1 & 0.90 & 0.0000000 \\
+l\_S & Dim.1 & 0.84 & 0.0000000 \\
+loops & Dim.1 & 0.81 & 0.0000000 \\
+diameter & Dim.1 & 0.80 & 0.0000000 \\
+S2 & Dim.1 & 0.79 & 0.0000000 \\
+omnivory & Dim.1 & 0.77 & 0.0000000 \\
+intermediate & Dim.1 & 0.72 & 0.0000004 \\
+cannibal & Dim.1 & 0.69 & 0.0000015 \\
+links & Dim.1 & 0.68 & 0.0000030 \\
+S5 & Dim.1 & 0.66 & 0.0000077 \\
+Clust & Dim.1 & 0.64 & 0.0000170 \\
+S4 & Dim.1 & 0.62 & 0.0000282 \\
+TL & Dim.1 & 0.57 & 0.0001879 \\
+ChLen & Dim.1 & 0.54 & 0.0005272 \\
+intervals & Dim.1 & 0.51 & 0.0009658 \\
+connectance & Dim.1 & 0.40 & 0.0123944 \\
+richness & Dim.1 & 0.38 & 0.0182160 \\
+ChSD & Dim.1 & 0.37 & 0.0205346 \\
+VulSD & Dim.1 & -0.34 & 0.0348758 \\
+GenSD & Dim.1 & -0.39 & 0.0150597 \\
+herbivory & Dim.1 & -0.51 & 0.0010542 \\
+basal & Dim.1 & -0.52 & 0.0009130 \\
+top & Dim.1 & -0.54 & 0.0004175 \\
+richness & Dim.2 & 0.84 & 0.0000000 \\
+ChNum & Dim.2 & 0.76 & 0.0000000 \\
+LinkSD & Dim.2 & 0.72 & 0.0000003 \\
+links & Dim.2 & 0.68 & 0.0000030 \\
+GenSD & Dim.2 & 0.67 & 0.0000051 \\
+intervals & Dim.2 & 0.65 & 0.0000111 \\
+VulSD & Dim.2 & 0.56 & 0.0002484 \\
+S4 & Dim.2 & 0.48 & 0.0020815 \\
+l\_S & Dim.2 & 0.45 & 0.0049841 \\
+basal & Dim.2 & 0.44 & 0.0062051 \\
+S5 & Dim.2 & 0.42 & 0.0091132 \\
+predpreyRatio & Dim.2 & 0.39 & 0.0142971 \\
+path & Dim.2 & 0.34 & 0.0381102 \\
+distance & Dim.2 & 0.33 & 0.0426262 \\
+Clust & Dim.2 & -0.35 & 0.0303883 \\
+TL & Dim.2 & -0.40 & 0.0139488 \\
+intermediate & Dim.2 & -0.48 & 0.0023996 \\
+ChLen & Dim.2 & -0.54 & 0.0005074 \\
+connectance & Dim.2 & -0.56 & 0.0002624 \\
+centrality & Dim.2 & -0.61 & 0.0000504 \\
+predpreyRatio & Dim.3 & 0.71 & 0.0000006 \\
+basal & Dim.3 & 0.65 & 0.0000122 \\
+connectance & Dim.3 & 0.60 & 0.0000804 \\
+MaxSim & Dim.3 & 0.57 & 0.0002078 \\
+S5 & Dim.3 & 0.52 & 0.0008330 \\
+S2 & Dim.3 & 0.47 & 0.0029951 \\
+cannibal & Dim.3 & 0.40 & 0.0122774 \\
+GenSD & Dim.3 & 0.33 & 0.0416849 \\
+intermediate & Dim.3 & -0.35 & 0.0293668 \\
+path & Dim.3 & -0.36 & 0.0276975 \\
+top & Dim.3 & -0.38 & 0.0201240 \\
+LinkSD & Dim.3 & -0.39 & 0.0148989 \\
+VulSD & Dim.3 & -0.42 & 0.0094597 \\
+ChSD & Dim.3 & -0.45 & 0.0047583 \\
+ChNum & Dim.3 & -0.47 & 0.0026959 \\
+ChLen & Dim.3 & -0.49 & 0.0018937 \\
+TL & Dim.3 & -0.66 & 0.0000064 \\
 
 \end{longtable}
 
@@ -606,7 +1313,7 @@ Notebook}}
 
 \begin{figure}[H]
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{figures/pca_vermaat.png}}
+{\centering \pandocbounded{\includegraphics[keepaspectratio,alt={VERMAAT networks only}]{figures/pca_vermaat.png}}
 
 }
 
@@ -616,7 +1323,7 @@ Notebook}}
 
 \begin{figure}[H]
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{figures/pca_allNetworks.png}}
+{\centering \pandocbounded{\includegraphics[keepaspectratio,alt={All networks. Vermaat subset = using only the structural measures from Vermaat}]{figures/pca_allNetworks.png}}
 
 }
 
@@ -625,18 +1332,21 @@ measures from Vermaat}
 
 \end{figure}%
 
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio,alt={Cluster}]{figures/metric_hclust.png}}
+
+}
+
+\caption{Cluster}
+
+\end{figure}%
+
 \section*{References}\label{references}
 \addcontentsline{toc}{section}{References}
 
 \protect\phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
-\bibitem[\citeproctext]{ref-delmasAnalysingEcologicalNetworks2019}
-Delmas, E., Besson, M., Brice, M.-H., Burkle, L. A., Riva, G. V. D.,
-Fortin, M.-J., Gravel, D., Guimarães, P. R., Hembry, D. H., Newman, E.
-A., Olesen, J. M., Pires, M. M., Yeakel, J. D., \& Poisot, T. (2019).
-Analysing ecological networks of species interactions. \emph{Biological
-Reviews}, \emph{94}(1), 16--36. \url{https://doi.org/10.1111/brv.12433}
-
 \bibitem[\citeproctext]{ref-dunneFoodwebStructureNetwork2002}
 Dunne, J. A., Williams, R. J., \& Martinez, N. D. (2002). Food-web
 structure and network theory: {The} role of connectance and size.
@@ -675,11 +1385,6 @@ Neutel, A.-M., Heesterbeek, J. A. P., \& De Ruiter, P. C. (2002).
 Stability in {Real Food Webs}: {Weak Links} in {Long Loops}.
 \emph{Science}, \emph{296}(5570), 1120--1123.
 \url{https://doi.org/10.1126/science.1068326}
-
-\bibitem[\citeproctext]{ref-staniczenkoGhostNestednessEcological2013}
-Staniczenko, P. P. A., Kopp, J. C., \& Allesina, S. (2013). The ghost of
-nestedness in ecological networks. \emph{Nature Communications},
-\emph{4}(1), 1391. \url{https://doi.org/10.1038/ncomms2422}
 
 \bibitem[\citeproctext]{ref-stoufferCompartmentalizationIncreasesFoodweb2011}
 Stouffer, D. B., \& Bascompte, J. (2011). Compartmentalization increases
@@ -734,12 +1439,6 @@ Williams, R. J., \& Martinez, N. D. (2004). Limits to {Trophic Levels}
 and {Omnivory} in {Complex Food Webs}: {Theory} and {Data}. \emph{The
 American Naturalist}, \emph{163}(3), 458--468.
 \url{https://doi.org/10.1086/381964}
-
-\bibitem[\citeproctext]{ref-williamsSuccessItsLimits2008a}
-Williams, R. J., \& Martinez, N. D. (2008). Success and its limits among
-structural models of complex food webs. \emph{The Journal of Animal
-Ecology}, \emph{77}(3), 512--519.
-\url{https://doi.org/10.1111/j.1365-2656.2008.01362.x}
 
 \bibitem[\citeproctext]{ref-yodzisSearchOperationalTrophospecies1999}
 Yodzis, P., \& Winemiller, K. O. (1999). In {Search} of {Operational
