@@ -133,7 +133,7 @@ To identify the dominant axes of structural variation within our dataset, we exp
 
 To identify a non-redundant subset of structural descriptors, we performed a Principal Component Analysis (PCA) on the scaled structural metrics. We excluded stability-related outcomes (*e.g.,* robustness, ρ, and SVD complexity) from the PCA to ensure the resulting dimensions represented pure physical architecture.
 
-We determined the number of significant structural dimensions using Kaiser’s Criterion (eigenvalues >1) and an analysis of the scree plot 'elbow'. To select a representative "anchor" for each significant dimension, we programmatically identified the metric with the highest contribution percentage (cos^2) to each Principal Component (PC). In cases where a single metric dominated multiple dimensions, the next highest unique contributor was selected to ensure a parsimonious yet comprehensive subset of predictors.
+We determined the number of significant structural dimensions using Kaiser’s Criterion (eigenvalues >1) and an analysis of the scree plot 'elbow'. To select a representative anchor for each significant dimension, we programmatically identified the metric with the highest contribution percentage (cos^2) to each Principal Component (PC). In cases where a single metric dominated multiple dimensions, the next highest unique contributor was selected to ensure a parsimonious yet comprehensive subset of predictors.
 
 ## Linking Structure to Stability Components
 
@@ -149,7 +149,7 @@ Each stability component was modelled as a function of the six 'Structural Pilla
 
 ### Directional Effects
 
-To interpret the ecological nature of these relationships, we generated Partial Dependence Plots (PDPs). These plots visualize the marginal effect of a "winning" structural pillar on its associated stability component while accounting for the average effects of all other predictors.
+To interpret the ecological nature of these relationships, we generated Partial Dependence Plots (PDPs). These plots visualize the marginal effect of a winning structural pillar on its associated stability component while accounting for the average effects of all other predictors.
 
 ## Validation of Structural Modularity
 
@@ -166,13 +166,13 @@ The PCA revealed a high-dimensional structural space where the first six princip
 * Dimension 1 (31.6% variance) was anchored by S1 (the number of pathways from basal species), representing the total volume of energy entry points.
 * Dimension 2 (21.6% variance) was dominated by Richness (S), representing the overall scale of the network.
 * Dimension 3 (15.5% variance) was defined by the Predator-Prey Ratio, capturing the balance of trophic roles (Node-level).
-* Dimension 4 (6.8% variance) was driven by Mean Distance, reflecting the efficiency or "tightness" of the wiring (Path-level).
+* Dimension 4 (6.8% variance) was driven by Mean Distance, reflecting the efficiency or tightness of the wiring (Path-level).
 * Dimension 5 (5.2% variance) was anchored by Herbivory, identifying the functional dominance of specific energy channels.
 * Dimension 6 (4.4% variance) was represented by MaxSim (Maximum Similarity), a measure of trophic redundancy and functional overlap.
 
 ## Alignment with the Energy-Flow Hierarchy
 
-The distribution of these representative metrics across the PCA dimensions suggests that no single hierarchical scale dominates food-web variation. Instead, the "network space" is composed of a mixture of Path-level (S1, Distance), Geometry (Richness), and Node-level (PredPreyRatio, Herbivory, MaxSim) properties. Notably, S1 (a Path-level metric) explained more variance than Richness, suggesting that the arrangement of energy flow pathways is a more fundamental structural signature than simple species counts.
+The distribution of these representative metrics across the PCA dimensions suggests that no single hierarchical scale dominates food-web variation. Instead, the network space is composed of a mixture of Path-level (S1, Distance), Geometry (Richness), and Node-level (PredPreyRatio, Herbivory, MaxSim) properties. Notably, S1 (a Path-level metric) explained more variance than Richness, suggesting that the arrangement of energy flow pathways is a more fundamental structural signature than simple species counts.
 
 ### Differential Drivers of Ecological Stability
 
@@ -192,9 +192,9 @@ Trophic Balance: Persistence showed a [direction] response to the PredPreyRatio,
 
 Basal Channels: The system's ability to dampen perturbations (ρ) improved as Herbivory [increased/decreased], suggesting that basal-heavy webs act as a buffer for energy surges.
 
-Specialization: SVD Complexity increased as MaxSim decreased, confirming that "organized" networks are those where species occupy distinct, non-overlapping trophic niches rather than redundant ones.
+Specialization: SVD Complexity increased as MaxSim decreased, confirming that organised networks are those where species occupy distinct, non-overlapping trophic niches rather than redundant ones.
 
-Our multi-stage analysis reveals that food web stability is governed by a hierarchical architecture where structural modules serve as specialized functional levers. While Principal Component Analysis and Silhouette validation (k=10) confirm the high dimensionality of network space, the hierarchical clustering identifies four robust, independent modules (AU ≥ 0.94) that dictate system behavior. We find a clear "decoupling" of network scale from network persistence; specifically, the Geometric Scale module (containing Richness and Connectance) accounts for significant structural variance but fails to predict any component of stability. Instead, the Energy Flow Engine (Module 3) and Trophic Redundancy (Module 4) emerge as the primary controllers. Specifically, node-level balance within the flow engine (PredPreyRatio and Herbivory) determines persistence and dampening, while the isolation of species roles (MaxSim) dictates organizational complexity. This suggests that the "stability" of an ecosystem is not a product of its size, but of the specific configuration of its energy channels and the redundancy of its functional roles.
+Our multi-stage analysis reveals that food web stability is governed by a hierarchical architecture where structural modules serve as specialized functional levers. While Principal Component Analysis and Silhouette validation (k=10) confirm the high dimensionality of network space, the hierarchical clustering identifies four robust, independent modules (AU ≥ 0.94) that dictate system behaviour. We find a clear decoupling of network scale from network persistence; specifically, the Geometric Scale module (containing Richness and Connectance) accounts for significant structural variance but fails to predict any component of stability. Instead, the Energy Flow Engine (Module 3) and Trophic Redundancy (Module 4) emerge as the primary controllers. Specifically, node-level balance within the flow engine (PredPreyRatio and Herbivory) determines persistence and dampening, while the isolation of species roles (MaxSim) dictates organizational complexity. This suggests that the stability of an ecosystem is not a product of its size, but of the specific configuration of its energy channels and the redundancy of its functional roles.
 
 -   Redundancy / persistence
 -   Pathway coupling / resistance
@@ -203,18 +203,43 @@ Our multi-stage analysis reveals that food web stability is governed by a hierar
 
 # Discussion
 
--   Why consensus on “the best metric” has failed
--   Why different studies find different structure–stability relationships
--   Implications for biodiversity–stability theory
--   Guidance for metric choice based on question and scale
+## Why consensus on “the best metric” has remained elusive
+
+For more than four decades, the structure–stability debate has oscillated between competing structural descriptors, from connectance and complexity to modularity, omnivory, and trophic redundancy. Early theoretical work, most notably by May, suggested that increasing complexity should destabilise large systems, placing global descriptors such as connectance and interaction density at the centre of the debate. Subsequent empirical and theoretical studies, however, demonstrated stabilising roles for omnivory, weak links, and compartmentalisation (e.g. McCann; Dunne), shifting attention toward pathway-level and geometric properties. Our results suggest that this apparent inconsistency does not arise because some metrics are “wrong,” but because they capture different dimensions of a fundamentally multi-layered architecture. Food-web structure is not a single axis ranging from simple to complex; it is a high-dimensional space in which node composition, pathway routing, geometric constraint, and emergent organisation vary semi-independently. Metrics that have historically been treated as competitors—such as richness, connectance, omnivory, and redundancy—are in fact anchors of distinct structural dimensions. This explains why no single metric consistently predicts “stability” across studies: stability itself is not singular. When studies measure persistence (e.g. secondary extinctions), node-level balance and redundancy dominate. When they measure local stability or damping, path-level coupling and basal channel dominance matter more. When they measure recovery or informational organisation, global heterogeneity and role differentiation become decisive. The search for a universal structural predictor of stability has therefore been misguided—not because structure is unimportant, but because both structure and stability are multidimensional.
+
+## Reconciling contrasting structure–stability relationships
+
+A persistent challenge in the literature has been that similar metrics sometimes show opposite associations with stability. For example, omnivory has been reported as stabilising in some contexts and destabilising in others. Within our framework, this variability is expected. Path-level coupling (e.g. omnivory motifs) primarily relates to resistance—the containment or diffusion of perturbations—rather than persistence per se. A structure that dampens oscillations may not prevent extinction cascades, and vice versa. Similarly, our finding that richness contributes substantially to structural variance but fails to predict any stability component underscores an important decoupling: network size is not synonymous with robustness. This result aligns with empirical syntheses showing that species richness alone poorly predicts secondary extinction resistance unless accompanied by trophic balance or redundancy. In our analyses, the predator–prey ratio and herbivory—metrics reflecting trophic shape and basal channel dominance—were far stronger determinants of persistence and damping than richness itself. This helps reconcile why biodiversity–stability studies sometimes find positive, neutral, or context-dependent relationships. Richness operates primarily as a geometric scaling variable. Its effect on stability depends on how additional species alter the configuration of energy channels—whether they add redundancy, elongate chains, skew trophic balance, or increase coupling. Without specifying which structural dimension richness modifies, its stability effect is indeterminate.
+
+## Implications for biodiversity–stability theory
+
+Our results contribute to a long-standing tension between the “complexity begets instability” argument and more recent views that diversity enhances resilience. The resolution lies in recognising that different dimensions of complexity influence different stability components. Redundancy and trophic similarity (low MaxSim heterogeneity) enhance persistence by providing functional compensation following species loss. Pathway multiplicity and basal channel dominance regulate resistance by shaping how perturbations propagate. Global organisational heterogeneity (captured by SVD complexity and spectral properties) influences return dynamics by constraining system-wide oscillations and reassembly patterns. In this sense, complexity is neither inherently stabilising nor destabilising. Instead, distinct forms of complexity map onto distinct dynamical outcomes. Connectance, motif structure, redundancy, and informational heterogeneity are not interchangeable proxies for “complexity,” but structurally and mechanistically distinct attributes. By explicitly embedding food-web metrics within an energy-flow hierarchy, our framework reframes biodiversity–stability theory. Stability emerges not from species number alone, but from the configuration of energy channels and the distribution of functional roles across those channels. A bottom-heavy web with balanced predator–prey ratios and differentiated trophic niches may achieve both persistence and damping, even at moderate richness. Conversely, a species-rich but top-heavy or weakly differentiated web may remain fragile.
+
+## Structural modularity and the minimum sufficient set
+
+A key practical outcome of our analysis is the identification of six structural pillars that capture nearly 85% of the variation in network architecture. Despite starting with 31 commonly used metrics, much of their variance collapses into a smaller number of independent axes. Hierarchical clustering further revealed robust modules corresponding to trophic balance, pathway structure, geometric scale, and redundancy. This dimensional reduction has two important implications. First, it demonstrates that many commonly reported metrics are statistically redundant. Reporting both connectance and L/S, or multiple correlated distance measures, adds little new information. Second, it provides a principled route toward a minimum sufficient descriptor set tailored to ecological questions. Rather than selecting metrics by convention, researchers can select representatives of the relevant structural scale.
+
+## Guidance for metric choice based on ecological question
+
+If the question concerns extinction cascades or tolerance to species loss (persistence): prioritise node-level balance and redundancy metrics (e.g. predator–prey ratio, herbivory, similarity). If the question concerns perturbation propagation or damping (resistance): focus on path-level and basal-channel metrics (e.g. pathway multiplicity, omnivory, mean distance). If the question concerns recovery dynamics or organisational reassembly (return): emphasise global heterogeneity and spectral measures (e.g. SVD complexity, spectral radius). If the question concerns comparative architecture across systems: use geometric anchors (e.g. richness) but interpret them as scale descriptors rather than stability predictors. This scale-explicit approach shifts the emphasis from asking “Which metric best predicts stability?” to “Which structural dimension corresponds to the stability mechanism of interest?”
+
+## Limitations and future directions
+
+While our framework clarifies structural dimensionality, it remains grounded in static network topology. Real ecosystems exhibit interaction strengths, temporal variability, adaptive rewiring, and environmental forcing. Incorporating weighted networks and dynamic simulations would strengthen the mechanistic link between structural axes and realised dynamics. Additionally, the separation of persistence, resistance, and return is analytically useful but biologically intertwined. For example, structures that enhance resistance may indirectly support persistence by preventing large cascades. Future work could explore how these components interact across environmental gradients and disturbance regimes. Finally, extending this framework beyond trophic networks to mutualistic, host–parasite, or multilayer networks would test its generality. The energy-flow hierarchy proposed here may represent a broader organising principle of ecological interaction systems.
+
+# Conclusion
+
+Food-web stability is not governed by a single structural property, but by multiple, hierarchically organised dimensions of network architecture. Node composition, pathway routing, geometric constraint, and emergent organisation each represent distinct levers through which ecosystems maintain persistence, resist perturbation, and reorganise following disturbance.
+
+By explicitly mapping structural scale to stability mechanism, we reconcile decades of seemingly conflicting findings in the structure–stability literature. The key insight is not that one metric is superior, but that different metrics answer different ecological questions. Recognising and embracing this multidimensionality provides a coherent foundation for future biodiversity–stability research and a practical framework for selecting network descriptors based on mechanism rather than tradition.
 
 | Dimension | Key Metrics | Expected Effect on Stability | Supporting Literature |
 |-----------------|-----------------|---------------------|-----------------|
-| Complexity & Redundancy | Connectance, MaxSim, Links | **Positive:** High redundancy allows for "functional compensation" if one species is lost. | @dunneFoodwebStructureNetwork2002; @mccannDiversityStabilityDebate2000 |
+| Complexity & Redundancy | Connectance, MaxSim, Links | **Positive:** High redundancy allows for 'functional compensation' if one species is lost. | @dunneFoodwebStructureNetwork2002; @mccannDiversityStabilityDebate2000 |
 | Compartmentalization | Clust, Modularity, ρ | **Positive:** Limits the spread of perturbations; local collapses don't become global. | @stoufferCompartmentalizationIncreasesFoodweb2011 |
 | Feedback & Coupling | Omnivory (S2), Loop, ChLen | **Variable:** Omnivory can stabilize by diffusing energy, but long chains can amplify oscillations. | @mccannDiversityStabilityDebate2000; @neutelStabilityRealFood2002 |
-| Hierarchy & Shape | Prey:Predator, Basal, Top | **Critical:** "Bottom-heavy" systems are generally more stable; inverted pyramids are fragile. |  |
-| Information Heterogeneity | SVD Complexity, LinkSD | **Positive:** Diverse interaction strengths prevent "resonant" instabilities. | @ulanowiczInformationTheoryEcology2001 |
+| Hierarchy & Shape | Prey:Predator, Basal, Top | **Critical:** 'Bottom-heavy' systems are generally more stable; inverted pyramids are fragile. |  |
+| Information Heterogeneity | SVD Complexity, LinkSD | **Positive:** Diverse interaction strengths prevent 'resonant' instabilities. | @ulanowiczInformationTheoryEcology2001 |
 
 : Network properties used for analysis. {#tbl-metrics}
 
