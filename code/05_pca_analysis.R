@@ -1,86 +1,86 @@
 # ================================================
-# 03_pca_analysis.R
+# 05_pca_analysis_MODIFIED.R
 # ================================================
 
 library(FactoMineR)
+library(factoextra)
 library(tidyverse)
 library(ggrepel)
-library(patchwork)
-library(genzplyr)
-library(here)
-
-setwd(here::here())
 
 # Load datasets
-metrics <- read.csv("data/cleaned/all_networks.csv")
-topology_subset <- read.csv("data/cleaned/vermaat_subset.csv")
+predictors <- read.csv("data/cleaned/all_networks.csv") %>%
+  as_tibble() %>%
+  vibe_check(-c(ρ, complexity, robustness))
 
-data_list <- list(complete = metrics, subset = topology_subset)
-data_names <- c("complete", "subset", "reduced")
-plot_list <- vector(mode="list", length=length(data_list))
+# 2. Run the PCA on Predictors only
+pca_res <- PCA(predictors, scale.unit = TRUE, ncp = 10, graph = FALSE)
 
-# Functional categories
-behaviour_metrics <- c("ρ", "complexity", "robustness")
-geometry_metrics <- c("connectance", "l_S", "links", "richness", "Clust", "GenSD", "VulSD", "LinkSD", "diameter", "intervals")
-path_metrics <- c("ChLen", "ChSD", "ChNum", "path", "S1", "S2", "S4", "S5", "omnivory", "loops", "predpreyRatio", "distance")
-node_metrics <- c("basal", "top","intermediate", "herbivory", "cannibal", "TL", "centrality", "MaxSim")
+# 3. DIAGNOSTIC: How many dimensions matter?
+# Look for the 'elbow' or Eigenvalues > 1
+fviz_eig(pca_res, addlabels = TRUE)
 
-for (i in seq_along(data_list)) {
+# Check the eigenvalues
+eig.val <- get_eigenvalue(pca_res)
+print(eig.val)
+
+# 4. Get the contribution matrix for all metrics across all 6 dimensions
+contrib_matrix <- var_info$contrib[, 1:6]
+
+# Function to find the top metric for each dimension, 
+# but ensuring we don't pick the same metric twice
+get_unique_representatives <- function(contrib_mat) {
+  reps <- character(ncol(contrib_mat))
+  used_metrics <- c()
   
-  df <- data_list[[i]]
-  
-  # Run PCA
-  pca <- PCA(df, scale.unit = TRUE, graph = FALSE)
-  variance <- pca$eig %>% as.data.frame() %>% pull(`percentage of variance`)
-  
-  # Significant correlations
-  dim_descrip <- dimdesc(pca, axes=1:3)
-  signif_corrs <- bind_rows(
-    dim_descrip$Dim.1 %>% as.data.frame() %>% rownames_to_column("Property") %>% glow_up(dimension="Dim.1"),
-    dim_descrip$Dim.2 %>% as.data.frame() %>% rownames_to_column("Property") %>% glow_up(dimension="Dim.2"),
-    dim_descrip$Dim.3 %>% as.data.frame() %>% rownames_to_column("Property") %>% glow_up(dimension="Dim.3")
-  ) %>% glow_up(quanti.correlation=round(quanti.correlation,2))
-  
-  # Merge all correlations and flatten list columns
-  pca_cor_df <- pca$var$cor %>%
-    as.data.frame() %>%
-    rownames_to_column("Property") %>%
-    pivot_longer(!Property, names_to="dimension", values_to="quanti.correlation") %>%
-    full_join(signif_corrs) %>%
-    glow_up(quanti.correlation=round(quanti.correlation,2)) %>%
-    mutate(across(where(is.list), ~ sapply(., function(x) if(is.null(x)) NA else as.character(x))) )
-  
-  write.csv(pca_cor_df, paste0("../tables/allNetworks_corr_", data_names[i], ".csv"), row.names=FALSE)
-  
-  # Add functional category for plotting
-  pca_arrows <- pca$var$coord %>%
-    as.data.frame() %>%
-    rownames_to_column("Property") %>%
-    mutate(Category = case_when(
-      Property %in% behaviour_metrics ~ "Behaviour",
-      Property %in% geometry_metrics ~ "Geometry",
-      Property %in% path_metrics ~ "Path",
-      Property %in% node_metrics ~ "Node",
-      TRUE ~ "Other"
-    ))
-  
-  # PCA biplot
-  plot_list[[i]] <- ggplot(pca_arrows, aes(x=Dim.1, y=Dim.2)) +
-    geom_hline(yintercept=0, linetype=2, color="grey60") +
-    geom_vline(xintercept=0, linetype=2, color="grey60") +
-    geom_segment(aes(x=0, y=0, xend=Dim.1, yend=Dim.2, color=Category),
-                 arrow = arrow(length=unit(0.1,"inches"))) +
-    geom_text_repel(aes(label=Property, color=Category)) +
-    theme_classic() +
-    lims(x=c(-1,1), y=c(-1,1)) +
-    labs(
-      x=paste("PCA 1 (", round(variance[1]), "%)", sep=""),
-      y=paste("PCA 2 (", round(variance[2]), "%)", sep="")
-    )
+  for (i in 1:ncol(contrib_mat)) {
+    # Sort metrics for this dimension by contribution descending
+    sorted_metrics <- sort(contrib_mat[, i], decreasing = TRUE)
+    
+    # Pick the top one that isn't already in our 'used' list
+    candidate <- names(sorted_metrics)[!(names(sorted_metrics) %in% used_metrics)][1]
+    
+    reps[i] <- candidate
+    used_metrics <- c(used_metrics, candidate)
+  }
+  return(reps)
 }
 
-combined_plot <- (plot_list[[1]] + labs(title="A. Complete")) / 
-                 (plot_list[[2]] + labs(title="B. Vermaat subset"))
+# Apply the function
+unique_reps <- get_unique_representatives(contrib_matrix)
 
-ggsave("../figures/pca_allNetworks.png", combined_plot,
+# Create your final Table
+representative_table <- data.frame(
+  Dimension = paste("Dim", 1:6),
+  Eigenvalue = eig.val[1:6, 1],
+  Variance_Explained = eig.val[1:6, 2],
+  Representative_Metric = unique_reps
+)
+
+print(representative_table)
+
+# 5. VISUALIZE: The "Causal Hierarchy" Biplot
+# Map your categories back onto the arrows
+pca_arrows <- as.data.frame(var_stats$coord) %>%
+  rownames_to_column("Property") %>%
+  mutate(Category = case_when(
+    Property %in% geometry_metrics ~ "Geometry",
+    Property %in% path_metrics ~ "Path",
+    Property %in% node_metrics ~ "Node",
+    TRUE ~ "Other"
+  ))
+
+ggplot(pca_arrows, aes(x=Dim.1, y=Dim.2)) +
+  geom_hline(yintercept=0, linetype=2, color="grey70") +
+  geom_vline(xintercept=0, linetype=2, color="grey70") +
+  geom_segment(aes(x=0, y=0, xend=Dim.1, yend=Dim.2, color=Category),
+               arrow = arrow(length=unit(0.1,"inches")), linewidth = 1) +
+  geom_text_repel(aes(label=Property, color=Category), max.overlaps = 15) +
+  scale_color_brewer(palette = "Set1") +
+  labs(title = "Network Structural Space",
+       subtitle = "Dimensions colored by Energy-Flow Hierarchy",
+       x = paste0("PC1 (", round(pca_res$eig[1,2], 1), "%)"),
+       y = paste0("PC2 (", round(pca_res$eig[2,2], 1), "%)")) +
+  theme_minimal()
+
+ggsave("../figures/pca.png", combined_plot,
        width=4000, height=6500, units="px", dpi=600)

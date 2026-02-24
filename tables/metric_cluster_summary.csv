@@ -1,0 +1,5 @@
+"Cluster","Metrics","Count"
+1,"richness, links, connectance, diameter, top, cannibal, l_S, VulSD, ChNum, LinkSD, S1, S2, S4, S5, centrality, loops, intervals",17
+2,"distance, ChSD, path",3
+3,"basal, intermediate, predpreyRatio, herbivory, omnivory, GenSD, TL, ChLen, Clust",9
+4,"MaxSim",1

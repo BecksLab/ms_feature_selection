@@ -125,17 +125,77 @@ We compiled quantitative network data from XX, resulting in a total of XX ecolog
 
 : An informative caption about the different network properties. We use a combination of metrics from both the original @vermaatMajorDimensionsFoodweb2009 paper as well as including those that have been identified by @thompsonFoodWebsReconciling2012 and have been linked to emerging ecosystem properties such as stability {#tbl-properties}
 
-## Identification of dominant structural dimensions
+## Statistical Characterisation of Network Space
 
-Ecological network metrics are frequently correlated, reflecting shared underlying structural properties. To identify dominant dimensions of food-web structure, we applied hierarchical clustering to the absolute correlation matrix of all metrics using average linkage. Cluster stability was assessed using bootstrap resampling (1,000 iterations). From each stable cluster, a single representative metric was selected based on interpretability and prevalence in the literature. This procedure yielded a reduced set of descriptors capturing the primary axes of structural variation across networks.
+To identify the dominant axes of structural variation within our dataset, we expanded upon the dimensionality reduction approach established by Vermaat et al. (2009). We quantified 31 structural metrics for each food web, categorising them into four hierarchical scales of energy flow: Node-level (e.g., trophic roles), Path-level (e.g., energy sequences), Network Geometry (e.g., global shape), and Emergent Behaviour (e.g., system-wide complexity).
 
-## Linking structure to robustness
+### Dimensionality Reduction and Metric Selection
 
-To examine how dominant structural dimensions relate to tolerance to species loss, we quantified network robustness as the proportion of secondary extinctions following primary species removal. We related robustness to both PCA scores and individual metrics from the reduced set using linear regression and Random Forest models. Random Forests were used to accommodate potential non-linear relationships and interactions among predictors. Variable importance was assessed using permutation-based measures.
+To identify a non-redundant subset of structural descriptors, we performed a Principal Component Analysis (PCA) on the scaled structural metrics. We excluded stability-related outcomes (*e.g.,* robustness, ρ, and SVD complexity) from the PCA to ensure the resulting dimensions represented pure physical architecture.
+
+We determined the number of significant structural dimensions using Kaiser’s Criterion (eigenvalues >1) and an analysis of the scree plot 'elbow'. To select a representative "anchor" for each significant dimension, we programmatically identified the metric with the highest contribution percentage (cos^2) to each Principal Component (PC). In cases where a single metric dominated multiple dimensions, the next highest unique contributor was selected to ensure a parsimonious yet comprehensive subset of predictors.
+
+## Linking Structure to Stability Components
+
+To test the hypothesis that different hierarchical structural scales govern distinct aspects of ecological stability, we employed Random Forest (RF) models. We defined three response variables representing components of Stability:
+
+* Persistence: Quantified as structural Robustness (secondary extinction resistance).
+* Dampening: Quantified as the Spectral Radius (ρ), representing local stability.
+* Organization: Quantified as SVD Complexity, representing the informational diversity of energy channels.
+
+### Model Specification and Importance
+
+Each stability component was modelled as a function of the six 'Structural Pillars' identified in the PCA phase (S1, Richness, PredPreyRatio, Distance, Herbivory, and MaxSim). We used 1,000 trees per forest to ensure stable importance estimates. We quantified the relative influence of each structural pillar using Percentage Increase in Mean Squared Error (%IncMSE), which identifies the metrics most indispensable for model accuracy.
+
+### Directional Effects
+
+To interpret the ecological nature of these relationships, we generated Partial Dependence Plots (PDPs). These plots visualize the marginal effect of a "winning" structural pillar on its associated stability component while accounting for the average effects of all other predictors.
+
+## Validation of Structural Modularity
+
+To assess the redundancy and independence of the 31 structural metrics, we performed a Hierarchical Variable Clustering analysis using the hclust algorithm in R. We used 1−∣Correlation∣ as the distance metric to group variables based on the strength of their relationship, regardless of the direction of the correlation.
+
+To determine the optimal number of structural modules, we calculated Average Silhouette Widths for k=2 to 10. Additionally, we performed multiscale bootstrap resampling (n=1000) using the pvclust package to assign Approximately Unbiased (AU) p-values to each cluster, ensuring that the identified modules were statistically robust and not artifacts of the specific dataset.
 
 # Results
 
--   Major axes correspond to:
+## The Six Dimensions of Food Web Architecture
+
+The PCA revealed a high-dimensional structural space where the first six principal components accounted for 84.9% of the total structural variation (Table 1). This indicates that while food web structure is complex, it can be effectively distilled into six primary axes of architectural variation.
+
+* Dimension 1 (31.6% variance) was anchored by S1 (the number of pathways from basal species), representing the total volume of energy entry points.
+* Dimension 2 (21.6% variance) was dominated by Richness (S), representing the overall scale of the network.
+* Dimension 3 (15.5% variance) was defined by the Predator-Prey Ratio, capturing the balance of trophic roles (Node-level).
+* Dimension 4 (6.8% variance) was driven by Mean Distance, reflecting the efficiency or "tightness" of the wiring (Path-level).
+* Dimension 5 (5.2% variance) was anchored by Herbivory, identifying the functional dominance of specific energy channels.
+* Dimension 6 (4.4% variance) was represented by MaxSim (Maximum Similarity), a measure of trophic redundancy and functional overlap.
+
+## Alignment with the Energy-Flow Hierarchy
+
+The distribution of these representative metrics across the PCA dimensions suggests that no single hierarchical scale dominates food-web variation. Instead, the "network space" is composed of a mixture of Path-level (S1, Distance), Geometry (Richness), and Node-level (PredPreyRatio, Herbivory, MaxSim) properties. Notably, S1 (a Path-level metric) explained more variance than Richness, suggesting that the arrangement of energy flow pathways is a more fundamental structural signature than simple species counts.
+
+### Differential Drivers of Ecological Stability
+
+The Random Forest models revealed a clear partitioning of structural influence, with different 'pillars' emerging as the dominant predictors for each stability component (Table 2).
+
+Persistence (Robustness) was primarily governed by PredPreyRatio (%IncMSE = 15.98) and Herbivory (%IncMSE = 10.23). Surprisingly, network Richness had no predictive power for persistence (%IncMSE = -2.49), suggesting that the balance of trophic roles is more critical for preventing extinction cascades than the total number of species.
+
+Dampening (ρ) was most sensitive to Herbivory (%IncMSE = 17.28). This indicates that the strength and proportion of energy flow originating from the basal-consumer interface is the primary regulator of a network's local stability.
+
+Organization (SVD Complexity) was uniquely driven by MaxSim (%IncMSE = 13.12) and S1 (%IncMSE = 12.56). This supports the view that informational complexity emerges from a combination of unique species roles (low similarity) and the total volume of energy entry pathways.
+
+### Directionality and Trophic Control
+
+Partial dependence analysis provided a mechanistic look at how these pillars operate:
+
+Trophic Balance: Persistence showed a [direction] response to the PredPreyRatio, indicating an optimal balance between consumers and resources is required to maintain structural integrity.
+
+Basal Channels: The system's ability to dampen perturbations (ρ) improved as Herbivory [increased/decreased], suggesting that basal-heavy webs act as a buffer for energy surges.
+
+Specialization: SVD Complexity increased as MaxSim decreased, confirming that "organized" networks are those where species occupy distinct, non-overlapping trophic niches rather than redundant ones.
+
+Our multi-stage analysis reveals that food web stability is governed by a hierarchical architecture where structural modules serve as specialized functional levers. While Principal Component Analysis and Silhouette validation (k=10) confirm the high dimensionality of network space, the hierarchical clustering identifies four robust, independent modules (AU ≥ 0.94) that dictate system behavior. We find a clear "decoupling" of network scale from network persistence; specifically, the Geometric Scale module (containing Richness and Connectance) accounts for significant structural variance but fails to predict any component of stability. Instead, the Energy Flow Engine (Module 3) and Trophic Redundancy (Module 4) emerge as the primary controllers. Specifically, node-level balance within the flow engine (PredPreyRatio and Herbivory) determines persistence and dampening, while the isolation of species roles (MaxSim) dictates organizational complexity. This suggests that the "stability" of an ecosystem is not a product of its size, but of the specific configuration of its energy channels and the redundancy of its functional roles.
+
 -   Redundancy / persistence
 -   Pathway coupling / resistance
 -   Organizational constraint / return

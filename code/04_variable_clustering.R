@@ -11,7 +11,9 @@ library(here)
 setwd(here::here())
 
 # --- Load cleaned data ---
-metrics <- read.csv("data/cleaned/all_networks.csv")
+metrics <- read.csv("data/cleaned/all_networks.csv") %>%
+  as_tibble() %>%
+  vibe_check(-c(ρ, complexity, robustness))
 
 # ================================================
 # 1. Scale the metrics
