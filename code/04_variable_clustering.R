@@ -29,14 +29,9 @@ metrics <- read.csv("data/cleaned/all_networks.csv") %>%
   select(-c(ρ, complexity, robustness))
 
 # ============================================================
-# 1. SCALE METRICS
+# 3. DISTANCE MATRICES
 # ============================================================
-metrics_scaled <- scale(metrics)
-
-# ============================================================
-# 2. DISTANCE MATRICES
-# ============================================================
-cor_signed <- cor(metrics_scaled, use = "pairwise.complete.obs")
+cor_signed <- cor(metrics, use = "pairwise.complete.obs")
 dist_signed <- as.dist(1 - cor_signed)
 
 cor_abs <- abs(cor_signed)
@@ -131,7 +126,7 @@ write.csv(cluster_summary_abs, "../tables/metric_cluster_summary_abs.csv", row.n
 # 5. BOOTSTRAP SUPPORT
 # ============================================================
 
-pv <- pvclust(metrics_scaled,
+pv <- pvclust(metrics,
               method.hclust = "average",
               method.dist = "correlation",
               nboot = 1000)
@@ -248,32 +243,70 @@ write.csv(module_table,
 
 
 # ============================================================
-# 6. RICHNESS CORRECTION
+# 6. RICHNESS CORRECTION (LOG-LOG)
 # ============================================================
 
-if ("richness" %in% colnames(metrics_scaled)) {
-  
-  metrics_resid <- metrics_scaled
-  
-  for (col in colnames(metrics_scaled)) {
-    if (col != "richness") {
-      model <- lm(metrics_scaled[, col] ~ metrics_scaled[, "richness"])
-      metrics_resid[, col] <- resid(model)
-    }
-  }
-  
-  cor_resid <- cor(metrics_resid, use="pairwise.complete.obs")
-  dist_resid <- as.dist(1 - abs(cor_resid))
-  
-  hc_resid <- hclust(dist_resid, method="average")
-  
-  png("../figures/clustering_richness_corrected.png", width = 800, height = 600)
-  plot(hc_resid,
-       main="Clustering After Richness Correction")
-  dev.off()
-  
-  write.csv(metrics_resid, "../tables/metrics_richness_corrected.csv", row.names = TRUE)
+library(ppcor)
+
+# Remove richness from matrix
+metrics_no_rich <- metrics %>% dplyr::select(-richness)
+
+
+# Residualise all metrics against richness
+metrics_resid <- metrics_no_rich
+
+for (col in colnames(metrics_no_rich)) {
+  model <- lm(metrics_no_rich[[col]] ~ metrics$richness)
+  metrics_resid[[col]] <- resid(model)
 }
+
+# Now compute correlation of residuals
+cor_partial <- cor(metrics_resid, use = "pairwise.complete.obs")
+
+dist_partial <- as.dist(1 - abs(cor_partial))
+hc_partial <- pvclust(metrics_no_rich,
+                      method.hclust = "average",
+                      method.dist = "correlation",
+                      nboot = 1000)
+
+hlust_partial <- hclust(dist_partial, method = "average")
+
+# Convert hclust to dendrogram
+hc <- hc_partial$hclust
+dend <- as.dendrogram(hc)
+dend_data <- dendro_data(dend)
+
+# Join cluster membership to label positions
+label_df <- dend_data$label %>%
+  left_join(cluster_df, by = c("label" = "Metric")) %>%
+  mutate(Cluster = as.factor(Cluster))
+
+# Build horizontal plot
+ggplot() +
+  geom_segment(data = dend_data$segment,
+               aes(x = y, y = x,
+                   xend = yend, yend = xend),
+               linewidth = 0.8) +
+  # Metric labels
+  geom_text(data = label_df,
+            aes(x = -0.015, y = x, label = label, colour = Cluster),
+            hjust = 1,
+            size = rel(1.8),
+            family = "space") +
+  scale_colour_manual(values = cluster_colors,
+                    labels = module_names$Module_Name,
+                    name = "Module") +
+  theme_minimal(base_size = 14) +
+  labs(x = "Correlation Distance",
+       y = "") +
+  coord_cartesian(xlim = c(-0.1, max(dend_data$segment$y))) +
+  figure_theme() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    panel.grid.major = element_blank(),
+    legend.position = "right"
+  )
 
 ############################################################
 # END
