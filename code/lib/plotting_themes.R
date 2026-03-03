@@ -25,40 +25,26 @@ trace(grDevices::png, exit = quote({
 }), print = FALSE)
 
 kraken_palette <- c(
-  "Macro Complexity"       = "#001628", # Deep Sea Blue (Kraken)
-  "Trophic Integration"    = "#69BE28", # Action Green (Seahawks)
-  "Energy Transport"       = "#FBD800", # Storm Gold (Storm)
-  "Trophic Asymmetry"      = "#005A5B", # Torrent Teal (Torrent)
-  "Control Heterogeneity"  = "#E9072B", # Red Alert (Kraken)
-  "Centralisation"         = "#8B0000", # Deep Crimson (Kraken)
-  "Functional Redundancy"  = "#99D9D9" # Ice Blue (Kraken)
-  # these are extra colours I might want to use...
-  #"Shadow Blue"            = "#68A2B9"  # Shadow Blue (Kraken)
+  "Macro Complexity"       = "#001628", # Deep Sea
+  "Trophic Integration"    = "#69BE28", # Action Green
+  "Energy Transport"       = "#FBD800", # Storm Gold
+  "Trophic Asymmetry"      = "#68A2B9", # Shadow Blue
+  "Control Heterogeneity"  = "#E9072B",  # Kraken Red
+  "Centralisation"         = "#355464", # Boundless
+  "Functional Redundancy"  = "#99D9D9" # Ice
 )
 
 # Converts the named vector into a dataframe for easier mapping in ggplot
 pal_df <- tibble(
   label   = names(kraken_palette), # printed label
-  colour = kraken_palette, # colour code
+  colour  = kraken_palette, # colour code
   value   = factor(1:length(kraken_palette)) # module number
 )
 
-module_names <- tibble(
-  Cluster = 1:7,
-  Module_Name = c(
-    "Macro Complexity",
-    "Trophic Integration",
-    "Energy Transport",
-    "Trophic Asymmetry",
-    "Control Heterogeneity",
-    "Centralisation",
-    "Functional Redundancy"
-  )
-)
 
 # continuous ramp
 seattle_anchors <- c(
-  "Foam"      = "#E9E3D3", 
+  Foam        = "#F4EFE2", 
   "Ice"       = "#99D9D9", 
   "Shadow"    = "#68A2B9", 
   "Boundless" = "#355464", 
@@ -70,9 +56,13 @@ seattle_anchors <- c(
 seattle_abyssal_gen <- colorRampPalette(seattle_anchors)
 
 # diverging colour
-pal_diverge <- tibble(low = "#2C3E50",
-                      mid = "white",
-                      high = "#C1785A")
+pal_diverge <- tibble(
+  low  = "#3D356B",  # darker trench
+  mid  = "#F6F4F0",
+  high = "#C07A3F"   # brighter copper
+)
+
+pal_diverge_gen <- colorRampPalette(pal_diverge)
 
 figure_theme <- function() {
   theme_bw() %+replace% 

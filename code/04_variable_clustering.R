@@ -11,6 +11,7 @@
 
 library(tidyverse)
 library(cluster)
+library(genzplyr)
 library(pvclust)
 library(factoextra)
 library(ggdendro)
@@ -26,7 +27,7 @@ setwd(here::here())
 metrics <- read.csv("data/cleaned/all_networks.csv") %>%
   as_tibble() %>%
   # Exclude stability response variables from clustering
-  select(-c(ρ, complexity, robustness))
+  vibe_check(-c(ρ, complexity, robustness))
 
 # ============================================================
 # 3. DISTANCE MATRICES
@@ -159,24 +160,8 @@ rect_df <- label_df %>%
     ymin = min(x),
     ymax = max(x),
     xmin = -Inf,
-    xmax = max(dend_data$segment$y) * 0.05,
-    .groups = "drop"
+    xmax = max(dend_data$segment$y) * 0.05
   )
-
-cluster_colors <- as.vector(kraken_7)
-
-module_names <- tibble(
-  Cluster = 1:7,
-  Module_Name = c(
-    "Macro Complexity",
-    "Trophic Integration",
-    "Energy Transport",
-    "Trophic Asymmetry",
-    "Control Heterogeneity",
-    "Centralisation",
-    "Functional Redundancy"
-  )
-)
 
 # Build horizontal plot
 ggplot() +
@@ -196,7 +181,7 @@ ggplot() +
             hjust = 1,
             size = rel(3),
             family = "space") +
-  scale_fill_manual(values = pal_df$colour,
+  scale_fill_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
                     labels = pal_df$label,
                     limits = pal_df$value,
                     name = "Module") +
@@ -232,10 +217,11 @@ module_table <- cluster_df %>%
   summarise(
     Metrics = paste(Metric, collapse = ", "),
     Count = n(),
-    .groups = "drop"
   ) %>%
-  left_join(module_names, by = "Cluster") %>%
-  select(Cluster, Module_Name, Count, Metrics) %>%
+  glow_up(Cluster = as.factor(Cluster)) %>%
+  left_join(pal_df, 
+            by = join_by(Cluster == value)) %>%
+  vibe_check(Cluster, label, Count, Metrics) %>%
   arrange(Cluster)
 
 write.csv(module_table,
@@ -294,8 +280,9 @@ ggplot() +
             hjust = 1,
             size = rel(2),
             family = "space") +
-  scale_colour_manual(values = cluster_colors,
-                      labels = module_names$Module_Name,
+  scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
+                      labels = pal_df$label,
+                      limits = pal_df$value,
                       name = "Module") +
   labs(x = "Correlation Distance",
        y = "") +

@@ -103,10 +103,19 @@ for (p in seq_len(n_perm)) {
 }
 
 # ---- Compute p-values ----
-p_values <- apply(perm_results,
-                  c(1,2),
-                  function(x)
-                    mean(x >= obs_alignment))
+p_values <- matrix(NA,
+                   nrow = nrow(obs_alignment),
+                   ncol = ncol(obs_alignment),
+                   dimnames = dimnames(obs_alignment))
+
+for (i in seq_len(nrow(obs_alignment))) {
+  for (j in seq_len(ncol(obs_alignment))) {
+    
+    p_values[i, j] <- mean(
+      perm_results[i, j, ] >= obs_alignment[i, j]
+    )
+  }
+}
 
 # ---- Global test ----
 obs_T  <- sum(obs_alignment^2)
@@ -188,7 +197,12 @@ ggplot(data = module_var_df,
        aes(x = PC, y = Variance_Fraction, alluvium = as.character(Module))) +
   geom_alluvium(aes(fill = as.character(Module)),
                 alpha = 0.9) +
-  scale_fill_manual(values = cluster_colors) +
+  scale_fill_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
+                    labels = pal_df$label,
+                    limits = pal_df$value,
+                    name = "Module") +
+  coord_cartesian(clip = "on",
+                  expand = FALSE) +
   labs(title = "Variance Explained by Module per PC",
        y = "Fraction of PC Variance",
        fill = "Module",
@@ -282,7 +296,7 @@ p_sidebar <- ggplot(cluster_annotation,
                         y = Metric,
                         fill = as.factor(Module))) +
   geom_tile(alpha = 0.8) +
-  scale_fill_manual(values = pal_df$colour,
+  scale_fill_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
                     labels = pal_df$label,
                     limits = pal_df$value,
                     name = "Module") +
@@ -328,7 +342,7 @@ loadings_plot <- as.data.frame(loadings[,1:2]) %>%
   rownames_to_column("Metric") %>%
   mutate(Module = as.factor(clusters[Metric]))
 
-var_explained <- summary(pca)$importance["Proportion of Variance", ]
+var_explained <- summary(pca_all)$importance["Proportion of Variance", ]
 pc1_label <- paste0("PC1 (", round(var_explained[1] * 100, 1), "%)")
 pc2_label <- paste0("PC2 (", round(var_explained[2] * 100, 1), "%)")
 
@@ -345,7 +359,7 @@ ggplot(loadings_plot,
                   show.legend = FALSE) +
   labs(x = pc1_label,
        y = pc2_label) +
-  scale_colour_manual(values = pal_df$colour,
+  scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
                       labels = pal_df$label,
                       limits = pal_df$value,
                       name = "Module") +
@@ -379,19 +393,29 @@ annotation_matrix <- sig_mask
 
 pheatmap(
   plot_mat,
-  color = seattle_abyssal_gen(100),
+  color = pal_diverge_gen(100),
   cluster_rows = TRUE,
   cluster_cols = TRUE,
   display_numbers = annotation_matrix,
-  number_color = "#E9E3D3",
+  number_color = "#1A1A1A",
   fontsize_number = 14,
   main = "Module–PC Significance (Z-scores)",
   breaks = seq(-4, 4, length.out = 101)
 )
 
+ggsave("../figures/heatmap_zscores.png",
+       width = 6000,
+       height = 3000,
+       units = "px",
+       dpi = 600)
+
+joint_sig <- (p_values < 0.05) & (abs(z_scores) > 1.96)
+
 sig_summary <- data.frame(
-  Module = rownames(sig_mat),
-  Num_Significant_PCs = rowSums(sig_mat),
+  Module = rownames(z_scores),
+  Num_Significant_PCs = rowSums(joint_sig),
   Mean_Z = rowMeans(z_scores),
   Max_Z = apply(z_scores, 1, max)
 )
+
+
