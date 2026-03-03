@@ -1,32 +1,39 @@
-\begin{figure}[H]
+\begin{figure}
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{figures/pca_vermaat.png}}
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/cluster_dendrogram.png}}
 
 }
 
-\caption{VERMAAT networks only}
+\caption{\label{fig-cluster}Blah blah blah clusters}
 
 \end{figure}
 \efloatseparator
  
-\begin{figure}[H]
+\begin{figure}
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{figures/pca_allNetworks.png}}
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/pca_loadings.png}}
 
 }
 
-\caption{All networks. Vermaat subset = using only the structural
-measures from Vermaat}
+\caption{\label{fig-pca}Blah blah blah - colours represent clusters.
+Network metric loadings with PC1 and PC2}
 
 \end{figure}
 \efloatseparator
  
-\begin{figure}[H]
+\begin{figure}
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{figures/metric_hclust.png}}
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/module_alignment_heatmap.png}}
 
 }
 
-\caption{Cluster}
+\caption{\label{fig-alignment_heatmap}Blah blah blah - colour intensity
+= greater alignment}
 
 \end{figure}
