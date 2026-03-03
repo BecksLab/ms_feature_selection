@@ -210,7 +210,7 @@ stability}
 1%
 }%
 }
-\date{2026-02-24}
+\date{2026-03-03}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -282,6 +282,28 @@ dimensionality reduction%
 \begin{quote}
 Which metrics best represent the distinct stages of the energy-flow
 hierarchy, and do they capture different components of stability?
+\end{quote}
+
+\begin{quote}
+Food web structure self-organises into process-level modules, and those
+modules govern different components of stability.
+\end{quote}
+
+\begin{quote}
+Food web architecture is organised into emergent structural process
+modules, and different modules regulate different components of
+ecological stability.
+\end{quote}
+
+\begin{quote}
+Food web metrics self-organise into structural process modules, these
+modules define network space, and different modules regulate different
+stability components.
+\end{quote}
+
+\begin{quote}
+Should we be looking at if different metrics scale predictably with each
+other?
 \end{quote}
 
 Ecological networks are commonly characterised using a large and diverse
@@ -592,207 +614,355 @@ shared-resource structures among consumers. & Stouffer et al. (2007)
 Milo et al. (2002) \\
 \end{longtable}
 
-\subsection{Statistical Characterisation of Network
-Space}\label{statistical-characterisation-of-network-space}
+\subsection{Identification of Structural
+Modules}\label{identification-of-structural-modules}
 
-To identify the dominant axes of structural variation within our
-dataset, we expanded upon the dimensionality reduction approach
-established by Vermaat et al.~(2009). We quantified 31 structural
-metrics for each food web, categorising them into four hierarchical
-scales of energy flow: Node-level (e.g., trophic roles), Path-level
-(e.g., energy sequences), Network Geometry (e.g., global shape), and
-Emergent Behaviour (e.g., system-wide complexity).
+We tested the hypothesis that structural descriptors of food webs are
+organised into statistically coherent modules reflecting shared
+ecological function or scaling relationships, rather than forming
+arbitrary clusters driven by sampling noise. If such modular
+organization exists, then metrics within a module should exhibit strong
+internal correlation relative to metrics assigned to different modules.
+The resulting clusters should be robust to resampling of the data. The
+identified modular structure should exceed expectations under null
+models of random association among metrics.
 
-\subsubsection{Dimensionality Reduction and Metric
-Selection}\label{dimensionality-reduction-and-metric-selection}
+We quantified pairwise associations among the 30 structural metrics
+using Pearson correlations computed across food webs. Because ecological
+metrics may covary either positively or negatively depending on scaling
+relationships, we constructed two alternative distance matrices:
+\(1−r\), which preserves the sign of correlations and distinguishes
+positive from negative association and \(1−∣r∣\), which groups variables
+based on the magnitude of their association regardless of sign. These
+two definitions allow us to test whether modular structure depends on
+directional relationships or simply on the strength of coupling among
+metrics. Hierarchical clustering was performed using average linkage on
+each distance matrix to identify candidate structural modules.
 
-To identify a non-redundant subset of structural descriptors, we
-performed a Principal Component Analysis (PCA) on the scaled structural
-metrics. We excluded stability-related outcomes (\emph{e.g.,}
-robustness, ρ, and SVD complexity) from the PCA to ensure the resulting
-dimensions represented pure physical architecture.
+The optimal number of clusters was evaluated across a range of partition
+sizes (k = 2--10) using average silhouette width to assess
+within-cluster cohesion and between-cluster separation. To further
+evaluate cluster robustness, we implemented bootstrap resampling with
+1,000 bootstrap replicates. This procedure estimates approximately
+unbiased (AU) p-values for each cluster, quantifying the probability
+that a cluster is supported under repeated resampling of the data.
+Clusters were considered statistically robust when they exhibited high
+silhouette support, and approximately unbiased bootstrap support ≥ 0.95.
+This dual criterion ensures that identified modules are both
+structurally coherent and stable to sampling variation.
 
-We determined the number of significant structural dimensions using
-Kaiser's Criterion (eigenvalues \textgreater1) and an analysis of the
-scree plot `elbow'. To select a representative anchor for each
-significant dimension, we programmatically identified the metric with
-the highest contribution percentage (cos\^{}2) to each Principal
-Component (PC). In cases where a single metric dominated multiple
-dimensions, the next highest unique contributor was selected to ensure a
-parsimonious yet comprehensive subset of predictors.
+\subsection{Multivariate Structure and Module--Axis
+Alignment}\label{multivariate-structure-and-moduleaxis-alignment}
 
-\subsection{Linking Structure to Stability
-Components}\label{linking-structure-to-stability-components}
+To evaluate whether structural metrics of food webs organize into
+coherent multivariate modules and whether those modules define principal
+axes of variation, we conducted a principal component analysis (PCA)
+followed by a permutation-based test of module--axis alignment. Under
+this framework, principal components define dominant structural
+gradients in the metric space, whereas modules represent hypothesised
+mechanistic groupings of structurally related metrics. Demonstrating
+alignment between these two representations would suggest that modular
+decomposition captures fundamental axes of ecological variation.
 
-To test the hypothesis that different hierarchical structural scales
-govern distinct aspects of ecological stability, we employed Random
-Forest (RF) models. We defined three response variables representing
-components of Stability:
+Skewed count-based metrics (\emph{e.g.,} link counts, interval counts,
+and related quantities) were log-transformed using \(log(x + 1)\) to
+reduce right skew. All remaining variables were standardized to zero
+mean and unit variance prior to analysis to ensure that metrics measured
+on different scales contributed equally to the ordination.
 
-\begin{itemize}
-\tightlist
-\item
-  Persistence: Quantified as structural Robustness (secondary extinction
-  resistance).
-\item
-  Dampening: Quantified as the Spectral Radius (ρ), representing local
-  stability.
-\item
-  Organization: Quantified as SVD Complexity, representing the
-  informational diversity of energy channels.
-\end{itemize}
+To quantify how structural modules align with principal axes, we
+decomposed variance in each principal component according to module
+membership. For each module \(m\) and principal component \(k\), we
+computed:
 
-\subsubsection{Model Specification and
-Importance}\label{model-specification-and-importance}
+\[ 
+A_{mk} = \sum_{i \in m} l^{2}_{ik}
+\]
 
-Each stability component was modelled as a function of the six
-`Structural Pillars' identified in the PCA phase (S1, Richness,
-PredPreyRatio, Distance, Herbivory, and MaxSim). We used 1,000 trees per
-forest to ensure stable importance estimates. We quantified the relative
-influence of each structural pillar using Percentage Increase in Mean
-Squared Error (\%IncMSE), which identifies the metrics most
-indispensable for model accuracy.
+where \(l_{ik}\) is the loading of metric \(i\) on principal component
+\(k\) and \(A_{mk}\) represents the fraction of variance in PC \(k\)
+attributable to metrics in module \(m\). Because squared loadings sum to
+one within each principal component, this provides a direct partitioning
+of PC variance across modules. This produces a module × PC matrix
+describing geometric alignment between modular structure and
+multivariate axes.
 
-\subsubsection{Directional Effects}\label{directional-effects}
+To evaluate whether observed module--PC alignment exceeded expectations
+under random module structure, we implemented a permutation test. We
+randomly permuted module labels among metrics 1 000 times while
+preserving the number and size distribution of modules, and the PCA
+loadings. For each permutation \(r\), we recomputed \(A^{(r)}_{mk}\) so
+as to form a null distribution for each module--PC pair. From this we
+computed p-values and corresponding z-scores, which was then used to
+infer significant alignment when \(p_{mk} < 0.05 \land |Z_{mk}| > 1.96\)
 
-To interpret the ecological nature of these relationships, we generated
-Partial Dependence Plots (PDPs). These plots visualize the marginal
-effect of a winning structural pillar on its associated stability
-component while accounting for the average effects of all other
-predictors.
+\[ 
+p_{mk} = P(A^{(r)}_{mk} > A_{mk})
+\]
 
-\subsection{Validation of Structural
-Modularity}\label{validation-of-structural-modularity}
+\[ 
+Z_{mk} = \frac{A_{mk} - \mu_{mk}}{\sigma_{mk}}
+\]
 
-To assess the redundancy and independence of the 31 structural metrics,
-we performed a Hierarchical Variable Clustering analysis using the
-hclust algorithm in R. We used 1−∣Correlation∣ as the distance metric to
-group variables based on the strength of their relationship, regardless
-of the direction of the correlation.
-
-To determine the optimal number of structural modules, we calculated
-Average Silhouette Widths for k=2 to 10. Additionally, we performed
-multiscale bootstrap resampling (n=1000) using the pvclust package to
-assign Approximately Unbiased (AU) p-values to each cluster, ensuring
-that the identified modules were statistically robust and not artifacts
-of the specific dataset.
+Additionally we also evaluated if modules collectively aligned with PCA
+structure beyond random expectation. Overall concentration of variance
+within module--PC space was calculated as \(T = \sum_{m, k} A^{2}_{mk}\)
+and significance was determined by comparing the observed (\(T\)) the
+permutation distribution (\(T^{(r)}\)). Where
+\(p_{global} = P(T^{(r)} \geq T)\). A significant result indicates that
+module structure explains multivariate variance better than random
+groupings.
 
 \section{Results}\label{results}
 
-\subsection{The Six Dimensions of Food Web
-Architecture}\label{the-six-dimensions-of-food-web-architecture}
+\subsection{Structural Metrics Organise into Robust
+Modules}\label{structural-metrics-organise-into-robust-modules}
 
-The PCA revealed a high-dimensional structural space where the first six
-principal components accounted for 84.9\% of the total structural
-variation (Table 1). This indicates that while food web structure is
-complex, it can be effectively distilled into six primary axes of
-architectural variation.
+Hierarchical clustering of structural descriptors revealed clear modular
+organisation within food-web architecture Figure~\ref{fig-cluster}.
+Silhouette analysis indicated an optimal partition of the signed
+correlation matrix at k=7 modules, with a maximum average silhouette
+width of {[}insert value{]}. Clustering based on absolute correlations
+produced a slightly coarser but comparable solution (k=5), demonstrating
+that the modular structure is robust to the treatment of correlation
+sign and reflects strong underlying association patterns among metrics.
 
-\begin{itemize}
-\tightlist
-\item
-  Dimension 1 (31.6\% variance) was anchored by S1 (the number of
-  pathways from basal species), representing the total volume of energy
-  entry points.
-\item
-  Dimension 2 (21.6\% variance) was dominated by Richness (S),
-  representing the overall scale of the network.
-\item
-  Dimension 3 (15.5\% variance) was defined by the Predator-Prey Ratio,
-  capturing the balance of trophic roles (Node-level).
-\item
-  Dimension 4 (6.8\% variance) was driven by Mean Distance, reflecting
-  the efficiency or tightness of the wiring (Path-level).
-\item
-  Dimension 5 (5.2\% variance) was anchored by Herbivory, identifying
-  the functional dominance of specific energy channels.
-\item
-  Dimension 6 (4.4\% variance) was represented by MaxSim (Maximum
-  Similarity), a measure of trophic redundancy and functional overlap.
-\end{itemize}
+\begin{figure}
 
-\subsection{Alignment with the Energy-Flow
-Hierarchy}\label{alignment-with-the-energy-flow-hierarchy}
+\centering{
 
-The distribution of these representative metrics across the PCA
-dimensions suggests that no single hierarchical scale dominates food-web
-variation. Instead, the network space is composed of a mixture of
-Path-level (S1, Distance), Geometry (Richness), and Node-level
-(PredPreyRatio, Herbivory, MaxSim) properties. Notably, S1 (a Path-level
-metric) explained more variance than Richness, suggesting that the
-arrangement of energy flow pathways is a more fundamental structural
-signature than simple species counts.
+\pandocbounded{\includegraphics[keepaspectratio]{figures/cluster_dendrogram.png}}
 
-\subsubsection{Differential Drivers of Ecological
-Stability}\label{differential-drivers-of-ecological-stability}
+}
 
-The Random Forest models revealed a clear partitioning of structural
-influence, with different `pillars' emerging as the dominant predictors
-for each stability component (Table 2).
+\caption{\label{fig-cluster}Blah blah blah clusters}
 
-Persistence (Robustness) was primarily governed by PredPreyRatio
-(\%IncMSE = 15.98) and Herbivory (\%IncMSE = 10.23). Surprisingly,
-network Richness had no predictive power for persistence (\%IncMSE =
--2.49), suggesting that the balance of trophic roles is more critical
-for preventing extinction cascades than the total number of species.
+\end{figure}%
 
-Dampening (ρ) was most sensitive to Herbivory (\%IncMSE = 17.28). This
-indicates that the strength and proportion of energy flow originating
-from the basal-consumer interface is the primary regulator of a
-network's local stability.
+Bootstrap resampling further supported the stability of the major
+clusters. Most principal modules exhibited high approximately unbiased
+(AU) support values (AU ≥ {[}insert value{]}), indicating that the
+identified clusters are not artefacts of sampling variability but
+represent statistically robust groupings of structural descriptors.
 
-Organization (SVD Complexity) was uniquely driven by MaxSim (\%IncMSE =
-13.12) and S1 (\%IncMSE = 12.56). This supports the view that
-informational complexity emerges from a combination of unique species
-roles (low similarity) and the total volume of energy entry pathways.
+The resulting modular partition identified coherent groups of metrics
+describing distinct aspects of network architecture. These included a
+large-scale architectural module integrating size and motif-based
+descriptors, modules capturing trophic organisation and energy routing,
+and two modules consisting of isolated structural descriptors that
+function independently from broader metric groupings. Importantly, the
+modular structure persisted after accounting for species richness,
+demonstrating that clustering was not driven solely by network size
+effects.
 
-\subsubsection{Directionality and Trophic
-Control}\label{directionality-and-trophic-control}
+\subsection{Modular Decomposition of Structural
+Space}\label{modular-decomposition-of-structural-space}
 
-Partial dependence analysis provided a mechanistic look at how these
-pillars operate:
+The seven-module solution revealed a hierarchical decomposition of
+structural space into interpretable architectural dimensions.
+Collectively, the module decomposition reveals that food web structure
+can be interpreted as statistically supported and ecologically
+interpretable dimensions of network organisation that is strongly
+suggestive of a delineation by hierarchical architecture.
 
-Trophic Balance: Persistence showed a {[}direction{]} response to the
-PredPreyRatio, indicating an optimal balance between consumers and
-resources is required to maintain structural integrity.
+\textbf{Macro-Architectural Complexity:} The largest module encompassed
+species richness, number of interactions, diameter, motif frequencies,
+intervality, and related descriptors. These metrics jointly describe
+large-scale expansion of the interaction network and increased
+combinatorial complexity as species richness increases. This module
+reflects macro-architectural scaling: increasing network size
+simultaneously expands motif diversity, path structure, and global
+trophic ordering.
 
-Basal Channels: The system's ability to dampen perturbations (ρ)
-improved as Herbivory {[}increased/decreased{]}, suggesting that
-basal-heavy webs act as a buffer for energy surges.
+\textbf{Trophic Integration:} A second module grouped metrics describing
+vertical trophic organisation and connectivity, including connectance,
+trophic level, omnivory, chain length, and clustering. Together, these
+descriptors quantify how densely and hierarchically energy and
+interactions are embedded across trophic strata. This module captures
+the degree to which the network integrates trophic levels through
+cross-level interactions and structural embedding.
 
-Specialization: SVD Complexity increased as MaxSim decreased, confirming
-that organised networks are those where species occupy distinct,
-non-overlapping trophic niches rather than redundant ones.
+\textbf{Energy Transport:} A distinct module isolated geometric
+descriptors of interaction pathways, including mean distance, path
+number, and dispersion in chain length. These metrics characterize the
+structural geometry of energy routing independent of overall network
+size. The separation of this module suggests that routing structure
+constitutes an independent dimension of architectural variation rather
+than merely scaling with complexity.
 
-Our multi-stage analysis reveals that food web stability is governed by
-a hierarchical architecture where structural modules serve as
-specialized functional levers. While Principal Component Analysis and
-Silhouette validation (k=10) confirm the high dimensionality of network
-space, the hierarchical clustering identifies four robust, independent
-modules (AU ≥ 0.94) that dictate system behaviour. We find a clear
-decoupling of network scale from network persistence; specifically, the
-Geometric Scale module (containing Richness and Connectance) accounts
-for significant structural variance but fails to predict any component
-of stability. Instead, the Energy Flow Engine (Module 3) and Trophic
-Redundancy (Module 4) emerge as the primary controllers. Specifically,
-node-level balance within the flow engine (PredPreyRatio and Herbivory)
-determines persistence and dampening, while the isolation of species
-roles (MaxSim) dictates organizational complexity. This suggests that
-the stability of an ecosystem is not a product of its size, but of the
-specific configuration of its energy channels and the redundancy of its
-functional roles.
+\textbf{Trophic Asymmetry:} Another module captured metrics describing
+structural imbalance between basal and consumer components, including
+the proportion of basal species, predator--prey ratios, and generality
+measures. This module reflects bottom-heavy versus top-heavy structural
+skew and quantifies asymmetry in the distribution of trophic roles
+across the network.
 
-\begin{itemize}
-\tightlist
-\item
-  Redundancy / persistence
-\item
-  Pathway coupling / resistance
-\item
-  Organizational constraint / return
-\item
-  Reduced metric sets retain these axes
-\end{itemize}
+\textbf{Control Heterogeneity:} A separate module grouped descriptors of
+heterogeneity in consumer pressure and top-down control, including the
+proportion of apex species, herbivory structure, and variance in
+vulnerability. This module captures variation in how evenly or unevenly
+control is distributed across trophic levels.
+
+\textbf{Centralisation and Functional Redundancy:} Two metrics formed
+independent modules. Centrality emerged as a standalone module,
+representing concentration of structural dominance within a subset of
+species. Maximum trophic similarity likewise formed an isolated module,
+quantifying functional redundancy and niche overlap. The separation of
+these descriptors from broader structural groupings indicates that
+dominance concentration and trophic redundancy represent independent
+axes of food-web organisation.
+
+Collectively, these seven modules delineate a hierarchical decomposition
+of food-web structure spanning macro-scale complexity, vertical
+integration, routing geometry, trophic imbalance, control heterogeneity,
+dominance concentration, and functional overlap.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1368}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1684}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2737}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2947}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1263}}@{}}
+\caption{Structural Modules Identified From Hierarchical
+Clustering.}\label{tbl-modules}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Module Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Metrics Included
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Ecological Interpretation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Robustness (Silhouette / AU)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Module Size
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Module Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Metrics Included
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Ecological Interpretation
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Robustness (Silhouette / AU)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Module Size
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Macro-Architectural Complexity & richness, links, diameter, motif
+frequencies, intervality, path-related metrics & Captures large-scale
+expansion of network structure and combinatorial complexity associated
+with increasing system size & & \\
+Trophic Integration & connectance, trophic level, omnivory, chain
+length, clustering & Describes vertical trophic embedding and density of
+cross-level interactions & & \\
+Energy Transport & mean distance, path number, chain-length dispersion &
+Quantifies geometric structure of energy routing independent of size
+scaling & & \\
+Trophic Asymmetry & basal proportion, predator--prey ratio, generality &
+Represents structural skew between basal and consumer dominance;
+bottom-heavy vs top-heavy organization & & \\
+Control Heterogeneity & apex proportion, herbivory, vulnerability
+variance & Captures heterogeneity in top-down control and uneven
+distribution of interaction pressure & & \\
+Centralisation & centrality & Measures concentration of structural
+dominance within a subset of species & & \\
+Functional Redundancy & maximum trophic similarity & Quantifies trophic
+overlap and niche redundancy; independent axis of functional equivalence
+& & \\
+\end{longtable}
+
+\subsection{Structural Modules Align with Dominant Axes of Network
+Variation}\label{structural-modules-align-with-dominant-axes-of-network-variation}
+
+Principal component analysis of standardised structural metrics revealed
+strong dimensional compression in food-web structure
+Figure~\ref{fig-pca}. The first three principal components accounted for
+69.1\% of total variance (PC1 = 31.2\%, PC2 = 22.4\%, PC3 = 15.4\%),
+with 80.8\% of variance explained by the first five components.
+Subsequent axes contributed progressively smaller proportions of
+variance, indicating that a small number of dominant gradients summarise
+most structural variation.
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/pca_loadings.png}}
+
+}
+
+\caption{\label{fig-pca}Blah blah blah - colours represent clusters.
+Network metric loadings with PC1 and PC2}
+
+\end{figure}%
+
+Inspection of the loading structure showed that the first principal
+component primarily reflected variation in network size and
+connectivity. Metrics such as richness, number of links, diameter, path
+length, and measures associated with topological complexity loaded
+strongly on this axis. The second principal component captured variation
+associated with structural organization and connectivity patterns,
+whereas the third component reflected variation in trophic structure and
+vertical differentiation, with strong contributions from trophic level,
+chain length, and related measures. Together, these axes represent
+interpretable structural gradients in the metric space.
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/module_alignment_heatmap.png}}
+
+}
+
+\caption{\label{fig-alignment_heatmap}Blah blah blah - colour intensity
+= greater alignment}
+
+\end{figure}%
+
+The global permutation test indicated significant alignment between
+modules and principal components (P = 0.005), demonstrating that the
+observed modular partition explains the multivariate geometry of
+structural metrics better than randomly assigned modules. Module 1
+exhibited the strongest and most extensive alignment with principal
+components, showing significant associations across seven axes and with
+its strongest alignment occurring on PC1. This module therefore
+contributes substantially to the dominant structural gradient and
+captures variation associated with network size and connectivity. Module
+3 showed significant alignment with four principal components, with its
+strongest association on PC4, suggesting that it captures structural
+variation orthogonal to the primary complexity gradient. Modules 2, 4,
+5, 6, and 7 displayed more limited alignment, each showing significance
+with fewer principal components. Notably, Module 2 aligned most strongly
+with a later principal component (PC19), indicating that it captures a
+more subtle structural axis that contributes modestly to overall
+variance but remains statistically distinct from random expectation.
+Across modules, significant alignments were concentrated in a subset of
+principal components, reinforcing the interpretation that modular
+structure maps onto specific structural gradients rather than uniformly
+spanning the full multivariate space.
+
+\begin{quote}
+I have an idea for this result\ldots{}
+\end{quote}
+
+Collectively, these results demonstrate that food-web structural metrics
+exhibit strong low-dimensional organisation and that independently
+identified structural modules are non-randomly aligned with the dominant
+axes of variation. The significant global alignment supports the
+interpretation that modular decomposition reflects meaningful geometric
+structure rather than clustering artifacts. Moreover, the dominance of a
+single module across multiple principal components suggests hierarchical
+organisation, wherein a core structural module governs the primary
+gradient of variation while additional modules capture secondary and
+specialised structural dimensions.
 
 \section{Discussion}\label{discussion}
 
@@ -1076,271 +1246,6 @@ emergent properties of the network, including system-wide stability,
 resilience, and structural complexity. Capture how the network responds
 to perturbations or organizes itself at a global level. \\
 \end{longtable}
-
-{
-
-\begin{longtable}[]{@{}llrr@{}}
-
-\caption{\label{tbl-corr}Here is a table showing the correlation of the
-different network properties with the first three dimensions of the PCA}
-
-\tabularnewline
-
-\toprule\noalign{}
-Property & dimension & quanti.correlation & quanti.p.value \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-richness & Dim.1 & 0.38 & NA \\
-richness & Dim.2 & 0.84 & NA \\
-richness & Dim.3 & -0.27 & NA \\
-richness & Dim.4 & 0.04 & NA \\
-richness & Dim.5 & -0.05 & NA \\
-links & Dim.1 & 0.68 & NA \\
-links & Dim.2 & 0.68 & NA \\
-links & Dim.3 & 0.01 & NA \\
-links & Dim.4 & 0.03 & NA \\
-links & Dim.5 & 0.12 & NA \\
-connectance & Dim.1 & 0.40 & NA \\
-connectance & Dim.2 & -0.56 & NA \\
-connectance & Dim.3 & 0.60 & NA \\
-connectance & Dim.4 & -0.04 & NA \\
-connectance & Dim.5 & 0.10 & NA \\
-diameter & Dim.1 & 0.80 & NA \\
-diameter & Dim.2 & 0.27 & NA \\
-diameter & Dim.3 & -0.24 & NA \\
-diameter & Dim.4 & 0.02 & NA \\
-diameter & Dim.5 & 0.11 & NA \\
-distance & Dim.1 & -0.01 & NA \\
-distance & Dim.2 & 0.33 & NA \\
-distance & Dim.3 & 0.08 & NA \\
-distance & Dim.4 & 0.59 & NA \\
-distance & Dim.5 & 0.40 & NA \\
-basal & Dim.1 & -0.52 & NA \\
-basal & Dim.2 & 0.44 & NA \\
-basal & Dim.3 & 0.65 & NA \\
-basal & Dim.4 & 0.22 & NA \\
-basal & Dim.5 & -0.19 & NA \\
-top & Dim.1 & -0.54 & NA \\
-top & Dim.2 & 0.21 & NA \\
-top & Dim.3 & -0.38 & NA \\
-top & Dim.4 & -0.55 & NA \\
-top & Dim.5 & 0.09 & NA \\
-intermediate & Dim.1 & 0.72 & NA \\
-intermediate & Dim.2 & -0.48 & NA \\
-intermediate & Dim.3 & -0.35 & NA \\
-intermediate & Dim.4 & 0.10 & NA \\
-intermediate & Dim.5 & 0.11 & NA \\
-predpreyRatio & Dim.1 & -0.31 & NA \\
-predpreyRatio & Dim.2 & 0.39 & NA \\
-predpreyRatio & Dim.3 & 0.71 & NA \\
-predpreyRatio & Dim.4 & 0.31 & NA \\
-predpreyRatio & Dim.5 & -0.27 & NA \\
-herbivory & Dim.1 & -0.51 & NA \\
-herbivory & Dim.2 & 0.27 & NA \\
-herbivory & Dim.3 & 0.02 & NA \\
-herbivory & Dim.4 & -0.17 & NA \\
-herbivory & Dim.5 & 0.55 & NA \\
-omnivory & Dim.1 & 0.77 & NA \\
-omnivory & Dim.2 & -0.31 & NA \\
-omnivory & Dim.3 & -0.14 & NA \\
-omnivory & Dim.4 & 0.05 & NA \\
-omnivory & Dim.5 & -0.15 & NA \\
-cannibal & Dim.1 & 0.69 & NA \\
-cannibal & Dim.2 & 0.07 & NA \\
-cannibal & Dim.3 & 0.40 & NA \\
-cannibal & Dim.4 & -0.39 & NA \\
-cannibal & Dim.5 & 0.00 & NA \\
-l\_S & Dim.1 & 0.84 & NA \\
-l\_S & Dim.2 & 0.45 & NA \\
-l\_S & Dim.3 & 0.26 & NA \\
-l\_S & Dim.4 & -0.09 & NA \\
-l\_S & Dim.5 & 0.03 & NA \\
-GenSD & Dim.1 & -0.39 & NA \\
-GenSD & Dim.2 & 0.67 & NA \\
-GenSD & Dim.3 & 0.33 & NA \\
-GenSD & Dim.4 & 0.21 & NA \\
-GenSD & Dim.5 & -0.32 & NA \\
-VulSD & Dim.1 & -0.34 & NA \\
-VulSD & Dim.2 & 0.56 & NA \\
-VulSD & Dim.3 & -0.42 & NA \\
-VulSD & Dim.4 & -0.46 & NA \\
-VulSD & Dim.5 & 0.17 & NA \\
-TL & Dim.1 & 0.57 & NA \\
-TL & Dim.2 & -0.40 & NA \\
-TL & Dim.3 & -0.66 & NA \\
-TL & Dim.4 & -0.05 & NA \\
-TL & Dim.5 & -0.08 & NA \\
-ChLen & Dim.1 & 0.54 & NA \\
-ChLen & Dim.2 & -0.54 & NA \\
-ChLen & Dim.3 & -0.49 & NA \\
-ChLen & Dim.4 & 0.12 & NA \\
-ChLen & Dim.5 & -0.16 & NA \\
-ChSD & Dim.1 & 0.37 & NA \\
-ChSD & Dim.2 & 0.11 & NA \\
-ChSD & Dim.3 & -0.45 & NA \\
-ChSD & Dim.4 & 0.40 & NA \\
-ChSD & Dim.5 & -0.10 & NA \\
-ChNum & Dim.1 & -0.11 & NA \\
-ChNum & Dim.2 & 0.76 & NA \\
-ChNum & Dim.3 & -0.47 & NA \\
-ChNum & Dim.4 & -0.24 & NA \\
-ChNum & Dim.5 & -0.15 & NA \\
-path & Dim.1 & 0.31 & NA \\
-path & Dim.2 & 0.34 & NA \\
-path & Dim.3 & -0.36 & NA \\
-path & Dim.4 & 0.54 & NA \\
-path & Dim.5 & 0.35 & NA \\
-LinkSD & Dim.1 & -0.19 & NA \\
-LinkSD & Dim.2 & 0.72 & NA \\
-LinkSD & Dim.3 & -0.39 & NA \\
-LinkSD & Dim.4 & -0.05 & NA \\
-LinkSD & Dim.5 & -0.29 & NA \\
-S1 & Dim.1 & 0.90 & NA \\
-S1 & Dim.2 & -0.03 & NA \\
-S1 & Dim.3 & 0.14 & NA \\
-S1 & Dim.4 & -0.07 & NA \\
-S1 & Dim.5 & 0.08 & NA \\
-S2 & Dim.1 & 0.79 & NA \\
-S2 & Dim.2 & -0.06 & NA \\
-S2 & Dim.3 & 0.47 & NA \\
-S2 & Dim.4 & -0.26 & NA \\
-S2 & Dim.5 & -0.06 & NA \\
-S4 & Dim.1 & 0.62 & NA \\
-S4 & Dim.2 & 0.48 & NA \\
-S4 & Dim.3 & 0.28 & NA \\
-S4 & Dim.4 & -0.26 & NA \\
-S4 & Dim.5 & 0.18 & NA \\
-S5 & Dim.1 & 0.66 & NA \\
-S5 & Dim.2 & 0.42 & NA \\
-S5 & Dim.3 & 0.52 & NA \\
-S5 & Dim.4 & -0.08 & NA \\
-S5 & Dim.5 & 0.00 & NA \\
-centrality & Dim.1 & -0.30 & NA \\
-centrality & Dim.2 & -0.61 & NA \\
-centrality & Dim.3 & 0.26 & NA \\
-centrality & Dim.4 & 0.07 & NA \\
-centrality & Dim.5 & 0.46 & NA \\
-loops & Dim.1 & 0.81 & NA \\
-loops & Dim.2 & 0.28 & NA \\
-loops & Dim.3 & 0.17 & NA \\
-loops & Dim.4 & -0.09 & NA \\
-loops & Dim.5 & 0.12 & NA \\
-intervals & Dim.1 & 0.51 & NA \\
-intervals & Dim.2 & 0.65 & NA \\
-intervals & Dim.3 & -0.11 & NA \\
-intervals & Dim.4 & 0.24 & NA \\
-intervals & Dim.5 & 0.18 & NA \\
-MaxSim & Dim.1 & -0.12 & NA \\
-MaxSim & Dim.2 & -0.07 & NA \\
-MaxSim & Dim.3 & 0.57 & NA \\
-MaxSim & Dim.4 & -0.14 & NA \\
-MaxSim & Dim.5 & 0.21 & NA \\
-Clust & Dim.1 & 0.64 & NA \\
-Clust & Dim.2 & -0.35 & NA \\
-Clust & Dim.3 & 0.16 & NA \\
-Clust & Dim.4 & 0.01 & NA \\
-Clust & Dim.5 & -0.40 & NA \\
-S1 & Dim.1 & 0.90 & 0.0000000 \\
-l\_S & Dim.1 & 0.84 & 0.0000000 \\
-loops & Dim.1 & 0.81 & 0.0000000 \\
-diameter & Dim.1 & 0.80 & 0.0000000 \\
-S2 & Dim.1 & 0.79 & 0.0000000 \\
-omnivory & Dim.1 & 0.77 & 0.0000000 \\
-intermediate & Dim.1 & 0.72 & 0.0000004 \\
-cannibal & Dim.1 & 0.69 & 0.0000015 \\
-links & Dim.1 & 0.68 & 0.0000030 \\
-S5 & Dim.1 & 0.66 & 0.0000077 \\
-Clust & Dim.1 & 0.64 & 0.0000170 \\
-S4 & Dim.1 & 0.62 & 0.0000282 \\
-TL & Dim.1 & 0.57 & 0.0001879 \\
-ChLen & Dim.1 & 0.54 & 0.0005272 \\
-intervals & Dim.1 & 0.51 & 0.0009658 \\
-connectance & Dim.1 & 0.40 & 0.0123944 \\
-richness & Dim.1 & 0.38 & 0.0182160 \\
-ChSD & Dim.1 & 0.37 & 0.0205346 \\
-VulSD & Dim.1 & -0.34 & 0.0348758 \\
-GenSD & Dim.1 & -0.39 & 0.0150597 \\
-herbivory & Dim.1 & -0.51 & 0.0010542 \\
-basal & Dim.1 & -0.52 & 0.0009130 \\
-top & Dim.1 & -0.54 & 0.0004175 \\
-richness & Dim.2 & 0.84 & 0.0000000 \\
-ChNum & Dim.2 & 0.76 & 0.0000000 \\
-LinkSD & Dim.2 & 0.72 & 0.0000003 \\
-links & Dim.2 & 0.68 & 0.0000030 \\
-GenSD & Dim.2 & 0.67 & 0.0000051 \\
-intervals & Dim.2 & 0.65 & 0.0000111 \\
-VulSD & Dim.2 & 0.56 & 0.0002484 \\
-S4 & Dim.2 & 0.48 & 0.0020815 \\
-l\_S & Dim.2 & 0.45 & 0.0049841 \\
-basal & Dim.2 & 0.44 & 0.0062051 \\
-S5 & Dim.2 & 0.42 & 0.0091132 \\
-predpreyRatio & Dim.2 & 0.39 & 0.0142971 \\
-path & Dim.2 & 0.34 & 0.0381102 \\
-distance & Dim.2 & 0.33 & 0.0426262 \\
-Clust & Dim.2 & -0.35 & 0.0303883 \\
-TL & Dim.2 & -0.40 & 0.0139488 \\
-intermediate & Dim.2 & -0.48 & 0.0023996 \\
-ChLen & Dim.2 & -0.54 & 0.0005074 \\
-connectance & Dim.2 & -0.56 & 0.0002624 \\
-centrality & Dim.2 & -0.61 & 0.0000504 \\
-predpreyRatio & Dim.3 & 0.71 & 0.0000006 \\
-basal & Dim.3 & 0.65 & 0.0000122 \\
-connectance & Dim.3 & 0.60 & 0.0000804 \\
-MaxSim & Dim.3 & 0.57 & 0.0002078 \\
-S5 & Dim.3 & 0.52 & 0.0008330 \\
-S2 & Dim.3 & 0.47 & 0.0029951 \\
-cannibal & Dim.3 & 0.40 & 0.0122774 \\
-GenSD & Dim.3 & 0.33 & 0.0416849 \\
-intermediate & Dim.3 & -0.35 & 0.0293668 \\
-path & Dim.3 & -0.36 & 0.0276975 \\
-top & Dim.3 & -0.38 & 0.0201240 \\
-LinkSD & Dim.3 & -0.39 & 0.0148989 \\
-VulSD & Dim.3 & -0.42 & 0.0094597 \\
-ChSD & Dim.3 & -0.45 & 0.0047583 \\
-ChNum & Dim.3 & -0.47 & 0.0026959 \\
-ChLen & Dim.3 & -0.49 & 0.0018937 \\
-TL & Dim.3 & -0.66 & 0.0000064 \\
-
-\end{longtable}
-
-}
-
-\textsubscript{Source:
-\href{https://BecksLab.github.io/ms_feature_selection/index.qmd.html}{Article
-Notebook}}
-
-\begin{figure}[H]
-
-{\centering \pandocbounded{\includegraphics[keepaspectratio,alt={VERMAAT networks only}]{figures/pca_vermaat.png}}
-
-}
-
-\caption{VERMAAT networks only}
-
-\end{figure}%
-
-\begin{figure}[H]
-
-{\centering \pandocbounded{\includegraphics[keepaspectratio,alt={All networks. Vermaat subset = using only the structural measures from Vermaat}]{figures/pca_allNetworks.png}}
-
-}
-
-\caption{All networks. Vermaat subset = using only the structural
-measures from Vermaat}
-
-\end{figure}%
-
-\begin{figure}[H]
-
-{\centering \pandocbounded{\includegraphics[keepaspectratio,alt={Cluster}]{figures/metric_hclust.png}}
-
-}
-
-\caption{Cluster}
-
-\end{figure}%
 
 \section*{References}\label{references}
 \addcontentsline{toc}{section}{References}
