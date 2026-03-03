@@ -282,7 +282,9 @@ p_sidebar <- ggplot(cluster_annotation,
                         y = Metric,
                         fill = as.factor(Module))) +
   geom_tile(alpha = 0.8) +
-  scale_fill_manual(values = cluster_colors,
+  scale_fill_manual(values = pal_df$colour,
+                    labels = pal_df$label,
+                    limits = pal_df$value,
                     name = "Module") +
   theme_void() +
   theme(legend.position = "right")
@@ -295,11 +297,13 @@ p_loadings <- ggplot(loadings_df,
   geom_tile() +
   geom_hline(yintercept = cluster_bounds$y,
              colour = "#1A1A1A",
-             linewidth = 0.4) +
+             linewidth = 0.7)  +
+  coord_cartesian(clip = "on",
+                  expand = FALSE) +
   scale_fill_gradient2(
-    low = "#2C3E50",
-    mid = "white",
-    high = "#C1785A",
+    low = pal_diverge$low,
+    mid = pal_diverge$mid,
+    high = pal_diverge$high,
     midpoint = 0
   ) +
   theme_void() +
@@ -307,7 +311,7 @@ p_loadings <- ggplot(loadings_df,
 
 p_loadings +
   p_sidebar + 
-  plot_layout(widths = c(1, 0.08),
+  plot_layout(widths = c(1, 0.05),
               guides = 'collect')
 
 ggsave("../figures/pca_loadings_heatmap.png",
@@ -317,12 +321,16 @@ ggsave("../figures/pca_loadings_heatmap.png",
        dpi = 600)
 
 ##################################################
-# 9. PCA LOADING PLOT (MODULE COLORED)
+# 9. PCA LOADING PLOT
 ##################################################
 
 loadings_plot <- as.data.frame(loadings[,1:2]) %>%
   rownames_to_column("Metric") %>%
   mutate(Module = as.factor(clusters[Metric]))
+
+var_explained <- summary(pca)$importance["Proportion of Variance", ]
+pc1_label <- paste0("PC1 (", round(var_explained[1] * 100, 1), "%)")
+pc2_label <- paste0("PC2 (", round(var_explained[2] * 100, 1), "%)")
 
 ggplot(loadings_plot, 
        aes(PC1, PC2, 
@@ -331,17 +339,23 @@ ggplot(loadings_plot,
   geom_hline(yintercept = 0, linetype = "dashed", colour = "#A5ACAF") +
   geom_vline(xintercept = 0, linetype = "dashed", colour = "#A5ACAF") +
   geom_point(size = 2.4,
-             alpha = 0.8) +
-  geom_text_repel(vjust = 1.2, size = 3,
-                  family = "space") +
-  scale_colour_manual(values = as.vector(kraken_7)) +
+             alpha = 0.7) +
+  geom_text_repel(vjust = 1.2, size = 4.2,
+                  family = "space",
+                  show.legend = FALSE) +
+  labs(x = pc1_label,
+       y = pc2_label) +
+  scale_colour_manual(values = pal_df$colour,
+                      labels = pal_df$label,
+                      limits = pal_df$value,
+                      name = "Module") +
   figure_theme() +
   theme(legend.position = 'right',
         panel.grid.major = element_blank())
 
 ggsave("../figures/pca_loadings.png",
        width = 5000,
-       height = 3000,
+       height = 3200,
        units = "px",
        dpi = 600)
 

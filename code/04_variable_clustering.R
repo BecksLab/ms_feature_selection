@@ -188,20 +188,21 @@ ggplot() +
   geom_rect(data = rect_df,
             aes(xmin = -0.01, xmax = 0,
                 ymin = ymin-0.3, ymax = ymax+0.3,
-                fill = factor(Cluster))) +
+                fill = factor(Cluster)),
+            alpha = 0.8) +
   # Metric labels
   geom_text(data = label_df,
             aes(x = -0.015, y = x, label = label),
             hjust = 1,
-            size = rel(1.8),
+            size = rel(3),
             family = "space") +
-  scale_fill_manual(values = cluster_colors,
-                    labels = module_names$Module_Name,
+  scale_fill_manual(values = pal_df$colour,
+                    labels = pal_df$label,
+                    limits = pal_df$value,
                     name = "Module") +
-  theme_minimal(base_size = 14) +
   labs(x = "Correlation Distance",
        y = "") +
-  coord_cartesian(xlim = c(-0.1, max(dend_data$segment$y))) +
+  coord_cartesian(xlim = c(-0.2, max(dend_data$segment$y))) +
   figure_theme() +
   theme(
     axis.text.y = element_blank(),
@@ -211,8 +212,8 @@ ggplot() +
   )
 
 ggsave("../figures/cluster_dendrogram.png",
-       width = 6000,
-       height = 3000,
+       width = 5500,
+       height = 2750,
        units = "px",
        dpi = 600)
 
@@ -291,12 +292,11 @@ ggplot() +
   geom_text(data = label_df,
             aes(x = -0.015, y = x, label = label, colour = Cluster),
             hjust = 1,
-            size = rel(1.8),
+            size = rel(2),
             family = "space") +
   scale_colour_manual(values = cluster_colors,
-                    labels = module_names$Module_Name,
-                    name = "Module") +
-  theme_minimal(base_size = 14) +
+                      labels = module_names$Module_Name,
+                      name = "Module") +
   labs(x = "Correlation Distance",
        y = "") +
   coord_cartesian(xlim = c(-0.1, max(dend_data$segment$y))) +
