@@ -1,4 +1,5 @@
 library(tidyverse)
+library(ggalluvial)
 library(ggrepel)
 library(patchwork)
 library(pheatmap)
@@ -129,6 +130,78 @@ module_summary <- data.frame(
   Num_Significant_PCs = rowSums(sig_mat),
   Strongest_PC = apply(abs(z_scores), 1, which.max)
 )
+
+module_effect <- data.frame(
+  Module = rownames(z_scores),
+  Mean_Z = rowMeans(z_scores),
+  Max_Z = apply(z_scores, 1, max)
+)
+
+# which PCs are module driven
+pc_summary <- data.frame(
+  PC = colnames(z_scores),
+  Num_Significant_Modules = colSums(sig_mat),
+  Strongest_Module = apply(abs(z_scores), 2, which.max)
+)
+
+##################################################
+# 8. VARIANCE EXPLAINED
+##################################################
+
+obs_alignment <- matrix(0,
+                        nrow = length(unique(clusters)),
+                        ncol = ncol(loadings),
+                        dimnames = list(
+                          unique(clusters),
+                          colnames(loadings)
+                        ))
+
+for (m in unique(clusters)) {
+  
+  metrics_in_module <- names(clusters[clusters == m])
+  
+  for (pc in colnames(loadings)) {
+    
+    obs_alignment[m, pc] <-
+      sum(loadings[metrics_in_module, pc]^2,
+          na.rm = TRUE)
+  }
+}
+
+module_var_frac <- obs_alignment
+
+for (pc in colnames(module_var_frac)) {
+  module_var_frac[, pc] <- module_var_frac[, pc] /
+    sum(module_var_frac[, pc])
+}
+
+module_var_df <- as.data.frame(module_var_frac) %>%
+  rownames_to_column("Module") %>%
+  pivot_longer(-Module,
+               names_to = "PC",
+               values_to = "Variance_Fraction")
+
+module_var_df$PC <- factor(module_var_df$PC,
+                           levels = unique(module_var_df$PC))
+
+ggplot(data = module_var_df,
+       aes(x = PC, y = Variance_Fraction, alluvium = as.character(Module))) +
+  geom_alluvium(aes(fill = as.character(Module)),
+                alpha = 0.9) +
+  scale_fill_manual(values = cluster_colors) +
+  labs(title = "Variance Explained by Module per PC",
+       y = "Fraction of PC Variance",
+       fill = "Module",
+       x = "") +
+  figure_theme() +
+  theme(legend.position = "right",
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave("../figures/variance_expalined.png",
+       width = 7500,
+       height = 3000,
+       units = "px",
+       dpi = 600)
 
 ##################################################
 # 8. VISUALISE MODEL ALIGNMENT
@@ -271,3 +344,40 @@ ggsave("../figures/pca_loadings.png",
        height = 3000,
        units = "px",
        dpi = 600)
+
+##################################################
+# 10. Z-SCORES HEATMAP
+##################################################
+
+sig_mask <- (p_values < 0.05) & (abs(z_scores) > 1.96)
+
+sig_mask <- ifelse(sig_mask, "*", "")
+
+# Use Z-scores for visualization (better than raw alignment)
+plot_mat <- z_scores
+
+# Optional: Cap extreme values for better visual scaling
+plot_mat[plot_mat > 4]  <- 4
+plot_mat[plot_mat < -4] <- -4
+
+# Create annotation of significance
+annotation_matrix <- sig_mask
+
+pheatmap(
+  plot_mat,
+  color = seattle_abyssal_gen(100),
+  cluster_rows = TRUE,
+  cluster_cols = TRUE,
+  display_numbers = annotation_matrix,
+  number_color = "#E9E3D3",
+  fontsize_number = 14,
+  main = "Module–PC Significance (Z-scores)",
+  breaks = seq(-4, 4, length.out = 101)
+)
+
+sig_summary <- data.frame(
+  Module = rownames(sig_mat),
+  Num_Significant_PCs = rowSums(sig_mat),
+  Mean_Z = rowMeans(z_scores),
+  Max_Z = apply(z_scores, 1, max)
+)
