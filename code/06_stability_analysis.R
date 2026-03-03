@@ -50,6 +50,8 @@ varImpPlot(rf_robust, type=1, main="Drivers of Persistence")
 varImpPlot(rf_rho,    type=1, main="Drivers of Dampening")
 varImpPlot(rf_comp,   type=1, main="Drivers of Organization")
 
+par(mfrow=c(1,1)) 
+
 # 3. Extract and compare Performance (R-squared)
 perf <- data.frame(
   Stability_Type = c("Robustness", "Spectral Radius", "SVD Complexity"),
