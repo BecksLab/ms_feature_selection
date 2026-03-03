@@ -37,3 +37,23 @@ Network metric loadings with PC1 and PC2}
 = greater alignment}
 
 \end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/heatmap_zscores.png}}
+
+}
+
+\caption{\label{fig-alignment_signif}Heatmap showing module--principal
+component alignment quantified by permutation-derived Z-scores. Colour
+intensity reflects the magnitude and direction of alignment, and
+asterisks denote cells that meet joint significance criteria
+(permutation P \textless{} 0.05 and \textbar Z\textbar{} \textgreater{}
+1.96). Rows correspond to structural metric modules and columns to
+principal components. Clustering highlights patterns of shared alignment
+across modules and multivariate structural gradients.}
+
+\end{figure}

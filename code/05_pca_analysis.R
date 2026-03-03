@@ -301,7 +301,8 @@ p_sidebar <- ggplot(cluster_annotation,
                     limits = pal_df$value,
                     name = "Module") +
   theme_void() +
-  theme(legend.position = "right")
+  theme(legend.position = "right",
+        text = element_text(family = "space", color = "#001628"))
 
 # Heatmap of loadings
 p_loadings <- ggplot(loadings_df,
@@ -310,18 +311,17 @@ p_loadings <- ggplot(loadings_df,
                          fill = Loading)) +
   geom_tile() +
   geom_hline(yintercept = cluster_bounds$y,
-             colour = "#1A1A1A",
+             colour = "#001628",
              linewidth = 0.7)  +
   coord_cartesian(clip = "on",
                   expand = FALSE) +
-  scale_fill_gradient2(
-    low = pal_diverge$low,
-    mid = pal_diverge$mid,
-    high = pal_diverge$high,
-    midpoint = 0
+  scale_fill_gradientn(
+    colors = seattle_div,
+    values = scales::rescale(c(-1, 0, 1))
   ) +
   theme_void() +
-  theme(axis.text.x = element_text(family = "space", size = 10, color = "#1A1A1A"))
+  theme(axis.text.x = element_text(family = "space", size = 10, color = "#001628"),
+        text = element_text(family = "space", color = "#001628"))
 
 p_loadings +
   p_sidebar + 
@@ -391,7 +391,7 @@ plot_mat[plot_mat < -4] <- -4
 # Create annotation of significance
 annotation_matrix <- sig_mask
 
-pheatmap(
+z_heatmap <- pheatmap(
   plot_mat,
   color = pal_diverge_gen(100),
   cluster_rows = TRUE,
@@ -404,6 +404,7 @@ pheatmap(
 )
 
 ggsave("../figures/heatmap_zscores.png",
+       z_heatmap,
        width = 6000,
        height = 3000,
        units = "px",
