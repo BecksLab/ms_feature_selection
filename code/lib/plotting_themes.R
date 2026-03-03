@@ -41,10 +41,23 @@ kraken_7 <- c(
   "Torrent Teal"   = "#005A5B", # Torrent Teal (Torrent)
   "Kraken Red"     = "#E9072B", # Red Alert (Kraken)
   "Deep Crimson"   = "#8B0000", # Deep Crimson (Kraken)
-  "Kraken Ice"     = "#99D9D9",  # Ice Blue (Kraken)
-  "Shadow Blue"    = "#68A2B9" # Shadow Blue
+  "Kraken Ice"     = "#99D9D9", # Ice Blue (Kraken)
+  "Shadow Blue"    = "#68A2B9"  # Shadow Blue (Kraken)
   
 )
+
+# continuous ramp
+seattle_anchors <- c(
+  "Foam"      = "#E9E3D3", 
+  "Ice"       = "#99D9D9", 
+  "Shadow"    = "#68A2B9", 
+  "Boundless" = "#355464", 
+  "DeepSea"   = "#001628"
+)
+
+# 2. Create the Generator Function
+# This creates a function that can interpolate any number of colors
+seattle_abyssal_gen <- colorRampPalette(seattle_anchors)
 
 figure_theme <- function() {
   theme_bw() %+replace% 
