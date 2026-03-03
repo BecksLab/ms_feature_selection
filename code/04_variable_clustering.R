@@ -170,6 +170,19 @@ rect_df <- label_df %>%
 
 cluster_colors <- as.vector(kraken_7)
 
+module_names <- tibble(
+  Cluster = 1:7,
+  Module_Name = c(
+    "Macro Complexity",
+    "Trophic Integration",
+    "Energy Transport",
+    "Trophic Asymmetry",
+    "Control Heterogeneity",
+    "Centralisation",
+    "Functional Redundancy"
+  )
+)
+
 # Build horizontal plot
 ggplot() +
   geom_segment(data = dend_data$segment,
@@ -211,25 +224,12 @@ ggsave("../figures/cluster_dendrogram.png",
 
 # Export cluster table
 write.csv(cluster_df,
-          "tables/metric_clusters_auto.csv",
+          "../tables/metric_clusters_auto.csv",
           row.names = FALSE)
 
 cluster_df %>%
   group_by(Cluster) %>%
   summarise(Size = n())
-
-module_names <- tibble(
-  Cluster = 1:7,
-  Module_Name = c(
-    "Macro Complexity",
-    "Trophic Integration",
-    "Energy Transport",
-    "Trophic Asymmetry",
-    "Control Heterogeneity",
-    "Centralisation",
-    "Functional Redundancy"
-  )
-)
 
 module_table <- cluster_df %>%
   group_by(Cluster) %>%
@@ -243,7 +243,7 @@ module_table <- cluster_df %>%
   arrange(Cluster)
 
 write.csv(module_table,
-          "tables/module_summary_7clusters.csv",
+          "../tables/module_summary_7clusters.csv",
           row.names = FALSE)
 
 

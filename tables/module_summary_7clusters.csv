@@ -1,0 +1,8 @@
+"Cluster","Module_Name","Count","Metrics"
+1,"Macro-Architectural Complexity",11,"richness, links, diameter, cannibal, l_S, S1, S2, S4, S5, loops, intervals"
+2,"Trophic Integration Architecture",6,"connectance, intermediate, omnivory, TL, ChLen, Clust"
+3,"Energy Transport Architecture",3,"distance, ChSD, path"
+4,"Trophic Asymmetry Architecture",3,"basal, predpreyRatio, GenSD"
+5,"Control Heterogeneity Architecture",5,"top, herbivory, VulSD, ChNum, LinkSD"
+6,"Centralisation Architecture",1,"centrality"
+7,"Functional Redundancy Architecture",1,"MaxSim"
