@@ -211,7 +211,7 @@ ggplot(data = module_var_df,
   theme(legend.position = "right",
         axis.text.x = element_text(angle = 45, hjust = 1))
 
-ggsave("../figures/variance_expalined.png",
+ggsave("../figures/variance_explained.png",
        width = 7500,
        height = 3000,
        units = "px",
