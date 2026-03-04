@@ -61,13 +61,21 @@ seattle_div <- c("#005A9C", "#F5F5F5", "#00843D")
 
 pal_diverge_gen <- colorRampPalette(seattle_div)
 
+# additional categorical colours
+
+secondary_palette <- c(
+  "#005596", 
+  "#005C5C", 
+  "#50723C"
+  )
+
 figure_theme <- function() {
   theme_bw() %+replace% 
     theme(
       # Text & Axes
       text = element_text(family = "space", color = "#001628"),
       plot.title = element_text(face = "bold", size = 14, margin = ggplot2::margin(b = 10)),
-      axis.text = element_text(size = 10, color = "#1A1A1A"),
+      axis.text = element_text(size = 10, color = "#001628"),
       axis.title = element_text(face = "bold"),
       
       # Grid & Background
@@ -76,8 +84,8 @@ figure_theme <- function() {
       panel.background = element_rect(fill = "white", color = NA),
       
       # Border & Strip Alignment
-      panel.border = element_rect(color = "#1A1A1A", fill = NA, linewidth = 1),
-      strip.background = element_rect(color = "#1A1A1A", fill = "white", linewidth = 1),
+      panel.border = element_rect(color = "#001628", fill = NA, linewidth = 1),
+      strip.background = element_rect(color = "#001628", fill = "white", linewidth = 1),
       
       # Important: ensure there is no gap between strip and panel
       panel.spacing = unit(0, "pt"),
