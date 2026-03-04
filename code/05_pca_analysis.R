@@ -38,6 +38,9 @@ pc_scores <- pca_all$x
 
 explained_var <- summary(pca_all)$importance[2, ]
 
+# Save pca object
+saveRDS(pca_all, "data/outputs/pca_object.rds")
+
 ##################################################
 # 4. DEFINE MODULES
 ##################################################
