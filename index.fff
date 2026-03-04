@@ -116,7 +116,7 @@ structural influence underlying different facets of stability.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{figures/struct_stability_summ.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{figures/struct_stability_coeff.png}}
 
 }
 
