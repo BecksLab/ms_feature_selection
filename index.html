@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.28">
+<meta name="generator" content="quarto-1.9.29">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -56,7 +56,7 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-49e51e44f424ea8c7044b429bdbbbfe2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dfa48a90d809c806c7ea2d5aecd9fc66.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-133a0a4dda30ced7f07b755c880e46a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -239,12 +239,26 @@ window.Quarto = {
   <li><a href="#data-compilation" id="toc-data-compilation" class="nav-link" data-scroll-target="#data-compilation"><span class="header-section-number">2.1</span> Data Compilation</a></li>
   <li><a href="#identification-of-structural-modules" id="toc-identification-of-structural-modules" class="nav-link" data-scroll-target="#identification-of-structural-modules"><span class="header-section-number">2.2</span> Identification of Structural Modules</a></li>
   <li><a href="#multivariate-structure-and-moduleaxis-alignment" id="toc-multivariate-structure-and-moduleaxis-alignment" class="nav-link" data-scroll-target="#multivariate-structure-and-moduleaxis-alignment"><span class="header-section-number">2.3</span> Multivariate Structure and Module–Axis Alignment</a></li>
+  <li><a href="#structural-metric-reduction-and-representation-of-network-space" id="toc-structural-metric-reduction-and-representation-of-network-space" class="nav-link" data-scroll-target="#structural-metric-reduction-and-representation-of-network-space"><span class="header-section-number">2.4</span> Structural Metric Reduction and Representation of Network Space</a>
+  <ul class="collapse">
+  <li><a href="#identification-of-structural-domains" id="toc-identification-of-structural-domains" class="nav-link" data-scroll-target="#identification-of-structural-domains"><span class="header-section-number">2.4.1</span> Identification of Structural Domains</a></li>
+  <li><a href="#extraction-of-latent-structural-axes" id="toc-extraction-of-latent-structural-axes" class="nav-link" data-scroll-target="#extraction-of-latent-structural-axes"><span class="header-section-number">2.4.2</span> Extraction of Latent Structural Axes</a></li>
+  <li><a href="#conceptual-contrast-between-representations" id="toc-conceptual-contrast-between-representations" class="nav-link" data-scroll-target="#conceptual-contrast-between-representations"><span class="header-section-number">2.4.3</span> Conceptual Contrast Between Representations</a></li>
+  <li><a href="#implications-for-model-comparison" id="toc-implications-for-model-comparison" class="nav-link" data-scroll-target="#implications-for-model-comparison"><span class="header-section-number">2.4.4</span> Implications for Model Comparison</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">3</span> Results</a>
   <ul class="collapse">
   <li><a href="#structural-metrics-organise-into-robust-modules" id="toc-structural-metrics-organise-into-robust-modules" class="nav-link" data-scroll-target="#structural-metrics-organise-into-robust-modules"><span class="header-section-number">3.1</span> Structural Metrics Organise into Robust Modules</a></li>
   <li><a href="#modular-decomposition-of-structural-space" id="toc-modular-decomposition-of-structural-space" class="nav-link" data-scroll-target="#modular-decomposition-of-structural-space"><span class="header-section-number">3.2</span> Modular Decomposition of Structural Space</a></li>
   <li><a href="#structural-modules-align-with-dominant-axes-of-network-variation" id="toc-structural-modules-align-with-dominant-axes-of-network-variation" class="nav-link" data-scroll-target="#structural-modules-align-with-dominant-axes-of-network-variation"><span class="header-section-number">3.3</span> Structural Modules Align with Dominant Axes of Network Variation</a></li>
+  <li><a href="#predictors-of-stability" id="toc-predictors-of-stability" class="nav-link" data-scroll-target="#predictors-of-stability"><span class="header-section-number">3.4</span> Predictors of stability</a>
+  <ul class="collapse">
+  <li><a href="#dimensional-reduction-characterisation" id="toc-dimensional-reduction-characterisation" class="nav-link" data-scroll-target="#dimensional-reduction-characterisation"><span class="header-section-number">3.4.1</span> Dimensional Reduction Characterisation</a></li>
+  <li><a href="#predictive-performance-across-structural-representations" id="toc-predictive-performance-across-structural-representations" class="nav-link" data-scroll-target="#predictive-performance-across-structural-representations"><span class="header-section-number">3.4.2</span> Predictive Performance Across Structural Representations</a></li>
+  <li><a href="#predictor-importance-and-structural-drivers" id="toc-predictor-importance-and-structural-drivers" class="nav-link" data-scroll-target="#predictor-importance-and-structural-drivers"><span class="header-section-number">3.4.3</span> Predictor Importance and Structural Drivers</a></li>
+  <li><a href="#differential-effects-across-stability-components" id="toc-differential-effects-across-stability-components" class="nav-link" data-scroll-target="#differential-effects-across-stability-components"><span class="header-section-number">3.4.4</span> Differential Effects Across Stability Components</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion"><span class="header-section-number">4</span> Discussion</a>
   <ul class="collapse">
@@ -614,6 +628,26 @@ Z_{mk} = \frac{A_{mk} - \mu_{mk}}{\sigma_{mk}}
 \]</span></p>
 <p>Additionally we also evaluated if modules collectively aligned with PCA structure beyond random expectation. Overall concentration of variance within module–PC space was calculated as <span class="math inline">\(T = \sum_{m, k} A^{2}_{mk}\)</span> and significance was determined by comparing the observed (<span class="math inline">\(T\)</span>) the permutation distribution (<span class="math inline">\(T^{(r)}\)</span>). Where <span class="math inline">\(p_{global} = P(T^{(r)} \geq T)\)</span>. A significant result indicates that module structure explains multivariate variance better than random groupings.</p>
 </section>
+<section id="structural-metric-reduction-and-representation-of-network-space" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="structural-metric-reduction-and-representation-of-network-space"><span class="header-section-number">2.4</span> Structural Metric Reduction and Representation of Network Space</h2>
+<p>To evaluate how network structure predicts ecological stability, we first reduced a high-dimensional set of topological metrics into alternative, biologically interpretable predictor sets. Because dimensionality reduction can fundamentally shape inference, we explicitly compared two conceptually distinct representations of network structure: (1) structural domain representatives and (2) latent axes of network variation.</p>
+<section id="identification-of-structural-domains" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="identification-of-structural-domains"><span class="header-section-number">2.4.1</span> Identification of Structural Domains</h3>
+<p>We previously grouped network metrics into clusters based on their pairwise correlations, such that each cluster represented a structurally coherent domain (e.g., trophic composition, centralization, path structure). Clustering was performed using correlation-based distance, ensuring that metrics grouped together reflected shared structural information rather than raw scale. To construct a reduced predictor set from these domains, we selected a single representative metric per cluster using a medoid approach. Within each cluster, we computed the absolute correlation matrix among member metrics and defined distance as 1−∣r∣. The medoid was identified as the metric minimizing mean pairwise distance to other metrics in the cluster. This approach preserves structural diversity while minimizing redundancy and does not rely on principal component loadings, which can bias selection toward dominant variance axes. The resulting ‘cluster medoid’ set retained one interpretable metric per structural domain. Importantly, this procedure prioritizes preservation of structural domains rather than overall variance magnitude, allowing low-variance but potentially mechanistically relevant features of network topology to be retained.</p>
+</section>
+<section id="extraction-of-latent-structural-axes" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="extraction-of-latent-structural-axes"><span class="header-section-number">2.4.2</span> Extraction of Latent Structural Axes</h3>
+<p>As a complementary representation of network structure, we performed principal component analysis (PCA) on the scaled full metric matrix. Principal components were retained until cumulative explained variance exceeded 80%, yielding a set of orthogonal axes describing the dominant gradients of variation in network topology. These retained PC scores constitute a low-dimensional latent representation of network space. Unlike cluster medoids, which preserve structural categories, PC scores preserve maximal variance and ensure orthogonality among predictors. We also explored a third reduction approach—selecting the single highest-loading metric per retained PC. However, because principal components are linear combinations of multiple metrics, this “PC-dominant metric” strategy substantially reduces the variance represented by each axis. Consequently, this approach captures less of the total structural variance and was treated as exploratory rather than primary.</p>
+</section>
+<section id="conceptual-contrast-between-representations" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="conceptual-contrast-between-representations"><span class="header-section-number">2.4.3</span> Conceptual Contrast Between Representations</h3>
+<p>The cluster-medoid and PCA-score representations reflect different theoretical assumptions about how structure relates to stability. The cluster-medoid approach assumes that ecological stability responds to discrete structural domains that may vary independently and need not align with the dominant gradients of network variation. In contrast, the PCA-score approach assumes that stability responds primarily to the major axes of variation in network topology, regardless of their interpretability in terms of structural domains. By explicitly comparing predictive performance across these representations, we test whether ecological stability is better explained by domain-specific structural mechanisms or by global geometric gradients of network organization.</p>
+</section>
+<section id="implications-for-model-comparison" class="level3" data-number="2.4.4">
+<h3 data-number="2.4.4" class="anchored" data-anchor-id="implications-for-model-comparison"><span class="header-section-number">2.4.4</span> Implications for Model Comparison</h3>
+<p>Because the cluster-medoid and PCA-score sets differ in dimensionality and variance preservation, predictive comparisons were conducted using identical cross-validation schemes to ensure fair evaluation. Model performance was assessed using out-of-sample metrics, and variable importance was evaluated via cross-validated permutation procedures. This framework allows us to determine whether stability aligns more strongly with interpretable structural domains or with latent axes of network variation, and whether some structural domains are decoupled from stability altogether.</p>
+</section>
+</section>
 </section>
 <section id="results" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Results</h1>
@@ -758,6 +792,93 @@ Figure&nbsp;4: Heatmap showing module–principal component alignment quantified
 </figure>
 </div>
 <p>Collectively, these results demonstrate that food-web structural metrics exhibit strong low-dimensional organisation and that independently identified structural modules are non-randomly aligned with the dominant axes of variation. The significant global alignment supports the interpretation that modular decomposition reflects meaningful geometric structure rather than clustering artifacts. Moreover, the dominance of a single module across multiple principal components suggests hierarchical organisation, wherein a core structural module governs the primary gradient of variation while additional modules capture secondary and specialised structural dimensions.</p>
+</section>
+<section id="predictors-of-stability" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="predictors-of-stability"><span class="header-section-number">3.4</span> Predictors of stability</h2>
+<section id="dimensional-reduction-characterisation" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="dimensional-reduction-characterisation"><span class="header-section-number">3.4.1</span> Dimensional Reduction Characterisation</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 20%">
+<col style="width: 25%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Representation</th>
+<th>Dimensionality</th>
+<th>Variance Preserved</th>
+<th>Structure Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Medoids</td>
+<td>7</td>
+<td>23%</td>
+<td>Domain sampling</td>
+</tr>
+<tr class="even">
+<td>PC-dominant metrics</td>
+<td>4</td>
+<td>13%</td>
+<td>Axis proxy sampling</td>
+</tr>
+<tr class="odd">
+<td>PC scores</td>
+<td>5</td>
+<td>80%</td>
+<td>True latent space</td>
+</tr>
+</tbody>
+</table>
+<p>To evaluate how alternative structural representations differed in their information content and redundancy, we quantified variance retention, internal correlation structure, effective dimensionality, and geometric similarity among representations.</p>
+<p><strong>Variance Retention:</strong> The three representations differed substantially in the proportion of total structural variance preserved (Fig. S1A). The cluster-medoid representation retained ~23% of the total variance in the full metric space despite reducing dimensionality to seven predictors. In contrast, the PC-dominant metric set retained only ~13% of total variance, reflecting the fact that individual metrics capture only a fraction of each principal component’s multivariate structure. As expected by construction, the retained PC-score representation preserved approximately 80% of total variance. Thus, domain-based reduction preserved more distributed structural information than selecting one metric per PC axis, whereas the PC-score representation maximally preserved dominant gradients of network variation.</p>
+<p><strong>Internal Redundancy:</strong> Representations also differed in their internal correlation structure (Fig. S1B). PC scores were orthogonal by definition (mean |r| ≈ 0), indicating complete statistical independence among predictors. In contrast, cluster medoids exhibited moderate residual correlation (mean |r| = X), suggesting partial overlap among structural domains. PC-dominant metrics showed comparable (or higher/lower — insert result) redundancy relative to medoids. These differences indicate that the three approaches vary not only in information retention but also in predictor independence.</p>
+<p><strong>Effective Dimensionality:</strong> We next quantified effective dimensionality as the number of axes required to explain 80% of variance within each reduced predictor set (Fig. S1C). The PC-score representation required X axes, reflecting its design to capture dominant structural gradients. The cluster-medoid representation required X axes to reach the same threshold, indicating that despite containing seven predictors, structural variation was concentrated along fewer effective dimensions. The PC-dominant set exhibited the lowest effective dimensionality (X axes), consistent with its reduced variance retention. Together, these results show that dimensional compression differed across approaches not only in magnitude but in the distribution of variance across axes.</p>
+<p>Overall, the three structural representations differed substantially in variance retention, redundancy, and effective dimensionality. Cluster medoids preserved moderate variance while maintaining domain interpretability, PC-dominant metrics retained minimal total variance, and PC scores preserved dominant structural gradients while ensuring predictor orthogonality. These differences establish that the representations encode distinct aspects of network topology, justifying their empirical comparison in predictive analyses of stability.</p>
+<div id="fig-dim_red" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dim_red-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figures/fig_dimensional_reduction.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: Figure S1. Characterisation of alternative dimensional-reduction approaches for network structural metrics. (A) Proportion of total variance in the full metric space retained by each representation: cluster medoids, PC-dominant metrics, and retained PC scores (≥80% cumulative variance). (B) Mean absolute pairwise correlation (|r|) among predictors within each representation, quantifying internal redundancy. (C) Effective dimensionality, defined as the number of axes required to explain 80% of variance within each reduced predictor set. Together, these diagnostics illustrate differences in information retention, redundancy, and structural alignment among dimensional-reduction strategies."><img src="figures/fig_dimensional_reduction.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dim_red-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Figure S1. Characterisation of alternative dimensional-reduction approaches for network structural metrics. (A) Proportion of total variance in the full metric space retained by each representation: cluster medoids, PC-dominant metrics, and retained PC scores (≥80% cumulative variance). (B) Mean absolute pairwise correlation (|r|) among predictors within each representation, quantifying internal redundancy. (C) Effective dimensionality, defined as the number of axes required to explain 80% of variance within each reduced predictor set. Together, these diagnostics illustrate differences in information retention, redundancy, and structural alignment among dimensional-reduction strategies.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="predictive-performance-across-structural-representations" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="predictive-performance-across-structural-representations"><span class="header-section-number">3.4.2</span> Predictive Performance Across Structural Representations</h3>
+<p><strong>Structural Predictability of Stability Components:</strong> Network structural metrics predicted stability components with varying strength (Table 1). Predictive performance was highest for complexity, which achieved a cross-validated R^2 of 0.78 ± 0.14 (mean ± SD) under the cluster-medoid representation. Predictability was intermediate for ρ (0.58 ± 0.20 under cluster medoids) and consistently low for robustness across all representations (maximum R^2 =0.25). Across stability components, robustness exhibited the lowest explanatory power (mean R^2 =0.14–0.25), whereas complexity showed the strongest and most consistent signal. These results indicate that not all dimensions of stability are equally encoded in network structure.</p>
+<p><strong>Comparison Among Structural Representations:</strong> Predictive performance differed among dimensional-reduction approaches, but effects were stability-component specific. For complexity, the cluster-medoid representation substantially outperformed PC-based alternatives. Cluster medoids achieved a mean R^2 =0.776 ± 0.139, compared to 0.543 ± 0.104 for PC-dominant metrics and 0.403 ± 0.251 for PC scores. A paired comparison between cluster medoids and PC scores revealed a significant performance difference (paired t-test: t_4 =5.01, p = 0.007), with a mean R^2 increase of 0.37. Thus, complexity was best predicted by domain-based structural descriptors rather than latent axes. In contrast, robustness showed low and statistically indistinguishable performance across representations (cluster: 0.189 ± 0.258; PC scores: 0.247 ± 0.240; paired t_4 =−0.35, p = 0.74). Structural representation choice had little influence on predictive ability for this component. For ρ, cluster medoids again produced the highest mean performance (0.584 ± 0.204), followed by PC scores (0.404 ± 0.246) and PC-dominant metrics (0.384 ± 0.094). However, the difference between cluster medoids and PC scores was not statistically significant (paired t_4 = 1.36, p = 0.24). Taken together, these results indicate that structural domain representatives can outperform latent-axis representations, but this advantage is not universal across stability components.</p>
+<p><strong>Variability Across Folds:</strong> Fold-level variability also differed among representations. PC-score models exhibited higher variance in predictive performance (SD up to 0.25) relative to PC-dominant metrics (SD ≤ 0.11 across components), indicating less stable out-of-sample generalization. Cluster-medoid models showed intermediate variability, except for robustness, where fold variance was high across all approaches. These differences suggest that dimensional reduction strategy influences not only mean predictive power but also model stability.</p>
+<div id="fig-pred_pref" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pred_pref-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figures/fig_pred_preformance.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: Figure S2. Cross-validated predictive performance (R²) of random forest models across structural representations. Points represent individual cross-validation folds; large points indicate mean ± SE. Predictive performance varied among stability components, with cluster medoids substantially outperforming PC-based representations for complexity but not for robustness or ρ."><img src="figures/fig_pred_preformance.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pred_pref-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Figure S2. Cross-validated predictive performance (R²) of random forest models across structural representations. Points represent individual cross-validation folds; large points indicate mean ± SE. Predictive performance varied among stability components, with cluster medoids substantially outperforming PC-based representations for complexity but not for robustness or ρ.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="predictor-importance-and-structural-drivers" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="predictor-importance-and-structural-drivers"><span class="header-section-number">3.4.3</span> Predictor Importance and Structural Drivers</h3>
+<section id="structural-drivers-of-stability" class="level4" data-number="3.4.3.1">
+<h4 data-number="3.4.3.1" class="anchored" data-anchor-id="structural-drivers-of-stability"><span class="header-section-number">3.4.3.1</span> Structural Drivers of Stability</h4>
+<p>Permutation-based variable importance revealed no single structural metric that exhibited statistically robust effects across stability components or structural representations (all Z &lt; 1; Table Sx). Thus, despite differences in predictive performance, stability components were not attributable to singular structural drivers. For complexity, predictive signal was moderately distributed across metrics. Under the cluster representation, linkage density (l_S) contributed 47.8% of total importance, followed by maximum similarity (MaxSim), but neither exceeded permutation expectations. PC-based representations showed stronger apparent concentration (PC_Dominant: 63% attributed to S1; PC_Scores: 41% to PC1), yet these effects remained statistically weak. Robustness exhibited low overall predictive performance and correspondingly unstable importance structure. Although basal species fraction dominated the cluster model (57% contribution) and predator–prey ratio dominated the PC_Dominant model (&gt;100% relative contribution due to negative importances among other predictors), no metric demonstrated consistent significance, indicating that apparent dominance reflects model instability rather than mechanistic control. For ρ, importance was comparatively diffuse across predictors. Under the cluster representation, vulnerability heterogeneity (VulSD) and linkage density shared contributions without strong statistical support. PC-based representations distributed importance across multiple axes without a dominant structural dimension. Collectively, these results indicate that even where prediction is strong (e.g., complexity), stability emerges from combinations of structural properties rather than single dominant descriptors.</p>
+</section>
+</section>
+<section id="differential-effects-across-stability-components" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="differential-effects-across-stability-components"><span class="header-section-number">3.4.4</span> Differential Effects Across Stability Components</h3>
+<ul>
+<li>Heatmaps</li>
+<li>Cross-component comparisons</li>
+</ul>
+</section>
 </section>
 </section>
 <section id="discussion" class="level1" data-number="4">
