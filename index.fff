@@ -86,15 +86,49 @@ and structural alignment among dimensional-reduction strategies.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{figures/fig_pred_preformance.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{figures/struct_stability_summ.png}}
 
 }
 
-\caption{\label{fig-pred_pref}Figure S2. Cross-validated predictive
-performance (R²) of random forest models across structural
-representations. Points represent individual cross-validation folds;
-large points indicate mean ± SE. Predictive performance varied among
-stability components, with cluster medoids substantially outperforming
-PC-based representations for complexity but not for robustness or ρ.}
+\caption{\label{fig-var_pred}A: Predictive performance of structural
+representations across stability components. Cross-validated variance
+explained (R2) for each stability component (facets) under three
+representations of network structure: fine-scale cluster descriptors,
+dominant structural metrics, and principal component scores. Points
+represent mean predictive performance across repeated cross-validation
+folds; error bars denote ±1 standard deviation. Faceting separates
+stability components. Differences among representations indicate how the
+abstraction of structural space influences the strength of structural
+control across stability facets. B: Regularization structure across
+stability components and structural representations. Mean elastic-net
+mixing parameter (α) across repeated cross-validation folds for each
+stability component and structural representation. Values near zero
+indicate ridge-like models where predictive signal is distributed across
+correlated predictors; values near one indicate lasso-like models where
+a small number of predictors dominate. Faceting highlights how
+structural abstraction alters the concentration or dispersion of
+structural influence underlying different facets of stability.}
+
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/struct_stability_summ.png}}
+
+}
+
+\caption{\label{fig-stab_corr}Standardised structural coefficients
+linking network predictors to stability components across
+representations. Elastic-net coefficients extracted from full models
+after cross-validation. Positive and negative coefficients indicate the
+direction and magnitude of structural influence. Predictor ordering
+reflects clustering metadata, and colours denote structural modules or
+metric groupings. Faceting by stability component and structural
+representation illustrates how the identity and strength of structural
+drivers reorganize as network space is represented at different levels
+of abstraction.}
 
 \end{figure}
