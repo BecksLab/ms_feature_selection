@@ -2,17 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.28">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tanya Strydom">
 <meta name="author" content="Andrew P. Beckerman">
-<meta name="dcterms.date" content="2026-03-03">
+<meta name="dcterms.date" content="2026-03-04">
 <meta name="keywords" content="food web, structure, dimensionality reduction">
 
 <title>Multiple dimensions of network structure underlie ecological stability</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -28,7 +31,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -50,15 +52,14 @@ div.csl-indent {
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-49e51e44f424ea8c7044b429bdbbbfe2.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a74871fe4945b66d259aafc266475145.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-133a0a4dda30ced7f07b755c880e46a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -70,7 +71,7 @@ div.csl-indent {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -105,10 +106,10 @@ window.Quarto = {
 <meta name="citation_keywords" content="food web,structure,dimensionality reduction">
 <meta name="citation_author" content="Tanya Strydom">
 <meta name="citation_author" content="Andrew P. Beckerman">
-<meta name="citation_publication_date" content="2026-03-03">
-<meta name="citation_cover_date" content="2026-03-03">
+<meta name="citation_publication_date" content="2026-03-04">
+<meta name="citation_cover_date" content="2026-03-04">
 <meta name="citation_year" content="2026">
-<meta name="citation_online_date" content="2026-03-03">
+<meta name="citation_online_date" content="2026-03-04">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Stability criteria for complex ecosystems;,citation_abstract=Analysis of stability criteria for different types of complex ecological network shows key differences between predator–prey interactions, which are stabilizing, and competitive and mutualistic interactions, which are destabilizing.;,citation_author=Stefano Allesina;,citation_author=Si Tang;,citation_publication_date=2012-03;,citation_cover_date=2012-03;,citation_year=2012;,citation_fulltext_html_url=https://www.nature.com/articles/nature10832;,citation_issue=7388, 7388;,citation_doi=10.1038/nature10832;,citation_issn=1476-4687;,citation_volume=483;,citation_language=en-US;,citation_journal_title=Nature;,citation_publisher=Nature Publishing Group;">
 <meta name="citation_reference" content="citation_title=Spatial Guilds in the Serengeti Food Web Revealed by a Bayesian Group Model;,citation_abstract=Food webs, networks of feeding relationships in an ecosystem, provide fundamental insights into mechanisms that determine ecosystem stability and persistence. A standard approach in food-web analysis, and network analysis in general, has been to identify compartments, or modules, defined by many links within compartments and few links between them. This approach can identify large habitat boundaries in the network but may fail to identify other important structures. Empirical analyses of food webs have been further limited by low-resolution data for primary producers. In this paper, we present a Bayesian computational method for identifying group structure using a flexible definition that can describe both functional trophic roles and standard compartments. We apply this method to a newly compiled plant-mammal food web from the Serengeti ecosystem that includes high taxonomic resolution at the plant level, allowing a simultaneous examination of the signature of both habitat and trophic roles in network structure. We find that groups at the plant level reflect habitat structure, coupled at higher trophic levels by groups of herbivores, which are in turn coupled by carnivore groups. Thus the group structure of the Serengeti web represents a mixture of trophic guild structure and spatial pattern, in contrast to the standard compartments typically identified. The network topology supports recent ideas on spatial coupling and energy channels in ecosystems that have been proposed as important for persistence. Furthermore, our Bayesian approach provides a powerful, flexible framework for the study of network structure, and we believe it will prove instrumental in a variety of biological contexts.;,citation_author=Edward B. Baskerville;,citation_author=Andy P. Dobson;,citation_author=Trevor Bedford;,citation_author=Stefano Allesina;,citation_author=T. Michael Anderson;,citation_author=Mercedes Pascual;,citation_publication_date=2011-12-29;,citation_cover_date=2011-12-29;,citation_year=2011;,citation_fulltext_html_url=https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1002321;,citation_issue=12;,citation_doi=10.1371/journal.pcbi.1002321;,citation_issn=1553-7358;,citation_volume=7;,citation_language=en-US;,citation_journal_title=PLOS Computational Biology;,citation_journal_abbrev=PLOS Computational Biology;,citation_publisher=Public Library of Science;">
@@ -194,7 +195,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">March 3, 2026</p>
+              <p class="date">March 4, 2026</p>
             </div>
           </div>
           
@@ -291,7 +292,7 @@ window.Quarto = {
 <p>We conceptualise food-web structure as organised across four hierarchical structural scales: node-level, path-level, network geometry, and emergent system behaviour (Pimm 1982; Cohen et al.&nbsp;1990; Vermaat et al.&nbsp;2009). These scales reflect increasing levels of integration, progressing from individual species roles to whole-network dynamics.</p>
 <p><strong>Node-level structure:</strong> describes the properties and roles of individual species within the network. Metrics such as trophic position, basal and top species proportions, centrality, and trophic similarity capture how energy enters the system, which species process or redistribute that energy, and the degree of functional redundancy among taxa (Yodzis &amp; Winemiller 1999; Estrada 2007; Allesina &amp; Pascual 2009). At this scale, structure primarily reflects who participates in energy transfer and whether alternative species can compensate for local losses, a long-standing mechanism proposed to underpin persistence in complex ecosystems (McCann 2000).</p>
 <p><strong>Path-level structure</strong>: describes how energy is routed through sequences of interactions linking species. Metrics such as food chain length, omnivory, motifs, loops, and prey–predator ratios capture the coupling of energy channels and the multiplicity of pathways connecting basal resources to higher trophic levels (Pimm &amp; Lawton 1977; McCann et al.&nbsp;1998; Stouffer &amp; Bascompte 2011). This scale reflects how energy moves through the network and how perturbations may be transmitted across species, with particular pathway configurations either amplifying or diffusing disturbance effects (Neutel et al.&nbsp;2002; Rooney et al.&nbsp;2006).</p>
-<p><strong>Network geometry</strong>: captures the global arrangement and constraints of interactions, including link density, connectance, clustering, modularity, intervality, and network distances (Dunne et al.&nbsp;2002; Stouffer et al.&nbsp;2006; Delmas et al.&nbsp;2019). These properties define the overall “shape” of the food web and constrain which pathways are available for energy flow. Geometric organisation has been shown to influence the containment of perturbations, for example through compartmentalisation that limits the spread of local disturbances <span class="citation" data-cites="stoufferCompartmentalizationIncreasesFoodweb2011">(<a href="#ref-stoufferCompartmentalizationIncreasesFoodweb2011" role="doc-biblioref">Daniel B. Stouffer and Bascompte 2011</a>)</span>.</p>
+<p><strong>Network geometry</strong>: captures the global arrangement and constraints of interactions, including link density, connectance, clustering, modularity, intervality, and network distances (Dunne et al.&nbsp;2002; Stouffer et al.&nbsp;2006; Delmas et al.&nbsp;2019). These properties define the overall “shape” of the food web and constrain which pathways are available for energy flow. Geometric organisation has been shown to influence the containment of perturbations, for example through compartmentalisation that limits the spread of local disturbances <span class="citation" data-cites="stoufferCompartmentalizationIncreasesFoodweb2011">(<a href="#ref-stoufferCompartmentalizationIncreasesFoodweb2011" role="doc-biblioref">Stouffer and Bascompte 2011</a>)</span>.</p>
 <p><strong>Emergent system-level behaviour</strong>: reflects the collective dynamical properties that arise from the interaction of nodes, paths, and geometry. Metrics such as spectral radius, SVD complexity, and robustness capture properties that cannot be attributed to individual species or interactions alone, but instead describe the system’s overall capacity to absorb, reorganise, or amplify perturbations (May 1972; Staniczenko et al.&nbsp;2013; Strydom et al.&nbsp;2021).</p>
 <p>Together, these structural scales form a causal hierarchy: species roles give rise to interaction pathways, which are embedded within a global network geometry, from which emergent dynamical behaviour arises.</p>
 </section>
@@ -360,7 +361,7 @@ window.Quarto = {
 <div id="tbl-properties" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: An informative caption about the different network properties. We use a combination of metrics from both the original <span class="citation" data-cites="vermaatMajorDimensionsFoodweb2009">Vermaat, Dunne, and Gilbert (<a href="#ref-vermaatMajorDimensionsFoodweb2009" role="doc-biblioref">2009</a>)</span> paper as well as including those that have been identified by <span class="citation" data-cites="thompsonFoodWebsReconciling2012">Thompson et al. (<a href="#ref-thompsonFoodWebsReconciling2012" role="doc-biblioref">2012</a>)</span> and have been linked to emerging ecosystem properties such as stability
+Table&nbsp;1: An informative caption about the different network properties. We use a combination of metrics from both the original <span class="citation" data-cites="vermaatMajorDimensionsFoodweb2009">Vermaat et al. (<a href="#ref-vermaatMajorDimensionsFoodweb2009" role="doc-biblioref">2009</a>)</span> paper as well as including those that have been identified by <span class="citation" data-cites="thompsonFoodWebsReconciling2012">Thompson et al. (<a href="#ref-thompsonFoodWebsReconciling2012" role="doc-biblioref">2012</a>)</span> and have been linked to emerging ecosystem properties such as stability
 </figcaption>
 <div aria-describedby="tbl-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -539,7 +540,7 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <td>Intervality</td>
 <td>Degree to which taxa can be ordered along a single niche dimension.</td>
 <td>Measures the extent of niche ordering in trophic interactions.</td>
-<td><span class="citation" data-cites="stoufferRobustMeasureFood2006a">Daniel B. Stouffer, Camacho, and Amaral (<a href="#ref-stoufferRobustMeasureFood2006a" role="doc-biblioref">2006</a>)</span></td>
+<td><span class="citation" data-cites="stoufferRobustMeasureFood2006a">Stouffer et al. (<a href="#ref-stoufferRobustMeasureFood2006a" role="doc-biblioref">2006</a>)</span></td>
 </tr>
 <tr class="even">
 <td>ρ (Spectral radius)</td>
@@ -551,7 +552,7 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <td>Complexity (SVD)</td>
 <td>Shannon entropy of the singular value decomposition of the adjacency matrix.</td>
 <td>Quantifies heterogeneity in interaction structure.</td>
-<td><span class="citation" data-cites="strydomSVDEntropyReveals2021">Strydom, Dalla Riva, and Poisot (<a href="#ref-strydomSVDEntropyReveals2021" role="doc-biblioref">2021</a>)</span></td>
+<td><span class="citation" data-cites="strydomSVDEntropyReveals2021">Strydom et al. (<a href="#ref-strydomSVDEntropyReveals2021" role="doc-biblioref">2021</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Robustness</td>
@@ -563,25 +564,25 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <td>S1 (Linear chain)</td>
 <td>Frequency of three-node linear chains (A → B → C) with no additional links.</td>
 <td>Captures the prevalence of simple, unbranched energy-transfer pathways.</td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="even">
 <td>S2 (Omnivory)</td>
 <td>Frequency of three-node motifs forming a feed-forward loop (A → B → C, A → C).</td>
 <td>Describes vertical coupling of trophic levels within small subnetworks.</td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>S4 (Apparent competition)</td>
 <td>Frequency of motifs where one consumer feeds on two resources (A → B ← C).</td>
 <td>Captures the prevalence of shared-predator structures among resources.</td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="even">
 <td>S5 (Direct competition)</td>
 <td>Frequency of motifs where two consumers share a single resource (A ← B → C).</td>
 <td>Describes the occurrence of shared-resource structures among consumers.</td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 </tbody>
 </table>
@@ -816,19 +817,19 @@ Table&nbsp;3: Network properties used for analysis.
 <td>Complexity &amp; Redundancy</td>
 <td>Connectance, MaxSim, Links</td>
 <td><strong>Positive:</strong> High redundancy allows for ‘functional compensation’ if one species is lost.</td>
-<td><span class="citation" data-cites="dunneFoodwebStructureNetwork2002">Dunne, Williams, and Martinez (<a href="#ref-dunneFoodwebStructureNetwork2002" role="doc-biblioref">2002</a>)</span>; <span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span></td>
+<td><span class="citation" data-cites="dunneFoodwebStructureNetwork2002">Dunne et al. (<a href="#ref-dunneFoodwebStructureNetwork2002" role="doc-biblioref">2002</a>)</span>; <span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Compartmentalization</td>
 <td>Clust, Modularity,&nbsp;ρ</td>
 <td><strong>Positive:</strong> Limits the spread of perturbations; local collapses don’t become global.</td>
-<td><span class="citation" data-cites="stoufferCompartmentalizationIncreasesFoodweb2011">Daniel B. Stouffer and Bascompte (<a href="#ref-stoufferCompartmentalizationIncreasesFoodweb2011" role="doc-biblioref">2011</a>)</span></td>
+<td><span class="citation" data-cites="stoufferCompartmentalizationIncreasesFoodweb2011">Stouffer and Bascompte (<a href="#ref-stoufferCompartmentalizationIncreasesFoodweb2011" role="doc-biblioref">2011</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>Feedback &amp; Coupling</td>
 <td>Omnivory (S2), Loop, ChLen</td>
 <td><strong>Variable:</strong> Omnivory can stabilize by diffusing energy, but long chains can amplify oscillations.</td>
-<td><span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span>; <span class="citation" data-cites="neutelStabilityRealFood2002">Neutel, Heesterbeek, and De Ruiter (<a href="#ref-neutelStabilityRealFood2002" role="doc-biblioref">2002</a>)</span></td>
+<td><span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span>; <span class="citation" data-cites="neutelStabilityRealFood2002">Neutel et al. (<a href="#ref-neutelStabilityRealFood2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Hierarchy &amp; Shape</td>
@@ -896,7 +897,7 @@ Table&nbsp;4: Classification of food web metrics into functional categories. Nod
 </section>
 <section id="references" class="level1 unnumbered">
 <h1 class="unnumbered">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-dunneFoodwebStructureNetwork2002" class="csl-entry" role="listitem">
 Dunne, Jennifer A., Richard J. Williams, and Neo D. Martinez. 2002. <span>“Food-Web Structure and Network Theory: <span>The</span> Role of Connectance and Size.”</span> <em>Proceedings of the National Academy of Sciences</em> 99 (20): 12917–22. <a href="https://doi.org/10.1073/pnas.192407699">https://doi.org/10.1073/pnas.192407699</a>.
 </div>
@@ -931,7 +932,7 @@ Stouffer, Daniel B, Juan Camacho, Wenxin Jiang, and Luís A Nunes Amaral. 2007. 
 Strydom, Tanya, Giulio V. Dalla Riva, and Timothée Poisot. 2021. <span>“<span>SVD Entropy Reveals</span> the <span>High Complexity</span> of <span>Ecological Networks</span>.”</span> <em>Frontiers in Ecology and Evolution</em> 9. <a href="https://doi.org/10.3389/fevo.2021.623141">https://doi.org/10.3389/fevo.2021.623141</a>.
 </div>
 <div id="ref-thompsonFoodWebsReconciling2012" class="csl-entry" role="listitem">
-Thompson, Ross M., Ulrich Brose, Jennifer Dunne, Robert O. Hall, Sally Hladyz, Roger L. Kitching, Neo D. Martinez, et al. 2012. <span>“Food Webs: Reconciling the Structure and Function of Biodiversity.”</span> <em>Trends in Ecology &amp; Evolution</em> 27 (12): 689–97. <a href="https://doi.org/10.1016/j.tree.2012.08.005">https://doi.org/10.1016/j.tree.2012.08.005</a>.
+Thompson, Ross M., Ulrich Brose, Jennifer Dunne, et al. 2012. <span>“Food Webs: Reconciling the Structure and Function of Biodiversity.”</span> <em>Trends in Ecology &amp; Evolution</em> 27 (12): 689–97. <a href="https://doi.org/10.1016/j.tree.2012.08.005">https://doi.org/10.1016/j.tree.2012.08.005</a>.
 </div>
 <div id="ref-ulanowiczInformationTheoryEcology2001" class="csl-entry" role="listitem">
 Ulanowicz, Robert E. 2001. <span>“Information Theory in Ecology.”</span> <em>Computers &amp; Chemistry</em> 25 (4): 393–99. <a href="https://doi.org/10.1016/S0097-8485(01)00073-0">https://doi.org/10.1016/S0097-8485(01)00073-0</a>.
