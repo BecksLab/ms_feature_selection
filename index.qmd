@@ -169,6 +169,28 @@ $$
 
 Additionally we also evaluated if modules collectively aligned with PCA structure beyond random expectation. Overall concentration of variance within module–PC space was calculated as $T = \sum_{m, k} A^{2}_{mk}$ and significance was determined by comparing the observed ($T$) the permutation distribution ($T^{(r)}$). Where $p_{global} = P(T^{(r)} \geq T)$. A significant result indicates that module structure explains multivariate variance better than random groupings.
 
+## Structural Metric Reduction and Representation of Network Space
+
+To evaluate how network structure predicts ecological stability, we first reduced a high-dimensional set of topological metrics into alternative, biologically interpretable predictor sets. Because dimensionality reduction can fundamentally shape inference, we explicitly compared two conceptually distinct representations of network structure: (1) structural domain representatives and (2) latent axes of network variation.
+
+### Identification of Structural Domains
+
+We previously grouped network metrics into clusters based on their pairwise correlations, such that each cluster represented a structurally coherent domain (e.g., trophic composition, centralization, path structure). Clustering was performed using correlation-based distance, ensuring that metrics grouped together reflected shared structural information rather than raw scale. To construct a reduced predictor set from these domains, we selected a single representative metric per cluster using a medoid approach. Within each cluster, we computed the absolute correlation matrix among member metrics and defined distance as 1−∣r∣. The medoid was identified as the metric minimizing mean pairwise distance to other metrics in the cluster. This approach preserves structural diversity while minimizing redundancy and does not rely on principal component loadings, which can bias selection toward dominant variance axes. The resulting 'cluster medoid' set retained one interpretable metric per structural domain. Importantly, this procedure prioritizes preservation of structural domains rather than overall variance magnitude, allowing low-variance but potentially mechanistically relevant features of network topology to be retained.
+
+### Extraction of Latent Structural Axes
+
+As a complementary representation of network structure, we performed principal component analysis (PCA) on the scaled full metric matrix. Principal components were retained until cumulative explained variance exceeded 80%, yielding a set of orthogonal axes describing the dominant gradients of variation in network topology. These retained PC scores constitute a low-dimensional latent representation of network space. Unlike cluster medoids, which preserve structural categories, PC scores preserve maximal variance and ensure orthogonality among predictors. We also explored a third reduction approach—selecting the single highest-loading metric per retained PC. However, because principal components are linear combinations of multiple metrics, this “PC-dominant metric” strategy substantially reduces the variance represented by each axis. Consequently, this approach captures less of the total structural variance and was treated as exploratory rather than primary.
+
+### Conceptual Contrast Between Representations
+
+The cluster-medoid and PCA-score representations reflect different theoretical assumptions about how structure relates to stability.
+The cluster-medoid approach assumes that ecological stability responds to discrete structural domains that may vary independently and need not align with the dominant gradients of network variation. In contrast, the PCA-score approach assumes that stability responds primarily to the major axes of variation in network topology, regardless of their interpretability in terms of structural domains. By explicitly comparing predictive performance across these representations, we test whether ecological stability is better explained by domain-specific structural mechanisms or by global geometric gradients of network organization.
+
+### Implications for Model Comparison
+
+Because the cluster-medoid and PCA-score sets differ in dimensionality and variance preservation, predictive comparisons were conducted using identical cross-validation schemes to ensure fair evaluation. Model performance was assessed using out-of-sample metrics, and variable importance was evaluated via cross-validated permutation procedures.
+This framework allows us to determine whether stability aligns more strongly with interpretable structural domains or with latent axes of network variation, and whether some structural domains are decoupled from stability altogether.
+
 # Results
 
 ## Structural Metrics Organise into Robust Modules
@@ -226,6 +248,49 @@ The global permutation test indicated significant alignment between the modular 
 ![Heatmap showing module–principal component alignment quantified by permutation-derived Z-scores. Colour intensity reflects the magnitude and direction of alignment, and asterisks denote cells that meet joint significance criteria (permutation P < 0.05 and |Z| > 1.96). Rows correspond to structural metric modules and columns to principal components. Clustering highlights patterns of shared alignment across modules and multivariate structural gradients.](figures/heatmap_zscores.png){#fig-alignment_signif}
 
 Collectively, these results demonstrate that food-web structural metrics exhibit strong low-dimensional organisation and that independently identified structural modules are non-randomly aligned with the dominant axes of variation. The significant global alignment supports the interpretation that modular decomposition reflects meaningful geometric structure rather than clustering artifacts. Moreover, the dominance of a single module across multiple principal components suggests hierarchical organisation, wherein a core structural module governs the primary gradient of variation while additional modules capture secondary and specialised structural dimensions.
+
+## Predictors of stability
+
+### Dimensional Reduction Characterisation
+
+| Representation      | Dimensionality | Variance Preserved | Structure Type      |
+| ------------------- | -------------- | ------------------ | ------------------- |
+| Medoids             | 7              | 23%                | Domain sampling     |
+| PC-dominant metrics | 4              | 13%                | Axis proxy sampling |
+| PC scores           | 5              | 80%                | True latent space   |
+
+To evaluate how alternative structural representations differed in their information content and redundancy, we quantified variance retention, internal correlation structure, effective dimensionality, and geometric similarity among representations.
+
+**Variance Retention:** The three representations differed substantially in the proportion of total structural variance preserved (Fig. S1A). The cluster-medoid representation retained ~23% of the total variance in the full metric space despite reducing dimensionality to seven predictors. In contrast, the PC-dominant metric set retained only ~13% of total variance, reflecting the fact that individual metrics capture only a fraction of each principal component’s multivariate structure. As expected by construction, the retained PC-score representation preserved approximately 80% of total variance. Thus, domain-based reduction preserved more distributed structural information than selecting one metric per PC axis, whereas the PC-score representation maximally preserved dominant gradients of network variation.
+
+**Internal Redundancy:** Representations also differed in their internal correlation structure (Fig. S1B). PC scores were orthogonal by definition (mean |r| ≈ 0), indicating complete statistical independence among predictors. In contrast, cluster medoids exhibited moderate residual correlation (mean |r| = X), suggesting partial overlap among structural domains. PC-dominant metrics showed comparable (or higher/lower — insert result) redundancy relative to medoids. These differences indicate that the three approaches vary not only in information retention but also in predictor independence.
+
+**Effective Dimensionality:** We next quantified effective dimensionality as the number of axes required to explain 80% of variance within each reduced predictor set (Fig. S1C). The PC-score representation required X axes, reflecting its design to capture dominant structural gradients. The cluster-medoid representation required X axes to reach the same threshold, indicating that despite containing seven predictors, structural variation was concentrated along fewer effective dimensions. The PC-dominant set exhibited the lowest effective dimensionality (X axes), consistent with its reduced variance retention. Together, these results show that dimensional compression differed across approaches not only in magnitude but in the distribution of variance across axes.
+
+Overall, the three structural representations differed substantially in variance retention, redundancy, and effective dimensionality. Cluster medoids preserved moderate variance while maintaining domain interpretability, PC-dominant metrics retained minimal total variance, and PC scores preserved dominant structural gradients while ensuring predictor orthogonality. These differences establish that the representations encode distinct aspects of network topology, justifying their empirical comparison in predictive analyses of stability.
+
+![Figure S1. Characterisation of alternative dimensional-reduction approaches for network structural metrics. (A) Proportion of total variance in the full metric space retained by each representation: cluster medoids, PC-dominant metrics, and retained PC scores (≥80% cumulative variance). (B) Mean absolute pairwise correlation (|r|) among predictors within each representation, quantifying internal redundancy. (C) Effective dimensionality, defined as the number of axes required to explain 80% of variance within each reduced predictor set. Together, these diagnostics illustrate differences in information retention, redundancy, and structural alignment among dimensional-reduction strategies.](figures/fig_dimensional_reduction.png){#fig-dim_red}
+
+### Predictive Performance Across Structural Representations
+
+**Structural Predictability of Stability Components:** Network structural metrics predicted stability components with varying strength (Table 1). Predictive performance was highest for complexity, which achieved a cross-validated R^2 of 0.78 ± 0.14 (mean ± SD) under the cluster-medoid representation. Predictability was intermediate for ρ (0.58 ± 0.20 under cluster medoids) and consistently low for robustness across all representations (maximum R^2 =0.25). Across stability components, robustness exhibited the lowest explanatory power (mean R^2 =0.14–0.25), whereas complexity showed the strongest and most consistent signal. These results indicate that not all dimensions of stability are equally encoded in network structure.
+
+**Comparison Among Structural Representations:** Predictive performance differed among dimensional-reduction approaches, but effects were stability-component specific. For complexity, the cluster-medoid representation substantially outperformed PC-based alternatives. Cluster medoids achieved a mean R^2 =0.776 ± 0.139, compared to 0.543 ± 0.104 for PC-dominant metrics and 0.403 ± 0.251 for PC scores. A paired comparison between cluster medoids and PC scores revealed a significant performance difference (paired t-test: t_4 =5.01, p = 0.007), with a mean R^2 increase of 0.37. Thus, complexity was best predicted by domain-based structural descriptors rather than latent axes. In contrast, robustness showed low and statistically indistinguishable performance across representations (cluster: 0.189 ± 0.258; PC scores: 0.247 ± 0.240; paired  t_4 =−0.35, p = 0.74). Structural representation choice had little influence on predictive ability for this component. For ρ, cluster medoids again produced the highest mean performance (0.584 ± 0.204), followed by PC scores (0.404 ± 0.246) and PC-dominant metrics (0.384 ± 0.094). However, the difference between cluster medoids and PC scores was not statistically significant (paired t_4 = 1.36, p = 0.24). Taken together, these results indicate that structural domain representatives can outperform latent-axis representations, but this advantage is not universal across stability components.
+
+**Variability Across Folds:** Fold-level variability also differed among representations. PC-score models exhibited higher variance in predictive performance (SD up to 0.25) relative to PC-dominant metrics (SD ≤ 0.11 across components), indicating less stable out-of-sample generalization. Cluster-medoid models showed intermediate variability, except for robustness, where fold variance was high across all approaches. These differences suggest that dimensional reduction strategy influences not only mean predictive power but also model stability.
+
+![Figure S2. Cross-validated predictive performance (R²) of random forest models across structural representations. Points represent individual cross-validation folds; large points indicate mean ± SE. Predictive performance varied among stability components, with cluster medoids substantially outperforming PC-based representations for complexity but not for robustness or ρ.](figures/fig_pred_preformance.png){#fig-pred_pref}
+
+### Predictor Importance and Structural Drivers
+
+#### Structural Drivers of Stability
+
+Permutation-based variable importance revealed no single structural metric that exhibited statistically robust effects across stability components or structural representations (all Z < 1; Table Sx). Thus, despite differences in predictive performance, stability components were not attributable to singular structural drivers. For complexity, predictive signal was moderately distributed across metrics. Under the cluster representation, linkage density (l_S) contributed 47.8% of total importance, followed by maximum similarity (MaxSim), but neither exceeded permutation expectations. PC-based representations showed stronger apparent concentration (PC_Dominant: 63% attributed to S1; PC_Scores: 41% to PC1), yet these effects remained statistically weak. Robustness exhibited low overall predictive performance and correspondingly unstable importance structure. Although basal species fraction dominated the cluster model (57% contribution) and predator–prey ratio dominated the PC_Dominant model (>100% relative contribution due to negative importances among other predictors), no metric demonstrated consistent significance, indicating that apparent dominance reflects model instability rather than mechanistic control. For ρ, importance was comparatively diffuse across predictors. Under the cluster representation, vulnerability heterogeneity (VulSD) and linkage density shared contributions without strong statistical support. PC-based representations distributed importance across multiple axes without a dominant structural dimension. Collectively, these results indicate that even where prediction is strong (e.g., complexity), stability emerges from combinations of structural properties rather than single dominant descriptors.
+
+### Differential Effects Across Stability Components
+
+* Heatmaps
+* Cross-component comparisons
 
 # Discussion
 

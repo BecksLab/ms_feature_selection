@@ -57,3 +57,44 @@ principal components. Clustering highlights patterns of shared alignment
 across modules and multivariate structural gradients.}
 
 \end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/fig_dimensional_reduction.png}}
+
+}
+
+\caption{\label{fig-dim_red}Figure S1. Characterisation of alternative
+dimensional-reduction approaches for network structural metrics. (A)
+Proportion of total variance in the full metric space retained by each
+representation: cluster medoids, PC-dominant metrics, and retained PC
+scores (≥80\% cumulative variance). (B) Mean absolute pairwise
+correlation (\textbar r\textbar) among predictors within each
+representation, quantifying internal redundancy. (C) Effective
+dimensionality, defined as the number of axes required to explain 80\%
+of variance within each reduced predictor set. Together, these
+diagnostics illustrate differences in information retention, redundancy,
+and structural alignment among dimensional-reduction strategies.}
+
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/fig_pred_preformance.png}}
+
+}
+
+\caption{\label{fig-pred_pref}Figure S2. Cross-validated predictive
+performance (R²) of random forest models across structural
+representations. Points represent individual cross-validation folds;
+large points indicate mean ± SE. Predictive performance varied among
+stability components, with cluster medoids substantially outperforming
+PC-based representations for complexity but not for robustness or ρ.}
+
+\end{figure}
