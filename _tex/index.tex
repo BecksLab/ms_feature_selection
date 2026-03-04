@@ -65,7 +65,6 @@
 
 
 \usepackage{longtable,booktabs,array}
-\newcounter{none} % for unnumbered tables
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -927,31 +926,53 @@ interpretable structural gradients in the metric space.
 
 \end{figure}%
 
-The global permutation test indicated significant alignment between
-modules and principal components (P = 0.005), demonstrating that the
-observed modular partition explains the multivariate geometry of
-structural metrics better than randomly assigned modules. Module 1
-exhibited the strongest and most extensive alignment with principal
-components, showing significant associations across seven axes and with
-its strongest alignment occurring on PC1. This module therefore
-contributes substantially to the dominant structural gradient and
-captures variation associated with network size and connectivity. Module
-3 showed significant alignment with four principal components, with its
-strongest association on PC4, suggesting that it captures structural
-variation orthogonal to the primary complexity gradient. Modules 2, 4,
-5, 6, and 7 displayed more limited alignment, each showing significance
-with fewer principal components. Notably, Module 2 aligned most strongly
-with a later principal component (PC19), indicating that it captures a
-more subtle structural axis that contributes modestly to overall
-variance but remains statistically distinct from random expectation.
-Across modules, significant alignments were concentrated in a subset of
-principal components, reinforcing the interpretation that modular
-structure maps onto specific structural gradients rather than uniformly
-spanning the full multivariate space.
+The global permutation test indicated significant alignment between the
+modular partition and the principal component structure (P = 0.005),
+demonstrating that the observed module assignment explains the
+multivariate geometry of structural metrics better than randomly
+assigned modules. Alignment strength varied substantially across modules
+Figure~\ref{fig-alignment_signif}. Macro Complexity (Module 1) exhibited
+the strongest and most extensive alignment, showing significant
+associations with five principal components and a dominant loading on
+PC1, indicating that it contributes substantially to the primary
+structural gradient associated with network size and connectivity.
+Energy Transport (Module 3) showed significant alignment with four
+principal components, with its strongest association on PC4, suggesting
+that it captures structural variation largely orthogonal to the dominant
+complexity axis. Trophic Integration (Module 2), Trophic Asymmetry
+(Module 4), Control Heterogeneity (Module 5), and Functional Redundancy
+(Module 7) displayed more limited alignment, each significantly
+associated with one to two principal components, indicating more
+constrained mapping onto the structural feature space. Notably,
+Functional Redundancy exhibited its strongest association with a
+high-order principal component (PC7), suggesting sensitivity to more
+subtle structural variation. Centralisation (Module 6) showed no
+significant alignment under the joint permutation and Z-score criterion,
+indicating that it does not meaningfully structure variation across the
+retained principal components. Overall, significant module--PC
+associations were concentrated in a subset of principal components,
+reinforcing the interpretation that modular structure maps onto specific
+structural gradients rather than uniformly spanning the full
+multivariate space.
 
-\begin{quote}
-I have an idea for this result\ldots{}
-\end{quote}
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/heatmap_zscores.png}}
+
+}
+
+\caption{\label{fig-alignment_signif}Heatmap showing module--principal
+component alignment quantified by permutation-derived Z-scores. Colour
+intensity reflects the magnitude and direction of alignment, and
+asterisks denote cells that meet joint significance criteria
+(permutation P \textless{} 0.05 and \textbar Z\textbar{} \textgreater{}
+1.96). Rows correspond to structural metric modules and columns to
+principal components. Clustering highlights patterns of shared alignment
+across modules and multivariate structural gradients.}
+
+\end{figure}%
 
 Collectively, these results demonstrate that food-web structural metrics
 exhibit strong low-dimensional organisation and that independently
@@ -1250,7 +1271,7 @@ to perturbations or organizes itself at a global level. \\
 \section*{References}\label{references}
 \addcontentsline{toc}{section}{References}
 
-\protect\phantomsection\label{refs}
+\phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-dunneFoodwebStructureNetwork2002}
 Dunne, J. A., Williams, R. J., \& Martinez, N. D. (2002). Food-web

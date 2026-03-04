@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.27">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,9 +13,6 @@
 
 <title>Multiple dimensions of network structure underlie ecological stability</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -31,6 +28,7 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -52,14 +50,15 @@ div.csl-indent {
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-adfb2833bc15652ec5881dc6381ea988.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-133a0a4dda30ced7f07b755c880e46a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a74871fe4945b66d259aafc266475145.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -71,7 +70,7 @@ div.csl-indent {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -292,7 +291,7 @@ window.Quarto = {
 <p>We conceptualise food-web structure as organised across four hierarchical structural scales: node-level, path-level, network geometry, and emergent system behaviour (Pimm 1982; Cohen et al.&nbsp;1990; Vermaat et al.&nbsp;2009). These scales reflect increasing levels of integration, progressing from individual species roles to whole-network dynamics.</p>
 <p><strong>Node-level structure:</strong> describes the properties and roles of individual species within the network. Metrics such as trophic position, basal and top species proportions, centrality, and trophic similarity capture how energy enters the system, which species process or redistribute that energy, and the degree of functional redundancy among taxa (Yodzis &amp; Winemiller 1999; Estrada 2007; Allesina &amp; Pascual 2009). At this scale, structure primarily reflects who participates in energy transfer and whether alternative species can compensate for local losses, a long-standing mechanism proposed to underpin persistence in complex ecosystems (McCann 2000).</p>
 <p><strong>Path-level structure</strong>: describes how energy is routed through sequences of interactions linking species. Metrics such as food chain length, omnivory, motifs, loops, and prey–predator ratios capture the coupling of energy channels and the multiplicity of pathways connecting basal resources to higher trophic levels (Pimm &amp; Lawton 1977; McCann et al.&nbsp;1998; Stouffer &amp; Bascompte 2011). This scale reflects how energy moves through the network and how perturbations may be transmitted across species, with particular pathway configurations either amplifying or diffusing disturbance effects (Neutel et al.&nbsp;2002; Rooney et al.&nbsp;2006).</p>
-<p><strong>Network geometry</strong>: captures the global arrangement and constraints of interactions, including link density, connectance, clustering, modularity, intervality, and network distances (Dunne et al.&nbsp;2002; Stouffer et al.&nbsp;2006; Delmas et al.&nbsp;2019). These properties define the overall “shape” of the food web and constrain which pathways are available for energy flow. Geometric organisation has been shown to influence the containment of perturbations, for example through compartmentalisation that limits the spread of local disturbances <span class="citation" data-cites="stoufferCompartmentalizationIncreasesFoodweb2011">(<a href="#ref-stoufferCompartmentalizationIncreasesFoodweb2011" role="doc-biblioref">Stouffer and Bascompte 2011</a>)</span>.</p>
+<p><strong>Network geometry</strong>: captures the global arrangement and constraints of interactions, including link density, connectance, clustering, modularity, intervality, and network distances (Dunne et al.&nbsp;2002; Stouffer et al.&nbsp;2006; Delmas et al.&nbsp;2019). These properties define the overall “shape” of the food web and constrain which pathways are available for energy flow. Geometric organisation has been shown to influence the containment of perturbations, for example through compartmentalisation that limits the spread of local disturbances <span class="citation" data-cites="stoufferCompartmentalizationIncreasesFoodweb2011">(<a href="#ref-stoufferCompartmentalizationIncreasesFoodweb2011" role="doc-biblioref">Daniel B. Stouffer and Bascompte 2011</a>)</span>.</p>
 <p><strong>Emergent system-level behaviour</strong>: reflects the collective dynamical properties that arise from the interaction of nodes, paths, and geometry. Metrics such as spectral radius, SVD complexity, and robustness capture properties that cannot be attributed to individual species or interactions alone, but instead describe the system’s overall capacity to absorb, reorganise, or amplify perturbations (May 1972; Staniczenko et al.&nbsp;2013; Strydom et al.&nbsp;2021).</p>
 <p>Together, these structural scales form a causal hierarchy: species roles give rise to interaction pathways, which are embedded within a global network geometry, from which emergent dynamical behaviour arises.</p>
 </section>
@@ -361,7 +360,7 @@ window.Quarto = {
 <div id="tbl-properties" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: An informative caption about the different network properties. We use a combination of metrics from both the original <span class="citation" data-cites="vermaatMajorDimensionsFoodweb2009">Vermaat et al. (<a href="#ref-vermaatMajorDimensionsFoodweb2009" role="doc-biblioref">2009</a>)</span> paper as well as including those that have been identified by <span class="citation" data-cites="thompsonFoodWebsReconciling2012">Thompson et al. (<a href="#ref-thompsonFoodWebsReconciling2012" role="doc-biblioref">2012</a>)</span> and have been linked to emerging ecosystem properties such as stability
+Table&nbsp;1: An informative caption about the different network properties. We use a combination of metrics from both the original <span class="citation" data-cites="vermaatMajorDimensionsFoodweb2009">Vermaat, Dunne, and Gilbert (<a href="#ref-vermaatMajorDimensionsFoodweb2009" role="doc-biblioref">2009</a>)</span> paper as well as including those that have been identified by <span class="citation" data-cites="thompsonFoodWebsReconciling2012">Thompson et al. (<a href="#ref-thompsonFoodWebsReconciling2012" role="doc-biblioref">2012</a>)</span> and have been linked to emerging ecosystem properties such as stability
 </figcaption>
 <div aria-describedby="tbl-properties-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -540,7 +539,7 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <td>Intervality</td>
 <td>Degree to which taxa can be ordered along a single niche dimension.</td>
 <td>Measures the extent of niche ordering in trophic interactions.</td>
-<td><span class="citation" data-cites="stoufferRobustMeasureFood2006a">Stouffer et al. (<a href="#ref-stoufferRobustMeasureFood2006a" role="doc-biblioref">2006</a>)</span></td>
+<td><span class="citation" data-cites="stoufferRobustMeasureFood2006a">Daniel B. Stouffer, Camacho, and Amaral (<a href="#ref-stoufferRobustMeasureFood2006a" role="doc-biblioref">2006</a>)</span></td>
 </tr>
 <tr class="even">
 <td>ρ (Spectral radius)</td>
@@ -552,7 +551,7 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <td>Complexity (SVD)</td>
 <td>Shannon entropy of the singular value decomposition of the adjacency matrix.</td>
 <td>Quantifies heterogeneity in interaction structure.</td>
-<td><span class="citation" data-cites="strydomSVDEntropyReveals2021">Strydom et al. (<a href="#ref-strydomSVDEntropyReveals2021" role="doc-biblioref">2021</a>)</span></td>
+<td><span class="citation" data-cites="strydomSVDEntropyReveals2021">Strydom, Dalla Riva, and Poisot (<a href="#ref-strydomSVDEntropyReveals2021" role="doc-biblioref">2021</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Robustness</td>
@@ -564,25 +563,25 @@ Table&nbsp;1: An informative caption about the different network properties. We 
 <td>S1 (Linear chain)</td>
 <td>Frequency of three-node linear chains (A → B → C) with no additional links.</td>
 <td>Captures the prevalence of simple, unbranched energy-transfer pathways.</td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="even">
 <td>S2 (Omnivory)</td>
 <td>Frequency of three-node motifs forming a feed-forward loop (A → B → C, A → C).</td>
 <td>Describes vertical coupling of trophic levels within small subnetworks.</td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>S4 (Apparent competition)</td>
 <td>Frequency of motifs where one consumer feeds on two resources (A → B ← C).</td>
 <td>Captures the prevalence of shared-predator structures among resources.</td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="even">
 <td>S5 (Direct competition)</td>
 <td>Frequency of motifs where two consumers share a single resource (A ← B → C).</td>
 <td>Describes the occurrence of shared-resource structures among consumers.</td>
-<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
+<td><span class="citation" data-cites="stoufferEvidenceExistenceRobust2007">Daniel B. Stouffer et al. (<a href="#ref-stoufferEvidenceExistenceRobust2007" role="doc-biblioref">2007</a>)</span> <span class="citation" data-cites="miloNetworkMotifsSimple2002">Milo et al. (<a href="#ref-miloNetworkMotifsSimple2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 </tbody>
 </table>
@@ -746,10 +745,17 @@ Figure&nbsp;3: Blah blah blah - colour intensity = greater alignment
 </figcaption>
 </figure>
 </div>
-<p>The global permutation test indicated significant alignment between modules and principal components (P = 0.005), demonstrating that the observed modular partition explains the multivariate geometry of structural metrics better than randomly assigned modules. Module 1 exhibited the strongest and most extensive alignment with principal components, showing significant associations across seven axes and with its strongest alignment occurring on PC1. This module therefore contributes substantially to the dominant structural gradient and captures variation associated with network size and connectivity. Module 3 showed significant alignment with four principal components, with its strongest association on PC4, suggesting that it captures structural variation orthogonal to the primary complexity gradient. Modules 2, 4, 5, 6, and 7 displayed more limited alignment, each showing significance with fewer principal components. Notably, Module 2 aligned most strongly with a later principal component (PC19), indicating that it captures a more subtle structural axis that contributes modestly to overall variance but remains statistically distinct from random expectation. Across modules, significant alignments were concentrated in a subset of principal components, reinforcing the interpretation that modular structure maps onto specific structural gradients rather than uniformly spanning the full multivariate space.</p>
-<blockquote class="blockquote">
-<p>I have an idea for this result…</p>
-</blockquote>
+<p>The global permutation test indicated significant alignment between the modular partition and the principal component structure (P = 0.005), demonstrating that the observed module assignment explains the multivariate geometry of structural metrics better than randomly assigned modules. Alignment strength varied substantially across modules <a href="#fig-alignment_signif" class="quarto-xref">Figure&nbsp;4</a>. Macro Complexity (Module 1) exhibited the strongest and most extensive alignment, showing significant associations with five principal components and a dominant loading on PC1, indicating that it contributes substantially to the primary structural gradient associated with network size and connectivity. Energy Transport (Module 3) showed significant alignment with four principal components, with its strongest association on PC4, suggesting that it captures structural variation largely orthogonal to the dominant complexity axis. Trophic Integration (Module 2), Trophic Asymmetry (Module 4), Control Heterogeneity (Module 5), and Functional Redundancy (Module 7) displayed more limited alignment, each significantly associated with one to two principal components, indicating more constrained mapping onto the structural feature space. Notably, Functional Redundancy exhibited its strongest association with a high-order principal component (PC7), suggesting sensitivity to more subtle structural variation. Centralisation (Module 6) showed no significant alignment under the joint permutation and Z-score criterion, indicating that it does not meaningfully structure variation across the retained principal components. Overall, significant module–PC associations were concentrated in a subset of principal components, reinforcing the interpretation that modular structure maps onto specific structural gradients rather than uniformly spanning the full multivariate space.</p>
+<div id="fig-alignment_signif" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-alignment_signif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="figures/heatmap_zscores.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Heatmap showing module–principal component alignment quantified by permutation-derived Z-scores. Colour intensity reflects the magnitude and direction of alignment, and asterisks denote cells that meet joint significance criteria (permutation P < 0.05 and |Z| > 1.96). Rows correspond to structural metric modules and columns to principal components. Clustering highlights patterns of shared alignment across modules and multivariate structural gradients."><img src="figures/heatmap_zscores.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-alignment_signif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Heatmap showing module–principal component alignment quantified by permutation-derived Z-scores. Colour intensity reflects the magnitude and direction of alignment, and asterisks denote cells that meet joint significance criteria (permutation P &lt; 0.05 and |Z| &gt; 1.96). Rows correspond to structural metric modules and columns to principal components. Clustering highlights patterns of shared alignment across modules and multivariate structural gradients.
+</figcaption>
+</figure>
+</div>
 <p>Collectively, these results demonstrate that food-web structural metrics exhibit strong low-dimensional organisation and that independently identified structural modules are non-randomly aligned with the dominant axes of variation. The significant global alignment supports the interpretation that modular decomposition reflects meaningful geometric structure rather than clustering artifacts. Moreover, the dominance of a single module across multiple principal components suggests hierarchical organisation, wherein a core structural module governs the primary gradient of variation while additional modules capture secondary and specialised structural dimensions.</p>
 </section>
 </section>
@@ -810,19 +816,19 @@ Table&nbsp;3: Network properties used for analysis.
 <td>Complexity &amp; Redundancy</td>
 <td>Connectance, MaxSim, Links</td>
 <td><strong>Positive:</strong> High redundancy allows for ‘functional compensation’ if one species is lost.</td>
-<td><span class="citation" data-cites="dunneFoodwebStructureNetwork2002">Dunne et al. (<a href="#ref-dunneFoodwebStructureNetwork2002" role="doc-biblioref">2002</a>)</span>; <span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span></td>
+<td><span class="citation" data-cites="dunneFoodwebStructureNetwork2002">Dunne, Williams, and Martinez (<a href="#ref-dunneFoodwebStructureNetwork2002" role="doc-biblioref">2002</a>)</span>; <span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Compartmentalization</td>
 <td>Clust, Modularity,&nbsp;ρ</td>
 <td><strong>Positive:</strong> Limits the spread of perturbations; local collapses don’t become global.</td>
-<td><span class="citation" data-cites="stoufferCompartmentalizationIncreasesFoodweb2011">Stouffer and Bascompte (<a href="#ref-stoufferCompartmentalizationIncreasesFoodweb2011" role="doc-biblioref">2011</a>)</span></td>
+<td><span class="citation" data-cites="stoufferCompartmentalizationIncreasesFoodweb2011">Daniel B. Stouffer and Bascompte (<a href="#ref-stoufferCompartmentalizationIncreasesFoodweb2011" role="doc-biblioref">2011</a>)</span></td>
 </tr>
 <tr class="odd">
 <td>Feedback &amp; Coupling</td>
 <td>Omnivory (S2), Loop, ChLen</td>
 <td><strong>Variable:</strong> Omnivory can stabilize by diffusing energy, but long chains can amplify oscillations.</td>
-<td><span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span>; <span class="citation" data-cites="neutelStabilityRealFood2002">Neutel et al. (<a href="#ref-neutelStabilityRealFood2002" role="doc-biblioref">2002</a>)</span></td>
+<td><span class="citation" data-cites="mccannDiversityStabilityDebate2000">McCann (<a href="#ref-mccannDiversityStabilityDebate2000" role="doc-biblioref">2000</a>)</span>; <span class="citation" data-cites="neutelStabilityRealFood2002">Neutel, Heesterbeek, and De Ruiter (<a href="#ref-neutelStabilityRealFood2002" role="doc-biblioref">2002</a>)</span></td>
 </tr>
 <tr class="even">
 <td>Hierarchy &amp; Shape</td>
@@ -890,7 +896,7 @@ Table&nbsp;4: Classification of food web metrics into functional categories. Nod
 </section>
 <section id="references" class="level1 unnumbered">
 <h1 class="unnumbered">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-dunneFoodwebStructureNetwork2002" class="csl-entry" role="listitem">
 Dunne, Jennifer A., Richard J. Williams, and Neo D. Martinez. 2002. <span>“Food-Web Structure and Network Theory: <span>The</span> Role of Connectance and Size.”</span> <em>Proceedings of the National Academy of Sciences</em> 99 (20): 12917–22. <a href="https://doi.org/10.1073/pnas.192407699">https://doi.org/10.1073/pnas.192407699</a>.
 </div>
@@ -925,7 +931,7 @@ Stouffer, Daniel B, Juan Camacho, Wenxin Jiang, and Luís A Nunes Amaral. 2007. 
 Strydom, Tanya, Giulio V. Dalla Riva, and Timothée Poisot. 2021. <span>“<span>SVD Entropy Reveals</span> the <span>High Complexity</span> of <span>Ecological Networks</span>.”</span> <em>Frontiers in Ecology and Evolution</em> 9. <a href="https://doi.org/10.3389/fevo.2021.623141">https://doi.org/10.3389/fevo.2021.623141</a>.
 </div>
 <div id="ref-thompsonFoodWebsReconciling2012" class="csl-entry" role="listitem">
-Thompson, Ross M., Ulrich Brose, Jennifer Dunne, et al. 2012. <span>“Food Webs: Reconciling the Structure and Function of Biodiversity.”</span> <em>Trends in Ecology &amp; Evolution</em> 27 (12): 689–97. <a href="https://doi.org/10.1016/j.tree.2012.08.005">https://doi.org/10.1016/j.tree.2012.08.005</a>.
+Thompson, Ross M., Ulrich Brose, Jennifer Dunne, Robert O. Hall, Sally Hladyz, Roger L. Kitching, Neo D. Martinez, et al. 2012. <span>“Food Webs: Reconciling the Structure and Function of Biodiversity.”</span> <em>Trends in Ecology &amp; Evolution</em> 27 (12): 689–97. <a href="https://doi.org/10.1016/j.tree.2012.08.005">https://doi.org/10.1016/j.tree.2012.08.005</a>.
 </div>
 <div id="ref-ulanowiczInformationTheoryEcology2001" class="csl-entry" role="listitem">
 Ulanowicz, Robert E. 2001. <span>“Information Theory in Ecology.”</span> <em>Computers &amp; Chemistry</em> 25 (4): 393–99. <a href="https://doi.org/10.1016/S0097-8485(01)00073-0">https://doi.org/10.1016/S0097-8485(01)00073-0</a>.
