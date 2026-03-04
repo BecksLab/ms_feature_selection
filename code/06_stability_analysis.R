@@ -19,510 +19,420 @@ setwd(here::here())
 
 topology <- read.csv("data/cleaned/all_networks.csv")
 
-############################################################
-# 2. Define Module Representative Metrics
-############################################################
+cluster_medoids <- readRDS("data/outputs/cluster_medoids.rds")
+pc_dominant_metrics <- readRDS("data/outputs/pc_dominant_metrics.rds")
+pc_scores_df <- readRDS("data/outputs/pc_scores_df.rds")
 
-# -----> Replace with your empirically selected metrics
-module_reps <- c("S1", "richness", "predpreyRatio", "distance", "herbivory", "MaxSim", "centrality")
-
-# Keep only variables that exist in dataset
-module_reps <- module_reps[module_reps %in% colnames(topology)]
-
-############################################################
-# 3. Define Stability Components
-############################################################
-
-stability_vars <- c("robustness", "ρ", "complexity")
-
-stability_vars <- stability_vars[stability_vars %in% colnames(topology)]
+# get cluster/module masterlist
+clust_metada <-
+  left_join(read_csv("../tables/metric_clusters_auto.csv"),
+            read_csv("../tables/module_summary_7clusters.csv") %>%
+              vibe_check(c(Cluster, label)))
 
 ############################################################
-# 4. Function to Fit Random Forest Model
+# Create Cross-Validation Folds
 ############################################################
 
-fit_rf_model <- function(response, predictors, data){
-  
-  df <- data %>%
-    dplyr::select(all_of(c(response, predictors))) %>%
-    drop_na()
-  
-  formula <- as.formula(
-    paste(response, "~", paste(predictors, collapse = "+"))
-  )
-  
-  rf <- randomForest(
-    formula,
-    data = df,
-    importance = TRUE,
-    ntree = 1000
-  )
-  
-  return(rf)
-}
-
-############################################################
-# 5. Fit Models for Each Stability Component
-############################################################
-
-rf_models <- list()
-
-for (stab in stability_vars) {
-  
-  rf_models[[stab]] <- fit_rf_model(
-    response = stab,
-    predictors = module_reps,
-    data = topology
-  )
-}
-
-############################################################
-# 6. Extract Variable Importance
-############################################################
-
-importance_table <- map2_df(
-  rf_models,
-  names(rf_models),
-  ~ {
-    
-    imp <- as.data.frame(importance(.x))
-    imp <- tibble(
-      Module = rownames(imp),
-      Importance = imp$`%IncMSE`,
-      Stability = .y
-    )
-    
-    return(imp)
-  }
-)
-
-print(importance_table)
-
-############################################################
-# 7. Extract Model Performance (R²)
-############################################################
-
-performance <- tibble(
-  Stability = names(rf_models),
-  R2 = map_dbl(rf_models, ~ max(.x$rsq))
-)
-
-print(performance)
-
-############################################################
-# 8. Plot Variable Importance Per Stability Component
-############################################################
-
-plots <- map(rf_models, ~ {
-  
-  varImpPlot(.x,
-             type = 1,
-             main = paste("Drivers of", deparse(substitute(.x))))
-})
-
-# Display side-by-side
-par(mfrow = c(1, length(plots)))
-invisible(plots)
-par(mfrow = c(1,1))
-
-
-############################################################
-# 9. Partial Dependence Plots
-############################################################
-
-pdp_plots <- list()
-
-for (stab in stability_vars) {
-  
-  rf_model <- rf_models[[stab]]
-  
-  # Extract predictor names from the model
-  model_vars <- attr(rf_model$terms, "term.labels")
-  
-  # Reconstruct training data using SAME variables
-  train_data <- topology %>%
-    dplyr::select(dplyr::all_of(c(stab, model_vars))) %>%
-    tidyr::drop_na()
-  
-  for (pred in intersect(module_reps, model_vars)) {
-    
-    # Double-check variable actually exists
-    if (!(pred %in% colnames(train_data))) next
-    
-    p <- partial(
-      object = rf_model,
-      pred.var = pred,
-      train = train_data,
-      plot = TRUE,
-      rug = TRUE,
-      grid.resolution = 20,
-      main = paste(stab, "~", pred)
-    )
-    
-    pdp_plots[[paste(stab, pred, sep = "_")]] <- p
-  }
-}
-
-
-############################################################
-# 10. Permutation Test for Importance
-############################################################
-
-# Permute stability variable and refit to build null importance
-
-perm_test <- function(response,
-                      predictors,
-                      data,
-                      nperm = 500,
-                      alternative = "two.sided") {
-  
-  # Remove missing values once
-  df <- data[, unique(c(response, predictors))]
-  df <- na.omit(df)
-  
-  # ---- Observed Model ----
-  obs_rf <- fit_rf_model(response, predictors, df)
-  obs_imp <- importance(obs_rf)[, "%IncMSE"]
-  
-  # Store null importance
-  null_mat <- matrix(NA,
-                     nrow = nperm,
-                     ncol = length(predictors))
-  
-  colnames(null_mat) <- predictors
-  
-  # ---- Permutation Loop ----
-  for (i in seq_len(nperm)) {
-    
-    df_perm <- df
-    
-    # Permute response (break structure–stability link)
-    df_perm[[response]] <- sample(df_perm[[response]])
-    
-    rf_perm <- fit_rf_model(response, predictors, df_perm)
-    
-    null_mat[i, ] <- importance(rf_perm)[, "%IncMSE"]
-  }
-  
-  # ---- Statistics ----
-  
-  null_mean <- colMeans(null_mat)
-  null_sd   <- apply(null_mat, 2, sd)
-  
-  z_scores <- (obs_imp - null_mean) / null_sd
-  
-  # Empirical p-values
-  if (alternative == "greater") {
-    
-    p_vals <- colMeans(null_mat >= matrix(obs_imp,
-                                          nrow = nperm,
-                                          ncol = length(obs_imp),
-                                          byrow = TRUE))
-    
-  } else if (alternative == "less") {
-    
-    p_vals <- colMeans(null_mat <= matrix(obs_imp,
-                                          nrow = nperm,
-                                          ncol = length(obs_imp),
-                                          byrow = TRUE))
-    
-  } else {
-    
-    # Two-sided
-    p_vals <- colMeans(abs(null_mat) >=
-                         matrix(abs(obs_imp),
-                                nrow = nperm,
-                                ncol = length(obs_imp),
-                                byrow = TRUE))
-  }
-  
-  # ---- Return Full Object ----
-  
-  return(list(
-    observed_importance = obs_imp,
-    null_distribution   = null_mat,
-    z_scores            = z_scores,
-    p_values            = p_vals
-  ))
-}
-
-perm_results <- perm_test(
-  response   = "robustness",
-  predictors = module_reps,
-  data       = topology,
-  nperm      = 500
-)
-
-perm_results$p_values
-perm_results$z_scores
-
-boxplot(perm_results$null_distribution)
-points(perm_results$observed_importance,
-       col = "red",
-       pch = 19)
-
-############################################################
-# Cross-Validated Permutation Importance
-############################################################
-
-cv_perm_importance <- function(response,
-                               predictors,
-                               data,
-                               nfolds = 5,
-                               nperm  = 100,
-                               seed   = 66) {
+create_cv_folds <- function(n, k = 5, seed = 66){
   
   set.seed(seed)
+  folds <- sample(rep(1:k, length.out = n))
+  return(folds)
+}
+
+############################################################
+# Cross-Validated RF with Permutation Importance
+############################################################
+
+run_rf_cv <- function(response,
+                      predictors,
+                      data,
+                      folds,
+                      nperm = 100,
+                      ntree = 1000){
   
-  df <- data[, unique(c(response, predictors))]
+  df <- data[, c(response, predictors)]
   df <- na.omit(df)
   
-  folds <- sample(rep(1:nfolds,
-                      length.out = nrow(df)))
+  k <- length(unique(folds))
   
   # Storage
-  fold_results <- list()
+  predictions_all <- data.frame()
+  fold_perf <- data.frame()
+  importance_obs <- list()
+  importance_null <- list()
   
-  for (f in seq_len(nfolds)) {
+  for (f in 1:k){
     
     train_data <- df[folds != f, ]
     test_data  <- df[folds == f, ]
     
-    # ----- Train Model on Fold -----
-    rf_model <- fit_rf_model(response, predictors, train_data)
+    # Fit model
+    rf_model <- randomForest(
+      as.formula(paste(response, "~ .")),
+      data = train_data,
+      ntree = ntree,
+      importance = TRUE
+    )
     
-    obs_imp <- importance(rf_model)[, "%IncMSE"]
+    # Predict
+    preds <- predict(rf_model, newdata = test_data)
     
-    # ---- Permutation Null Within Fold ----
-    null_mat <- matrix(NA,
-                       nrow = nperm,
-                       ncol = length(predictors))
+    # Store predictions
+    predictions_all <- rbind(
+      predictions_all,
+      data.frame(
+        Fold = f,
+        Observed = test_data[[response]],
+        Predicted = preds
+      )
+    )
     
+    # Performance metrics
+    r2 <- cor(test_data[[response]], preds)^2
+    rmse <- sqrt(mean((test_data[[response]] - preds)^2))
+    
+    fold_perf <- rbind(
+      fold_perf,
+      data.frame(Fold = f, R2 = r2, RMSE = rmse)
+    )
+    
+    # Observed importance
+    obs_imp <- importance(rf_model)[,"%IncMSE"]
+    importance_obs[[f]] <- obs_imp
+    
+    # Permutation null importance
+    null_mat <- matrix(NA, nrow = nperm, ncol = length(predictors))
     colnames(null_mat) <- predictors
     
-    for (p in seq_len(nperm)) {
+    for (p in 1:nperm){
       
       test_perm <- test_data
       test_perm[[response]] <- sample(test_perm[[response]])
       
-      rf_perm <- fit_rf_model(response,
-                              predictors,
-                              rbind(train_data, test_perm))
+      rf_perm <- randomForest(
+        as.formula(paste(response, "~ .")),
+        data = rbind(train_data, test_perm),
+        ntree = ntree,
+        importance = TRUE
+      )
       
-      null_mat[p, ] <- importance(rf_perm)[, "%IncMSE"]
+      null_mat[p, ] <- importance(rf_perm)[,"%IncMSE"]
     }
     
-    fold_results[[f]] <- list(
-      observed = obs_imp,
-      null     = null_mat
-    )
+    importance_null[[f]] <- null_mat
   }
   
-  obs_matrix  <- do.call(rbind,
-                         lapply(fold_results, `[[`, "observed"))
+  # Aggregate performance
+  mean_R2 <- mean(fold_perf$R2)
+  mean_RMSE <- mean(fold_perf$RMSE)
   
-  null_matrix <- do.call(rbind,
-                         lapply(fold_results, `[[`, "null"))
+  # Aggregate importance
+  obs_matrix <- do.call(rbind, importance_obs)
+  null_matrix <- do.call(rbind, importance_null)
   
-  mean_obs <- colMeans(obs_matrix)
-  mean_null <- colMeans(null_matrix)
+  mean_obs_imp <- colMeans(obs_matrix)
+  mean_null_imp <- colMeans(null_matrix)
   
-  z_scores <- (mean_obs - mean_null) /
+  z_scores <- (mean_obs_imp - mean_null_imp) /
     apply(null_matrix, 2, sd)
   
-  p_vals <- colMeans(abs(null_matrix) >=
-                       matrix(abs(mean_obs),
-                              nrow = nrow(null_matrix),
-                              ncol = length(mean_obs),
-                              byrow = TRUE))
+  p_values <- colMeans(abs(null_matrix) >=
+                         matrix(abs(mean_obs_imp),
+                                nrow = nrow(null_matrix),
+                                ncol = length(mean_obs_imp),
+                                byrow = TRUE))
   
   return(list(
-    mean_observed = mean_obs,
-    mean_null     = mean_null,
-    z_scores      = z_scores,
-    p_values      = p_vals,
-    null_dist     = null_matrix
+    predictions = predictions_all,
+    fold_performance = fold_perf,
+    mean_performance = data.frame(R2 = mean_R2,
+                                  RMSE = mean_RMSE),
+    importance_observed = obs_matrix,
+    importance_null = null_matrix,
+    mean_importance = mean_obs_imp,
+    z_scores = z_scores,
+    p_values = p_values
   ))
 }
 
-cv_results <- cv_perm_importance(
-  response   = "robustness",
-  predictors = module_reps,
-  data       = topology,
-  nfolds     = 5,
-  nperm      = 100
-)
-
-cv_results$p_values
-cv_results$z_scores
-
 ############################################################
-# Plot 1: Observed vs Null
+# Run RF for Multiple Stability Components
 ############################################################
 
-plot_observed_vs_null <- function(cv_results){
+run_rf_suite <- function(stability_vars,
+                         predictor_set,
+                         data,
+                         folds,
+                         nperm = 100){
   
-  null_mat <- cv_results$null_dist
+  results <- list()
   
-  modules <- colnames(null_mat)
-  
-  # ---- Build Proper Null DataFrame ----
-  null_df <- expand.grid(
-    Iteration = seq_len(nrow(null_mat)),
-    Module = modules
-  )
-  
-  null_df$Importance <- as.vector(null_mat)
-  
-  # ---- Observed ----
-  obs_df <- tibble(
-    Module = names(cv_results$mean_observed),
-    Observed = cv_results$mean_observed
-  )
-  
-  # ---- Plot ----
-  ggplot(null_df, aes(x = Module, y = Importance)) +
-    geom_boxplot(
-      data = null_df,
-      aes(group = Module),
-      fill = "grey80",
-      alpha = 0.6
-    ) +
-    geom_point(
-      data = obs_df,
-      aes(x = Module, y = Observed),
-      color = "red",
-      size = 3
-    ) +
-    theme_minimal() +
-    labs(
-      title = "Observed vs Null Module Importance",
-      y = "% IncMSE",
-      x = "Module"
-    ) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-plot_observed_vs_null(cv_results)
-
-############################################################
-# Plot 2: Ranked Module Importance
-############################################################
-
-plot_ranked_importance <- function(cv_results){
-  
-  df <- tibble(
-    Module = names(cv_results$mean_observed),
-    Importance = cv_results$mean_observed,
-    Z = cv_results$z_scores
-  ) %>%
-    arrange(desc(Importance)) %>%
-    mutate(Module = factor(Module,
-                           levels = Module))
-  
-  df$Significant <- cv_results$p_values < 0.05
-  
-  ggplot(df, aes(x = Module, y = Importance)) +
-    geom_col(fill = "steelblue") +
-    geom_errorbar(aes(ymin = Importance - abs(Z),
-                      ymax = Importance + abs(Z)),
-                  width = 0.2) +
-    geom_text(aes(label = ifelse(Significant, "*", "")),
-              hjust = -0.5) +
-    coord_flip() +
-    theme_minimal() +
-    labs(title = "Ranked Module Importance",
-         y = "Cross-Validated %IncMSE",
-         x = "Module")
-}
-
-plot_ranked_importance(cv_results)
-
-############################################################
-# Multi panel figure
-############################################################
-
-cv_results_list <-
-  list(robustness = cv_perm_importance(response   = "robustness",
-                                       predictors = module_reps,
-                                       data       = topology,
-                                       nfolds     = 5,
-                                       nperm      = 100),
-       spectral_radius = cv_perm_importance(response   = "ρ",
-                                            predictors = module_reps,
-                                            data       = topology,
-                                            nfolds     = 5,
-                                            nperm      = 100),
-       complexity = cv_perm_importance(response   = "complexity",
-                                       predictors = module_reps,
-                                       data       = topology,
-                                       nfolds     = 5,
-                                       nperm      = 100)
-       )
-
-############################################################
-# Multi-Panel Summary Figure
-############################################################
-
-plot_multi_stability_summary <- function(cv_results_list){
-  
-  plot_list <- list()
-  
-  for (stab in names(cv_results_list)) {
+  for (stab in stability_vars){
     
-    res <- cv_results_list[[stab]]
-    null_mat <- res$null_dist
-    
-    modules <- colnames(null_mat)
-    
-    # ---- Build Null Data ----
-    null_df <- expand.grid(
-      Iteration = seq_len(nrow(null_mat)),
-      Module = modules
+    results[[stab]] <- run_rf_cv(
+      response = stab,
+      predictors = predictor_set,
+      data = data,
+      folds = folds,
+      nperm = nperm
     )
-    
-    null_df$Importance <- as.vector(null_mat)
-    
-    # ---- Observed ----
-    obs_df <- tibble(
-      Module = names(res$mean_observed),
-      Observed = res$mean_observed
-    )
-    
-    # ---- Plot for This Stability Component ----
-    p <- ggplot(null_df, aes(x = Module, y = Importance)) +
-      geom_boxplot(fill = "grey80",
-                   alpha = 0.6,
-                   outlier.shape = NA) +
-      geom_point(
-        data = obs_df,
-        aes(x = Module, y = Observed),
-        color = "red",
-        size = 3
-      ) +
-      coord_flip() +
-      theme_minimal() +
-      labs(
-        title = paste("Stability Component:", stab),
-        y = "% IncMSE",
-        x = NULL
-      ) +
-      theme(
-        axis.text.y = element_text(size = 8),
-        plot.title = element_text(size = 10, face = "bold")
-      )
-    
-    plot_list[[stab]] <- p
   }
   
-  # ---- Arrange Panels ----
-  gridExtra::grid.arrange(
-    grobs = plot_list,
-    ncol = 1
-  )
+  return(results)
 }
 
-plot_multi_stability_summary(cv_results_list)
+############################################################
+# Execute for Each Structural Representation
+############################################################
+
+# PC scores must be appended to the topology dataframe
+topology_pc <- cbind(topology, pc_scores_df)
+
+# create shared folds
+folds <- create_cv_folds(nrow(topology), k = 5)
+
+# run models
+
+# Cluster medoids
+rf_cluster <- run_rf_suite(
+  stability_vars,
+  cluster_medoids,
+  topology,
+  folds,
+  nperm = 100
+)
+
+# PC dominant metrics
+rf_pc_dominant_metrics <- run_rf_suite(
+  stability_vars,
+  pc_dominant_metrics,
+  topology,
+  folds,
+  nperm = 100
+)
+
+# PC scores
+rf_pc <- run_rf_suite(
+  stability_vars,
+  colnames(pc_scores_df),
+  topology_pc,
+  folds,
+  nperm = 100
+)
+
+# Save outputs
+saveRDS(rf_cluster, "data/outputs/rf_cluster_results.rds")
+saveRDS(rf_pc, "data/outputs/rf_pc_results.rds")
+saveRDS(rf_pc_dominant_metrics, "data/outputs/rf_pc_dominant_metrics_results.rds")
+
+############################################################
+# maybe move this stuff own script
+############################################################
+
+############################################################
+# Extract Performance Across Representations
+############################################################
+
+extract_performance <- function(rf_object, label){
+  
+  stability_names <- names(rf_object)
+  
+  perf_list <- lapply(stability_names, function(stab){
+    
+    fold_df <- rf_object[[stab]]$fold_performance
+    
+    data.frame(
+      Stability = stab,
+      Representation = label,
+      Fold = fold_df$Fold,
+      R2 = fold_df$R2,
+      RMSE = fold_df$RMSE
+    )
+  })
+  
+  do.call(rbind, perf_list)
+}
+
+perf_cluster <- extract_performance(rf_cluster, "Cluster")
+perf_pc_dom  <- extract_performance(rf_pc_dominant_metrics, "PC_Dominant")
+perf_pc      <- extract_performance(rf_pc, "PC_Scores")
+
+performance_all <- rbind(perf_cluster,
+                         perf_pc_dom,
+                         perf_pc)
+
+performance_summary <- aggregate(
+  cbind(R2, RMSE) ~ Stability + Representation,
+  data = performance_all,
+  FUN = function(x) c(mean = mean(x), sd = sd(x))
+)
+
+compare_models <- function(stability_name){
+  
+  df <- subset(performance_all,
+               Stability == stability_name)
+  
+  cluster_r2 <- df$R2[df$Representation == "Cluster"]
+  pc_r2      <- df$R2[df$Representation == "PC_Scores"]
+  
+  t.test(cluster_r2, pc_r2, paired = TRUE)
+}
+
+compare_models("robustness")
+compare_models("ρ")
+compare_models("complexity")
+
+############################################################
+# Extract Importance Summary
+############################################################
+
+extract_importance <- function(rf_object, label){
+  
+  stability_names <- names(rf_object)
+  
+  imp_list <- lapply(stability_names, function(stab){
+    
+    mean_imp <- rf_object[[stab]]$mean_importance
+    z_scores <- rf_object[[stab]]$z_scores
+    p_vals   <- rf_object[[stab]]$p_values
+    
+    data.frame(
+      Stability = stab,
+      Representation = label,
+      Predictor = names(mean_imp),
+      MeanImportance = mean_imp,
+      Z = z_scores,
+      P = p_vals
+    )
+  })
+  
+  do.call(rbind, imp_list)
+}
+
+
+imp_cluster <- extract_importance(rf_cluster, "Cluster")
+imp_pc_dom  <- extract_importance(rf_pc_dominant_metrics, "PC_Dominant")
+imp_pc      <- extract_importance(rf_pc, "PC_Scores")
+
+importance_all <- rbind(imp_cluster,
+                        imp_pc_dom,
+                        imp_pc)
+
+ggplot(performance_all,
+       aes(x = Representation,
+           y = R2,
+           colour = Representation,
+           fill = Representation)) +
+  geom_jitter(width = 0.1,
+              alpha = 0.6,
+              size = 3) +
+  stat_summary(fun = mean,
+               geom = "point",
+               size = 5) +
+  stat_summary(fun.data = mean_se,
+               aes(colour = Representation),
+               geom = "errorbar",
+               width = 0.2) +
+  scale_colour_manual(values = secondary_palette) +
+  scale_fill_manual(values = secondary_palette) +
+  facet_wrap(~ Stability) +
+  labs(y = expression(R^2),
+       x = "",
+       title = "Predictive Performance Across Structural Representations") +
+  figure_theme() +
+  theme(legend.position = 'none')
+
+ggsave("../figures/fig_pred_preformance.png",
+       width = 5500,
+       height = 2500,
+       units = "px")
+
+plot_imp_df <- 
+  importance_all %>%
+  left_join(clust_metada, 
+            by = join_by(Predictor == Metric)) %>%
+  # get colours
+  left_join(pal_df) %>%
+  # add manual colour for PCA axes (keep same since they have no visual language)
+  glow_up(colour = if_else(is.na(colour), "#50723C", colour),
+          label = if_else(is.na(label), "PCA Axis", label))
+
+ggplot(plot_imp_df,
+         aes(y = Predictor,
+             x = MeanImportance,
+             colour = label)) +
+  geom_segment(aes(xend = MeanImportance,
+                   x = -Inf,
+                   y = Predictor),
+               linewidth = 1) +
+  geom_point(size = 8) +
+  scale_color_manual(values = setNames(plot_imp_df$colour, as.character(plot_imp_df$label)),
+                     name = "Module") +
+  facet_grid(rows = vars(Representation),
+             cols = vars(Stability),
+             scales = "free_y") +
+  labs(x = "Mean Importance") +
+  figure_theme() +
+  theme(legend.position = 'right')
+
+ggsave("../figures/mean_importance.png",
+       width = 5500,
+       height = 3000,
+       units = "px")
+
+############################################################
+# Extract Variable Importance (Simple & Clean)
+############################################################
+
+extract_variable_importance <- function(rf_object, label){
+  
+  stab_names <- names(rf_object)
+  
+  imp_list <- lapply(stab_names, function(stab){
+    
+    imp_matrix <- rf_object[[stab]]$importance_observed
+    z_vals     <- rf_object[[stab]]$z_scores
+    p_vals     <- rf_object[[stab]]$p_values
+    
+    # Ensure matrix
+    imp_matrix <- as.matrix(imp_matrix)
+    
+    # Aggregate across folds
+    mean_imp <- colMeans(imp_matrix, na.rm = TRUE)
+    
+    data.frame(
+      Stability = stab,
+      Representation = label,
+      Predictor = names(mean_imp),
+      MeanImportance = as.numeric(mean_imp),
+      Z = as.numeric(z_vals),
+      P = as.numeric(p_vals)
+    )
+  })
+  
+  do.call(rbind, imp_list)
+}
+
+imp_cluster <- extract_variable_importance(rf_cluster, "Cluster")
+
+imp_pc_dom <- extract_variable_importance(
+  rf_pc_dominant_metrics,
+  "PC_Dominant"
+)
+
+imp_pc <- extract_variable_importance(
+  rf_pc,
+  "PC_Scores"
+)
+
+importance_all <- rbind(
+  imp_cluster,
+  imp_pc_dom,
+  imp_pc
+)
+
+
 
 ############################################################
 # End
