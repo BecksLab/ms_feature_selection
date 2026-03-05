@@ -210,7 +210,7 @@ stability}
 1%
 }%
 }
-\date{2026-03-04}
+\date{2026-03-05}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -491,10 +491,10 @@ metrics were standardized (mean = 0, SD = 1) to account for differences
 in scale and units across descriptors.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2297}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2297}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3108}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2297}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2917}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}@{}}
 \caption{An informative caption about the different network properties.
 We use a combination of metrics from both the original Vermaat et al.
 (2009) paper as well as including those that have been identified by
@@ -925,11 +925,9 @@ integration, routing geometry, trophic imbalance, control heterogeneity,
 dominance concentration, and functional overlap.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1368}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1684}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2737}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2947}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1263}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3182}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3182}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3636}}@{}}
 \caption{Structural Modules Identified From Hierarchical
 Clustering.}\label{tbl-modules}\tabularnewline
 \toprule\noalign{}
@@ -939,10 +937,6 @@ Module Name
 Metrics Included
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Ecological Interpretation
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Robustness (Silhouette / AU)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Module Size
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
@@ -953,10 +947,6 @@ Module Name
 Metrics Included
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Ecological Interpretation
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Robustness (Silhouette / AU)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Module Size
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
@@ -965,24 +955,24 @@ Module Size
 Macro-Architectural Complexity & richness, links, diameter, motif
 frequencies, intervality, path-related metrics & Captures large-scale
 expansion of network structure and combinatorial complexity associated
-with increasing system size & & \\
+with increasing system size \\
 Trophic Integration & connectance, trophic level, omnivory, chain
 length, clustering & Describes vertical trophic embedding and density of
-cross-level interactions & & \\
+cross-level interactions \\
 Energy Transport & mean distance, path number, chain-length dispersion &
 Quantifies geometric structure of energy routing independent of size
-scaling & & \\
+scaling \\
 Trophic Asymmetry & basal proportion, predator--prey ratio, generality &
 Represents structural skew between basal and consumer dominance;
-bottom-heavy vs top-heavy organization & & \\
+bottom-heavy vs top-heavy organization \\
 Control Heterogeneity & apex proportion, herbivory, vulnerability
 variance & Captures heterogeneity in top-down control and uneven
-distribution of interaction pressure & & \\
+distribution of interaction pressure \\
 Centralisation & centrality & Measures concentration of structural
-dominance within a subset of species & & \\
+dominance within a subset of species \\
 Functional Redundancy & maximum trophic similarity & Quantifies trophic
-overlap and niche redundancy; independent axis of functional equivalence
-& & \\
+overlap and niche redundancy; independent axis of functional
+equivalence \\
 \end{longtable}
 
 \subsection{Structural Modules Align with Dominant Axes of Network
@@ -1100,10 +1090,10 @@ Characterisation}\label{dimensional-reduction-characterisation}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2714}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2571}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2714}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2603}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2329}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2466}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2603}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Representation
@@ -1342,6 +1332,11 @@ of abstraction.}
 
 \section{Discussion}\label{discussion}
 
+\begin{quote}
+Something about `static' structural metric that can be powerful from a
+biodiversity targets perspective
+\end{quote}
+
 \subsection{Why consensus on ``the best metric'' has remained
 elusive}\label{why-consensus-on-the-best-metric-has-remained-elusive}
 
@@ -1502,10 +1497,10 @@ practical framework for selecting network descriptors based on mechanism
 rather than tradition.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2917}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2703}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}@{}}
 \caption{Network properties used for
 analysis.}\label{tbl-metrics}\tabularnewline
 \toprule\noalign{}
