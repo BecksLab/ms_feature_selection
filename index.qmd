@@ -43,7 +43,7 @@ number-sections: true
 
 > Food web metrics self-organise into structural process modules, these modules define network space, and different modules regulate different stability components.
 
-> Should we be looking at if different metrics scale predictably with each other? 
+> Should we be looking at if different metrics scale predictably with each other?
 
 > Emergent property (thinking like the cool tensor work/dynamic models) vs static metrics (using one measure of structure)
 
@@ -97,7 +97,7 @@ This perspective provides a mechanistic explanation for why studies using differ
 We compiled quantitative network data from XX, resulting in a total of XX ecological networks. Each network was characterized using a suite of XX structural metrics [@tbl-properties], including classic descriptors such as richness, connectance, and modularity, as well as information-theoretic measures like spectral radius and SVD complexity. Prior to analysis, networks with missing values were omitted, and all metrics were standardized (mean = 0, SD = 1) to account for differences in scale and units across descriptors.
 
 | Label | Definition | Structural interpretation | Reference |
-|-----------------|-----------------|-----------------------|-----------------|
+|-----------------|-----------------|---------------------|-----------------|
 | Basal | Proportion of taxa with zero vulnerability (no consumers). | Quantifies the proportion of species representing basal energy inputs to the network. |  |
 | Top | Proportion of taxa with zero generality (no resources). | Describes the relative prevalence of terminal consumers in the network. |  |
 | Intermediate | Proportion of taxa with both consumers and resources. | Captures the proportion of species participating in both upward and downward energy transfer. |  |
@@ -137,8 +137,7 @@ We compiled quantitative network data from XX, resulting in a total of XX ecolog
 
 ## Identification of Structural Modules
 
-We tested the hypothesis that structural descriptors of food webs are organised into statistically coherent modules reflecting shared ecological function or scaling relationships, rather than forming arbitrary clusters driven by sampling noise.
-If such modular organization exists, then metrics within a module should exhibit strong internal correlation relative to metrics assigned to different modules. The resulting clusters should be robust to resampling of the data. The identified modular structure should exceed expectations under null models of random association among metrics.
+We tested the hypothesis that structural descriptors of food webs are organised into statistically coherent modules reflecting shared ecological function or scaling relationships, rather than forming arbitrary clusters driven by sampling noise. If such modular organization exists, then metrics within a module should exhibit strong internal correlation relative to metrics assigned to different modules. The resulting clusters should be robust to resampling of the data. The identified modular structure should exceed expectations under null models of random association among metrics.
 
 We quantified pairwise associations among the 30 structural metrics using Pearson correlations computed across food webs. Because ecological metrics may covary either positively or negatively depending on scaling relationships, we constructed two alternative distance matrices: $1−r$, which preserves the sign of correlations and distinguishes positive from negative association and $1−∣r∣$, which groups variables based on the magnitude of their association regardless of sign. These two definitions allow us to test whether modular structure depends on directional relationships or simply on the strength of coupling among metrics. Hierarchical clustering was performed using average linkage on each distance matrix to identify candidate structural modules.
 
@@ -156,8 +155,7 @@ $$
 A_{mk} = \sum_{i \in m} l^{2}_{ik}
 $$
 
-where $l_{ik}$  is the loading of metric $i$ on principal component $k$ and $A_{mk}$ represents the fraction of variance in PC 
-$k$ attributable to metrics in module $m$. Because squared loadings sum to one within each principal component, this provides a direct partitioning of PC variance across modules. This produces a module × PC matrix describing geometric alignment between modular structure and multivariate axes.
+where $l_{ik}$ is the loading of metric $i$ on principal component $k$ and $A_{mk}$ represents the fraction of variance in PC $k$ attributable to metrics in module $m$. Because squared loadings sum to one within each principal component, this provides a direct partitioning of PC variance across modules. This produces a module × PC matrix describing geometric alignment between modular structure and multivariate axes.
 
 To evaluate whether observed module–PC alignment exceeded expectations under random module structure, we implemented a permutation test. We randomly permuted module labels among metrics 1 000 times while preserving the number and size distribution of modules, and the PCA loadings. For each permutation $r$, we recomputed $A^{(r)}_{mk}$ so as to form a null distribution for each module–PC pair. From this we computed p-values and corresponding z-scores, which was then used to infer significant alignment when $p_{mk} < 0.05 \land |Z_{mk}| > 1.96$
 
@@ -185,8 +183,7 @@ As a complementary representation of network structure, we performed principal c
 
 ### Conceptual Contrast Between Representations
 
-The cluster-medoid and PCA-score representations reflect different theoretical assumptions about how structure relates to stability.
-The cluster-medoid approach assumes that ecological stability responds to discrete structural domains that may vary independently and need not align with the dominant gradients of network variation. In contrast, the PCA-score approach assumes that stability responds primarily to the major axes of variation in network topology, regardless of their interpretability in terms of structural domains. By explicitly comparing predictive performance across these representations, we test whether ecological stability is better explained by domain-specific structural mechanisms or by global geometric gradients of network organization.
+The cluster-medoid and PCA-score representations reflect different theoretical assumptions about how structure relates to stability. The cluster-medoid approach assumes that ecological stability responds to discrete structural domains that may vary independently and need not align with the dominant gradients of network variation. In contrast, the PCA-score approach assumes that stability responds primarily to the major axes of variation in network topology, regardless of their interpretability in terms of structural domains. By explicitly comparing predictive performance across these representations, we test whether ecological stability is better explained by domain-specific structural mechanisms or by global geometric gradients of network organization.
 
 ### Structural Control of Stability
 
@@ -196,17 +193,17 @@ Elastic net regularization was chosen because it permits inference under correla
 
 #### Model Evaluation
 
-Predictive performance was assessed using repeated v-fold cross-validation (5 folds × 20 repeats). Within each training partition, models were fit across a grid of α values (0–1 in increments of 0.25), and the optimal penalty strength (λ) was selected via internal cross-validation. Performance was quantified as cross-validated R^2 computed on held-out test partitions. After cross-validation, final models were refit to the full dataset using the mean selected α, and standardized coefficients were extracted to characterize the direction and magnitude of structural effects. This approach was not intended to maximize predictive accuracy per se, but rather to quantify the relative degree and architecture of structural control across stability facets.
+Predictive performance was assessed using repeated v-fold cross-validation (5 folds × 20 repeats). Within each training partition, models were fit across a grid of α values (0–1 in increments of 0.25), and the optimal penalty strength (λ) was selected via internal cross-validation. Performance was quantified as cross-validated R\^2 computed on held-out test partitions. After cross-validation, final models were refit to the full dataset using the mean selected α, and standardized coefficients were extracted to characterize the direction and magnitude of structural effects. This approach was not intended to maximize predictive accuracy per se, but rather to quantify the relative degree and architecture of structural control across stability facets.
 
 # Results
 
 ## Structural Metrics Organise into Robust Modules
 
-Hierarchical clustering of structural descriptors revealed clear modular organisation within food-web architecture [@fig-cluster]. Silhouette analysis indicated an optimal partition of the signed correlation matrix at k=7 modules, with a maximum average silhouette width of [insert value]. Clustering based on absolute correlations produced a slightly coarser but comparable solution (k=5), demonstrating that the modular structure is robust to the treatment of correlation sign and reflects strong underlying association patterns among metrics.
+Hierarchical clustering of structural descriptors revealed clear modular organisation within food-web architecture [@fig-cluster]. Silhouette analysis indicated an optimal partition of the signed correlation matrix at k=7 modules, with a maximum average silhouette width of \[insert value\]. Clustering based on absolute correlations produced a slightly coarser but comparable solution (k=5), demonstrating that the modular structure is robust to the treatment of correlation sign and reflects strong underlying association patterns among metrics.
 
 ![Blah blah blah clusters](figures/cluster_dendrogram.png){#fig-cluster}
 
-Bootstrap resampling further supported the stability of the major clusters. Most principal modules exhibited high approximately unbiased (AU) support values (AU ≥ [insert value]), indicating that the identified clusters are not artefacts of sampling variability but represent statistically robust groupings of structural descriptors.
+Bootstrap resampling further supported the stability of the major clusters. Most principal modules exhibited high approximately unbiased (AU) support values (AU ≥ \[insert value\]), indicating that the identified clusters are not artefacts of sampling variability but represent statistically robust groupings of structural descriptors.
 
 The resulting modular partition identified coherent groups of metrics describing distinct aspects of network architecture. These included a large-scale architectural module integrating size and motif-based descriptors, modules capturing trophic organisation and energy routing, and two modules consisting of isolated structural descriptors that function independently from broader metric groupings. Importantly, the modular structure persisted after accounting for species richness, demonstrating that clustering was not driven solely by network size effects.
 
@@ -228,15 +225,15 @@ The seven-module solution revealed a hierarchical decomposition of structural sp
 
 Collectively, these seven modules delineate a hierarchical decomposition of food-web structure spanning macro-scale complexity, vertical integration, routing geometry, trophic imbalance, control heterogeneity, dominance concentration, and functional overlap.
 
-| Module Name | Metrics Included | Ecological Interpretation | Robustness (Silhouette / AU) | Module Size |
-|-------------|----------------|--------------------------|----------------------------|------------|
-| Macro-Architectural Complexity | richness, links, diameter, motif frequencies, intervality, path-related metrics | Captures large-scale expansion of network structure and combinatorial complexity associated with increasing system size |  |  |
-| Trophic Integration | connectance, trophic level, omnivory, chain length, clustering | Describes vertical trophic embedding and density of cross-level interactions |  |  |
-| Energy Transport | mean distance, path number, chain-length dispersion | Quantifies geometric structure of energy routing independent of size scaling |  |  |
-| Trophic Asymmetry | basal proportion, predator–prey ratio, generality | Represents structural skew between basal and consumer dominance; bottom-heavy vs top-heavy organization |  |  |
-| Control Heterogeneity | apex proportion, herbivory, vulnerability variance | Captures heterogeneity in top-down control and uneven distribution of interaction pressure |  |  |
-| Centralisation | centrality | Measures concentration of structural dominance within a subset of species |  |  |
-| Functional Redundancy | maximum trophic similarity | Quantifies trophic overlap and niche redundancy; independent axis of functional equivalence |  |  |
+| Module Name | Metrics Included | Ecological Interpretation |
+|--------------|--------------|----------------|
+| Macro-Architectural Complexity | richness, links, diameter, motif frequencies, intervality, path-related metrics | Captures large-scale expansion of network structure and combinatorial complexity associated with increasing system size |
+| Trophic Integration | connectance, trophic level, omnivory, chain length, clustering | Describes vertical trophic embedding and density of cross-level interactions |
+| Energy Transport | mean distance, path number, chain-length dispersion | Quantifies geometric structure of energy routing independent of size scaling |
+| Trophic Asymmetry | basal proportion, predator–prey ratio, generality | Represents structural skew between basal and consumer dominance; bottom-heavy vs top-heavy organization |
+| Control Heterogeneity | apex proportion, herbivory, vulnerability variance | Captures heterogeneity in top-down control and uneven distribution of interaction pressure |
+| Centralisation | centrality | Measures concentration of structural dominance within a subset of species |
+| Functional Redundancy | maximum trophic similarity | Quantifies trophic overlap and niche redundancy; independent axis of functional equivalence |
 
 : Structural Modules Identified From Hierarchical Clustering. {#tbl-modules}
 
@@ -252,7 +249,7 @@ Inspection of the loading structure showed that the first principal component pr
 
 The global permutation test indicated significant alignment between the modular partition and the principal component structure (P = 0.005), demonstrating that the observed module assignment explains the multivariate geometry of structural metrics better than randomly assigned modules. Alignment strength varied substantially across modules [@fig-alignment_signif]. Macro Complexity (Module 1) exhibited the strongest and most extensive alignment, showing significant associations with five principal components and a dominant loading on PC1, indicating that it contributes substantially to the primary structural gradient associated with network size and connectivity. Energy Transport (Module 3) showed significant alignment with four principal components, with its strongest association on PC4, suggesting that it captures structural variation largely orthogonal to the dominant complexity axis. Trophic Integration (Module 2), Trophic Asymmetry (Module 4), Control Heterogeneity (Module 5), and Functional Redundancy (Module 7) displayed more limited alignment, each significantly associated with one to two principal components, indicating more constrained mapping onto the structural feature space. Notably, Functional Redundancy exhibited its strongest association with a high-order principal component (PC7), suggesting sensitivity to more subtle structural variation. Centralisation (Module 6) showed no significant alignment under the joint permutation and Z-score criterion, indicating that it does not meaningfully structure variation across the retained principal components. Overall, significant module–PC associations were concentrated in a subset of principal components, reinforcing the interpretation that modular structure maps onto specific structural gradients rather than uniformly spanning the full multivariate space.
 
-![Heatmap showing module–principal component alignment quantified by permutation-derived Z-scores. Colour intensity reflects the magnitude and direction of alignment, and asterisks denote cells that meet joint significance criteria (permutation P < 0.05 and |Z| > 1.96). Rows correspond to structural metric modules and columns to principal components. Clustering highlights patterns of shared alignment across modules and multivariate structural gradients.](figures/heatmap_zscores.png){#fig-alignment_signif}
+![Heatmap showing module–principal component alignment quantified by permutation-derived Z-scores. Colour intensity reflects the magnitude and direction of alignment, and asterisks denote cells that meet joint significance criteria (permutation P \< 0.05 and \|Z\| \> 1.96). Rows correspond to structural metric modules and columns to principal components. Clustering highlights patterns of shared alignment across modules and multivariate structural gradients.](figures/heatmap_zscores.png){#fig-alignment_signif}
 
 Collectively, these results demonstrate that food-web structural metrics exhibit strong low-dimensional organisation and that independently identified structural modules are non-randomly aligned with the dominant axes of variation. The significant global alignment supports the interpretation that modular decomposition reflects meaningful geometric structure rather than clustering artifacts. Moreover, the dominance of a single module across multiple principal components suggests hierarchical organisation, wherein a core structural module governs the primary gradient of variation while additional modules capture secondary and specialised structural dimensions.
 
@@ -261,22 +258,22 @@ Collectively, these results demonstrate that food-web structural metrics exhibit
 ### Dimensional Reduction Characterisation
 
 | Representation      | Dimensionality | Variance Preserved | Structure Type      |
-| ------------------- | -------------- | ------------------ | ------------------- |
+|-------------------|-----------------|------------------|-------------------|
 | Medoids             | 7              | 23%                | Domain sampling     |
 | PC-dominant metrics | 4              | 13%                | Axis proxy sampling |
 | PC scores           | 5              | 80%                | True latent space   |
 
 To evaluate how alternative structural representations differed in their information content and redundancy, we quantified variance retention, internal correlation structure, effective dimensionality, and geometric similarity among representations.
 
-**Variance Retention:** The three representations differed substantially in the proportion of total structural variance preserved (Fig. S1A). The cluster-medoid representation retained ~23% of the total variance in the full metric space despite reducing dimensionality to seven predictors. In contrast, the PC-dominant metric set retained only ~13% of total variance, reflecting the fact that individual metrics capture only a fraction of each principal component’s multivariate structure. As expected by construction, the retained PC-score representation preserved approximately 80% of total variance. Thus, domain-based reduction preserved more distributed structural information than selecting one metric per PC axis, whereas the PC-score representation maximally preserved dominant gradients of network variation.
+**Variance Retention:** The three representations differed substantially in the proportion of total structural variance preserved (Fig. S1A). The cluster-medoid representation retained \~23% of the total variance in the full metric space despite reducing dimensionality to seven predictors. In contrast, the PC-dominant metric set retained only \~13% of total variance, reflecting the fact that individual metrics capture only a fraction of each principal component’s multivariate structure. As expected by construction, the retained PC-score representation preserved approximately 80% of total variance. Thus, domain-based reduction preserved more distributed structural information than selecting one metric per PC axis, whereas the PC-score representation maximally preserved dominant gradients of network variation.
 
-**Internal Redundancy:** Representations also differed in their internal correlation structure (Fig. S1B). PC scores were orthogonal by definition (mean |r| ≈ 0), indicating complete statistical independence among predictors. In contrast, cluster medoids exhibited moderate residual correlation (mean |r| = X), suggesting partial overlap among structural domains. PC-dominant metrics showed comparable (or higher/lower — insert result) redundancy relative to medoids. These differences indicate that the three approaches vary not only in information retention but also in predictor independence.
+**Internal Redundancy:** Representations also differed in their internal correlation structure (Fig. S1B). PC scores were orthogonal by definition (mean \|r\| ≈ 0), indicating complete statistical independence among predictors. In contrast, cluster medoids exhibited moderate residual correlation (mean \|r\| = X), suggesting partial overlap among structural domains. PC-dominant metrics showed comparable (or higher/lower — insert result) redundancy relative to medoids. These differences indicate that the three approaches vary not only in information retention but also in predictor independence.
 
 **Effective Dimensionality:** We next quantified effective dimensionality as the number of axes required to explain 80% of variance within each reduced predictor set (Fig. S1C). The PC-score representation required X axes, reflecting its design to capture dominant structural gradients. The cluster-medoid representation required X axes to reach the same threshold, indicating that despite containing seven predictors, structural variation was concentrated along fewer effective dimensions. The PC-dominant set exhibited the lowest effective dimensionality (X axes), consistent with its reduced variance retention. Together, these results show that dimensional compression differed across approaches not only in magnitude but in the distribution of variance across axes.
 
 Overall, the three structural representations differed substantially in variance retention, redundancy, and effective dimensionality. Cluster medoids preserved moderate variance while maintaining domain interpretability, PC-dominant metrics retained minimal total variance, and PC scores preserved dominant structural gradients while ensuring predictor orthogonality. These differences establish that the representations encode distinct aspects of network topology, justifying their empirical comparison in predictive analyses of stability.
 
-![Figure S1. Characterisation of alternative dimensional-reduction approaches for network structural metrics. (A) Proportion of total variance in the full metric space retained by each representation: cluster medoids, PC-dominant metrics, and retained PC scores (≥80% cumulative variance). (B) Mean absolute pairwise correlation (|r|) among predictors within each representation, quantifying internal redundancy. (C) Effective dimensionality, defined as the number of axes required to explain 80% of variance within each reduced predictor set. Together, these diagnostics illustrate differences in information retention, redundancy, and structural alignment among dimensional-reduction strategies.](figures/fig_dimensional_reduction.png){#fig-dim_red}
+![Figure S1. Characterisation of alternative dimensional-reduction approaches for network structural metrics. (A) Proportion of total variance in the full metric space retained by each representation: cluster medoids, PC-dominant metrics, and retained PC scores (≥80% cumulative variance). (B) Mean absolute pairwise correlation (\|r\|) among predictors within each representation, quantifying internal redundancy. (C) Effective dimensionality, defined as the number of axes required to explain 80% of variance within each reduced predictor set. Together, these diagnostics illustrate differences in information retention, redundancy, and structural alignment among dimensional-reduction strategies.](figures/fig_dimensional_reduction.png){#fig-dim_red}
 
 ### Predictive Performance Across Structural Representations
 
@@ -292,13 +289,15 @@ Predictive performance differed substantially across stability components and st
 
 ### Differential Effects Across Stability Components
 
-The relationship between network structure and stability was not uniform across components but instead varied systematically in both magnitude and architecture. Complexity was governed by distributed structural influence, with intermediate regularization and multiple retained predictors across representations. This indicates that complexity reflects the cumulative effect of multiple interacting topological features rather than a single dominant driver. In contrast, ρ displayed stronger alignment with multivariate structural axes. Its predictive structure was most coherent under principal component abstraction, suggesting that it emerges from integrated patterns of connectivity and organization that span multiple network dimensions. Robustness differed qualitatively. Under principal component representation, models shifted toward sparsity, with a single dominant structural axis explaining most retained signal. However, overall explanatory power remained modest. This implies that robustness may be only weakly constrained by static network architecture and potentially more sensitive to perturbation dynamics or species-level functional traits. 
+The relationship between network structure and stability was not uniform across components but instead varied systematically in both magnitude and architecture. Complexity was governed by distributed structural influence, with intermediate regularization and multiple retained predictors across representations. This indicates that complexity reflects the cumulative effect of multiple interacting topological features rather than a single dominant driver. In contrast, ρ displayed stronger alignment with multivariate structural axes. Its predictive structure was most coherent under principal component abstraction, suggesting that it emerges from integrated patterns of connectivity and organization that span multiple network dimensions. Robustness differed qualitatively. Under principal component representation, models shifted toward sparsity, with a single dominant structural axis explaining most retained signal. However, overall explanatory power remained modest. This implies that robustness may be only weakly constrained by static network architecture and potentially more sensitive to perturbation dynamics or species-level functional traits.
 
 Collectively, these results demonstrate that stability components occupy distinct positions within structural space and are governed by different structural hierarchies. Complexity is shaped by distributed fine-scale topology, ρ emerges from coordinated multivariate structural gradients, and robustness exhibits comparatively weak and representation-sensitive structural determination. Rather than reflecting a single structural driver, stability components are organized along layered and facet-specific dimensions of network architecture.
 
 ![Standardised structural coefficients linking network predictors to stability components across representations. Elastic-net coefficients extracted from full models after cross-validation. Positive and negative coefficients indicate the direction and magnitude of structural influence. Predictor ordering reflects clustering metadata, and colours denote structural modules or metric groupings. Faceting by stability component and structural representation illustrates how the identity and strength of structural drivers reorganize as network space is represented at different levels of abstraction.](figures/struct_stability_coeff.png){#fig-stab_corr}
 
 # Discussion
+
+> Something about 'static' structural metric that can be powerful from a biodiversity targets perspective
 
 ## Why consensus on “the best metric” has remained elusive
 
@@ -331,7 +330,7 @@ Food-web stability is not governed by a single structural property, but by multi
 By explicitly mapping structural scale to stability mechanism, we reconcile decades of seemingly conflicting findings in the structure–stability literature. The key insight is not that one metric is superior, but that different metrics answer different ecological questions. Recognising and embracing this multidimensionality provides a coherent foundation for future biodiversity–stability research and a practical framework for selecting network descriptors based on mechanism rather than tradition.
 
 | Dimension | Key Metrics | Expected Effect on Stability | Supporting Literature |
-|-----------------|-----------------|---------------------|-----------------|
+|------------------|------------------|--------------------|------------------|
 | Complexity & Redundancy | Connectance, MaxSim, Links | **Positive:** High redundancy allows for 'functional compensation' if one species is lost. | @dunneFoodwebStructureNetwork2002; @mccannDiversityStabilityDebate2000 |
 | Compartmentalization | Clust, Modularity, ρ | **Positive:** Limits the spread of perturbations; local collapses don't become global. | @stoufferCompartmentalizationIncreasesFoodweb2011 |
 | Feedback & Coupling | Omnivory (S2), Loop, ChLen | **Variable:** Omnivory can stabilize by diffusing energy, but long chains can amplify oscillations. | @mccannDiversityStabilityDebate2000; @neutelStabilityRealFood2002 |
@@ -350,7 +349,6 @@ To better link network structure to ecosystem function, we grouped commonly used
 | Behaviour/system-level | ρ, complexity, robustness | Metrics describing emergent properties of the network, including system-wide stability, resilience, and structural complexity. Capture how the network responds to perturbations or organizes itself at a global level. |
 
 : Classification of food web metrics into functional categories. Node-level metrics capture species roles; path-level metrics capture energy or interaction flows; geometry metrics describe network structure; and behaviour/system-level metrics capture emergent stability and resilience. {#tbl-classification}
-
 
 # References {.unnumbered}
 
