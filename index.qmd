@@ -332,7 +332,7 @@ By explicitly mapping structural scale to stability mechanism, we reconcile deca
 | Dimension | Key Metrics | Expected Effect on Stability | Supporting Literature |
 |------------------|------------------|--------------------|------------------|
 | Complexity & Redundancy | Connectance, MaxSim, Links | **Positive:** High redundancy allows for 'functional compensation' if one species is lost. | @dunneFoodwebStructureNetwork2002; @mccannDiversityStabilityDebate2000 |
-| Compartmentalization | Clust, Modularity, ρ | **Positive:** Limits the spread of perturbations; local collapses don't become global. | @stoufferCompartmentalizationIncreasesFoodweb2011 |
+| Compartmentalisation | Clust, Modularity, ρ | **Positive:** Limits the spread of perturbations; local collapses don't become global. | @stoufferCompartmentalizationIncreasesFoodweb2011 |
 | Feedback & Coupling | Omnivory (S2), Loop, ChLen | **Variable:** Omnivory can stabilize by diffusing energy, but long chains can amplify oscillations. | @mccannDiversityStabilityDebate2000; @neutelStabilityRealFood2002 |
 | Hierarchy & Shape | Prey:Predator, Basal, Top | **Critical:** 'Bottom-heavy' systems are generally more stable; inverted pyramids are fragile. |  |
 | Information Heterogeneity | SVD Complexity, LinkSD | **Positive:** Diverse interaction strengths prevent 'resonant' instabilities. | @ulanowiczInformationTheoryEcology2001 |

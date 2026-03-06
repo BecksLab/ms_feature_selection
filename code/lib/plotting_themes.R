@@ -26,7 +26,7 @@ trace(grDevices::png, exit = quote({
 
 kraken_palette <- c(
   "Macro Complexity"      = "#001628",
-  "Trophic Integration"   = "#355264",
+  "Trophic Integration"   = "#355464",
   "Energy Transport"      = "#63C1E5",
   "Trophic Asymmetry"     = "#004A32",
   "Control Heterogeneity" = "#86BD26",
@@ -57,7 +57,7 @@ pal_diverge <- tibble(
 )
 
 seattle_div <- c("#001628", "#638596", "#F0F0F0", "#86BD26", "#FFB612")
-seattle_div <- c("#005A9C", "#F5F5F5", "#00843D")
+seattle_div <- c("#E9072B", "#F5F5F5", "#68A2B9")
 
 pal_diverge_gen <- colorRampPalette(seattle_div)
 
@@ -74,7 +74,7 @@ figure_theme <- function() {
     theme(
       # Text & Axes
       text = element_text(family = "space", color = "#001628"),
-      plot.title = element_text(face = "bold", size = 14, margin = ggplot2::margin(b = 10)),
+      plot.title = element_text(face = "bold", size = rel(1.7)),
       axis.text = element_text(size = 10, color = "#001628"),
       axis.title = element_text(face = "bold"),
       
@@ -87,7 +87,7 @@ figure_theme <- function() {
       panel.border = element_rect(color = "#001628", fill = NA, linewidth = 1),
       strip.background = element_rect(color = "#001628", fill = "white", linewidth = 1),
       
-      # Important: ensure there is no gap between strip and panel
+      # No gap between strip and panel
       panel.spacing = unit(0, "pt"),
       
       # Legend

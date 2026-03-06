@@ -1,10 +1,13 @@
 library(tidyverse)
+library(genzplyr)
 library(ggalluvial)
 library(ggrepel)
 library(patchwork)
 library(pheatmap)
 
 set.seed(66)
+
+source("lib/plotting_themes.R")
 
 ##################################################
 # 1. LOAD DATA
@@ -349,7 +352,7 @@ var_explained <- summary(pca_all)$importance["Proportion of Variance", ]
 pc1_label <- paste0("PC1 (", round(var_explained[1] * 100, 1), "%)")
 pc2_label <- paste0("PC2 (", round(var_explained[2] * 100, 1), "%)")
 
-ggplot(loadings_plot, 
+pca_plot <- ggplot(loadings_plot, 
        aes(PC1, PC2, 
            color = Module, 
            label = Metric)) +
@@ -371,6 +374,7 @@ ggplot(loadings_plot,
         panel.grid.major = element_blank())
 
 ggsave("../figures/pca_loadings.png",
+       plot = pca_plot,
        width = 5000,
        height = 3200,
        units = "px",
