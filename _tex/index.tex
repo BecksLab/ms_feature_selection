@@ -491,10 +491,10 @@ metrics were standardized (mean = 0, SD = 1) to account for differences
 in scale and units across descriptors.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2917}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2361}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2703}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}@{}}
 \caption{An informative caption about the different network properties.
 We use a combination of metrics from both the original Vermaat et al.
 (2009) paper as well as including those that have been identified by
@@ -842,7 +842,13 @@ sign and reflects strong underlying association patterns among metrics.
 
 }
 
-\caption{\label{fig-cluster}Blah blah blah clusters}
+\caption{\label{fig-cluster}Hierarchical clustering of food-web
+structural descriptors. Dendrogram illustrating the modular organization
+of structural metrics based on a signed correlation matrix. Clustering
+was performed using UPGMA. Coloured bars indicate the seven distinct
+modules, reflecting robust association patterns among metrics. The
+horizontal axis represents the correlation distance (1−r), where shorter
+branches indicate stronger associations between descriptors.}
 
 \end{figure}%
 
@@ -925,9 +931,9 @@ integration, routing geometry, trophic imbalance, control heterogeneity,
 dominance concentration, and functional overlap.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3182}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3182}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3636}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3194}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3194}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3611}}@{}}
 \caption{Structural Modules Identified From Hierarchical
 Clustering.}\label{tbl-modules}\tabularnewline
 \toprule\noalign{}
@@ -995,8 +1001,41 @@ most structural variation.
 
 }
 
-\caption{\label{fig-pca}Blah blah blah - colours represent clusters.
-Network metric loadings with PC1 and PC2}
+\caption{\label{fig-pca}PCA loadings plot illustrating the dominant
+gradients of food web variation. Each point denotes a structural metric,
+with colours corresponding to the modular groupings. The clustering of
+like-coloured points along specific PC axes demonstrates that the
+modular organisation is preserved within a reduced dimensional space.}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/variance_explained.png}}
+
+}
+
+\caption{\label{fig-variance}This figure quantifies the relative
+contribution of each structural module to the variance captured by
+individual Principal Components (PCs). Calculation: For each PC, the
+total variance (eigenvalue) is partitioned among the k=7 modules
+identified in the hierarchical clustering. The contribution of a module
+to a specific PC is calculated as the sum of the squared loadings of all
+metrics belonging to that module, normalized by the total variance
+explained by that PC. Visual Interpretation: The alluvial plot
+illustrates how the ecological weight shifts across different structural
+dimensions. For example, while PC1 may be dominated by a single module,
+subsequent PCs often represent a more diverse blend of modular
+contributions, reflecting the multifaceted nature of topological
+complexity and trophic organization. Significance: This visualisation
+confirms that the PC axes are not merely statistical artifacts but are
+grounded in the specific groups of correlated metrics defined in the
+main text. The stability of the flow across the first several components
+demonstrates that the modular organisation of food web architecture is
+consistently represented across the primary gradients of structural
+variation.}
 
 \end{figure}%
 
@@ -1019,8 +1058,14 @@ interpretable structural gradients in the metric space.
 
 }
 
-\caption{\label{fig-alignment_heatmap}Blah blah blah - colour intensity
-= greater alignment}
+\caption{\label{fig-alignment_heatmap}Heatmap showing the correspondence
+between the seven identified food-web modules (rows) and the principal
+components (columns) capturing 80\% of cumulative variance. High values
+(darker shading) indicate strong alignment, where a specific module's
+internal structure drives the variation captured by that PC. Both rows
+and columns are hierarchically clustered to highlight similarities in
+how different structural dimensions contribute to the overall food-web
+architecture.}
 
 \end{figure}%
 
@@ -1090,10 +1135,10 @@ Characterisation}\label{dimensional-reduction-characterisation}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2603}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2329}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2466}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2603}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2568}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2568}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Representation
@@ -1174,12 +1219,12 @@ their empirical comparison in predictive analyses of stability.
 
 }
 
-\caption{\label{fig-dim_red}Figure S1. Characterisation of alternative
-dimensional-reduction approaches for network structural metrics. (A)
-Proportion of total variance in the full metric space retained by each
-representation: cluster medoids, PC-dominant metrics, and retained PC
-scores (≥80\% cumulative variance). (B) Mean absolute pairwise
-correlation (\textbar r\textbar) among predictors within each
+\caption{\label{fig-dim_red}\emph{Figure S1.} Characterisation of
+alternative dimensional-reduction approaches for network structural
+metrics. (A) Proportion of total variance in the full metric space
+retained by each representation: cluster medoids, PC-dominant metrics,
+and retained PC scores (≥80\% cumulative variance). (B) Mean absolute
+pairwise correlation (\textbar r\textbar) among predictors within each
 representation, quantifying internal redundancy. (C) Effective
 dimensionality, defined as the number of axes required to explain 80\%
 of variance within each reduced predictor set. Together, these
@@ -1497,10 +1542,10 @@ practical framework for selecting network descriptors based on mechanism
 rather than tradition.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2703}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2466}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2466}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2603}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2466}}@{}}
 \caption{Network properties used for
 analysis.}\label{tbl-metrics}\tabularnewline
 \toprule\noalign{}
