@@ -79,7 +79,7 @@ figure_theme <- function() {
       axis.title = element_text(face = "bold"),
       
       # Grid & Background
-      panel.grid.major = element_line(color = "#A5ACAF", size = 0.2),
+      panel.grid.major = element_line(color = "#A5ACAF", linewidth = 0.2),
       panel.grid.minor = element_blank(),
       panel.background = element_rect(fill = "white", color = NA),
       
