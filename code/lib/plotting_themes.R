@@ -69,12 +69,19 @@ secondary_palette <- c(
   "#50723C"
   )
 
+# stability palette
+stability_palette <- c(
+  "#198566", 
+  "#771985", 
+  "#856819"
+)
+
 figure_theme <- function() {
   theme_bw() %+replace% 
     theme(
       # Text & Axes
       text = element_text(family = "space", color = "#001628"),
-      plot.title = element_text(face = "bold", size = rel(1.7)),
+      plot.title = element_text(face = "bold", size = rel(1.7), margin = margin(b = 10)),
       axis.text = element_text(size = 10, color = "#001628"),
       axis.title = element_text(face = "bold"),
       
