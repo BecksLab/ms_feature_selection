@@ -6,7 +6,7 @@ library(patchwork)
 library(pheatmap)
 
 set.seed(66)
-
+setwd(here::here())
 source("lib/plotting_themes.R")
 
 ##################################################
@@ -354,21 +354,28 @@ pc2_label <- paste0("PC2 (", round(var_explained[2] * 100, 1), "%)")
 
 pca_plot <- ggplot(loadings_plot, 
        aes(PC1, PC2, 
-           color = Module, 
+           colour = Module, 
+           fill = Module, 
            label = Metric)) +
   geom_hline(yintercept = 0, linetype = "dashed", colour = "#A5ACAF") +
   geom_vline(xintercept = 0, linetype = "dashed", colour = "#A5ACAF") +
-  geom_point(size = 2.4,
-             alpha = 0.7) +
+  geom_point(size = 3,
+             alpha = 0.75,
+             shape = 21,
+             colour = "white") +
   geom_text_repel(vjust = 1.2, size = 4.2,
                   family = "space",
                   show.legend = FALSE) +
   labs(x = pc1_label,
        y = pc2_label) +
-  scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
+  scale_fill_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
                       labels = pal_df$label,
                       limits = pal_df$value,
                       name = "Module") +
+  scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
+                    labels = pal_df$label,
+                    limits = pal_df$value,
+                    name = "Module") +
   figure_theme() +
   theme(legend.position = 'right',
         panel.grid.major = element_blank())

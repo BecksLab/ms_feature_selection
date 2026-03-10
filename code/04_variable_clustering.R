@@ -18,8 +18,8 @@ library(ggdendro)
 library(here)
 
 set.seed(66)
-
 setwd(here::here())
+source("lib/plotting_themes.R")
 
 # ============================================================
 # 0. LOAD DATA
@@ -81,8 +81,8 @@ ggplot(sil_df,
         strip.text = element_text(size = rel(0.9)))
 
 ggsave("../figures/silhouette_curves.png",
-       width = 4000,
-       height = 2000,
+       width = 3000,
+       height = 1500,
        units = "px",
        dpi = 600)
 
@@ -171,13 +171,13 @@ ggplot() +
                linewidth = 0.8) +
   # Rectangles for 7 clusters
   geom_rect(data = rect_df,
-            aes(xmin = -0.01, xmax = 0,
+            aes(xmin = -0.02, xmax = 0,
                 ymin = ymin-0.3, ymax = ymax+0.3,
                 fill = factor(Cluster)),
             alpha = 0.8) +
   # Metric labels
   geom_text(data = label_df,
-            aes(x = -0.015, y = x, label = label),
+            aes(x = -0.025, y = x, label = label),
             hjust = 1,
             size = rel(3),
             family = "space") +
@@ -197,8 +197,8 @@ ggplot() +
   )
 
 ggsave("../figures/cluster_dendrogram.png",
-       width = 5500,
-       height = 2750,
+       width = 5000,
+       height = 2550,
        units = "px",
        dpi = 600)
 

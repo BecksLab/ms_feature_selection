@@ -10,6 +10,7 @@ library(tidyr)
 
 set.seed(66)
 setwd(here::here())
+source("lib/plotting_themes.R")
 
 ############################################################
 # 1. Load Data
@@ -187,7 +188,7 @@ plot_r2 <- performance_all %>%
   geom_point(aes(x = Representation,
                  y = mean,
                  colour = Representation),
-             size = 6) +
+             size = 8) +
   geom_errorbar(aes(x = Representation,
                     ymin = ymin,
                     ymax = ymax,
@@ -215,7 +216,8 @@ plot_alpha <- performance_all %>%
   ggplot() +
   geom_col(aes(x = Representation,
                y = mean,
-               fill = Representation)) +
+               fill = Representation),
+           colour = 'white') +
   scale_fill_manual(values = secondary_palette) +
   facet_wrap(~ Stability) +
   labs(y = "Alpha",
@@ -231,7 +233,7 @@ plot_r2 /
 
 ggsave("../figures/struct_stability_summ.png",
        width = 5500,
-       height = 7000,
+       height = 6000,
        units = "px")
 
 # coefficients
@@ -248,16 +250,22 @@ plot_coeff_df <- coefficients_all %>%
 ggplot(plot_coeff_df,
        aes(x = Coefficient,
            y = Predictor,
+           fill = label,
            colour = label)) +
   geom_segment(aes(xend = 0),
                linewidth = 1) +
   geom_vline(xintercept = 0,
              colour = "#001628",
              linewidth = 0.6) +
-  geom_point(size = 6) +
-  scale_color_manual(values = setNames(plot_imp_df$colour, as.character(plot_imp_df$label)),
-                     breaks = plot_imp_df$label[plot_imp_df$label != "PCA Axis"],
+  geom_point(size = 9,
+             shape = 21,
+             colour = "white") +
+  scale_fill_manual(values = setNames(plot_coeff_df$colour, as.character(plot_coeff_df$label)),
+                     breaks = plot_coeff_df$label[plot_coeff_df$label != "PCA Axis"],
                      name = "Module") +
+  scale_colour_manual(values = setNames(plot_coeff_df$colour, as.character(plot_coeff_df$label)),
+                    breaks = plot_coeff_df$label[plot_coeff_df$label != "PCA Axis"],
+                    name = "Module") +
   facet_grid(rows = vars(Representation),
              cols = vars(Stability),
              scales = "free_y") +
@@ -265,8 +273,8 @@ ggplot(plot_coeff_df,
   theme(legend.position = 'right')
 
 ggsave("../figures/struct_stability_coeff.png",
-       width = 6000,
-       height = 5000,
+       width = 5000,
+       height = 4000,
        units = "px")
 
 ############################################################
