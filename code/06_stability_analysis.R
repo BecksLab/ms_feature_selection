@@ -225,7 +225,18 @@ module_var_scaled <- module_var %>%
   mutate(ScaledVar = PropVar * R2) %>%
   left_join(pal_df, by = join_by(Module == label)) %>%
   glow_up(label = if_else(is.na(colour), "PCA Axis", Module),
-          colour = if_else(is.na(colour), "#50723C", colour))
+          colour = if_else(is.na(colour), pca_col, colour))
+
+module_sparsity <- module_var_scaled %>%
+  group_by(Stability, Representation) %>%
+  mutate(p = ScaledVar / sum(ScaledVar)) %>%
+  summarise(
+    entropy = -sum(p * log(p + 1e-10)),
+    max_entropy = log(n()),
+    sparsity = 1 - entropy / max_entropy,   # scaled 0–1
+    effective_modules = exp(entropy),
+    .groups = "drop"
+  )
 
 plot_r2  <- ggplot(module_var_scaled,
        aes(x = Representation,
@@ -269,8 +280,24 @@ plot_alpha <- performance_all %>%
   figure_theme() +
   theme(legend.position = 'none')
 
+plot_sparsity <- ggplot(module_sparsity) +
+  geom_col(aes(x = Representation,
+               y = sparsity,
+               fill = Representation),
+           colour = "white") +
+  scale_fill_manual(values = secondary_palette) +
+  facet_wrap(~ Stability) +
+  labs(
+    y = "Module dominance (scaled)",
+    x = "",
+    title = "Structural Dominance of Stability Control"
+  ) +
+  ylim(0,1) +
+  figure_theme() +
+  theme(legend.position = "none")
+
 plot_r2 /
-  plot_alpha + 
+  plot_alpha +
   plot_annotation(tag_levels = 'A',
                   theme = theme(text = element_text(family = "space", color = "#001628"))) +
   plot_layout(guides = 'collect')
@@ -288,7 +315,7 @@ plot_coeff_df <- coefficients_all %>%
   # get colours
   left_join(pal_df) %>%
   # add manual colour for PCA axes (keep same since they have no visual language)
-  glow_up(colour = if_else(is.na(colour), "#50723C", colour),
+  glow_up(colour = if_else(is.na(colour), pca_col, colour),
           label = if_else(is.na(label), "PCA Axis", label))
 
 ggplot(plot_coeff_df,
@@ -334,7 +361,7 @@ variance_partition <- coefficients_all %>%
   # get colours
   left_join(pal_df) %>%
   # add manual colour for PCA axes (keep same since they have no visual language)
-  glow_up(colour = if_else(is.na(colour), "#50723C", colour),
+  glow_up(colour = if_else(is.na(colour), pca_col, colour),
           label = if_else(is.na(label), "PCA Axis", label))
 
 
@@ -387,7 +414,7 @@ module_variance <- coefficients_all %>%
   left_join(pal_df, 
             by = join_by(Module == label)) %>%
   # add manual colour for PCA axes (keep same since they have no visual language)
-  glow_up(colour = if_else(is.na(colour), "#50723C", colour))
+  glow_up(colour = if_else(is.na(colour), pca_col, colour))
 
 ggplot(module_variance,
        aes(x = Representation,

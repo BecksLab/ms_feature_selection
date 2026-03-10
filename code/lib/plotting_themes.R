@@ -76,6 +76,8 @@ stability_palette <- c(
   "#856819"
 )
 
+pca_col <- secondary_palette[3]
+
 figure_theme <- function() {
   theme_bw() %+replace% 
     theme(
