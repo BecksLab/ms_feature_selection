@@ -276,9 +276,8 @@ plot_dimensional_summary <- function(results){
                aes(x = Representation,
                    y = Variance_Retained,
                    fill = Representation)) +
-    geom_col() +
+    geom_col(colour = "white") +
     scale_fill_manual(values = secondary_palette) +
-    geom_point(size = 3) +
     labs(title = "A. Variance Retention",
          y = "Proportion Variance Retained",
          x = "") +
@@ -293,9 +292,8 @@ plot_dimensional_summary <- function(results){
                aes(x = Representation,
                    y = Mean_Abs_Correlation,
                    fill = Representation)) +
-    geom_col() +
+    geom_col(colour = "white") +
     scale_fill_manual(values = secondary_palette) +
-    geom_point(size = 3) +
     labs(title = "B. Internal Redundancy",
          y = "Mean |r|",
          x = "") +
@@ -310,9 +308,8 @@ plot_dimensional_summary <- function(results){
                aes(x = Representation,
                    y = Effective_Dim,
                    fill = Representation)) +
-    geom_col() +
+    geom_col(colour = "white") +
     scale_fill_manual(values = secondary_palette) +
-    geom_point(size = 3) +
     labs(title = "C. Effective Dimensionality",
          y = "Dimensionality (80% variance)",
          x = "") +
@@ -334,6 +331,6 @@ dimensional_plot
 
 ggsave("../figures/fig_dimensional_reduction.png",
        dimensional_plot,
-       width = 5500,
-       height = 7000,
+       width = 3500,
+       height = 5000,
        units = "px")
