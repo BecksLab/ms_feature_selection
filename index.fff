@@ -136,24 +136,25 @@ and structural alignment among dimensional-reduction strategies.}
 
 }
 
-\caption{\label{fig-var_pred}A: Predictive performance of structural
-representations across stability components. Cross-validated variance
-explained (R2) for each stability component (facets) under three
-representations of network structure: fine-scale cluster descriptors,
-dominant structural metrics, and principal component scores. Points
-represent mean predictive performance across repeated cross-validation
-folds; error bars denote ±1 standard deviation. Faceting separates
-stability components. Differences among representations indicate how the
-abstraction of structural space influences the strength of structural
-control across stability facets. B: Regularisation structure across
-stability components and structural representations. Mean elastic-net
-mixing parameter (α) across repeated cross-validation folds for each
-stability component and structural representation. Values near zero
-indicate ridge-like models where predictive signal is distributed across
-correlated predictors; values near one indicate lasso-like models where
-a small number of predictors dominate. Faceting highlights how
-structural abstraction alters the concentration or dispersion of
-structural influence underlying different facets of stability.}
+\caption{\label{fig-var_pred}A: Predictive performance of alternative
+structural representations across stability components. Bars show
+cross-validated variance explained (R²) for each stability component
+(facets) under three representations of network structure: cluster-level
+descriptors, dominant structural metrics, and principal component
+scores. Bar height represents the total variance explained by each
+representation, while coloured segments indicate the proportional
+contribution of structural modules to that predictive signal. This
+partitioning highlights how different domains of network architecture
+contribute to explaining variation in stability across representations.
+B: Regularisation structure across stability components and structural
+representations. Bars show the mean elastic-net mixing parameter (α)
+across repeated cross-validation folds. Values near zero indicate
+ridge-like models where predictive signal is distributed across many
+correlated structural predictors, whereas values near one indicate
+lasso-like models where predictive power is concentrated in a small
+number of predictors. Together, panels illustrate how both the
+explanatory strength and structural concentration of stability
+predictors depend on how network structure is represented.}
 
 \end{figure}
 \efloatseparator
