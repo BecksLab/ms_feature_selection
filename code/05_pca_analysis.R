@@ -388,6 +388,53 @@ ggsave("../figures/pca_loadings.png",
        dpi = 600)
 
 ##################################################
+# 9. PCA LOADING PLOT - hulls
+##################################################
+
+# Compute convex hulls for each module
+hulls <- loadings_plot %>%
+  group_by(Module) %>%
+  slice(chull(PC1, PC2)) %>%
+  ungroup()
+
+pca_hull_plot <- ggplot(loadings_plot, 
+                        aes(PC1, PC2, colour = Module, fill = Module, label = Metric)) +
+  # dashed axes
+  geom_hline(yintercept = 0, linetype = "dashed", colour = "#A5ACAF") +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "#A5ACAF") +
+  
+  # hull polygons (semi-transparent)
+  geom_polygon(data = hulls, aes(x = PC1, y = PC2, group = Module),
+               alpha = 0.2, colour = NA) +
+  
+  # points and labels
+  geom_point(size = 3, alpha = 0.75, shape = 21, colour = "white") +
+  geom_text_repel(vjust = 1.2, size = 4.2, family = "space", show.legend = FALSE) +
+  
+  # axis labels
+  labs(x = pc1_label, y = pc2_label) +
+  
+  # colours
+  scale_fill_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
+                    labels = pal_df$label,
+                    limits = pal_df$value,
+                    name = "Module") +
+  scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
+                      labels = pal_df$label,
+                      limits = pal_df$value,
+                      name = "Module") +
+  
+  figure_theme() +
+  theme(legend.position = 'right',
+        panel.grid.major = element_blank())
+
+ggsave("../figures/pca_loadings_hulls.png",
+       width = 6000, 
+       height = 4000, 
+       units = "px",
+       dpi = 600)
+
+##################################################
 # 10. Z-SCORES HEATMAP
 ##################################################
 
