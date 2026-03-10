@@ -37,8 +37,8 @@ stability_vars <- c("robustness", "ρ", "complexity")
 run_elastic_suite <- function(stability_vars,
                               predictor_names,
                               data_matrix,
-                              nfolds = 5,
-                              nrepeats = 20){
+                              nfolds = 10,
+                              nrepeats = 10){
   
   results_list <- list()
   
@@ -48,6 +48,26 @@ run_elastic_suite <- function(stability_vars,
     X <- scale(data_matrix[, predictor_names])
     
     df_model <- data.frame(y = y, X)
+    
+    module_penalties <- clust_metada %>%
+      glow_up(
+        penalty = case_when(
+          label == "Macro-Architectural Complexity" ~ 0.7,
+          label == "Trophic Integration" ~ 0.8,
+          label == "Energy Transport" ~ 1.0,
+          label == "Trophic Asymmetry" ~ 1.0,
+          label == "Control Heterogeneity" ~ 1.1,
+          label == "Centralisation and Functional Redundancy" ~ 1.2,
+          TRUE ~ 1
+        )
+      ) %>%
+      vibe_check(Metric, penalty)
+    
+    penalty_vec <- module_penalties$penalty[
+      match(predictor_names, module_penalties$Metric)
+    ]
+    
+    penalty_vec[is.na(penalty_vec)] <- 1
     
     # Create repeated CV splits
     splits <- vfold_cv(df_model, v = nfolds, repeats = nrepeats)
@@ -70,7 +90,8 @@ run_elastic_suite <- function(stability_vars,
       cv_models <- map(alpha_grid, function(a){
         cv.glmnet(x_train, y_train,
                   alpha = a,
-                  standardize = FALSE)
+                  standardize = FALSE,
+                  penalty.factor = penalty_vec)
       })
       
       cv_errors <- map_dbl(cv_models, ~min(.x$cvm))
@@ -84,7 +105,11 @@ run_elastic_suite <- function(stability_vars,
                        newx = x_test,
                        s = "lambda.min")
       
-      r2 <- cor(preds, y_test)^2
+      if(sd(preds) == 0 || sd(y_test) == 0){
+        r2 <- 0
+      } else{
+        r2 <- cor(preds, y_test)^2
+      }
       
       tibble(
         Stability = stab,
@@ -101,13 +126,15 @@ run_elastic_suite <- function(stability_vars,
     cv_full <- cv.glmnet(as.matrix(X),
                          y,
                          alpha = best_alpha_global,
-                         standardize = FALSE)
+                         standardize = FALSE,
+                         penalty.factor = penalty_vec)
     
     final_model <- glmnet(as.matrix(X),
                           y,
                           alpha = best_alpha_global,
                           lambda = cv_full$lambda.min,
-                          standardize = FALSE)
+                          standardize = FALSE,
+                          penalty.factor = penalty_vec)
     
     coefs <- as.matrix(coef(final_model))[-1, , drop=FALSE]
     
@@ -176,33 +203,48 @@ coefficients_all <- bind_rows(
   coef_pc_scores
 )
 
-# which stability component is most explainable
+model_r2 <- performance_all %>%
+  group_by(Stability, Representation) %>%
+  summarise(R2 = mean(R2),
+            .groups = "drop_last")
 
-plot_r2 <- performance_all %>%
-  squad_up(Stability, Representation) %>%
-  no_cap(mean = mean(R2),
-         sd = sd(R2)) %>%
-  glow_up(ymax = mean + sd,
-          ymin = mean - sd) %>%
-  ggplot() +
-  geom_point(aes(x = Representation,
-                 y = mean,
-                 colour = Representation),
-             size = 8) +
-  geom_errorbar(aes(x = Representation,
-                    ymin = ymin,
-                    ymax = ymax,
-                    colour = Representation), 
-                width = 0.2) +
-  scale_colour_manual(values = secondary_palette) +
-  scale_fill_manual(values = secondary_palette) +
+module_var <- coefficients_all %>%
+  left_join(clust_metada,
+            by = join_by(Predictor == Metric)) %>%
+  mutate(Module = if_else(is.na(label), "PCA Axis", label),
+         VarContribution = Coefficient^2) %>%
+  group_by(Stability, Representation, Module) %>%
+  summarise(ModuleVar = sum(VarContribution), 
+            .groups = "drop") %>%
+  group_by(Stability, Representation) %>%
+  mutate(PropVar = ModuleVar / sum(ModuleVar))
+
+module_var_scaled <- module_var %>%
+  left_join(model_r2,
+            by = c("Stability", "Representation")) %>%
+  mutate(ScaledVar = PropVar * R2) %>%
+  left_join(pal_df, by = join_by(Module == label)) %>%
+  glow_up(label = if_else(is.na(colour), "PCA Axis", Module),
+          colour = if_else(is.na(colour), "#50723C", colour))
+
+plot_r2  <- ggplot(module_var_scaled,
+       aes(x = Representation,
+           y = ScaledVar,
+           fill = Module)) +
+  geom_col(width = 0.7) +
   facet_wrap(~ Stability) +
-  labs(y = expression(R^2),
-       x = "",
-       title = "Variance Explained Across Structural Representations") +
+  labs(
+    y = expression("Variance explained (" * R^2 * ")"),
+    x = "",
+    title = "Variance Explained Across Structural Representations"
+  ) +
+  scale_fill_manual(values = setNames(module_var_scaled$colour, 
+                                      as.character(module_var_scaled$Module)),
+                    breaks = module_var_scaled$label[module_var_scaled$label != "PCA Axis"],
+                    name = "Module") +
   ylim(0, 1.0) +
   figure_theme() +
-  theme(legend.position = 'none')
+  theme(legend.position = 'right')
 
 # Is stability controlled by many small structural 
 # effects or a few dominant ones
@@ -229,11 +271,13 @@ plot_alpha <- performance_all %>%
 
 plot_r2 /
   plot_alpha + 
-  plot_annotation(tag_levels = 'A')
+  plot_annotation(tag_levels = 'A',
+                  theme = theme(text = element_text(family = "space", color = "#001628"))) +
+  plot_layout(guides = 'collect')
 
 ggsave("../figures/struct_stability_summ.png",
-       width = 5500,
-       height = 6000,
+       width = 6500,
+       height = 5500,
        units = "px")
 
 # coefficients
@@ -317,11 +361,12 @@ ggplot(variance_partition,
                     name = "Module") +
   labs(x = "Proportion of explained variance",
        y = NULL,) +
-  figure_theme()v
+  figure_theme() +
+  theme(legend.position = 'right')
 
 ggsave("../figures/struct_stability_variance.png",
-       width = 6500,
-       height = 4000,
+       width = 5000,
+       height = 3500,
        units = "px")
 
 ############################################################
@@ -364,45 +409,6 @@ ggsave("../figures/struct_stability_variance_module.png",
        width = 6500,
        height = 2500,
        units = "px")
-
-############################################################
-# Variance partitioning - scaled
-############################################################
-
-model_r2 <- performance_all %>%
-  group_by(Stability, Representation) %>%
-  summarise(R2 = mean(R2),
-            .groups = "drop_last")
-
-module_var <- coefficients_all %>%
-  left_join(clust_metada,
-            by = join_by(Predictor == Metric)) %>%
-  mutate(Module = if_else(is.na(label), "PCA Axis", label),
-         VarContribution = Coefficient^2) %>%
-  group_by(Stability, Representation, Module) %>%
-  summarise(ModuleVar = sum(VarContribution), 
-            .groups = "drop") %>%
-  group_by(Stability, Representation) %>%
-  mutate(PropVar = ModuleVar / sum(ModuleVar))
-
-module_var_scaled <- module_var %>%
-  left_join(model_r2,
-            by = c("Stability", "Representation")) %>%
-  mutate(ScaledVar = PropVar * R2)
-
-ggplot(module_var_scaled,
-       aes(x = Representation,
-           y = ScaledVar,
-           fill = Module)) +
-  geom_col(width = 0.7) +
-  facet_wrap(~ Stability) +
-  labs(
-    y = expression("Variance explained (" * R^2 * ")"),
-    x = "",
-    title = "Structural contributions to ecological stability"
-  ) +
-  scale_fill_manual(values = pal_df$colour) +
-  figure_theme()
 
 ############################################################
 # Stability - structure PCA link
