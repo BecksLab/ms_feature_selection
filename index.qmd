@@ -194,11 +194,11 @@ Collectively, these seven modules delineate a hierarchical decomposition of food
 
 | Module Name | Metrics Included | Ecological Interpretation |
 |-----------------------|-----------------------|--------------------------|
-| Macro-Architectural Complexity | richness, links, diameter, motif frequencies, intervality, path-related metrics | Captures large-scale expansion of network structure and combinatorial complexity associated with increasing system size |
+| Macro Complexity | richness, links, diameter, motif frequencies (all), intervality, path-related metrics | Captures large-scale expansion of network structure and combinatorial complexity associated with increasing system size |
 | Trophic Integration | connectance, trophic level, omnivory, chain length, clustering | Describes vertical trophic embedding and density of cross-level interactions |
-| Energy Transport | mean distance, path number, chain-length dispersion | Quantifies geometric structure of energy routing independent of size scaling |
+| Energy Transport | mean distance, path number, chain-length | Quantifies geometric structure of energy routing independent of size scaling |
 | Trophic Asymmetry | basal proportion, predator–prey ratio, generality | Represents structural skew between basal and consumer dominance; bottom-heavy vs top-heavy organization |
-| Control Heterogeneity | apex proportion, herbivory, vulnerability variance | Captures heterogeneity in top-down control and uneven distribution of interaction pressure |
+| Control Heterogeneity | apex proportion, herbivory, vulnerability | Captures heterogeneity in top-down control and uneven distribution of interaction pressure |
 | Centralisation | centrality | Measures concentration of structural dominance within a subset of species |
 | Functional Redundancy | maximum trophic similarity | Quantifies trophic overlap and niche redundancy; independent axis of functional equivalence |
 
