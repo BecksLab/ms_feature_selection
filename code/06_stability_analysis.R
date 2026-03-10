@@ -278,5 +278,193 @@ ggsave("../figures/struct_stability_coeff.png",
        units = "px")
 
 ############################################################
+# Variance partitioning - metric
+############################################################
+
+variance_partition <- coefficients_all %>%
+  mutate(VarContribution = Coefficient^2) %>%
+  group_by(Stability, Representation) %>%
+  mutate(PropVar = VarContribution / sum(VarContribution)) %>%
+  left_join(clust_metada, 
+            by = join_by(Predictor == Metric)) %>%
+  # get colours
+  left_join(pal_df) %>%
+  # add manual colour for PCA axes (keep same since they have no visual language)
+  glow_up(colour = if_else(is.na(colour), "#50723C", colour),
+          label = if_else(is.na(label), "PCA Axis", label))
+
+
+ggplot(variance_partition,
+       aes(y = Predictor,
+           x = PropVar,
+           fill = label,
+           colour = label))  +
+  geom_segment(aes(xend = 0),
+               linewidth = 1) +
+  geom_point(size = 9,
+             shape = 21,
+             colour = "white") +
+  facet_grid(rows = vars(Representation),
+             cols = vars(Stability),
+             scales = "free_y") +
+  scale_colour_manual(values = setNames(variance_partition$colour, 
+                                      as.character(variance_partition$label)),
+                    breaks = variance_partition$label[variance_partition$label != "PCA Axis"],
+                    name = "Module") +
+  scale_fill_manual(values = setNames(variance_partition$colour, 
+                                      as.character(variance_partition$label)),
+                    breaks = variance_partition$label[variance_partition$label != "PCA Axis"],
+                    name = "Module") +
+  labs(x = "Proportion of explained variance",
+       y = NULL,) +
+  figure_theme()v
+
+ggsave("../figures/struct_stability_variance.png",
+       width = 6500,
+       height = 4000,
+       units = "px")
+
+############################################################
+# Variance partitioning - module
+############################################################
+
+module_variance <- coefficients_all %>%
+  left_join(clust_metada,
+            by = join_by(Predictor == Metric)) %>%
+  mutate(Module = if_else(is.na(label), "PCA Axis", label),
+         VarContribution = Coefficient^2) %>%
+  group_by(Stability, Representation, Module) %>%
+  summarise(ModuleVar = sum(VarContribution), .groups = "drop") %>%
+  group_by(Stability, Representation) %>%
+  mutate(PropVar = ModuleVar / sum(ModuleVar)) %>%
+  yeet(PropVar != 0) %>%
+  # get colours
+  left_join(pal_df, 
+            by = join_by(Module == label)) %>%
+  # add manual colour for PCA axes (keep same since they have no visual language)
+  glow_up(colour = if_else(is.na(colour), "#50723C", colour))
+
+ggplot(module_variance,
+       aes(x = Representation,
+           y = PropVar,
+           fill = Module)) +
+  geom_col(colour = "white") +
+  scale_fill_manual(values = setNames(module_variance$colour, 
+                                      as.character(module_variance$Module)),
+                    breaks = module_variance$Module[module_variance$Module != "PCA Axis"],
+                    name = "Module") +
+  facet_wrap(~ Stability) +
+  labs(y = "Proportion of explained variance",
+       x = "") +
+  figure_theme() +
+  theme(legend.position = 'right',
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave("../figures/struct_stability_variance_module.png",
+       width = 6500,
+       height = 2500,
+       units = "px")
+
+############################################################
+# Variance partitioning - scaled
+############################################################
+
+model_r2 <- performance_all %>%
+  group_by(Stability, Representation) %>%
+  summarise(R2 = mean(R2),
+            .groups = "drop_last")
+
+module_var <- coefficients_all %>%
+  left_join(clust_metada,
+            by = join_by(Predictor == Metric)) %>%
+  mutate(Module = if_else(is.na(label), "PCA Axis", label),
+         VarContribution = Coefficient^2) %>%
+  group_by(Stability, Representation, Module) %>%
+  summarise(ModuleVar = sum(VarContribution), 
+            .groups = "drop") %>%
+  group_by(Stability, Representation) %>%
+  mutate(PropVar = ModuleVar / sum(ModuleVar))
+
+module_var_scaled <- module_var %>%
+  left_join(model_r2,
+            by = c("Stability", "Representation")) %>%
+  mutate(ScaledVar = PropVar * R2)
+
+ggplot(module_var_scaled,
+       aes(x = Representation,
+           y = ScaledVar,
+           fill = Module)) +
+  geom_col(width = 0.7) +
+  facet_wrap(~ Stability) +
+  labs(
+    y = expression("Variance explained (" * R^2 * ")"),
+    x = "",
+    title = "Structural contributions to ecological stability"
+  ) +
+  scale_fill_manual(values = pal_df$colour) +
+  figure_theme()
+
+############################################################
+# Stability - structure PCA link
+############################################################
+
+# Join PCA scores with stability
+pca_stability <- pc_scores_df %>%
+  glow_up(network_id = row_number()) %>%
+  left_join(topology[, c("robustness", "ρ", "complexity")]%>%
+              glow_up(network_id = row_number()), 
+            by = "network_id") 
+
+# Example: colour by robustness, size by complexity
+ggplot(pca_stability, aes(x = PC1, y = PC2)) +
+  geom_point(aes(colour = robustness, size = complexity), alpha = 0.8) +
+  scale_colour_viridis_c(option = "plasma") +
+  scale_size_continuous(range = c(3,8)) +
+  labs(
+    x = "PC1",
+    y = "PC2",
+    colour = "Robustness",
+    size = "Complexity",
+    title = "Food-web PCA with stability metrics overlayed"
+  )  +
+  figure_theme()
+
+stab_corr <- pca_stability %>%
+  summarise(
+    r_robust_PC1 = cor(robustness, PC1),
+    r_robust_PC2 = cor(robustness, PC2),
+    r_rho_PC1    = cor(ρ, PC1),
+    r_rho_PC2    = cor(ρ, PC2),
+    r_comp_PC1   = cor(complexity, PC1),
+    r_comp_PC2   = cor(complexity, PC2)
+  ) %>% 
+  pivot_longer(everything(), names_to = "metric", values_to = "cor") %>%
+  separate(metric, into = c("stab","PC"), sep = "_PC") %>%
+  pivot_wider(names_from = PC, 
+              values_from = cor,
+              names_prefix = "PC") %>%
+  glow_up(stab = case_when(stab == "r_robust" ~ "robustness",
+                           stab == "r_rho" ~ "ρ",
+                           .default = "complexity"))
+
+ggplot(pca_stability, aes(x = PC1, y = PC2)) +
+  geom_point(alpha = 0.7) +
+  geom_segment(data = stab_corr,
+               aes(x = 0, y = 0, 
+                   xend = PC1*5, 
+                   yend = PC2*5, 
+                   colour = stab), 
+               arrow = arrow(length = unit(0.3,"cm"))) +
+  geom_text(data = stab_corr,
+            aes(x = PC1*5.5, y = PC2*5.5, label = stab, colour = stab),
+            size = 5) +
+  scale_colour_manual(values = stability_palette) +
+  labs(x = "PC1", y = "PC2", title = "PCA of network structure with stability gradients") +
+  figure_theme() +
+  theme(legend.position = 'right')
+
+
+
+############################################################
 # End
 ############################################################

@@ -145,7 +145,7 @@ represent mean predictive performance across repeated cross-validation
 folds; error bars denote ±1 standard deviation. Faceting separates
 stability components. Differences among representations indicate how the
 abstraction of structural space influences the strength of structural
-control across stability facets. B: Regularization structure across
+control across stability facets. B: Regularisation structure across
 stability components and structural representations. Mean elastic-net
 mixing parameter (α) across repeated cross-validation folds for each
 stability component and structural representation. Values near zero
@@ -176,5 +176,83 @@ metric groupings. Faceting by stability component and structural
 representation illustrates how the identity and strength of structural
 drivers reorganize as network space is represented at different levels
 of abstraction.}
+
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/struct_stability_variance.png}}
+
+}
+
+\caption{\label{fig-stab_var_metric}Contribution of individual
+structural descriptors to the variance explained in ecological
+stability. Points and horizontal segments show the proportion of
+variance in each stability metric (robustness, return rate ρ, and
+dynamical complexity) explained by each predictor, estimated from
+standardized elastic-net coefficients. Panels are organized by
+structural representation (rows) and stability metric (columns). Colours
+indicate the structural module or domain to which each metric belongs;
+metrics not assigned to a module (``PCA Axis'') are shown in grey-green.
+This visualization highlights which individual network descriptors most
+strongly influence model predictions, while also revealing variation in
+importance across representations and stability components.}
+
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/struct_stability_variance_module.png}}
+
+}
+
+\caption{\label{fig-stab_var_module}Contributions of structural modules
+to the variance explained in ecological stability. Bars show the
+proportion of variance in each stability metric explained by elastic-net
+models, aggregated across structural domains (modules) or PCA axes.
+Total bar height reflects the overall model predictive performance (R2),
+while coloured segments represent the relative contribution of each
+module, estimated from the sum of squared standardized coefficients.
+Facets separate stability metrics, and bar groups correspond to
+alternative structural representations (cluster medoids, dominant
+metrics, PCA scores). This representation summarizes how stability is
+shaped by collective architectural dimensions, demonstrating which
+modules---such as macro-architectural complexity, trophic integration,
+energy transport, and trophic asymmetry---drive variation in
+system-level stability.}
+
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/pca_struct_stability.png}}
+
+}
+
+\caption{\label{fig-pca_struct_stability.png}Food web structural
+variation and stability landscape. Points represent individual networks
+projected into structural principal component space, with the x- and
+y-axes corresponding to PC1 and PC2 of the network-level metrics. Point
+size (scaled independently within each stability metric) reflects the
+relative magnitude of the associated stability measure (robustness, ρ,
+or complexity) across networks. Arrows indicate the contribution of
+structural modules (e.g., macro-architectural complexity, trophic
+integration, energy transport, trophic asymmetry, control heterogeneity,
+centralisation, and functional redundancy) to the PCA axes,
+approximating the structural domains most associated with variation in
+network configuration. Facets separate stability metrics (rows) and
+structural representations (columns), highlighting how different network
+structures relate to each stability component. Arrow length is globally
+scaled for visibility, with module orientation showing the direction of
+increasing module values in PCA space.}
 
 \end{figure}
