@@ -637,8 +637,8 @@ Table&nbsp;2: Structural Modules Identified From Hierarchical Clustering.
 </thead>
 <tbody>
 <tr class="odd">
-<td>Macro-Architectural Complexity</td>
-<td>richness, links, diameter, motif frequencies, intervality, path-related metrics</td>
+<td>Macro Complexity</td>
+<td>richness, links, diameter, motif frequencies (all), intervality, path-related metrics</td>
 <td>Captures large-scale expansion of network structure and combinatorial complexity associated with increasing system size</td>
 </tr>
 <tr class="even">
@@ -648,7 +648,7 @@ Table&nbsp;2: Structural Modules Identified From Hierarchical Clustering.
 </tr>
 <tr class="odd">
 <td>Energy Transport</td>
-<td>mean distance, path number, chain-length dispersion</td>
+<td>mean distance, path number, chain-length</td>
 <td>Quantifies geometric structure of energy routing independent of size scaling</td>
 </tr>
 <tr class="even">
@@ -658,7 +658,7 @@ Table&nbsp;2: Structural Modules Identified From Hierarchical Clustering.
 </tr>
 <tr class="odd">
 <td>Control Heterogeneity</td>
-<td>apex proportion, herbivory, vulnerability variance</td>
+<td>apex proportion, herbivory, vulnerability</td>
 <td>Captures heterogeneity in top-down control and uneven distribution of interaction pressure</td>
 </tr>
 <tr class="even">
@@ -788,10 +788,10 @@ Figure&nbsp;6: <em>Figure S1.</em> Characterisation of alternative dimensional-r
 <div id="fig-var_pred" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-var_pred-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="figures/struct_stability_summ.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: A: Predictive performance of structural representations across stability components. Cross-validated variance explained (R2) for each stability component (facets) under three representations of network structure: fine-scale cluster descriptors, dominant structural metrics, and principal component scores. Points represent mean predictive performance across repeated cross-validation folds; error bars denote ±1 standard deviation. Faceting separates stability components. Differences among representations indicate how the abstraction of structural space influences the strength of structural control across stability facets. B: Regularisation structure across stability components and structural representations. Mean elastic-net mixing parameter (α) across repeated cross-validation folds for each stability component and structural representation. Values near zero indicate ridge-like models where predictive signal is distributed across correlated predictors; values near one indicate lasso-like models where a small number of predictors dominate. Faceting highlights how structural abstraction alters the concentration or dispersion of structural influence underlying different facets of stability."><img src="figures/struct_stability_summ.png" class="img-fluid figure-img"></a>
+<a href="figures/struct_stability_summ.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: A: Predictive performance of alternative structural representations across stability components. Bars show cross-validated variance explained (R²) for each stability component (facets) under three representations of network structure: cluster-level descriptors, dominant structural metrics, and principal component scores. Bar height represents the total variance explained by each representation, while coloured segments indicate the proportional contribution of structural modules to that predictive signal. This partitioning highlights how different domains of network architecture contribute to explaining variation in stability across representations. B: Regularisation structure across stability components and structural representations. Bars show the mean elastic-net mixing parameter (α) across repeated cross-validation folds. Values near zero indicate ridge-like models where predictive signal is distributed across many correlated structural predictors, whereas values near one indicate lasso-like models where predictive power is concentrated in a small number of predictors. Together, panels illustrate how both the explanatory strength and structural concentration of stability predictors depend on how network structure is represented."><img src="figures/struct_stability_summ.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-var_pred-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: A: Predictive performance of structural representations across stability components. Cross-validated variance explained (R2) for each stability component (facets) under three representations of network structure: fine-scale cluster descriptors, dominant structural metrics, and principal component scores. Points represent mean predictive performance across repeated cross-validation folds; error bars denote ±1 standard deviation. Faceting separates stability components. Differences among representations indicate how the abstraction of structural space influences the strength of structural control across stability facets. B: Regularisation structure across stability components and structural representations. Mean elastic-net mixing parameter (α) across repeated cross-validation folds for each stability component and structural representation. Values near zero indicate ridge-like models where predictive signal is distributed across correlated predictors; values near one indicate lasso-like models where a small number of predictors dominate. Faceting highlights how structural abstraction alters the concentration or dispersion of structural influence underlying different facets of stability.
+Figure&nbsp;7: A: Predictive performance of alternative structural representations across stability components. Bars show cross-validated variance explained (R²) for each stability component (facets) under three representations of network structure: cluster-level descriptors, dominant structural metrics, and principal component scores. Bar height represents the total variance explained by each representation, while coloured segments indicate the proportional contribution of structural modules to that predictive signal. This partitioning highlights how different domains of network architecture contribute to explaining variation in stability across representations. B: Regularisation structure across stability components and structural representations. Bars show the mean elastic-net mixing parameter (α) across repeated cross-validation folds. Values near zero indicate ridge-like models where predictive signal is distributed across many correlated structural predictors, whereas values near one indicate lasso-like models where predictive power is concentrated in a small number of predictors. Together, panels illustrate how both the explanatory strength and structural concentration of stability predictors depend on how network structure is represented.
 </figcaption>
 </figure>
 </div>
