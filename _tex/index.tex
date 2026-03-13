@@ -324,6 +324,34 @@ result, studies using different subsets of metrics frequently arrive at
 conflicting conclusions about the relationship between network structure
 and ecological stability.
 
+Ecological theory has long sought general principles linking the
+architecture of interaction networks to ecosystem stability. Early
+theoretical work framed this relationship in terms of system complexity,
+most famously through the analysis of random community matrices by
+Robert May, who showed that increasing species richness, interaction
+density, and interaction strength variance should reduce local dynamical
+stability in large ecological systems (May, 1972; May, 1974). Subsequent
+work refined this prediction by demonstrating that specific forms of
+network organisation such as interaction structure, trophic hierarchy,
+and compartmentalisation can substantially alter stability outcomes
+(Allesina \& Tang, 2012; McCann, 2000; Stouffer \& Bascompte, 2010).
+More recently, structural theories such as trophic coherence have
+proposed that food webs occupy constrained regions of structural space
+in which particular architectural features strongly influence system
+stability (Johnson et al., 2014). At the same time, ecological stability
+itself is now widely recognised as a multidimensional concept
+encompassing distinct dynamical properties such as persistence,
+resistance to disturbance, and recovery dynamics (Ives \& Carpenter,
+2007; Loreau \& de Mazancourt, 2013; Tilman, 1996). Together these
+developments suggest that the relationship between network structure and
+ecological stability may be more complex than originally assumed,
+specifically that both structure and stability are multidimensional
+properties of ecological systems. If so, apparent inconsistencies in the
+structure--stability literature may arise not because theoretical
+predictions are incorrect, but because different studies measure
+different aspects of network architecture and different components of
+ecological stability.
+
 One explanation for this inconsistency is that network structure is
 fundamentally multidimensional. Rather than representing a single
 property of ecosystems, structural metrics may capture different aspects
@@ -339,26 +367,26 @@ organise into a smaller set of coherent structural dimensions that
 define the underlying space of ecological network architecture.
 
 Ecological stability is likewise not a single property but a collection
-of related dynamical behaviours {[}Pimm 1984; Ives \& Carpenter
-(2007){]}. Different studies have emphasised different stability
-components, including the persistence of species {[}REF{]}, the
-resistance of communities to disturbance {[}REF{]}, and the speed with
-which systems recover following perturbation {[}REF{]}. These processes
-reflect distinct aspects of ecosystem dynamics and may depend on
-different features of network structure. From an energy-flow
-perspective, three stability mechanisms are particularly relevant:
-persistence, resistance, and return. Persistence refers to the continued
-maintenance of energy flow and species presence following species loss
-or environmental change. Resistance describes the degree to which
-disturbances propagate through ecological interactions, potentially
-amplifying or dampening perturbations. Return captures the capacity of a
-system to reorganise and re-establish stable interaction patterns
-following disturbance. Because these mechanisms operate through
-different ecological processes, they may be expected to depend on
-different aspects of network architecture. Structural features related
-to species roles and redundancy may influence persistence, whereas
-properties governing interaction pathways and network organisation may
-affect disturbance propagation or recovery dynamics.
+of related dynamical behaviours (Ives \& Carpenter, 2007; Pimm, 1984).
+Different studies have emphasised different stability components,
+including the persistence of species {[}REF{]}, the resistance of
+communities to disturbance {[}REF{]}, and the speed with which systems
+recover following perturbation {[}REF{]}. These processes reflect
+distinct aspects of ecosystem dynamics and may depend on different
+features of network structure. From an energy-flow perspective, three
+stability mechanisms are particularly relevant: persistence, resistance,
+and return. Persistence refers to the continued maintenance of energy
+flow and species presence following species loss or environmental
+change. Resistance describes the degree to which disturbances propagate
+through ecological interactions, potentially amplifying or dampening
+perturbations. Return captures the capacity of a system to reorganise
+and re-establish stable interaction patterns following disturbance.
+Because these mechanisms operate through different ecological processes,
+they may be expected to depend on different aspects of network
+architecture. Structural features related to species roles and
+redundancy may influence persistence, whereas properties governing
+interaction pathways and network organisation may affect disturbance
+propagation or recovery dynamics.
 
 Within this framework, metrics that are often treated as competing
 predictors of `stability' instead emerge as complementary descriptors of
@@ -508,7 +536,7 @@ LinkSD & Normalised standard deviation of total links per taxon. &
 Quantifies variation in species connectivity. & \\
 Intervality & Degree to which taxa can be ordered along a single niche
 dimension. & Measures the extent of niche ordering in trophic
-interactions. & Stouffer et al. (2006) \\
+interactions. & (\textbf{stoufferRobustMeasureFood2006a?}) \\
 ρ (Spectral radius) & Largest real part of the eigenvalues of the
 undirected adjacency matrix. & Captures a global property of network
 organisation related to interaction strength aggregation. & \\
@@ -561,7 +589,7 @@ metrics. Hierarchical clustering was performed using average linkage on
 each distance matrix to identify candidate structural modules.
 
 The optimal number of clusters was evaluated across a range of partition
-sizes (k = 2--10) using average silhouette width to assess
+sizes (\(k = 2–10\)) using average silhouette width to assess
 within-cluster cohesion and between-cluster separation. To further
 evaluate cluster robustness, we implemented bootstrap resampling with
 1,000 bootstrap replicates. This procedure estimates approximately
@@ -1432,9 +1460,9 @@ ecosystems.
 debate}\label{reinterpreting-the-structurestability-debate}
 
 \begin{quote}
-e.g., May 1972 vs.~McCann 2000 looks like a contradiction. However
-results suggest they were simply looking at different modules. May's
-work focused on Return (spectral properties), while McCann focused on
+e.g., May vs.~McCann looks like a contradiction. However results suggest
+they were simply looking at different modules. May's work focused on
+Return (spectral properties), while McCann focused on
 Persistence/Resistance (pathway dampening). By identifying these as
 independent axes in the PCA, we show that a network can be structurally
 complex (low return stability) but modularly dampened (high resistance).
@@ -1540,6 +1568,12 @@ Ives, A. R., \& Carpenter, S. R. (2007). Stability and {Diversity} of
 {Ecosystems}. \emph{Science}, \emph{317}(5834), 58--62.
 \url{https://doi.org/10.1126/science.1133258}
 
+\bibitem[\citeproctext]{ref-johnsonTrophicCoherenceDetermines2014}
+Johnson, S., Domínguez-García, V., Donetti, L., \& Muñoz, M. A. (2014).
+Trophic coherence determines food-web stability. \emph{Proceedings of
+the National Academy of Sciences}, \emph{111}(50), 17923--17928.
+\url{https://doi.org/10.1073/pnas.1409077111}
+
 \bibitem[\citeproctext]{ref-jonssonReliabilityR50Measure2015}
 Jonsson, T., Berg, S., Pimenov, A., Palmer, C., \& Emmerson, M. (2015).
 The reliability of {R50} as a measure of vulnerability of food webs to
@@ -1552,6 +1586,21 @@ M. (2017). Ecological network metrics: Opportunities for synthesis.
 \emph{Ecosphere}, \emph{8}(8), e01900.
 \url{https://doi.org/10.1002/ecs2.1900}
 
+\bibitem[\citeproctext]{ref-loreauBiodiversityEcosystemStability2013}
+Loreau, M., \& de Mazancourt, C. (2013). Biodiversity and ecosystem
+stability: A synthesis of underlying mechanisms. \emph{Ecology Letters},
+\emph{16}(s1), 106--115. \url{https://doi.org/10.1111/ele.12073}
+
+\bibitem[\citeproctext]{ref-mayWillLargeComplex1972}
+May, R. M. (1972). Will a {Large Complex System} be {Stable}?
+\emph{Nature}, \emph{238}(5364), 413--414.
+\url{https://doi.org/10.1038/238413a0}
+
+\bibitem[\citeproctext]{ref-mayStabilityComplexityModel1974}
+May, R. M. (1974). \emph{Stability and {Complexity} in {Model
+Ecosystems}} (Vol. 1). Princeton University Press.
+\url{https://doi.org/10.2307/j.ctvs32rq4}
+
 \bibitem[\citeproctext]{ref-mccannDiversityStabilityDebate2000}
 McCann, K. S. (2000). The diversity--stability debate. \emph{Nature},
 \emph{405}(6783), 228--233. \url{https://doi.org/10.1038/35012234}
@@ -1562,11 +1611,16 @@ Alon, U. (2002). Network {Motifs}: {Simple Building Blocks} of {Complex
 Networks}. \emph{Science}, \emph{298}(5594), 824--827.
 \url{https://doi.org/10.1126/science.298.5594.824}
 
-\bibitem[\citeproctext]{ref-stoufferRobustMeasureFood2006a}
-Stouffer, D. B., Camacho, J., \& Amaral, L. A. N. (2006). A robust
-measure of food web intervality. \emph{Proceedings of the National
-Academy of Sciences}, \emph{103}(50), 19015--19020.
-\url{https://doi.org/10.1073/pnas.0603844103}
+\bibitem[\citeproctext]{ref-pimmComplexityStabilityEcosystems1984}
+Pimm, S. L. (1984). The complexity and stability of ecosystems.
+\emph{Nature}, \emph{307}(5949), 321--326.
+\url{https://doi.org/10.1038/307321a0}
+
+\bibitem[\citeproctext]{ref-stoufferUnderstandingFoodwebPersistence2010}
+Stouffer, D. B., \& Bascompte, J. (2010). Understanding food-web
+persistence from local to global scales. \emph{Ecology Letters},
+\emph{13}(2), 154--161.
+\url{https://doi.org/10.1111/j.1461-0248.2009.01407.x}
 
 \bibitem[\citeproctext]{ref-stoufferEvidenceExistenceRobust2007}
 Stouffer, D. B., Camacho, J., Jiang, W., \& Nunes Amaral, L. A. (2007).
@@ -1588,6 +1642,11 @@ D. B., \& Tylianakis, J. M. (2012). Food webs: Reconciling the structure
 and function of biodiversity. \emph{Trends in Ecology \& Evolution},
 \emph{27}(12), 689--697.
 \url{https://doi.org/10.1016/j.tree.2012.08.005}
+
+\bibitem[\citeproctext]{ref-tilmanBiodiversityPopulationEcosystem1996}
+Tilman, D. (1996). Biodiversity: {Population Versus Ecosystem
+Stability}. \emph{Ecology}, \emph{77}(2), 350--363.
+\url{https://doi.org/10.2307/2265614}
 
 \bibitem[\citeproctext]{ref-vermaatMajorDimensionsFoodweb2009}
 Vermaat, J. E., Dunne, J. A., \& Gilbert, A. J. (2009). Major dimensions
