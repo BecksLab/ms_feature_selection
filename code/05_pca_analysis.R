@@ -218,8 +218,8 @@ ggplot(data = module_var_df,
         axis.text.x = element_text(angle = 45, hjust = 1))
 
 ggsave("../figures/variance_explained.png",
-       width = 7500,
-       height = 3000,
+       width = 7000,
+       height = 2750,
        units = "px",
        dpi = 600)
 

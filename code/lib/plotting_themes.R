@@ -83,9 +83,9 @@ figure_theme <- function() {
     theme(
       # Text & Axes
       text = element_text(family = "space", color = "#001628"),
-      plot.title = element_text(face = "bold", size = rel(1.7), margin = margin(b = 10)),
-      axis.text = element_text(size = 10, color = "#001628"),
-      axis.title = element_text(face = "bold"),
+      plot.title = element_text(face = "bold", size = rel(1.3), margin = margin(b = 10)),
+      axis.text = element_text(size = rel(0.7), color = "#001628"),
+      axis.title = element_text(size = rel(0.9), face = "bold"),
       
       # Grid & Background
       panel.grid.major = element_line(color = "#A5ACAF", linewidth = 0.2),

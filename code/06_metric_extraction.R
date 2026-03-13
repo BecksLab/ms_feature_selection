@@ -4,6 +4,10 @@ library(tidyverse)
 library(patchwork)
 library(reshape2)
 
+set.seed(66)
+setwd(here::here())
+source("lib/plotting_themes.R")
+
 # ============================================================
 # 0. LOAD DATA
 # ============================================================
@@ -282,7 +286,8 @@ plot_dimensional_summary <- function(results){
          y = "Proportion Variance Retained",
          x = "") +
     figure_theme() +
-    theme(legend.position = 'none')
+    theme(legend.position = 'none',
+          axis.title = element_text(size = rel(0.8), face = "bold"))
   
   ########################################
   # Panel B — Redundancy
@@ -298,7 +303,8 @@ plot_dimensional_summary <- function(results){
          y = "Mean |r|",
          x = "") +
     figure_theme() +
-    theme(legend.position = 'none')
+    theme(legend.position = 'none',
+          axis.title = element_text(size = rel(0.8), face = "bold"))
   
   ########################################
   # Panel C — Effective Dimensionality
@@ -314,7 +320,8 @@ plot_dimensional_summary <- function(results){
          y = "Dimensionality (80% variance)",
          x = "") +
     figure_theme() +
-    theme(legend.position = 'none')
+    theme(legend.position = 'none',
+          axis.title = element_text(size = rel(0.8), face = "bold"))
   
   ########################################
   # Combine With Patchwork
@@ -331,6 +338,6 @@ dimensional_plot
 
 ggsave("../figures/fig_dimensional_reduction.png",
        dimensional_plot,
-       width = 3500,
-       height = 5000,
+       width = 3000,
+       height = 3500,
        units = "px")
