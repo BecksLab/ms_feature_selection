@@ -210,7 +210,7 @@ Stability Debate}
 1%
 }%
 }
-\date{2026-03-10}
+\date{2026-03-13}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -400,13 +400,11 @@ that match specific ecological questions.
 \subsection{Data Compilation}\label{data-compilation}
 
 We compiled quantitative network data from XX, resulting in a total of
-XX ecological networks. Each network was characterized using a suite of
-XX structural metrics Table~\ref{tbl-properties}, including classic
-descriptors such as richness, connectance, and modularity, as well as
-information-theoretic measures like spectral radius and SVD complexity.
-Prior to analysis, networks with missing values were omitted, and all
-metrics were standardized (mean = 0, SD = 1) to account for differences
-in scale and units across descriptors.
+XX ecological networks. Each network was characterised using a suite of
+XX structural metrics (see Table~\ref{tbl-properties}). Prior to
+analysis, networks with missing values were omitted, and all metrics
+were standardized (mean = 0, SD = 1) to account for differences in scale
+and units across descriptors.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2432}}
@@ -544,13 +542,13 @@ We tested the hypothesis that structural descriptors of food webs are
 organised into statistically coherent modules reflecting shared
 ecological function or scaling relationships, rather than forming
 arbitrary clusters driven by sampling noise. If such modular
-organization exists, then metrics within a module should exhibit strong
+organisation exists, then metrics within a module should exhibit strong
 internal correlation relative to metrics assigned to different modules.
 The resulting clusters should be robust to resampling of the data. The
 identified modular structure should exceed expectations under null
 models of random association among metrics.
 
-We quantified pairwise associations among the 30 structural metrics
+We quantified pairwise associations among the XX structural metrics
 using Pearson correlations computed across food webs. Because ecological
 metrics may covary either positively or negatively depending on scaling
 relationships, we constructed two alternative distance matrices:
@@ -577,7 +575,7 @@ structurally coherent and stable to sampling variation.
 \subsection{Multivariate Structure and Module--Axis
 Alignment}\label{multivariate-structure-and-moduleaxis-alignment}
 
-To evaluate whether structural metrics of food webs organize into
+To evaluate whether structural metrics of food webs organise into
 coherent multivariate modules and whether those modules define principal
 axes of variation, we conducted a principal component analysis (PCA)
 followed by a permutation-based test of module--axis alignment. Under
@@ -589,7 +587,7 @@ decomposition captures fundamental axes of ecological variation.
 
 Skewed count-based metrics (\emph{e.g.,} link counts, interval counts,
 and related quantities) were log-transformed using \(log(x + 1)\) to
-reduce right skew. All remaining variables were standardized to zero
+reduce right skew. All remaining variables were standardised to zero
 mean and unit variance prior to analysis to ensure that metrics measured
 on different scales contributed equally to the ordination.
 
@@ -602,13 +600,12 @@ computed:
 A_{mk} = \sum_{i \in m} l^{2}_{ik}
 \]
 
-where \(l_{ik}\) is the loading of metric \(i\) on principal component
-\(k\) and \(A_{mk}\) represents the fraction of variance in PC \(k\)
-attributable to metrics in module \(m\). Because squared loadings sum to
-one within each principal component, this provides a direct partitioning
-of PC variance across modules. This produces a module × PC matrix
-describing geometric alignment between modular structure and
-multivariate axes.
+where \(l_{ik}\) is the loading of metric \(i\) on \(PC_k\) and
+\(A_{mk}\) represents the fraction of variance in \(PC_k\) attributable
+to metrics in module \(m\). Because squared loadings sum to one within
+each principal component, this provides a direct partitioning of PC
+variance across modules. This produces a module × PC matrix describing
+geometric alignment between modular structure and multivariate axes.
 
 To evaluate whether observed module--PC alignment exceeded expectations
 under random module structure, we implemented a permutation test. We
@@ -619,9 +616,13 @@ as to form a null distribution for each module--PC pair. From this we
 computed p-values and corresponding z-scores, which was then used to
 infer significant alignment when \(p_{mk} < 0.05 \land |Z_{mk}| > 1.96\)
 
+where:
+
 \[ 
 p_{mk} = P(A^{(r)}_{mk} > A_{mk})
 \]
+
+and:
 
 \[ 
 Z_{mk} = \frac{A_{mk} - \mu_{mk}}{\sigma_{mk}}
@@ -652,18 +653,18 @@ Domains}\label{identification-of-structural-domains}
 
 We previously grouped network metrics into clusters based on their
 pairwise correlations, such that each cluster represented a structurally
-coherent domain (\emph{e.g.,} trophic composition, centralization, path
+coherent domain (\emph{e.g.,} trophic composition, centralisation, path
 structure). Clustering was performed using correlation-based distance,
 ensuring that metrics grouped together reflected shared structural
 information rather than raw scale. To construct a reduced predictor set
 from these domains, we selected a single representative metric per
 cluster using a medoid approach. Within each cluster, we computed the
 absolute correlation matrix among member metrics and defined distance as
-1−∣r∣. The medoid was identified as the metric minimizing mean pairwise
-distance to other metrics in the cluster. This approach preserves
-structural diversity while minimizing redundancy and does not rely on
-principal component loadings, which can bias selection toward dominant
-variance axes. The resulting `cluster medoid' set retained one
+\(1−∣r∣\). The medoid was identified as the metric minimizing mean
+pairwise distance to other metrics in the cluster. This approach
+preserves structural diversity while minimizing redundancy and does not
+rely on principal component loadings, which can bias selection toward
+dominant variance axes. The resulting `cluster medoid' set retained one
 interpretable metric per structural domain. Importantly, this procedure
 prioritizes preservation of structural domains rather than overall
 variance magnitude, allowing low-variance but potentially
@@ -682,11 +683,10 @@ Unlike cluster medoids, which preserve structural categories, PC scores
 preserve maximal variance and ensure orthogonality among predictors. We
 also explored a third reduction approach---selecting the single
 highest-loading metric per retained PC. However, because principal
-components are linear combinations of multiple metrics, this
-``PC-dominant metric'' strategy substantially reduces the variance
-represented by each axis. Consequently, this approach captures less of
-the total structural variance and was treated as exploratory rather than
-primary.
+components are linear combinations of multiple metrics, this PC-dominant
+metric strategy substantially reduces the variance represented by each
+axis. Consequently, this approach captures less of the total structural
+variance.
 
 \subsubsection{Conceptual Contrast Between
 Representations}\label{conceptual-contrast-between-representations}
@@ -701,13 +701,13 @@ major axes of variation in network topology, regardless of their
 interpretability in terms of structural domains. By explicitly comparing
 predictive performance across these representations, we test whether
 ecological stability is better explained by domain-specific structural
-mechanisms or by global geometric gradients of network organization.
+mechanisms or by global geometric gradients of network organisation.
 
 \subsubsection{Structural Control of
 Stability}\label{structural-control-of-stability}
 
 To evaluate how different hierarchical representations of network
-structure explain variation in stability, we implemented a regularized
+structure explain variation in stability, we implemented a regularised
 linear modelling framework designed to balance interpretability and
 overfitting risk given the modest sample size (n = 38). For each
 stability component (complexity, robustness, and ρ), we fit elastic net
@@ -727,10 +727,10 @@ concentration onto a smaller subset of predictors.
 \paragraph{Model Evaluation}\label{model-evaluation}
 
 Predictive performance was assessed using repeated v-fold
-cross-validation (5 folds × 20 repeats). Within each training partition,
-models were fit across a grid of α values (0--1 in increments of 0.25),
-and the optimal penalty strength (λ) was selected via internal
-cross-validation. Performance was quantified as cross-validated R\^{}2
+cross-validation (10 folds x 10 repeats). Within each training
+partition, models were fit across a grid of α values (0--1 in increments
+of 0.25), and the optimal penalty strength (λ) was selected via internal
+cross-validation. Performance was quantified as cross-validated \(R^2\)
 computed on held-out test partitions. After cross-validation, final
 models were refit to the full dataset using the mean selected α, and
 standardized coefficients were extracted to characterize the direction
