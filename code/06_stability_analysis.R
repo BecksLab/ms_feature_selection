@@ -30,6 +30,9 @@ clust_metada <-
 
 stability_vars <- c("robustness", "ρ", "complexity", "control")
 
+# PCA with all metrics
+topology_pc <- bind_cols(topology, pc_scores_df)
+
 ############################################################
 # Elastic Net Modeling Suite
 ############################################################
@@ -37,7 +40,7 @@ stability_vars <- c("robustness", "ρ", "complexity", "control")
 run_elastic_suite <- function(stability_vars,
                               predictor_names,
                               data_matrix,
-                              nfolds = 10,
+                              nfolds = 5,
                               nrepeats = 10){
   
   results_list <- list()
@@ -49,25 +52,7 @@ run_elastic_suite <- function(stability_vars,
     
     df_model <- data.frame(y = y, X)
     
-    module_penalties <- clust_metada %>%
-      glow_up(
-        penalty = case_when(
-          label == "Macro-Architectural Complexity" ~ 0.7,
-          label == "Trophic Integration" ~ 0.8,
-          label == "Energy Transport" ~ 1.0,
-          label == "Trophic Asymmetry" ~ 1.0,
-          label == "Control Heterogeneity" ~ 1.1,
-          label == "Centralisation and Functional Redundancy" ~ 1.2,
-          TRUE ~ 1
-        )
-      ) %>%
-      vibe_check(Metric, penalty)
-    
-    penalty_vec <- module_penalties$penalty[
-      match(predictor_names, module_penalties$Metric)
-    ]
-    
-    penalty_vec[is.na(penalty_vec)] <- 1
+    penalty_vec <- rep(1, length(predictor_names))
     
     # Create repeated CV splits
     splits <- vfold_cv(df_model, v = nfolds, repeats = nrepeats)
@@ -303,7 +288,7 @@ plot_r2 /
   plot_layout(guides = 'collect')
 
 ggsave("../figures/struct_stability_summ.png",
-       width = 6500,
+       width = 5000,
        height = 5500,
        units = "px")
 
@@ -434,7 +419,7 @@ ggplot(module_variance,
 
 ggsave("../figures/struct_stability_variance_module.png",
        width = 6500,
-       height = 2500,
+       height = 5000,
        units = "px")
 
 ############################################################
@@ -444,20 +429,20 @@ ggsave("../figures/struct_stability_variance_module.png",
 # Join PCA scores with stability
 pca_stability <- pc_scores_df %>%
   glow_up(network_id = row_number()) %>%
-  left_join(topology[, c("robustness", "ρ", "complexity")]%>%
+  left_join(topology[, c("robustness", "ρ", "complexity", "control")]%>%
               glow_up(network_id = row_number()), 
             by = "network_id") 
 
 # Example: colour by robustness, size by complexity
 ggplot(pca_stability, aes(x = PC1, y = PC2)) +
-  geom_point(aes(colour = robustness, size = complexity), alpha = 0.8) +
+  geom_point(aes(colour = robustness, size = control), alpha = 0.8) +
   scale_colour_viridis_c(option = "plasma") +
   scale_size_continuous(range = c(3,8)) +
   labs(
     x = "PC1",
     y = "PC2",
     colour = "Robustness",
-    size = "Complexity",
+    size = "Control",
     title = "Food-web PCA with stability metrics overlayed"
   )  +
   figure_theme()
@@ -469,7 +454,9 @@ stab_corr <- pca_stability %>%
     r_rho_PC1    = cor(ρ, PC1),
     r_rho_PC2    = cor(ρ, PC2),
     r_comp_PC1   = cor(complexity, PC1),
-    r_comp_PC2   = cor(complexity, PC2)
+    r_comp_PC2   = cor(complexity, PC2),
+    r_control_PC1   = cor(control, PC1),
+    r_control_PC2   = cor(control, PC2)
   ) %>% 
   pivot_longer(everything(), names_to = "metric", values_to = "cor") %>%
   separate(metric, into = c("stab","PC"), sep = "_PC") %>%
@@ -478,6 +465,7 @@ stab_corr <- pca_stability %>%
               names_prefix = "PC") %>%
   glow_up(stab = case_when(stab == "r_robust" ~ "robustness",
                            stab == "r_rho" ~ "ρ",
+                           stab == "r_control" ~ "control",
                            .default = "complexity"))
 
 ggplot(pca_stability, aes(x = PC1, y = PC2)) +

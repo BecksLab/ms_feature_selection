@@ -12,10 +12,10 @@ library(grid)
 
 pca_stability <- pc_scores_df %>%
   glow_up(network_id = row_number()) %>%
-  left_join(topology[, c("robustness", "ρ", "complexity")]%>%
+  left_join(topology[, c("robustness", "ρ", "complexity", "control")] %>%
               glow_up(network_id = row_number()), 
             by = "network_id")  %>%
-  pivot_longer(cols = c(robustness, ρ, complexity),
+  pivot_longer(cols = c(robustness, ρ, complexity, control),
                names_to = "Stability",
                values_to = "Value") %>%
   group_by(Stability) %>%
@@ -173,7 +173,7 @@ pca_stab_plot <- ggplot(pca_stability,
                    yend = PC2_dir * 3),
                arrow = arrow(length = unit(0.3,"cm")),
                colour = "black",
-               linewidth = 1.5) +
+               linewidth = 1.7) +
   scale_colour_manual(values = setNames(module_vectors_all$colour, 
                                         as.character(module_vectors_all$Module)),
                       breaks = module_vectors_all$label[module_vectors_all$label != "PCA Axis"],
@@ -194,7 +194,7 @@ pca_stab_plot <- ggplot(pca_stability,
 ggsave("../figures/pca_struct_stability.png",
        pca_stab_plot,
        width = 5500,
-       height = 3000,
+       height = 4500,
        units = "px")
 
 #---------------------------------------------------
