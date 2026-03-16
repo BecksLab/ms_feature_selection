@@ -466,16 +466,18 @@ include("hopcroft_karp.jl")
 """
 structural_controllability(N::SpeciesInteractionNetwork)
 
-Returns number of driver nodes required to control the network.
-Higher values indicate lower controllability.
+Returns the fraction of driver nodes required to control the network
+following Liu et al. (2011). Lower values indicate higher controllability.
 """
 function structural_controllability(N::SpeciesInteractionNetwork)
+
     A = _get_matrix(N)
     S = size(A, 1)
 
-    # Build bipartite adjacency from i_out -> j_in
+    # bipartite graph
     left  = collect(1:S)
     right = collect(S+1:2S)
+
     adj = Dict(u => Int[] for u in left)
 
     for i in 1:S
@@ -486,11 +488,12 @@ function structural_controllability(N::SpeciesInteractionNetwork)
         end
     end
 
-    # Run Hopcroft–Karp
-    pairU, pairV, matching_size = hopcroft_karp_bipartite(left, right, adj)
+    _, _, matching_size = hopcroft_karp_bipartite(left, right, adj)
 
-    # Number of unmatched nodes = driver nodes
     Nd = S - matching_size
 
-    return Nd, pairU, pairV
+    # normalized controllability
+    nD = Nd / S
+
+    return nD
 end
