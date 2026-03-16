@@ -11,8 +11,11 @@ setwd(here::here())
 # Import datasets
 topology <- read.csv("data/vermaat_2009/vermaat_summary.csv") %>%
   rbind(read.csv("data/mangal/mangal_summary.csv")) %>%
+  rbind(read.csv("data/weboflife/weboflife_summary.csv")) %>%
   vibe_check(!id) %>%
-  na.omit()
+  na.omit() %>%
+  # just to catch any possible duplicate networks in both Mangal and WOL
+  distinct()
 
 # Subset for Vermaat variables (optional)
 topology_subset <- topology %>%
