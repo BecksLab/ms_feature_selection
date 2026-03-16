@@ -1,6 +1,6 @@
 "Cluster","Metrics","Count"
-1,"richness, links, diameter, cannibal, l_S, S1, S2, S4, S5, loops, intervals",11
-2,"connectance, top, VulSD, ChNum, LinkSD, centrality",6
-3,"distance, path",2
-4,"basal, intermediate, predpreyRatio, herbivory, omnivory, GenSD, TL, ChLen, ChSD, Clust, trophicCoherence, trophicVar",12
+1,"richness, links, l_S, S4, S5, intervals",6
+2,"connectance, top, VulSD, ChNum, centrality",5
+3,"diameter, basal, intermediate, predpreyRatio, herbivory, omnivory, cannibal, GenSD, TL, ChLen, ChSD, LinkSD, S1, S2, loops, Clust, trophicCoherence, trophicVar",18
+4,"distance, path",2
 5,"MaxSim",1

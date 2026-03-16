@@ -26,11 +26,11 @@ trace(grDevices::png, exit = quote({
 
 kraken_palette <- c(
   "Macro Complexity"          = "#000E3B",
-  "Integration & Dominance"   = "#E9072B",
-  "Energy Transport"          = "#99D9D9",
-  "Trophic Asymmetry"         = "#398754",
-  "Control Heterogeneity"     = "#9BBF80",
-  "Trophic Integration"       = "#355464"
+  "Trophic Integration"       = "#355464",
+  "Energy Transport"          = "#E9072B",
+  "Trophic Role Asymmetry"    = "#99D9D9",
+  "Control Heterogeneity"     = "#398754",
+  "Basal Control"             = "#9BBF80"
 )
 
 # Converts the named vector into a dataframe for easier mapping in ggplot
@@ -72,7 +72,8 @@ secondary_palette <- c(
 stability_palette <- c(
   "#198566", 
   "#771985", 
-  "#856819"
+  "#856819", 
+  "#FFB612"
 )
 
 pca_col <- secondary_palette[3]

@@ -231,7 +231,9 @@ ggplot(module_var_df,
   scale_fill_continuous(
     palette = seattle_abyssal_gen(100),
     name = "Variance Explained"
-  )
+  ) +
+  figure_theme() +
+  theme(legend.position = 'right')
 
 ggsave("../figures/variance_heatmap.png",
        width = 7000,
@@ -379,7 +381,7 @@ pca_plot <- ggplot(loadings_plot,
              alpha = 0.75,
              shape = 21,
              colour = "white") +
-  geom_text_repel(vjust = 1.2, size = 4.2,
+  geom_text_repel(size = rel(4),
                   family = "space",
                   show.legend = FALSE) +
   labs(x = pc1_label,
@@ -398,8 +400,8 @@ pca_plot <- ggplot(loadings_plot,
 
 ggsave("../figures/pca_loadings.png",
        plot = pca_plot,
-       width = 5000,
-       height = 3200,
+       width = 6000, 
+       height = 4000,
        units = "px",
        dpi = 600)
 
@@ -414,23 +416,19 @@ hulls <- loadings_plot %>%
   ungroup()
 
 pca_hull_plot <- ggplot(loadings_plot, 
-                        aes(PC1, PC2, colour = Module, fill = Module, label = Metric)) +
-  # dashed axes
+                        aes(PC1, PC2, 
+                            colour = Module, 
+                            fill = Module, 
+                            label = Metric)) +
   geom_hline(yintercept = 0, linetype = "dashed", colour = "#A5ACAF") +
   geom_vline(xintercept = 0, linetype = "dashed", colour = "#A5ACAF") +
-  
-  # hull polygons (semi-transparent)
   geom_polygon(data = hulls, aes(x = PC1, y = PC2, group = Module),
                alpha = 0.2, colour = NA) +
-  
-  # points and labels
   geom_point(size = 3, alpha = 0.75, shape = 21, colour = "white") +
-  geom_text_repel(vjust = 1.2, size = 4.2, family = "space", show.legend = FALSE) +
-  
-  # axis labels
+  geom_text_repel(size = rel(4),
+                  family = "space",
+                  show.legend = FALSE) +
   labs(x = pc1_label, y = pc2_label) +
-  
-  # colours
   scale_fill_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
                     labels = pal_df$label,
                     limits = pal_df$value,
@@ -439,7 +437,6 @@ pca_hull_plot <- ggplot(loadings_plot,
                       labels = pal_df$label,
                       limits = pal_df$value,
                       name = "Module") +
-  
   figure_theme() +
   theme(legend.position = 'right',
         panel.grid.major = element_blank())

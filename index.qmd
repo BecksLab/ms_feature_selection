@@ -183,12 +183,12 @@ The resulting modular partition identified coherent groups of metrics describing
 
 | Module Name | Metrics Included | Ecological Interpretation |
 |-----------------------|-----------------------|--------------------------|
-| Macro Complexity | richness, links, link density, diameter, motif frequencies (all), intervality, loops, cannibalism | Captures large-scale expansion of network structure and combinatorial complexity associated with increasing system size |
-| Integration & Dominance | connectance, centrality, maximum similarity | Describes how tightly interactions are organised and whether dominance and trophic redundancy are concentrated in key species |
-| Energy Transport | mean distance, path length | Quantifies geometric structure of energy routing independent of network size |
-| Trophic Asymmetry | basal proportion, predator–prey ratio, generality variance | Captures structural skew from bottom-heavy to top-heavy organisation |
-| Control Heterogeneity | apex proportion, herbivory, vulnerability variance, and variability in chain and link numbers | Reflects heterogeneity in top-down control and uneven distribution of interaction pressure |
-| Trophic Integration | intermediate species, omnivory, trophic level, chain length metrics, clustering, trophic coherence, and trophic level variance | Captures cross-level integration and the consistency of trophic ordering across intermediate levels, emphasising the organisation of energy flow along chains |
+| Macro Complexity | richness, links, l_S, S4, S5, intervals | Captures large-scale expansion of network structure and combinatorial complexity associated with increasing system size |
+| Trophic Integration | connectance, diameter, intermediate, omnivory, cannibal, TL, ChLen, ChSD, S1, S2, loops, Clust, trophicCoherence, trophicVar | Describes how ordered the trophic structure is and how tightly species are embedded across trophic levels |
+| Energy Transport | mean distance, path length | Quantifies geometric structure of energy routing independent of network size or trophic structure |
+| Trophic Role Asymmetry | basal, predpreyRatio, GenSD, LinkSD, MaxSim | Captures structural imbalance across trophic roles, but it also incorporates heterogeneity in consumer behaviour and redundancy. |
+| Control Heterogeneity | top, VulSD, ChNum | Reflects heterogeneity in top-down regulation and predation pressure distribution |
+| Basal Control | herbivory, centrality | Captures energy entry points and dominant structural hubs |
 
 : Structural Modules Identified From Hierarchical Clustering. {#tbl-modules}
 
