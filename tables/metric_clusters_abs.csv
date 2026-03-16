@@ -16,7 +16,7 @@
 "VulSD",2
 "TL",4
 "ChLen",4
-"ChSD",3
+"ChSD",4
 "ChNum",2
 "path",3
 "LinkSD",2
@@ -29,3 +29,5 @@
 "intervals",1
 "MaxSim",5
 "Clust",4
+"trophicCoherence",4
+"trophicVar",4

@@ -2,6 +2,7 @@
 
 using Extinctions
 using Graphs
+using GraphsMatching
 using LinearAlgebra
 using SpeciesInteractionNetworks
 using Statistics
@@ -85,7 +86,9 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
                                 remove_disconnected = true),
         :intervals => intervality(A),
         :MaxSim => max_sim(N),
-        :Clust => clustering(A)
+        :Clust => clustering(A),
+        :trophicCoherence => trophic_coherence(N),
+        :trophicVar => trophic_variance(N)
 )
     return D
 end
@@ -410,3 +413,70 @@ function clustering(A::Matrix{Bool})
     
     return mean_C
 end
+
+"""
+trophic_coherence(N::SpeciesInteractionNetwork)
+
+Returns the trophic incoherence parameter q.
+Lower q indicates higher trophic coherence.
+"""
+function trophic_coherence(N::SpeciesInteractionNetwork)
+
+    A = _get_matrix(N)
+    tl = trophic_level(N)
+
+    spp = species(N)
+    s = [tl[k] for k in spp]
+
+    trophic_dist = Float64[]
+
+    for i in eachindex(spp)
+        for j in eachindex(spp)
+
+            if A[i, j] == true
+                push!(trophic_dist, s[i] - s[j])
+            end
+
+        end
+    end
+
+    # variance of trophic distances
+    q = std(trophic_dist)
+
+    return q
+end
+
+"""
+trophic_variance(N::SpeciesInteractionNetwork)
+
+Returns variance in trophic levels across species.
+"""
+function trophic_variance(N::SpeciesInteractionNetwork)
+
+    tl = trophic_level(N)
+    tls = collect(values(tl))
+
+    return var(tls)
+
+end
+
+"""
+structural_controllability(N::SpeciesInteractionNetwork)
+
+Returns number of driver nodes required to control the network.
+Higher values indicate lower controllability.
+"""
+# function structural_controllability(N::SpeciesInteractionNetwork)
+# 
+#     A = _get_matrix(N)
+#     S = size(A, 1)
+# 
+#     g = DiGraph(A)
+# 
+#     # compute maximum matching
+#     m = maximum_matching(g)
+# 
+#     Nd = S - length(m)
+# 
+#     return Nd
+# end

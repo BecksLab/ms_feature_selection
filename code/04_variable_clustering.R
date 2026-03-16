@@ -141,7 +141,7 @@ dend <- as.dendrogram(hc)
 dend_data <- dendro_data(dend)
 
 # Cut at 7 clusters
-k <- 7
+k <- k_signed
 clusters_7 <- cutree(hc, k = k)
 
 cluster_df <- data.frame(
@@ -197,11 +197,10 @@ ggplot() +
   )
 
 ggsave("../figures/cluster_dendrogram.png",
-       width = 5000,
-       height = 2550,
+       width = 5500,
+       height = 3000,
        units = "px",
        dpi = 600)
-
 
 # Export cluster table
 write.csv(cluster_df,

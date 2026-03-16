@@ -95,6 +95,8 @@ mangal_topology = DataFrame(
     intervals = Any[],
     MaxSim = Any[],
     Clust = Any[],
+    trophicCoherence = Any[],
+    trophicVar = Any[]
 );
 
 # make object to store each network so we can import it later
