@@ -334,8 +334,8 @@ stability in large ecological systems (May, 1972; May, 1974). Subsequent
 work refined this prediction by demonstrating that specific forms of
 network organisation such as interaction structure, trophic hierarchy,
 and compartmentalisation can substantially alter stability outcomes
-(Allesina \& Tang, 2012; McCann, 2000; Stouffer \& Bascompte, 2010).
-More recently, structural theories such as trophic coherence have
+(Allesina \& Tang, 2012; K. S. McCann, 2000; Stouffer \& Bascompte,
+2010). More recently, structural theories such as trophic coherence have
 proposed that food webs occupy constrained regions of structural space
 in which particular architectural features strongly influence system
 stability (Johnson et al., 2014). At the same time, ecological stability
@@ -514,7 +514,7 @@ the average distance between taxa within the network. & \\
 Diameter & Maximum shortest path length between any two taxa. & Captures
 the largest network distance between species. & \\
 Omnivory & Proportion of taxa feeding on resources at multiple trophic
-levels. & Describes vertical coupling of energy channels. & McCann
+levels. & Describes vertical coupling of energy channels. & K. S. McCann
 (2000) \\
 Loop & Proportion of taxa involved in trophic loops. & Quantifies the
 prevalence of cyclic interaction pathways. & \\
@@ -694,7 +694,7 @@ preserves structural diversity while minimizing redundancy and does not
 rely on principal component loadings, which can bias selection toward
 dominant variance axes. The resulting `cluster medoid' set retained one
 interpretable metric per structural domain. Importantly, this procedure
-prioritizes preservation of structural domains rather than overall
+prioritises preservation of structural domains rather than overall
 variance magnitude, allowing low-variance but potentially
 mechanistically relevant features of network topology to be retained.
 
@@ -1406,19 +1406,32 @@ structure of food webs influences ecological stability. Yet despite
 extensive empirical and theoretical work, consensus has remained
 elusive. Different studies frequently identify different structural
 predictors of stability, and results often appear contradictory.
-Connectance has been linked both positively and negatively to stability,
-omnivory has been argued to stabilise or destabilise communities, and
-measures of modularity, trophic organisation, or motif structure have
-each been proposed as key determinants of ecosystem dynamics.
+Connectance has been linked both positively and negatively to stability
+{[}REF{]}, omnivory has been argued to stabilise or destabilise
+communities {[}REF{]}, and measures of modularity, trophic organisation,
+or motif structure have each been proposed as key determinants of
+ecosystem dynamics {[}REF{]}.
 
 Our results suggest that much of this inconsistency may arise from a
-conceptual simplification: network structure is rarely a single
-property. Instead, food-web architecture appears to be organised along
-several coherent dimensions of variation. Structural metrics commonly
-used in ecological studies do not behave as independent descriptors, nor
-do they represent interchangeable proxies for a single structural
-attribute. Rather, they cluster into statistically robust modules that
-capture distinct aspects of network organisation.
+conceptual simplification - network structure is rarely a single
+property. We demonstrate that food web structure exhibits strong modular
+organisation among commonly used network metrics
+Figure~\ref{fig-cluster}, with structural descriptors grouped into seven
+statistically supported modules spanning macro-architectural complexity,
+trophic integration, routing geometry, and trophic imbalance. Instead,
+food-web architecture appears to be organised along several coherent
+dimensions of variation, with principal component analysis revealing
+that this high-dimensional set of metrics collapses onto a small number
+of dominant structural gradients
+Figure~\ref{fig-pca}, Figure~\ref{fig-variance}, Figure~\ref{fig-alignment_heatmap}.
+Importantly, the independently identified structural modules align
+non-randomly with these principal gradients, indicating that the modular
+decomposition captures real axes of ecological variation rather than
+statistical artifacts. This suggests that the structural metrics
+commonly used in ecological studies do not behave as independent
+descriptors, nor do they represent interchangeable proxies for a single
+structural attribute, but rather that they cluster into statistically
+robust modules that capture distinct aspects of network organisation.
 
 This modular structure implies that ecological networks occupy a
 multidimensional structural space, in which different metrics describe
@@ -1432,13 +1445,16 @@ dimensions.
 
 \#\#~Structural modules reveal dimensions of network architecture
 
-The clustering analysis revealed consistent groupings of metrics
-describing different aspects of food-web organisation. Some modules
-correspond to large-scale architectural expansion, integrating species
-richness, interaction density, motif frequencies, and global network
-properties. Others capture more specific aspects of trophic
-organisation, such as the degree of vertical integration among trophic
-levels or the geometry of energy-transfer pathways.
+The clustering analysis revealed several consistent structural domains
+within food-web architecture Table~\ref{tbl-modules}. The largest module
+captured macro-architectural expansion, combining species richness,
+interaction density, motif frequencies, and intervality. Because these
+metrics scale together as networks grow, this module reflects the
+combinatorial growth of interaction space with increasing species
+richness. In contrast, trophic integration metrics---including
+connectance, omnivory, trophic level, and clustering---formed a distinct
+module capturing how tightly energy pathways are embedded across trophic
+levels.
 
 The emergence of these modules indicates that food-web structure is not
 best understood as a flat collection of descriptors but as a
@@ -1456,26 +1472,132 @@ Recognising these domains provides a principled basis for reducing
 metric redundancy and for interpreting structural patterns across
 ecosystems.
 
+\subsection{Structural domains and the mechanisms of
+stability}\label{structural-domains-and-the-mechanisms-of-stability}
+
+The modular organisation of structural metrics identified in our
+analysis provides a framework for linking distinct ecological processes
+to different components of ecosystem stability. Because each module
+captures a different aspect of network architecture, they likely
+influence stability through different mechanistic pathways. Interpreting
+the modules in light of existing food web theory suggests that multiple
+ecological processes such as community assembly, trophic integration,
+energetic constraints, and niche overlap jointly shape how perturbations
+propagate through ecological networks.
+
+The module associated with macro-architectural complexity reflects the
+structural consequences of increasing community size and interaction
+opportunities. Metrics describing species richness, interaction density,
+motif diversity, and large-scale path structure covary strongly,
+indicating that these properties scale together as food webs accumulate
+species. Classic theoretical work predicted that increasing complexity
+should destabilize ecological systems by increasing the density of
+interactions within the community matrix (May, 1972). However,
+subsequent studies demonstrated that the stability consequences of
+complexity depend strongly on how interactions are distributed across
+the network (K. McCann et al., 1998; Montoya et al., 2006). In this
+context, the macro-architectural module may primarily influence
+stability through its effects on the overall dimensionality of species
+interactions and the number of pathways through which perturbations can
+spread.
+
+A second structural domain describing trophic integration includes
+connectance, omnivory, trophic level, and clustering. These metrics
+capture how densely interactions couple trophic levels and the extent to
+which energy channels are interconnected across the food web.
+Theoretical work has long suggested that omnivory and cross-level
+feeding interactions can alter system stability by redistributing
+interaction strengths and dampening oscillatory dynamics (K. McCann \&
+Hastings, 1997; Polis \& Strong, 1996). Empirical analyses of
+interaction strengths similarly show that food webs often contain many
+weak links embedded within more complex interaction structures, a
+pattern that can stabilize population dynamics despite high connectance
+(Emmerson \& Yearsley, 2004; K. McCann et al., 1998). Variation in this
+structural domain therefore likely influences stability through the
+degree of coupling among trophic pathways and the distribution of
+interaction strengths across the network.
+
+A third module describes the geometry of energy transport through the
+network, capturing variation in path length distributions and food-chain
+structure. The independence of these metrics from those describing
+network size suggests that the organization of trophic pathways
+represents a distinct structural dimension. Recent work has emphasised
+the importance of trophic pathway organisation in determining the
+stability of ecological networks. In particular, measures of trophic
+coherence and pathway structure have been shown to strongly influence
+the propagation of perturbations and the stability of dynamical
+equilibria (Johnson et al., 2014). Differences in pathway geometry may
+therefore affect how disturbances move through the network, influencing
+the amplification or attenuation of population fluctuations along
+trophic chains.
+
+Other structural modules reflect variation in trophic role distributions
+and interaction heterogeneity across species. Metrics describing basal
+species prevalence and predator--prey ratios capture trophic asymmetry
+within the network, reflecting the energetic pyramid structure that
+arises from constraints on energy transfer across trophic levels. Such
+asymmetries influence both the distribution of interaction strengths and
+the sensitivity of higher trophic levels to perturbations originating at
+lower levels of the food web (Polis \& Strong, 1996). In contrast,
+modules describing heterogeneity in predation pressure capture how
+evenly consumer impacts are distributed among species, which may
+influence the likelihood of cascading effects following perturbations.
+
+Finally, descriptors of trophic similarity form an independent
+structural dimension associated with functional redundancy among
+species. Ecological theory predicts that redundancy in species roles can
+enhance robustness to species loss because remaining species may
+partially compensate for lost interactions (Walker, 1992). Variation in
+trophic similarity and shared resource use may therefore play a
+particularly important role in determining robustness to species removal
+and the potential for extinction cascades (Montoya et al., 2006).
+
+Taken together, these relationships suggest that different components of
+ecological stability may be governed by distinct domains of network
+architecture. Structural properties associated with community size and
+trophic integration may primarily influence equilibrium stability,
+whereas pathway geometry may shape dynamical variability by determining
+how perturbations propagate through trophic interactions. At the same
+time, heterogeneity in species roles and trophic similarity may
+influence robustness to species loss by determining the degree of
+functional redundancy within the network. Recognizing these distinct
+structural domains helps clarify why previous studies have reported
+contrasting relationships between network structure and stability:
+different analyses may emphasize different aspects of network
+architecture, each linked to separate ecological mechanisms.
+
 \subsection{Reinterpreting the structure--stability
 debate}\label{reinterpreting-the-structurestability-debate}
-
-\begin{quote}
-e.g., May vs.~McCann looks like a contradiction. However results suggest
-they were simply looking at different modules. May's work focused on
-Return (spectral properties), while McCann focused on
-Persistence/Resistance (pathway dampening). By identifying these as
-independent axes in the PCA, we show that a network can be structurally
-complex (low return stability) but modularly dampened (high resistance).
-\end{quote}
 
 The multidimensional nature of network structure has important
 implications for how stability relationships are interpreted. Much of
 the historical debate surrounding ecological stability has implicitly
-treated ``structure'' as a single explanatory variable. Studies
-typically select one or a small number of metrics and evaluate their
-relationship with a particular stability measure. However, if structural
-descriptors capture different architectural dimensions, then such
-analyses effectively examine different slices of structural space.
+treated structure as a single explanatory variable. Studies typically
+select one or a small number of metrics and evaluate their relationship
+with a particular stability measure. However, if structural descriptors
+capture different architectural dimensions, then such analyses
+effectively examine different slices of structural space.
+
+Our stability analyses support this multidimensional interpretation.
+Different stability components responded to different structural
+representations and levels of abstraction. Spectral radius (\(\rho\))
+exhibited the strongest structural determination and was best predicted
+when network structure was expressed as multivariate principal component
+axes. In contrast, complexity was most predictable from fine-scale
+structural descriptors, indicating distributed influence across multiple
+topological features. Robustness to species loss showed comparatively
+weak structural determination across representations.
+
+These results help reconcile apparently conflicting conclusions in the
+historical structure--stability literature. Theoretical work emphasizing
+stability, such as that of May {[}REF{]}, effectively captures
+structural variation along global connectivity gradients. In contrast,
+studies emphasising trophic pathways and energy dampening---such as
+those following McCann {[}REF{]} may instead capture variation in
+routing geometry or trophic integration. Because these architectural
+domains vary independently in empirical networks, different studies may
+observe contrasting stability relationships even when examining the same
+ecosystems.
 
 Under this interpretation, apparently conflicting results across studies
 become less surprising. A study focusing on connectance may capture
@@ -1498,6 +1620,17 @@ dimensions interact with different dynamical processes.
 
 \subsection{Implications for the design of network
 analyses}\label{implications-for-the-design-of-network-analyses}
+
+Our comparison of alternative structural representations highlights the
+consequences of dimensional reduction choices. Domain-based medoid
+representations preserved moderate structural variance while maintaining
+ecological interpretability, whereas selecting a single metric per
+principal component retained only a small fraction of total structural
+information. By contrast, multivariate PC scores preserved most
+structural variance but abstracted away from direct ecological
+interpretation. These results indicate that methodological choices about
+how network structure is summarised can substantially alter inference
+about stability drivers.
 
 Recognising the multidimensional structure of food webs has practical
 implications for ecological analysis. First, it suggests that the common
@@ -1558,6 +1691,12 @@ Allesina, S., \& Tang, S. (2012). Stability criteria for complex
 ecosystems. \emph{Nature}, \emph{483}(7388, 7388), 205--208.
 \url{https://doi.org/10.1038/nature10832}
 
+\bibitem[\citeproctext]{ref-emmersonWeakInteractionsOmnivory2004}
+Emmerson, M., \& Yearsley, J. M. (2004). Weak {Interactions}, {Omnivory}
+and {Emergent Food-Web Properties}. \emph{Proceedings: Biological
+Sciences}, \emph{271}(1537), 397--405.
+\url{https://www.jstor.org/stable/4142589}
+
 \bibitem[\citeproctext]{ref-estradaUsingNetworkCentrality2008}
 Estrada, E., \& Bodin, Ö. (2008). Using {Network Centrality Measures} to
 {Manage Landscape Connectivity}. \emph{Ecological Applications},
@@ -1605,16 +1744,37 @@ Ecosystems}} (Vol. 1). Princeton University Press.
 McCann, K. S. (2000). The diversity--stability debate. \emph{Nature},
 \emph{405}(6783), 228--233. \url{https://doi.org/10.1038/35012234}
 
+\bibitem[\citeproctext]{ref-mccannReEvaluatingOmnivoryStabilityRelationship1997}
+McCann, K., \& Hastings, A. (1997). Re-{Evaluating} the
+{Omnivory-Stability Relationship} in {Food Webs}. \emph{Proceedings:
+Biological Sciences}, \emph{264}(1385), 1249--1254.
+\url{https://www.jstor.org/stable/50878}
+
+\bibitem[\citeproctext]{ref-mccannWeakTrophicInteractions1998}
+McCann, K., Hastings, A., \& Huxel, G. R. (1998). Weak trophic
+interactions and the balance of nature. \emph{Nature}, \emph{395}(6704),
+794--798. \url{https://doi.org/10.1038/27427}
+
 \bibitem[\citeproctext]{ref-miloNetworkMotifsSimple2002}
 Milo, R., Shen-Orr, S., Itzkovitz, S., Kashtan, N., Chklovskii, D., \&
 Alon, U. (2002). Network {Motifs}: {Simple Building Blocks} of {Complex
 Networks}. \emph{Science}, \emph{298}(5594), 824--827.
 \url{https://doi.org/10.1126/science.298.5594.824}
 
+\bibitem[\citeproctext]{ref-montoyaEcologicalNetworksTheir2006}
+Montoya, J. M., Pimm, S. L., \& Solé, R. V. (2006). Ecological networks
+and their fragility. \emph{Nature}, \emph{442}(7100, 7100), 259--264.
+\url{https://doi.org/10.1038/nature04927}
+
 \bibitem[\citeproctext]{ref-pimmComplexityStabilityEcosystems1984}
 Pimm, S. L. (1984). The complexity and stability of ecosystems.
 \emph{Nature}, \emph{307}(5949), 321--326.
 \url{https://doi.org/10.1038/307321a0}
+
+\bibitem[\citeproctext]{ref-polisFoodWebComplexity1996}
+Polis, G. A., \& Strong, D. R. (1996). Food {Web Complexity} and
+{Community Dynamics}. \emph{The American Naturalist}, \emph{147}(5),
+813--846. \url{https://www.jstor.org/stable/2463091}
 
 \bibitem[\citeproctext]{ref-stoufferUnderstandingFoodwebPersistence2010}
 Stouffer, D. B., \& Bascompte, J. (2010). Understanding food-web
@@ -1652,6 +1812,11 @@ Stability}. \emph{Ecology}, \emph{77}(2), 350--363.
 Vermaat, J. E., Dunne, J. A., \& Gilbert, A. J. (2009). Major dimensions
 in food-web structure properties. \emph{Ecology}, \emph{90}(1),
 278--282. \url{https://doi.org/10.1890/07-0978.1}
+
+\bibitem[\citeproctext]{ref-walkerBiodiversityEcologicalRedundancy1992}
+Walker, B. H. (1992). Biodiversity and {Ecological Redundancy}.
+\emph{Conservation Biology}, \emph{6}(1), 18--23.
+\url{https://www.jstor.org/stable/2385847}
 
 \bibitem[\citeproctext]{ref-wattsCollectiveDynamicsSmallworld1998}
 Watts, D. J., \& Strogatz, S. H. (1998). Collective dynamics of
