@@ -15,7 +15,7 @@ source("lib/plotting_themes.R")
 
 predictors <- read.csv("data/cleaned/all_networks.csv") %>%
   as_tibble() %>%
-  vibe_check(-c(ρ, complexity, robustness))
+  vibe_check(-c(ρ, complexity, robustness, control))
 
 cluster_df <- read.csv("../tables/metric_clusters_auto.csv")
 
@@ -90,7 +90,7 @@ obs_alignment <- compute_module_alignment(loadings, clusters)
 
 set.seed(66)
 
-n_perm <- 1000
+n_perm <- 10000
 
 perm_results <- array(0,
                       dim = c(nrow(obs_alignment),
@@ -218,6 +218,22 @@ ggplot(data = module_var_df,
         axis.text.x = element_text(angle = 45, hjust = 1))
 
 ggsave("../figures/variance_explained.png",
+       width = 7000,
+       height = 2750,
+       units = "px",
+       dpi = 600)
+
+ggplot(module_var_df,
+       aes(x = PC,
+           y = Module,
+           fill = Variance_Fraction)) +
+  geom_tile() +
+  scale_fill_continuous(
+    palette = seattle_abyssal_gen(100),
+    name = "Variance Explained"
+  )
+
+ggsave("../figures/variance_heatmap.png",
        width = 7000,
        height = 2750,
        units = "px",

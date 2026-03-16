@@ -14,7 +14,7 @@ source("lib/plotting_themes.R")
 metrics <- read.csv("data/cleaned/all_networks.csv") %>%
   as_tibble() %>%
   # Exclude stability response variables from clustering
-  vibe_check(-c(ρ, complexity, robustness))
+  vibe_check(-c(ρ, complexity, robustness, control))
 
 # import pca object
 pca <- readRDS("data/outputs/pca_object.rds")

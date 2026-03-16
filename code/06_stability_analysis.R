@@ -28,7 +28,7 @@ clust_metada <-
             read_csv("../tables/module_summary_7clusters.csv") %>%
               vibe_check(c(Cluster, label)))
 
-stability_vars <- c("robustness", "ρ", "complexity")
+stability_vars <- c("robustness", "ρ", "complexity", "control")
 
 ############################################################
 # Elastic Net Modeling Suite
