@@ -47,6 +47,7 @@ vermaat_topology = DataFrame(
     Clust = Any[],
     trophicCoherence = Any[],
     trophicVar = Any[],
+    control = Any[],
 );
 
 # dataframe to store networks

@@ -88,7 +88,8 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :MaxSim => max_sim(N),
         :Clust => clustering(A),
         :trophicCoherence => trophic_coherence(N),
-        :trophicVar => trophic_variance(N)
+        :trophicVar => trophic_variance(N),
+        :control => structural_controllability(N)
 )
     return D
 end
@@ -460,23 +461,36 @@ function trophic_variance(N::SpeciesInteractionNetwork)
 
 end
 
+include("hopcroft_karp.jl")
+
 """
 structural_controllability(N::SpeciesInteractionNetwork)
 
 Returns number of driver nodes required to control the network.
 Higher values indicate lower controllability.
 """
-# function structural_controllability(N::SpeciesInteractionNetwork)
-# 
-#     A = _get_matrix(N)
-#     S = size(A, 1)
-# 
-#     g = DiGraph(A)
-# 
-#     # compute maximum matching
-#     m = maximum_matching(g)
-# 
-#     Nd = S - length(m)
-# 
-#     return Nd
-# end
+function structural_controllability(N::SpeciesInteractionNetwork)
+    A = _get_matrix(N)
+    S = size(A, 1)
+
+    # Build bipartite adjacency from i_out -> j_in
+    left  = collect(1:S)
+    right = collect(S+1:2S)
+    adj = Dict(u => Int[] for u in left)
+
+    for i in 1:S
+        for j in 1:S
+            if A[i, j]
+                push!(adj[i], S + j)
+            end
+        end
+    end
+
+    # Run Hopcroft–Karp
+    pairU, pairV, matching_size = hopcroft_karp_bipartite(left, right, adj)
+
+    # Number of unmatched nodes = driver nodes
+    Nd = S - matching_size
+
+    return Nd, pairU, pairV
+end
