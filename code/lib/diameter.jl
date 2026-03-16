@@ -45,13 +45,3 @@ function diameter(A::AbstractMatrix{<:Bool})
 
     return food_web_diameter
 end
-
-# Example 1: Long Trophic Chain (Diameter = 3)
-A1 = [
-    0 1 0 0  # 1 eats 2
-    0 0 1 0  # 2 eats 3
-    0 0 0 1  # 3 eats 4
-    0 0 0 0
-]
-
-diameter1 = diameter(A1)
