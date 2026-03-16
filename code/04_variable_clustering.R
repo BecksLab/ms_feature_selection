@@ -262,10 +262,20 @@ hc <- hc_partial$hclust
 dend <- as.dendrogram(hc)
 dend_data <- dendro_data(dend)
 
+clusters_partial <- cutree(hc, k = k_signed)
+
+cluster_partial_df <- data.frame(
+  label = names(clusters_partial),
+  Cluster = as.factor(clusters_partial)
+)
+
 # Join cluster membership to label positions
 label_df <- dend_data$label %>%
   left_join(cluster_df, by = c("label" = "Metric")) %>%
   mutate(Cluster = as.factor(Cluster))
+
+anti_join(cluster_partial_df,
+          label_df)
 
 # Build horizontal plot
 ggplot() +
