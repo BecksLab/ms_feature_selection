@@ -29,7 +29,7 @@ kraken_palette <- c(
   "Trophic Integration"       = "#355464",
   "Energy Transport"          = "#E9072B",
   "Trophic Role Asymmetry"    = "#99D9D9",
-  "Control Heterogeneity"     = "#398754",
+  "Control Heterogeneity"     = "#005A5B",
   "Basal Control"             = "#9BBF80"
 )
 
@@ -42,7 +42,7 @@ pal_df <- tibble(
 
 
 # continuous ramp
-seattle_anchors <- c("#D1E1E9", "#93C1D2", "#638596", "#324B5C", "#000E3B")
+seattle_anchors <- c("#C0DADC", "#93C1D2", "#638596", "#324B5C", "#000E3B")
 
 # 2. Create the Generator Function
 # This creates a function that can interpolate any number of colors
@@ -101,6 +101,6 @@ figure_theme <- function() {
       
       # Legend
       legend.title = element_text(face = "bold"),
-      legend.position = "bottom"
+      legend.position = "right"
     )
 }
