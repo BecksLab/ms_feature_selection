@@ -210,7 +210,7 @@ Stability Debate}
 1%
 }%
 }
-\date{2026-03-16}
+\date{2026-03-17}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -537,15 +537,6 @@ Quantifies variation in species connectivity. & \\
 Intervality & Degree to which taxa can be ordered along a single niche
 dimension. & Measures the extent of niche ordering in trophic
 interactions. & (\textbf{stoufferRobustMeasureFood2006a?}) \\
-ρ (Spectral radius) & Largest real part of the eigenvalues of the
-undirected adjacency matrix. & Captures a global property of network
-organisation related to interaction strength aggregation. & \\
-Complexity (SVD) & Shannon entropy of the singular value decomposition
-of the adjacency matrix. & Quantifies heterogeneity in interaction
-structure. & Strydom et al. (2021) \\
-Robustness & Proportion of secondary extinctions following primary
-species removal. & Operational measure of tolerance to node loss. &
-Jonsson et al. (2015) \\
 S1 (Linear chain) & Frequency of three-node linear chains (A → B → C)
 with no additional links. & Captures the prevalence of simple,
 unbranched energy-transfer pathways. & Stouffer et al. (2007) Milo et
@@ -561,7 +552,33 @@ S5 (Direct competition) & Frequency of motifs where two consumers share
 a single resource (A ← B → C). & Describes the occurrence of
 shared-resource structures among consumers. & Stouffer et al. (2007)
 Milo et al. (2002) \\
+trophicVar & Measure of how much the trophic positions of species
+deviate from the mean trophic level. & Variance is linked to chain
+length, with low variance indicating few long chains and high variance
+indicates long chains and varied interactions & Pimm (1982) \\
+TrophicCoherence & Measure how well the species in a food web fit into
+discrete trophic levels. & Highly coherent, neatly layered food webs are
+more stable to perturbations & Johnson et al. (2014) \\
 \end{longtable}
+
+In addition to network structural descriptors, we quantified multiple
+complementary measures of ecological stability that reflect different
+dynamical processes. Specifically, we included (1) Robustness (R50),
+which measures the proportion of secondary extinctions following
+sequential species loss and captures tolerance to perturbation (Jonsson
+et al., 2015); (2) Complexity (SVD), defined as the Shannon entropy of
+the singular value decomposition of the adjacency matrix, representing
+heterogeneity in interaction pathways and potential system-level
+fragility (Strydom et al., 2021); (3) Spectral Radius (ρ), the largest
+real part of the eigenvalues of the adjacency matrix, providing a global
+indicator of dynamic stability related to interaction strength
+aggregation (Staniczenko et al., 2013); and (4) Structural
+Controllability, a new addition, which evaluates the minimum number of
+driver species required to control the network's dynamics and thus
+captures the capacity for directed reorganization following perturbation
+(Liu et al., 2011). Together, these metrics operationalize multiple
+facets of ecological stability, linking structural organisation to
+distinct dynamical processes within food webs.
 
 \subsection{Identification of Structural
 Modules}\label{identification-of-structural-modules}
@@ -734,37 +751,48 @@ mechanisms or by global geometric gradients of network organisation.
 \subsubsection{Structural Control of
 Stability}\label{structural-control-of-stability}
 
-To evaluate how different hierarchical representations of network
-structure explain variation in stability, we implemented a regularised
-linear modelling framework designed to balance interpretability and
-overfitting risk given the modest sample size (n = 38). For each
-stability component (complexity, robustness, and ρ), we fit elastic net
-regression models using three distinct structural representations:
-Fine-scale cluster-level topological descriptors, Dominant structural
-summaries (PC\_Dominant), and Multivariate principal component scores
-(PC\_Scores). All predictors and response variables were standardized
-prior to analysis to allow direct comparison of coefficient magnitudes.
+To evaluate how hierarchical representations of network structure
+explain variation in stability, we modelled four complementary stability
+outcomes: Robustness (R50), Complexity (SVD), Spectral Radius (ρ), and
+Structural Controllability. These measures capture distinct dynamical
+processes governing ecosystem persistence, resistance, and
+controllability. Elastic net regression models were fit separately for
+each stability metric using three structural representations (cluster
+medoids, PC-dominant metrics, and full PCA scores), allowing us to
+compare the structural determinants of different stability processes.
+All predictors and response variables were standardised prior to
+analysis to allow direct comparison of coefficient magnitudes.
 
 Elastic net regularization was chosen because it permits inference under
 correlated predictors by interpolating between ridge (distributed
 shrinkage) and lasso (sparse selection) penalties. The mixing parameter
-α (0--1) determines the degree of sparsity, with lower values indicating
-distributed structural influence and higher values indicating
-concentration onto a smaller subset of predictors.
+\(\alpha\) (0--1) determines the degree of sparsity, with lower
+\(\alpha\) values indicate distributed influence across many correlated
+structural descriptors (ridge-like behaviour), whereas higher \(\alpha\)
+values indicate that stability is driven by a smaller subset of
+structural predictors (lasso-like sparsity)..
 
 \paragraph{Model Evaluation}\label{model-evaluation}
 
 Predictive performance was assessed using repeated v-fold
-cross-validation (10 folds x 10 repeats). Within each training
-partition, models were fit across a grid of α values (0--1 in increments
-of 0.25), and the optimal penalty strength (λ) was selected via internal
-cross-validation. Performance was quantified as cross-validated \(R^2\)
-computed on held-out test partitions. After cross-validation, final
-models were refit to the full dataset using the mean selected α, and
-standardized coefficients were extracted to characterize the direction
-and magnitude of structural effects. This approach was not intended to
-maximize predictive accuracy per se, but rather to quantify the relative
-degree and architecture of structural control across stability facets.
+cross-validation (5 folds x 10 repeats). Within each training partition,
+models were fit across a grid of α values (0--1 in increments of 0.25),
+and the optimal penalty strength (λ) was selected via internal
+cross-validation within each training partition. Performance was
+quantified as cross-validated \(R^2\) computed on held-out test
+partitions. After cross-validation, final models were refit to the full
+dataset using the mean selected \(\alpha\), and standardized
+coefficients were extracted to characterize the direction and magnitude
+of structural effects. The objective of this analysis was not predictive
+optimisation, but rather to quantify how structural organisation governs
+different stability processes. The elastic net mixing parameter α also
+provides insight into the architecture of structural control. To
+quantify the relative contribution of different structural modules,
+standardized regression coefficients from the final models were squared
+and aggregated within modules. The proportion of explained variance
+attributable to each module was then scaled by the model's
+cross-validated \(R^2\), providing a measure of the absolute variance in
+stability explained by each structural component.
 
 \section{Results}\label{results}
 
@@ -805,76 +833,17 @@ identified clusters are not artefacts of sampling variability but
 represent statistically robust groupings of structural descriptors.
 
 The resulting modular partition identified coherent groups of metrics
-describing distinct aspects of network architecture. These included a
-large-scale architectural module integrating size and motif-based
-descriptors, modules capturing trophic organisation and energy routing,
-and two modules consisting of isolated structural descriptors that
-function independently from broader metric groupings. Importantly, the
-modular structure persisted after accounting for species richness,
-demonstrating that clustering was not driven solely by network size
-effects.
-
-\subsection{Modular Decomposition of Structural
-Space}\label{modular-decomposition-of-structural-space}
-
-The seven-module solution revealed a hierarchical decomposition of
-structural space into interpretable architectural dimensions.
-Collectively, the module decomposition reveals that food web structure
-can be interpreted as statistically supported and ecologically
-interpretable dimensions of network organisation that is strongly
-suggestive of a delineation by hierarchical architecture.
-
-\textbf{Macro-Architectural Complexity:} The largest module encompassed
-species richness, number of interactions, diameter, motif frequencies,
-intervality, and related descriptors. These metrics jointly describe
-large-scale expansion of the interaction network and increased
-combinatorial complexity as species richness increases. This module
-reflects macro-architectural scaling: increasing network size
-simultaneously expands motif diversity, path structure, and global
-trophic ordering.
-
-\textbf{Trophic Integration:} A second module grouped metrics describing
-vertical trophic organisation and connectivity, including connectance,
-trophic level, omnivory, chain length, and clustering. Together, these
-descriptors quantify how densely and hierarchically energy and
-interactions are embedded across trophic strata. This module captures
-the degree to which the network integrates trophic levels through
-cross-level interactions and structural embedding.
-
-\textbf{Energy Transport:} A distinct module isolated geometric
-descriptors of interaction pathways, including mean distance, path
-number, and dispersion in chain length. These metrics characterize the
-structural geometry of energy routing independent of overall network
-size. The separation of this module suggests that routing structure
-constitutes an independent dimension of architectural variation rather
-than merely scaling with complexity.
-
-\textbf{Trophic Asymmetry:} Another module captured metrics describing
-structural imbalance between basal and consumer components, including
-the proportion of basal species, predator--prey ratios, and generality
-measures. This module reflects bottom-heavy versus top-heavy structural
-skew and quantifies asymmetry in the distribution of trophic roles
-across the network.
-
-\textbf{Control Heterogeneity:} A separate module grouped descriptors of
-heterogeneity in consumer pressure and top-down control, including the
-proportion of apex species, herbivory structure, and variance in
-vulnerability. This module captures variation in how evenly or unevenly
-control is distributed across trophic levels.
-
-\textbf{Centralisation and Functional Redundancy:} Two metrics formed
-independent modules. Centrality emerged as a standalone module,
-representing concentration of structural dominance within a subset of
-species. Maximum trophic similarity likewise formed an isolated module,
-quantifying functional redundancy and niche overlap. The separation of
-these descriptors from broader structural groupings indicates that
-dominance concentration and trophic redundancy represent independent
-axes of food-web organisation.
-
-Collectively, these seven modules delineate a hierarchical decomposition
-of food-web structure spanning macro-scale complexity, vertical
-integration, routing geometry, trophic imbalance, control heterogeneity,
-dominance concentration, and functional overlap.
+describing distinct aspects of network architecture
+Table~\ref{tbl-modules}. These included a large-scale architectural
+module integrating size and motif-based descriptors, modules capturing
+trophic organisation and energy routing, and two modules consisting of
+isolated structural descriptors that function independently from broader
+metric groupings. The six-module solution Table~\ref{tbl-modules}
+reveals a hierarchical decomposition of food-web structural space into
+interpretable ecological dimensions. Collectively, these modules
+illustrate that network organization is shaped by multiple statistically
+supported axes of structural variation, reflecting size scaling,
+integration, energy flow, and control asymmetry.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3194}}
@@ -904,26 +873,23 @@ Ecological Interpretation
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Macro Complexity & richness, links, diameter, motif frequencies (all),
-intervality, path-related metrics & Captures large-scale expansion of
-network structure and combinatorial complexity associated with
-increasing system size \\
-Trophic Integration & connectance, trophic level, omnivory, chain
-length, clustering & Describes vertical trophic embedding and density of
-cross-level interactions \\
-Energy Transport & mean distance, path number, chain-length & Quantifies
-geometric structure of energy routing independent of size scaling \\
-Trophic Asymmetry & basal proportion, predator--prey ratio, generality &
-Represents structural skew between basal and consumer dominance;
-bottom-heavy vs top-heavy organization \\
-Control Heterogeneity & apex proportion, herbivory, vulnerability &
-Captures heterogeneity in top-down control and uneven distribution of
-interaction pressure \\
-Centralisation & centrality & Measures concentration of structural
-dominance within a subset of species \\
-Functional Redundancy & maximum trophic similarity & Quantifies trophic
-overlap and niche redundancy; independent axis of functional
-equivalence \\
+Macro Complexity & richness, links, l\_S, S4, S5, intervals & Captures
+large-scale expansion of network structure and combinatorial complexity
+associated with increasing system size \\
+Trophic Integration & connectance, diameter, intermediate, omnivory,
+cannibal, TL, ChLen, ChSD, S1, S2, loops, Clust, trophicCoherence,
+trophicVar & Describes how ordered the trophic structure is and how
+tightly species are embedded across trophic levels \\
+Energy Transport & mean distance, path length & Quantifies geometric
+structure of energy routing independent of network size or trophic
+structure \\
+Trophic Role Asymmetry & basal, predpreyRatio, GenSD, LinkSD, MaxSim &
+Captures structural imbalance across trophic roles, but it also
+incorporates heterogeneity in consumer behaviour and redundancy. \\
+Control Heterogeneity & top, VulSD, ChNum & Reflects heterogeneity in
+top-down regulation and predation pressure distribution \\
+Basal Control & herbivory, centrality & Captures energy entry points and
+dominant structural hubs \\
 \end{longtable}
 
 \subsection{Structural Modules Align with Dominant Axes of Network
@@ -932,8 +898,8 @@ Variation}\label{structural-modules-align-with-dominant-axes-of-network-variatio
 Principal component analysis of standardised structural metrics revealed
 strong dimensional compression in food-web structure
 Figure~\ref{fig-pca}. The first three principal components accounted for
-69.1\% of total variance (PC1 = 31.2\%, PC2 = 22.4\%, PC3 = 15.4\%),
-with 80.8\% of variance explained by the first five components.
+68.5\% of total variance (PC1 = 31.2\%, PC2 = 21.5\%, PC3 = 15.6\%),
+with 80.7\% of variance explained by the first five components.
 Subsequent axes contributed progressively smaller proportions of
 variance, indicating that a small number of dominant gradients summarise
 most structural variation.
@@ -984,16 +950,19 @@ variation.}
 
 \end{figure}%
 
-Inspection of the loading structure showed that the first principal
-component primarily reflected variation in network size and
-connectivity. Metrics such as richness, number of links, diameter, path
-length, and measures associated with topological complexity loaded
-strongly on this axis. The second principal component captured variation
-associated with structural organization and connectivity patterns,
-whereas the third component reflected variation in trophic structure and
-vertical differentiation, with strong contributions from trophic level,
-chain length, and related measures. Together, these axes represent
-interpretable structural gradients in the metric space.
+Inspection of the variance explained by module-level contribution
+Figure~\ref{fig-alignment_heatmap} indicate that PC1 primarily reflects
+variation in Macro-Architectural Complexity and Trophic Integration \&
+Structural Consistency, capturing differences in network size, link
+density, and intermediate-level trophic ordering. PC2 is influenced
+largely by Control Heterogeneity and Trophic Integration, representing
+variation in top-down control and cross-level integration. PC3 contrasts
+Energy Transport Geometry with Control Heterogeneity, reflecting
+independent variation in energy routing and uneven distribution of
+interaction pressure. These results suggest that food-web structure can
+be summarized by a small number of ecologically interpretable axes,
+representing orthogonal gradients of size and complexity, trophic
+integration, and control heterogeneity.
 
 \begin{figure}
 
@@ -1015,33 +984,34 @@ architecture.}
 \end{figure}%
 
 The global permutation test indicated significant alignment between the
-modular partition and the principal component structure (P = 0.005),
+modular partition and the principal component structure (\(p = 0.05\)),
 demonstrating that the observed module assignment explains the
 multivariate geometry of structural metrics better than randomly
 assigned modules. Alignment strength varied substantially across modules
-Figure~\ref{fig-alignment_signif}. Macro Complexity (Module 1) exhibited
-the strongest and most extensive alignment, showing significant
-associations with five principal components and a dominant loading on
-PC1, indicating that it contributes substantially to the primary
-structural gradient associated with network size and connectivity.
-Energy Transport (Module 3) showed significant alignment with four
-principal components, with its strongest association on PC4, suggesting
-that it captures structural variation largely orthogonal to the dominant
-complexity axis. Trophic Integration (Module 2), Trophic Asymmetry
-(Module 4), Control Heterogeneity (Module 5), and Functional Redundancy
-(Module 7) displayed more limited alignment, each significantly
-associated with one to two principal components, indicating more
-constrained mapping onto the structural feature space. Notably,
-Functional Redundancy exhibited its strongest association with a
-high-order principal component (PC7), suggesting sensitivity to more
-subtle structural variation. Centralisation (Module 6) showed no
-significant alignment under the joint permutation and Z-score criterion,
-indicating that it does not meaningfully structure variation across the
-retained principal components. Overall, significant module--PC
-associations were concentrated in a subset of principal components,
-reinforcing the interpretation that modular structure maps onto specific
-structural gradients rather than uniformly spanning the full
-multivariate space.
+Figure~\ref{fig-alignment_signif}. Macro-Architectural Complexity
+(Module 1) exhibited the strongest and most extensive alignment, showing
+significant associations with multiple principal components and a
+dominant loading on PC1, indicating that it contributes substantially to
+the primary structural gradient associated with network size, link
+density, and motif diversity. Trophic Integration \& Structural
+Consistency (Module 6) displayed broad alignment across three principal
+components, with its strongest association on PC1, reflecting its
+contribution to intermediate-level ordering and consistency in trophic
+level structure. Integration \& Dominance (Module 2) and Control
+Heterogeneity \& Top-Down Variability (Module 5) showed more limited
+alignment, each significantly associated with one to two principal
+components, highlighting variation in network cohesion, dominance
+concentration, and top-down pressure that maps onto secondary structural
+gradients. Energy Transport Geometry (Module 3) was significantly
+aligned with PC3, indicating that energy routing structure represents an
+axis largely orthogonal to the dominant size and integration gradients.
+Trophic Asymmetry (Module 4) showed modest alignment with higher-order
+components, suggesting that skew between basal and consumer dominance
+captures subtler variation in network structure. Overall, significant
+module--PC associations were concentrated in a subset of principal
+components, reinforcing the interpretation that modular structure maps
+onto specific, ecologically interpretable structural gradients rather
+than uniformly spanning the full multivariate space.
 
 \begin{figure}
 
@@ -1067,11 +1037,17 @@ exhibit strong low-dimensional organisation and that independently
 identified structural modules are non-randomly aligned with the dominant
 axes of variation. The significant global alignment supports the
 interpretation that modular decomposition reflects meaningful geometric
-structure rather than clustering artifacts. Moreover, the dominance of a
-single module across multiple principal components suggests hierarchical
-organisation, wherein a core structural module governs the primary
-gradient of variation while additional modules capture secondary and
-specialised structural dimensions.
+structure rather than clustering artifacts. The broad influence of
+Macro-Architectural Complexity (Module 1) and Trophic Integration \&
+Structural Consistency (Module 6) across multiple principal components
+suggests a hierarchical organisation, in which these core modules govern
+the primary gradients of variation, while additional modules---including
+Integration \& Dominance, Control Heterogeneity, Energy Transport
+Geometry, and Trophic Asymmetry---capture secondary and more specialised
+structural dimensions. This pattern indicates that food web structure is
+shaped by a combination of network size, intermediate-level trophic
+ordering, energy flow geometry, and top-down control, all of which
+contribute to distinct, interpretable axes of variation.
 
 \subsection{Predictors of stability}\label{predictors-of-stability}
 
@@ -1725,6 +1701,11 @@ M. (2017). Ecological network metrics: Opportunities for synthesis.
 \emph{Ecosphere}, \emph{8}(8), e01900.
 \url{https://doi.org/10.1002/ecs2.1900}
 
+\bibitem[\citeproctext]{ref-liuControllabilityComplexNetworks2011}
+Liu, Y.-Y., Slotine, J.-J., \& Barabási, A.-L. (2011). Controllability
+of complex networks. \emph{Nature}, \emph{473}(7346), 167--173.
+\url{https://doi.org/10.1038/nature10011}
+
 \bibitem[\citeproctext]{ref-loreauBiodiversityEcosystemStability2013}
 Loreau, M., \& de Mazancourt, C. (2013). Biodiversity and ecosystem
 stability: A synthesis of underlying mechanisms. \emph{Ecology Letters},
@@ -1766,6 +1747,10 @@ Montoya, J. M., Pimm, S. L., \& Solé, R. V. (2006). Ecological networks
 and their fragility. \emph{Nature}, \emph{442}(7100, 7100), 259--264.
 \url{https://doi.org/10.1038/nature04927}
 
+\bibitem[\citeproctext]{ref-pimmFoodWebs1982}
+Pimm, S. L. (1982). \emph{Food {Webs}}. Springer Netherlands.
+\url{https://doi.org/10.1007/978-94-009-5925-5}
+
 \bibitem[\citeproctext]{ref-pimmComplexityStabilityEcosystems1984}
 Pimm, S. L. (1984). The complexity and stability of ecosystems.
 \emph{Nature}, \emph{307}(5949), 321--326.
@@ -1775,6 +1760,11 @@ Pimm, S. L. (1984). The complexity and stability of ecosystems.
 Polis, G. A., \& Strong, D. R. (1996). Food {Web Complexity} and
 {Community Dynamics}. \emph{The American Naturalist}, \emph{147}(5),
 813--846. \url{https://www.jstor.org/stable/2463091}
+
+\bibitem[\citeproctext]{ref-staniczenkoGhostNestednessEcological2013}
+Staniczenko, P. P. A., Kopp, J. C., \& Allesina, S. (2013). The ghost of
+nestedness in ecological networks. \emph{Nature Communications},
+\emph{4}(1), 1391. \url{https://doi.org/10.1038/ncomms2422}
 
 \bibitem[\citeproctext]{ref-stoufferUnderstandingFoodwebPersistence2010}
 Stouffer, D. B., \& Bascompte, J. (2010). Understanding food-web
