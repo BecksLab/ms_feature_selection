@@ -41,7 +41,7 @@ run_elastic_suite <- function(stability_vars,
                               predictor_names,
                               data_matrix,
                               nfolds = 5,
-                              nrepeats = 10){
+                              nrepeats = 5){
   
   results_list <- list()
   
@@ -329,7 +329,7 @@ ggplot(plot_coeff_df,
   theme(legend.position = 'right')
 
 ggsave("../figures/struct_stability_coeff.png",
-       width = 5000,
+       width = 6000,
        height = 4000,
        units = "px")
 
