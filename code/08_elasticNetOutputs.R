@@ -150,6 +150,11 @@ ggplot(variance_decomposition,
                     name = "Module") +
   figure_theme()
 
+ggsave("../figures/stability_variance.png",
+       width = 6000,
+       height = 4000,
+       units = "px")
+
 
 # estimates/coefficients
 ggplot(directed_estimates, 
