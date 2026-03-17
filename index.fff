@@ -132,29 +132,19 @@ and structural alignment among dimensional-reduction strategies.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{figures/struct_stability_summ.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{figures/stability_alpha.png}}
 
 }
 
-\caption{\label{fig-var_pred}A: Predictive performance of alternative
-structural representations across stability components. Bars show
-cross-validated variance explained (R²) for each stability component
-(facets) under three representations of network structure: cluster-level
-descriptors, dominant structural metrics, and principal component
-scores. Bar height represents the total variance explained by each
-representation, while coloured segments indicate the proportional
-contribution of structural modules to that predictive signal. This
-partitioning highlights how different domains of network architecture
-contribute to explaining variation in stability across representations.
-B: Regularisation structure across stability components and structural
-representations. Bars show the mean elastic-net mixing parameter (α)
-across repeated cross-validation folds. Values near zero indicate
-ridge-like models where predictive signal is distributed across many
-correlated structural predictors, whereas values near one indicate
-lasso-like models where predictive power is concentrated in a small
-number of predictors. Together, panels illustrate how both the
-explanatory strength and structural concentration of stability
-predictors depend on how network structure is represented.}
+\caption{\label{fig-stab_alpha}The architecture of structural control
+across stability regimes. The elastic net mixing parameter (α) is
+plotted for each stability metric, categorized by structural
+representation. α values near 0 (Ridge-like) indicate Distributed
+Control, where stability is an emergent property of the entire network
+fabric. α values near 1 (Lasso-like) indicate Sparse Control, where
+stability is governed by a small number of specific structural
+bottlenecks. A dashed line at α=0.5 denotes the transition between
+sparse and distributed modelling regimes.}
 
 \end{figure}
 \efloatseparator
@@ -163,20 +153,19 @@ predictors depend on how network structure is represented.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{figures/struct_stability_coeff.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{figures/stability_estimate.png}}
 
 }
 
-\caption{\label{fig-stab_corr}Standardised structural coefficients
-linking network predictors to stability components across
-representations. Elastic-net coefficients extracted from full models
-after cross-validation. Positive and negative coefficients indicate the
-direction and magnitude of structural influence. Predictor ordering
-reflects clustering metadata, and colours denote structural modules or
-metric groupings. Faceting by stability component and structural
-representation illustrates how the identity and strength of structural
-drivers reorganize as network space is represented at different levels
-of abstraction.}
+\caption{\label{fig-stab_corr}Standardised structural drivers of
+ecosystem stability. Lollipop plots display the standardised
+coefficients (estimates) for the top structural predictors across all
+stability metrics and representations. The magnitude of the point
+indicates the strength of the effect, while the position relative to the
+zero-intercept indicates a stabilizing (positive) or destabilizing
+(negative) influence. Plots are faceted by representation (rows) and
+stability metric (columns), with colours identifying the functional
+module of each structural driver.}
 
 \end{figure}
 \efloatseparator
@@ -185,22 +174,15 @@ of abstraction.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{figures/struct_stability_variance.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{figures/stability_variance.png}}
 
 }
 
-\caption{\label{fig-stab_var_metric}Contribution of individual
-structural descriptors to the variance explained in ecological
-stability. Points and horizontal segments show the proportion of
-variance in each stability metric (robustness, return rate ρ, and
-dynamical complexity) explained by each predictor, estimated from
-standardized elastic-net coefficients. Panels are organized by
-structural representation (rows) and stability metric (columns). Colours
-indicate the structural module or domain to which each metric belongs;
-metrics not assigned to a module (``PCA Axis'') are shown in grey-green.
-This visualization highlights which individual network descriptors most
-strongly influence model predictions, while also revealing variation in
-importance across representations and stability components.}
+\caption{\label{fig-stab_var}Structural partitioning of variance
+explained in ecosystem stability. Stacked bar charts represent the
+absolute variance (cross-validated R2) explained by different structural
+modules across four stability metrics: robustness, ρ, complexity, and
+control. Results are faceted by structural representation.}
 
 \end{figure}
 \efloatseparator
@@ -209,51 +191,18 @@ importance across representations and stability components.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{figures/struct_stability_variance_module.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{figures/stability_power_v_control.png}}
 
 }
 
-\caption{\label{fig-stab_var_module}Contributions of structural modules
-to the variance explained in ecological stability. Bars show the
-proportion of variance in each stability metric explained by elastic-net
-models, aggregated across structural domains (modules) or PCA axes.
-Total bar height reflects the overall model predictive performance (R2),
-while coloured segments represent the relative contribution of each
-module, estimated from the sum of squared standardized coefficients.
-Facets separate stability metrics, and bar groups correspond to
-alternative structural representations (cluster medoids, dominant
-metrics, PCA scores). This representation summarizes how stability is
-shaped by collective architectural dimensions, demonstrating which
-modules---such as macro-architectural complexity, trophic integration,
-energy transport, and trophic asymmetry---drive variation in
-system-level stability.}
-
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{figures/pca_struct_stability.png}}
-
-}
-
-\caption{\label{fig-pca_struct_stability.png}Food web structural
-variation and stability landscape. Points represent individual networks
-projected into structural principal component space, with the x- and
-y-axes corresponding to PC1 and PC2 of the network-level metrics. Point
-size (scaled independently within each stability metric) reflects the
-relative magnitude of the associated stability measure (robustness, ρ,
-or complexity) across networks. Arrows indicate the contribution of
-structural modules (e.g., macro-architectural complexity, trophic
-integration, energy transport, trophic asymmetry, control heterogeneity,
-centralisation, and functional redundancy) to the PCA axes,
-approximating the structural domains most associated with variation in
-network configuration. Facets separate stability metrics (rows) and
-structural representations (columns), highlighting how different network
-structures relate to each stability component. Arrow length is globally
-scaled for visibility, with module orientation showing the direction of
-increasing module values in PCA space.}
+\caption{\label{fig-stab_powercontrol}Relationship between predictive
+power and structural sparsity. Predictive power (CV R2) is plotted
+against the sparsity index (α) for all stability metrics. Point size
+represents the contribution of the dominant structural module to the
+total variance explained. The horizontal axis identifies the control
+regime, ranging from Distributed Control (low α) to Sparse Control (high
+α). This visualisation reveals whether high predictive accuracy in
+ecosystem stability is a result of specific structural ``levers''
+(top-right) or systemic, redundant configurations (top-left).}
 
 \end{figure}
