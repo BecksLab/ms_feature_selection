@@ -219,3 +219,16 @@ ecosystem stability is a result of specific structural ``levers''
 (top-right) or systemic, redundant configurations (top-left).}
 
 \end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/multi_panel_pca_stability.png}}
+
+}
+
+\caption{\label{fig-stab_pca}A vibe but don't know where it belongs}
+
+\end{figure}

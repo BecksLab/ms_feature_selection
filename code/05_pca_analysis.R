@@ -286,6 +286,10 @@ metric_order <- cluster_df %>%
 
 loadings_mat <- pca_all$rotation[metric_order, ]
 
+# save this for later pca plotting
+saveRDS(loadings_mat,
+        "data/outputs/pc_loadings.rds")
+
 # Keep only PCs explaining >5% variance
 explained_var <- summary(pca_all)$importance[2, ]
 impactful_pcs <- which(explained_var > 0.05)
