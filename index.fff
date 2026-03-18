@@ -38,6 +38,39 @@ modular organisation is preserved within a reduced dimensional space.}
 
 \centering{
 
+\pandocbounded{\includegraphics[keepaspectratio]{figures/module_alignment_heatmap.png}}
+
+}
+
+\caption{\label{fig-alignment_heatmap}Heatmap showing the correspondence
+between the seven identified food-web modules (rows) and the principal
+components (columns) capturing 80\% of cumulative variance. High values
+(darker shading) indicate strong alignment, where a specific module's
+internal structure drives the variation captured by that PC. Both rows
+and columns are hierarchically clustered to highlight similarities in
+how different structural dimensions contribute to the overall food-web
+architecture.}
+
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/pca_loadings_heatmap.png}}
+
+}
+
+\caption{\label{fig-pca_heatmap}TODO.}
+
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
 \pandocbounded{\includegraphics[keepaspectratio]{figures/variance_explained.png}}
 
 }
@@ -61,26 +94,6 @@ main text. The stability of the flow across the first several components
 demonstrates that the modular organisation of food web architecture is
 consistently represented across the primary gradients of structural
 variation.}
-
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{figures/module_alignment_heatmap.png}}
-
-}
-
-\caption{\label{fig-alignment_heatmap}Heatmap showing the correspondence
-between the seven identified food-web modules (rows) and the principal
-components (columns) capturing 80\% of cumulative variance. High values
-(darker shading) indicate strong alignment, where a specific module's
-internal structure drives the variation captured by that PC. Both rows
-and columns are hierarchically clustered to highlight similarities in
-how different structural dimensions contribute to the overall food-web
-architecture.}
 
 \end{figure}
 \efloatseparator
