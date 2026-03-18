@@ -48,7 +48,7 @@ individual Principal Components (PCs). Calculation: For each PC, the
 total variance (eigenvalue) is partitioned among the k=7 modules
 identified in the hierarchical clustering. The contribution of a module
 to a specific PC is calculated as the sum of the squared loadings of all
-metrics belonging to that module, normalized by the total variance
+metrics belonging to that module, normalised by the total variance
 explained by that PC. Visual Interpretation: The alluvial plot
 illustrates how the ecological weight shifts across different structural
 dimensions. For example, while PC1 may be dominated by a single module,
@@ -138,7 +138,7 @@ and structural alignment among dimensional-reduction strategies.}
 
 \caption{\label{fig-stab_alpha}The architecture of structural control
 across stability regimes. The elastic net mixing parameter (α) is
-plotted for each stability metric, categorized by structural
+plotted for each stability metric, categorised by structural
 representation. α values near 0 (Ridge-like) indicate Distributed
 Control, where stability is an emergent property of the entire network
 fabric. α values near 1 (Lasso-like) indicate Sparse Control, where
@@ -162,7 +162,7 @@ ecosystem stability. Lollipop plots display the standardised
 coefficients (estimates) for the top structural predictors across all
 stability metrics and representations. The magnitude of the point
 indicates the strength of the effect, while the position relative to the
-zero-intercept indicates a stabilizing (positive) or destabilizing
+zero-intercept indicates a stabilising (positive) or destabilising
 (negative) influence. Plots are faceted by representation (rows) and
 stability metric (columns), with colours identifying the functional
 module of each structural driver.}
