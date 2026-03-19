@@ -2,6 +2,19 @@
 
 \centering{
 
+\pandocbounded{\includegraphics[keepaspectratio]{figures/conceptual.png}}
+
+}
+
+\caption{\label{fig-conceptual}Idea for conceptual.}
+
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
 \pandocbounded{\includegraphics[keepaspectratio]{figures/cluster_dendrogram.png}}
 
 }
@@ -13,6 +26,19 @@ was performed using UPGMA. Coloured bars indicate the seven distinct
 modules, reflecting robust association patterns among metrics. The
 horizontal axis represents the correlation distance (1−r), where shorter
 branches indicate stronger associations between descriptors.}
+
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{figures/modules.png}}
+
+}
+
+\caption{\label{fig-conceptual}Idea for different take on modules.}
 
 \end{figure}
 \efloatseparator

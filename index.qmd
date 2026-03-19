@@ -59,6 +59,8 @@ Within this framework, metrics that are often treated as competing predictors of
 
 Here we investigate whether the large number of structural metrics used to characterise food webs can be reduced to a smaller set of coherent structural dimensions, and whether these dimensions relate to different components of ecological stability. Using a compilation of empirical food webs, we quantified a broad suite of commonly used network descriptors spanning species roles, interaction pathways, and global network organisation. We first examined whether these metrics self-organise into statistically robust modules based on their covariation across ecosystems. We then evaluated how these modules align with dominant multivariate axes of structural variation. Finally, we compared alternative representations of network structure to assess how different structural dimensions relate to three stability properties: robustness to species loss, spectral radius, and structural complexity. By explicitly mapping the multivariate structure of network architecture to stability outcomes, this analysis provides a principled framework for interpreting network metrics and for selecting structural descriptors that match specific ecological questions.
 
+![Idea for conceptual.](figures/conceptual.png){#fig-conceptual}
+
 # Materials & Methods
 
 ## Data Compilation
@@ -186,11 +188,13 @@ The resulting modular partition identified coherent groups of metrics describing
 | Macro Complexity | richness, links, l_S, S4, S5, intervals | Captures large-scale expansion of network structure and combinatorial complexity associated with increasing system size |
 | Trophic Integration | connectance, diameter, intermediate, omnivory, cannibal, TL, ChLen, ChSD, S1, S2, loops, Clust, trophicCoherence, trophicVar | Describes how ordered the trophic structure is and how tightly species are embedded across trophic levels |
 | Energy Transport | mean distance, path length | Quantifies geometric structure of energy routing independent of network size or trophic structure |
-| Trophic Role Asymmetry | basal, predpreyRatio, GenSD, LinkSD, MaxSim | Captures structural imbalance across trophic roles, but it also incorporates heterogeneity in consumer behaviour and redundancy. |
+| Trophic Role Asymmetry | basal, predpreyRatio, GenSD, LinkSD, MaxSim | Captures structural imbalance across trophic roles, but it also incorporates heterogeneity in consumer behaviour and redundancy |
 | Control Heterogeneity | top, VulSD, ChNum | Reflects heterogeneity in top-down regulation and predation pressure distribution |
 | Basal Control | herbivory, centrality | Captures energy entry points and dominant structural hubs |
 
 : Structural Modules Identified From Hierarchical Clustering. {#tbl-modules}
+
+![Idea for different take on modules.](figures/modules.png){#fig-conceptual}
 
 ## Structural Modules Align with Dominant Axes of Network Variation
 
