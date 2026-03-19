@@ -96,9 +96,6 @@ run_stability_enet <- function(target_var, predictor_names, data_full) {
 # 4. Execute
 ############################################################
 
-# Example: Running it for 'Robustness' using the PC scores
-robustness_pca_results <- run_stability_enet("robustness", pc_names, topology_pc)
-
 # Define the lists of column names for each representation
 rep_list <- list(
   medoids   = cluster_medoids,

@@ -262,6 +262,8 @@ pcs_plot_names <- paste0("PC", pcs_plot)
 
 alignment_mat <- obs_alignment[, pcs_plot_names, drop = FALSE]
 
+
+
 hm <- pheatmap(
   as.matrix(alignment_mat),
   color = seattle_abyssal_gen(100),
