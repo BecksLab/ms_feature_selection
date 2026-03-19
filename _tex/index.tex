@@ -210,7 +210,7 @@ Stability Debate}
 1%
 }%
 }
-\date{2026-03-18}
+\date{2026-03-19}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -341,16 +341,16 @@ particular architectural features strongly influence system stability
 (Johnson et al. 2014). At the same time, ecological stability itself is
 now widely recognised as a multidimensional concept encompassing
 distinct dynamical properties such as persistence, resistance to
-disturbance, and recovery dynamics (Tilman 1996; Ives and Carpenter
-2007; Loreau and de Mazancourt 2013). Together these developments
-suggest that the relationship between network structure and ecological
-stability may be more complex than originally assumed, specifically that
-both structure and stability are multidimensional properties of
-ecological systems. If so, apparent inconsistencies in the
-structure--stability literature may arise not because theoretical
-predictions are incorrect, but because different studies measure
-different aspects of network architecture and different components of
-ecological stability.
+disturbance, and recovery dynamics (Ives and Carpenter 2007; Loreau and
+de Mazancourt 2013; Donohue et al. 2016; Domínguez-García et al. 2019).
+Together these developments suggest that the relationship between
+network structure and ecological stability may be more complex than
+originally assumed, specifically that both structure and stability are
+multidimensional properties of ecological systems. If so, apparent
+inconsistencies in the structure--stability literature may arise not
+because theoretical predictions are incorrect, but because different
+studies measure different aspects of network architecture and different
+components of ecological stability.
 
 One explanation for this inconsistency is that network structure is
 fundamentally multidimensional. Rather than representing a single
@@ -562,16 +562,17 @@ more stable to perturbations & Johnson et al. (2014) \\
 
 In addition to network structural descriptors, we quantified multiple
 complementary measures of ecological stability that reflect different
-dynamical processes. Specifically, we included (1) Robustness
-(\(R_{50}\)), which measures the proportion of secondary extinctions
-following sequential species loss and captures tolerance to perturbation
-(Jonsson et al. 2015); (2) Complexity (SVD), defined as the Shannon
-entropy of the singular value decomposition of the adjacency matrix,
-representing heterogeneity in interaction pathways and potential
-system-level fragility (Strydom et al. 2021); (3) Spectral Radius (ρ),
-the largest real part of the eigenvalues of the adjacency matrix,
-providing a global indicator of dynamic stability related to interaction
-strength aggregation (Staniczenko et al. 2013); and (4) Structural
+dynamical processes. Specifically, we included (1) Robustness (as area
+under extinction curve), which measures the proportion of secondary
+extinctions following sequential species loss and captures tolerance to
+perturbation (Dunne et al. 2002); (2) Complexity (SVD), defined as the
+Shannon entropy of the singular value decomposition of the adjacency
+matrix, representing heterogeneity in interaction pathways and potential
+system-level fragility (Strydom et al. 2021); (3) Spectral Radius
+(\(\rho\)), the largest real part of the eigenvalues of the adjacency
+matrix and can conceptually \(\rho\) be thought of as a unipartite
+equivalent of nestedness (Staniczenko et al. 2013) making it a proxy for
+network persistence (Bascompte et al. 2003); and (4) Structural
 Controllability, which evaluates the minimum number of driver species
 required to control the network's dynamics and thus captures the
 capacity for directed reorganisation following perturbation (Liu et al.
@@ -1600,12 +1601,35 @@ Allesina, S., and S. Tang. 2012.
 \href{https://doi.org/10.1038/nature10832}{Stability criteria for
 complex ecosystems}. Nature 483:205--208.
 
+\bibitem[\citeproctext]{ref-bascompteNestedAssemblyPlantanimal2003}
+Bascompte, J., P. Jordano, C. J. Melian, and J. M. Olesen. 2003.
+\href{https://doi.org/10.1073/pnas.1633576100}{The nested assembly of
+plant-animal mutualistic networks}. Proceedings of the National Academy
+of Sciences 100:9383--9387.
+
 \bibitem[\citeproctext]{ref-cowanNodalDynamicsNot2012}
 Cowan, N. J., E. J. Chastain, D. A. Vilhena, J. S. Freudenberg, and C.
 T. Bergstrom. 2012.
 \href{https://doi.org/10.1371/journal.pone.0038398}{Nodal {Dynamics},
 {Not Degree Distributions}, {Determine} the {Structural Controllability}
 of {Complex Networks}}. PLOS ONE 7:e38398.
+
+\bibitem[\citeproctext]{ref-dominguez-garciaUnveilingDimensionsStability2019}
+Domínguez-García, V., V. Dakos, and S. Kéfi. 2019.
+\href{https://doi.org/10.1073/pnas.1904470116}{Unveiling dimensions of
+stability in complex ecological networks}. Proceedings of the National
+Academy of Sciences 116:25714--25720.
+
+\bibitem[\citeproctext]{ref-donohueNavigatingComplexityEcological2016}
+Donohue, I., H. Hillebrand, J. M. Montoya, O. L. Petchey, S. L. Pimm, M.
+S. Fowler, K. Healy, et al. 2016.
+\href{https://doi.org/10.1111/ele.12648}{Navigating the complexity of
+ecological stability}. Ecology Letters 19:1172--1185.
+
+\bibitem[\citeproctext]{ref-dunneNetworkStructureBiodiversity2002}
+Dunne, J., R. J. Williams, and N. D. Martinez. 2002. Network structure
+and biodiversity loss in food webs: Robustness increases with
+connectance. Ecol. Lett. 5:558--567.
 
 \bibitem[\citeproctext]{ref-emmersonWeakInteractionsOmnivory2004}
 Emmerson, M., and J. M. Yearsley. 2004.
@@ -1633,12 +1657,6 @@ Johnson, S., V. Domínguez-García, L. Donetti, and M. A. Muñoz. 2014.
 \href{https://doi.org/10.1073/pnas.1409077111}{Trophic coherence
 determines food-web stability}. Proceedings of the National Academy of
 Sciences 111:17923--17928.
-
-\bibitem[\citeproctext]{ref-jonssonReliabilityR50Measure2015}
-Jonsson, T., S. Berg, A. Pimenov, C. Palmer, and M. Emmerson. 2015.
-\href{https://doi.org/10.1111/oik.01588}{The reliability of {R50} as a
-measure of vulnerability of food webs to sequential species deletions}.
-Oikos 124:446--457.
 
 \bibitem[\citeproctext]{ref-lauEcologicalNetworkMetrics2017}
 Lau, M. K., S. R. Borrett, B. Baiser, N. J. Gotelli, and A. M. Ellison.
@@ -1755,10 +1773,6 @@ Kitching, N. D. Martinez, et al. 2012.
 \href{https://doi.org/10.1016/j.tree.2012.08.005}{Food webs: Reconciling
 the structure and function of biodiversity}. Trends in Ecology \&
 Evolution 27:689--697.
-
-\bibitem[\citeproctext]{ref-tilmanBiodiversityPopulationEcosystem1996}
-Tilman, D. 1996. \href{https://doi.org/10.2307/2265614}{Biodiversity:
-{Population Versus Ecosystem Stability}}. Ecology 77:350--363.
 
 \bibitem[\citeproctext]{ref-vermaatMajorDimensionsFoodweb2009}
 Vermaat, J. E., J. A. Dunne, and A. J. Gilbert. 2009.
