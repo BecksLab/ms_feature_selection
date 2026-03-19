@@ -242,7 +242,7 @@ ggsave("../figures/variance_heatmap.png",
        dpi = 600)
 
 ##################################################
-# 8. VISUALISE MODEL ALIGNMENT
+# 8. VISUALISE MODULE ALIGNMENT
 ##################################################
 
 var_prop <- summary(pca_all)$importance[2, ]  # variance explained
@@ -260,20 +260,30 @@ if (max(pcs_plot) < length(cum_var)) {
 pcs_plot <- pcs_plot[pcs_plot <= ncol(loadings)]
 pcs_plot_names <- paste0("PC", pcs_plot)
 
-alignment_mat <- obs_alignment[, pcs_plot_names, drop = FALSE]
+alignment_mat <- obs_alignment[, pcs_plot_names, drop = FALSE] %>%
+  as.tibble() %>%
+  glow_up(value = as.factor(row_number())) %>%
+  left_join(pal_df) %>%
+  vibe_check(-value, -colour) %>%
+  pivot_longer(-label)
 
-
-
-hm <- pheatmap(
-  as.matrix(alignment_mat),
-  color = seattle_abyssal_gen(100),
-  cluster_rows = TRUE,
-  cluster_cols = TRUE)
+ggplot(alignment_mat,
+       aes(x = name,
+           y = label,
+           fill = value)) +
+  geom_tile() +
+  scale_fill_continuous(
+    palette = seattle_abyssal_gen(100),
+    name = "Module Alignment"
+  ) +
+  labs(x = NULL,
+       y = NULL) +
+  figure_theme() +
+  theme(legend.position = 'right')
 
 ggsave("../figures/module_alignment_heatmap.png",
-       plot = hm$gtable,
        width = 6000,
-       height = 3000,
+       height = 2000,
        units = "px",
        dpi = 600)
 
@@ -377,10 +387,10 @@ pc1_label <- paste0("PC1 (", round(var_explained[1] * 100, 1), "%)")
 pc2_label <- paste0("PC2 (", round(var_explained[2] * 100, 1), "%)")
 
 pca_plot <- ggplot(loadings_plot, 
-       aes(PC1, PC2, 
-           colour = Module, 
-           fill = Module, 
-           label = Metric)) +
+                   aes(PC1, PC2, 
+                       colour = Module, 
+                       fill = Module, 
+                       label = Metric)) +
   geom_hline(yintercept = 0, linetype = "dashed", colour = "#A5ACAF") +
   geom_vline(xintercept = 0, linetype = "dashed", colour = "#A5ACAF") +
   geom_point(size = 3,
@@ -393,13 +403,13 @@ pca_plot <- ggplot(loadings_plot,
   labs(x = pc1_label,
        y = pc2_label) +
   scale_fill_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
-                      labels = pal_df$label,
-                      limits = pal_df$value,
-                      name = "Module") +
-  scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
                     labels = pal_df$label,
                     limits = pal_df$value,
                     name = "Module") +
+  scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
+                      labels = pal_df$label,
+                      limits = pal_df$value,
+                      name = "Module") +
   figure_theme() +
   theme(legend.position = 'right',
         panel.grid.major = element_blank())
@@ -462,31 +472,51 @@ sig_mask <- (p_values < 0.05) & (abs(z_scores) > 1.96)
 sig_mask <- ifelse(sig_mask, "*", "")
 
 # Use Z-scores for visualization (better than raw alignment)
-plot_mat <- z_scores
+plot_mat <- z_scores %>%
+  as.tibble() %>%
+  glow_up(value = as.factor(row_number())) %>%
+  left_join(pal_df) %>%
+  vibe_check(-value, -colour) %>%
+  pivot_longer(-label) %>%
+  glow_up(number = str_extract(name, "[[:digit:]]")) %>%
+  slay() %>%
+  glow_up(name = fct_inorder(name))
 
-# Optional: Cap extreme values for better visual scaling
-plot_mat[plot_mat > 4]  <- 4
-plot_mat[plot_mat < -4] <- -4
+max_val <- max(abs(plot_mat$value))
 
 # Create annotation of significance
-annotation_matrix <- sig_mask
+annotation_matrix <- sig_mask %>%
+  as.tibble() %>%
+  glow_up(value = as.factor(row_number())) %>%
+  left_join(pal_df) %>%
+  vibe_check(-value, -colour) %>%
+  pivot_longer(-label) %>%
+  yeet(value == "*")
 
-z_heatmap <- pheatmap(
-  plot_mat,
-  color = pal_diverge_gen(100),
-  cluster_rows = TRUE,
-  cluster_cols = TRUE,
-  display_numbers = annotation_matrix,
-  number_color = "#1A1A1A",
-  fontsize_number = 14,
-  main = "Module–PC Significance (Z-scores)",
-  breaks = seq(-4, 4, length.out = 101)
-)
+ggplot(plot_mat) +
+  geom_tile(aes(x = name,
+                y = label,
+                fill = value)) +
+  geom_text(data = annotation_matrix,
+            aes(x = name,
+                y = label),
+            colour = "#001628",
+            label = "*") +
+  scale_fill_gradient2(
+    low = seattle_div[1],
+    mid = seattle_div[2],
+    high = seattle_div[3],
+    limits = c(-max_val, max_val),
+    name = "Z-score"
+  ) +
+  labs(x = NULL,
+       y = NULL) +
+  figure_theme() +
+  theme(legend.position = 'right')
 
 ggsave("../figures/heatmap_zscores.png",
-       z_heatmap,
-       width = 6000,
-       height = 3000,
+       width = 7000,
+       height = 2500,
        units = "px",
        dpi = 600)
 

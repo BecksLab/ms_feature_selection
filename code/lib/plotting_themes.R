@@ -56,7 +56,7 @@ pal_diverge <- tibble(
 )
 
 seattle_div <- c("#001457", "#638596", "#F0F0F0", "#86BD26", "#FFB612")
-seattle_div <- c("#E9072B", "#F5F5F5", "#000E3B")
+seattle_div <- c("#E9072B", "#F5F5F5", "#68A2B9")
 
 pal_diverge_gen <- colorRampPalette(seattle_div)
 

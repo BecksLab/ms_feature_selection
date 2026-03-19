@@ -238,7 +238,7 @@ main_plot <- ggplot(final_summary,
   scale_size_continuous(
     range = c(2, 12), 
     breaks = c(0.1, 0.4, 0.7),
-    limits = c(0, 0.8),
+    limits = c(0, 0.9),
     labels = c("10%", "40%", "70%")) +
   scale_fill_manual(values = secondary_palette) +
   guides(
