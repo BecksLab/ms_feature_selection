@@ -185,7 +185,7 @@ ggplot(directed_estimates,
   labs(title = "Structural Drivers of Stability (PCA Scores)",
        subtitle = "Standardised Coefficients (direction and magnitude)",
        x = NULL,
-       y = "Standardized Estimate") +
+       y = "Standardised Estimate") +
   figure_theme()
 
 ggsave("../figures/stability_estimate.png",
