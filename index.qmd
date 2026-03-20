@@ -78,7 +78,6 @@ We compiled food web data from Mangal [@poisotMangalMakingEcological2016], Web o
 | L/S | Mean number of links per species. | Captures average interaction density per taxon. |  |
 | Cannibal | Proportion of taxa with self-loops. | Quantifies the prevalence of cannibalistic interactions. |  |
 | Herbivore | Proportion of taxa feeding exclusively on basal species. | Describes the representation of primary consumers. |  |
-| Intermediate | Percentage of intermediate taxa (with both consumers and resources) |  |  |
 | Trophic level (TL) | Prey-weighted trophic level averaged across taxa. | Captures the vertical organisation of energy transfer. | @williamsLimitsTrophicLevels2004 |
 | MaxSim | Mean maximum trophic similarity of each taxon to all others. | Quantifies functional similarity based on shared predators and prey. | @yodzisSearchOperationalTrophospecies1999 |
 | Centrality | Node centrality averaged across taxa (definition-dependent). | Captures the distribution of influence or connectivity among species. | @estradaUsingNetworkCentrality2008 |
@@ -90,7 +89,6 @@ We compiled food web data from Mangal [@poisotMangalMakingEcological2016], Web o
 | Omnivory | Proportion of taxa feeding on resources at multiple trophic levels. | Describes vertical coupling of energy channels. | @mccannDiversityStabilityDebate2000 |
 | Loop | Proportion of taxa involved in trophic loops. | Quantifies the prevalence of cyclic interaction pathways. |  |
 | Prey:Predator | Ratio of prey taxa (basal + intermediate) to predator taxa (intermediate + top). | Describes the overall shape of the trophic structure. |  |
-| Diameter | Diameter can also be measured as the average of the distances between each pair of nodes in the network |  |  |
 | Clust | Mean clustering coefficient. | Measures the tendency for taxa sharing interaction partners to also interact with each other. | @wattsCollectiveDynamicsSmallworld1998 |
 | GenSD | Normalised standard deviation of generality. | Captures heterogeneity in the number of resources per taxon. | @williamsLimitsTrophicLevels2004 |
 | VulSD | Normalised standard deviation of vulnerability. | Captures heterogeneity in the number of consumers per taxon. | @williamsLimitsTrophicLevels2004 |
