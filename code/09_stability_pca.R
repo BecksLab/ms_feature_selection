@@ -106,8 +106,8 @@ stability_panel <- ggplot(pca_stability) +
                    xend = PC1_corr, 
                    yend = PC2_corr),
                arrow = arrow(length = unit(0.3,"cm")), 
-               linewidth = 1.2,
-               colour = "#001628") +
+               linewidth = 1.8,
+               colour = "#57205C") +
   facet_wrap(~Stability, ncol = 1) +
   figure_theme() +
   theme(axis.text = element_blank(),

@@ -30,7 +30,7 @@ kraken_palette <- c(
   "Energy Transport"          = "#E9072B",
   "Trophic Role Asymmetry"    = "#99D9D9",
   "Control Heterogeneity"     = "#005A5B",
-  "Basal Control"             = "#9BBF80"
+  "Flow Control"              = "#9BBF80"
 )
 
 # Converts the named vector into a dataframe for easier mapping in ggplot

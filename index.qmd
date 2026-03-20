@@ -190,7 +190,7 @@ The resulting modular partition identified coherent groups of metrics describing
 | Energy Transport | mean distance, path length | Quantifies geometric structure of energy routing independent of network size or trophic structure |
 | Trophic Role Asymmetry | basal, predpreyRatio, GenSD, LinkSD, MaxSim | Captures structural imbalance across trophic roles, but it also incorporates heterogeneity in consumer behaviour and redundancy |
 | Control Heterogeneity | top, VulSD, ChNum | Reflects heterogeneity in top-down regulation and predation pressure distribution |
-| Basal Control | herbivory, centrality | Captures energy entry points and dominant structural hubs |
+| Flow Control | herbivory, centrality | Captures energy entry points and dominant structural hubs |
 
 : Structural Modules Identified From Hierarchical Clustering. {#tbl-modules}
 

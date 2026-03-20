@@ -4,4 +4,4 @@
 "3","Energy Transport",2,"distance, path"
 "4","Trophic Role Asymmetry",5,"basal, predpreyRatio, GenSD, LinkSD, MaxSim"
 "5","Control Heterogeneity",3,"top, VulSD, ChNum"
-"6","Basal Control",2,"herbivory, centrality"
+"6","Flow Control",2,"herbivory, centrality"
