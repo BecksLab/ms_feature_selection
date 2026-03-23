@@ -17,7 +17,7 @@ topology <- read.csv("data/vermaat_2009/vermaat_summary.csv") %>%
   # just to catch any possible duplicate networks in both Mangal and WOL
   distinct()
 
-# Subset for Vermaat variables (optional)
+# Subset for Vermaat variables
 topology_subset <- topology %>%
   vibe_check(-c(links, S1, S2, S4, S5, diameter, ρ, centrality, complexity))
 

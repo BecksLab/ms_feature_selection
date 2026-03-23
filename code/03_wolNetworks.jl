@@ -73,6 +73,7 @@ weboflife_topology = DataFrame(
     ρ = Any[],
     centrality = Any[],
     loops = Any[],
+    resilience = Any[],
     robustness = Any[],
     intervals = Any[],
     MaxSim = Any[],
