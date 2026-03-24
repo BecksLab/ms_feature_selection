@@ -120,9 +120,12 @@ pc_scores_df <- extract_pc_scores(pca,
 # 4) Export outputs
 ############################################################
 
-saveRDS(cluster_medoids, "data/outputs/cluster_medoids.rds")
-saveRDS(pc_dominant_metrics, "data/outputs/pc_dominant_metrics.rds")
-saveRDS(pc_scores_df, "data/outputs/pc_scores_df.rds")
+write.csv(cluster_medoids, "data/outputs/cluster_medoids.csv",
+          row.names = FALSE)
+write.csv(pc_dominant_metrics, "data/outputs/pc_dominant_metrics.csv",
+          row.names = FALSE)
+write.csv(pc_scores_df, "data/outputs/pc_scores_df.csv",
+          row.names = FALSE)
 
 ############################################################
 # 5) Sanity check
