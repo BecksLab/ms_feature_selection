@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.10.0">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tanya Strydom">
 <meta name="author" content="Andrew P. Beckerman">
-<meta name="dcterms.date" content="2026-03-20">
+<meta name="dcterms.date" content="2026-03-24">
 <meta name="keywords" content="food web, structure, dimensionality reduction">
 
 <title>Ecological Network Structure Is Multidimensional: Rethinking the Stability Debate</title>
@@ -56,7 +56,7 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-9c5e1a58ae97b3faeeb5cca0e0e2eaf1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-133a0a4dda30ced7f07b755c880e46a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -106,10 +106,10 @@ window.Quarto = {
 <meta name="citation_keywords" content="food web,structure,dimensionality reduction">
 <meta name="citation_author" content="Tanya Strydom">
 <meta name="citation_author" content="Andrew P. Beckerman">
-<meta name="citation_publication_date" content="2026-03-20">
-<meta name="citation_cover_date" content="2026-03-20">
+<meta name="citation_publication_date" content="2026-03-24">
+<meta name="citation_cover_date" content="2026-03-24">
 <meta name="citation_year" content="2026">
-<meta name="citation_online_date" content="2026-03-20">
+<meta name="citation_online_date" content="2026-03-24">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=Stability criteria for complex ecosystems;,citation_abstract=Analysis of stability criteria for different types of complex ecological network shows key differences between predator–prey interactions, which are stabilizing, and competitive and mutualistic interactions, which are destabilizing.;,citation_author=Stefano Allesina;,citation_author=Si Tang;,citation_publication_date=2012-03;,citation_cover_date=2012-03;,citation_year=2012;,citation_fulltext_html_url=https://www.nature.com/articles/nature10832;,citation_issue=7388, 7388;,citation_doi=10.1038/nature10832;,citation_issn=1476-4687;,citation_volume=483;,citation_language=en-US;,citation_journal_title=Nature;,citation_publisher=Nature Publishing Group;">
 <meta name="citation_reference" content="citation_title=Mangal.jl and EcologicalNetworks.jl: Two complementary packages for analyzing ecological networks in Julia;,citation_abstract=Network ecology is an emerging field of study describing species interactions (e.g. predation, pollination) in a biological community. Ecological networks, in which two species are connected if they can interact, are a mathematical representation of all interactions encountered in a given ecosystem. Anchored in graph theory, the methods developed in network ecology are remarkably rigorous and biologically insightful. Indeed, many ecological and evolutionary processes are driven by species interactions and network structure (i.e. the arrangement of links in ecological networks). The study of ecological networks, from data importation and simulation to data analysis and visualization, requires a coherent and efficient set of numerical tools. With its powerful and dynamic type system, the Julia programming language provides a very good and fast computing environment suitable for ecological research. Julia’s typing system notably ensures that appropriate methods are used when a function is applied to different types of ecological data, which therefore minimizes the risk of committing errors of analysis and interpretation in network ecology. Mangal.jl and EcologicalNetworks.jl are two novel and complementary Julia packages designed to conduct research in network ecology efficiently. Researchers studying a broad range of ecological networks can read the data and metadata of numerous well-documented networks using Mangal.jl, and analyze their properties using EcologicalNetworks.jl.;,citation_author=Francis Banville;,citation_author=Steve Vissault;,citation_author=Timothée Poisot;,citation_publication_date=2021-05-05;,citation_cover_date=2021-05-05;,citation_year=2021;,citation_fulltext_html_url=https://joss.theoj.org/papers/10.21105/joss.02721;,citation_issue=61;,citation_doi=10.21105/joss.02721;,citation_issn=2475-9066;,citation_volume=6;,citation_language=en-US;,citation_journal_title=Journal of Open Source Software;,citation_journal_abbrev=JOSS;">
@@ -226,7 +226,7 @@ window.Quarto = {
                 <div>
             <div class="quarto-title-meta-heading">Published</div>
             <div class="quarto-title-meta-contents">
-              <p class="date">March 20, 2026</p>
+              <p class="date">March 24, 2026</p>
             </div>
           </div>
           
@@ -862,23 +862,13 @@ Figure&nbsp;12: Structural partitioning of variance explained in ecosystem stabi
 <p>The relationship between network structure and stability was governed by different structural hierarchies. Complexity was characterised by a distributed or intermediate architecture in most representations, reflecting the cumulative effect of interacting features. In contrast, ρ displayed a strong alignment with coordinated multivariate axes, with the Trophic Integration module explaining a significant portion (30.2%) of the variance in the Cluster Dominant model.</p>
 <p>Control exhibited a uniquely representation-sensitive architecture: while the Cluster Dominant model suggested a Distributed regime (<span class="math inline">\(\alpha = 0\)</span>), the PC Score model favoured a Sparse regime (α=1). This indicates that while the structural signals for control are widespread (involving Trophic Role Asymmetry), they can be distilled into a single, high-leverage structural axis (PC1, estimate = -0.791). Finally, Robustness shifted towards Sparsity under PC abstraction, but its low <span class="math inline">\(R^2\)</span> suggests that even its bottleneck structural drivers (such as PC3) are only weak constraints on the system’s ability to withstand species loss.</p>
 <p>Collectively, these results demonstrate that stability components occupy distinct positions within structural space. Complexity is shaped by distributed fine-scale topology, ρ emerges from coordinated multivariate gradients, and robustness remains weakly constrained by static architecture. Rather than reflecting a single structural driver, ecosystem stability is organised along layered, facet-specific dimensions of network architecture.</p>
-<div id="fig-stab_powercontrol" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-stab_powercontrol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="figures/stability_power_v_control.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;13: Relationship between predictive power and structural sparsity. Predictive power (CV R2) is plotted against the sparsity index (α) for all stability metrics. Point size represents the contribution of the dominant structural module to the total variance explained. The horizontal axis identifies the control regime, ranging from Distributed Control (low α) to Sparse Control (high α). This visualisation reveals whether high predictive accuracy in ecosystem stability is a result of specific structural “levers” (top-right) or systemic, redundant configurations (top-left)."><img src="figures/stability_power_v_control.png" class="img-fluid figure-img"></a>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stab_powercontrol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13: Relationship between predictive power and structural sparsity. Predictive power (CV R2) is plotted against the sparsity index (α) for all stability metrics. Point size represents the contribution of the dominant structural module to the total variance explained. The horizontal axis identifies the control regime, ranging from Distributed Control (low α) to Sparse Control (high α). This visualisation reveals whether high predictive accuracy in ecosystem stability is a result of specific structural “levers” (top-right) or systemic, redundant configurations (top-left).
-</figcaption>
-</figure>
-</div>
 <div id="fig-stab_pca" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-stab_pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="figures/multi_panel_pca_stability.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;14: A vibe but don’t know where it belongs"><img src="figures/multi_panel_pca_stability.png" class="img-fluid figure-img"></a>
+<a href="figures/multi_panel_pca_stability.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Figure&nbsp;13: A vibe but don’t know where it belongs"><img src="figures/multi_panel_pca_stability.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stab_pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14: A vibe but don’t know where it belongs
+Figure&nbsp;13: A vibe but don’t know where it belongs
 </figcaption>
 </figure>
 </div>
