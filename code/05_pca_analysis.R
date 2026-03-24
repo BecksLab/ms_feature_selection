@@ -15,7 +15,7 @@ source("lib/plotting_themes.R")
 
 predictors <- read.csv("data/cleaned/all_networks.csv") %>%
   as_tibble() %>%
-  vibe_check(-c(ρ, complexity, robustness, control))
+  vibe_check(-c(ρ, complexity, robustness, control, resilience))
 
 cluster_df <- read.csv("../tables/metric_clusters_auto.csv")
 

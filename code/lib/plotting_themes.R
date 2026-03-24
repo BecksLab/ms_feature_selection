@@ -65,7 +65,8 @@ pal_diverge_gen <- colorRampPalette(seattle_div)
 secondary_palette <- c(
   "#AFD2E3", 
   "#283339", 
-  "#355464"
+  "#355464",
+  "#198566"
   )
 
 # stability palette
@@ -77,6 +78,7 @@ stability_palette <- c(
 )
 
 pca_col <- secondary_palette[3]
+complexity_col <- secondary_palette[4]
 
 figure_theme <- function() {
   theme_bw() %+replace% 

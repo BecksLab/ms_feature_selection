@@ -14,16 +14,17 @@ source("lib/plotting_themes.R")
 #-----------------------------------------------
 
 pc_scores_df <- readRDS("data/outputs/pc_scores_df.rds")
+topology <- read.csv("data/cleaned/all_networks.csv")
 
 # Add network_id
 pc_scores_df <- pc_scores_df %>%
   mutate(network_id = row_number())
 
 # Pivot stability metrics to long format
-pca_stability <- topology[, c("robustness", "ρ", "complexity", "control")] %>%
+pca_stability <- topology[, c("robustness", "ρ", "control", "resilience")] %>%
   glow_up(network_id = row_number()) %>%
   left_join(pc_scores_df) %>%
-  pivot_longer(cols = c(robustness, `ρ`, complexity, control),
+  pivot_longer(cols = c(robustness, `ρ`, control, resilience),
                names_to = "Stability",
                values_to = "Value") %>%
   squad_up(Stability) %>%
