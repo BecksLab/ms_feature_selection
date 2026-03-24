@@ -22,8 +22,10 @@ function hopcroft_karp_bipartite(left, right, adj)
 
     dist = Dict(u => 0 for u in left)
 
+    # Inside hopcroft_karp_bipartite
     bfs() = begin
-        queue = []
+        # Using a simple vector as a queue with a manual pointer
+        queue = Int[] 
         for u in left
             if pairU[u] == 0
                 dist[u] = 0
@@ -34,8 +36,11 @@ function hopcroft_karp_bipartite(left, right, adj)
         end
         dist[0] = INF
 
-        while !isempty(queue)
-            u = popfirst!(queue)
+        head = 1
+        while head <= length(queue)
+            u = queue[head]
+            head += 1
+            
             if dist[u] < dist[0]
                 for v in adj[u]
                     if dist[pairV[v]] == INF

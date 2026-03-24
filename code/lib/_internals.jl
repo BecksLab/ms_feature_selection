@@ -82,7 +82,9 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :ρ => spectralradius(N),
         :centrality => mean(collect(values(centrality(N)))),
         :loops => length(loops(N)) / S,
-        :robustness => resilience(extinction(N)),
+        :resilience => resilience(extinction(N)),
+        :robustness => robustness(N; threshold = 50,
+                                  remove_disconnected = true),
         :intervals => intervality(A),
         :MaxSim => max_sim(N),
         :Clust => clustering(A),
@@ -469,16 +471,15 @@ Returns the fraction of driver nodes required to control the network
 following Liu et al. (2011). Lower values indicate higher controllability.
 """
 function structural_controllability(N::SpeciesInteractionNetwork)
-
     A = _get_matrix(N)
     S = size(A, 1)
 
-    # bipartite graph
+    # bipartite graph indices
     left  = collect(1:S)
     right = collect(S+1:2S)
 
+    # Build adjacency list
     adj = Dict(u => Int[] for u in left)
-
     for i in 1:S
         for j in 1:S
             if A[i, j]
@@ -489,10 +490,9 @@ function structural_controllability(N::SpeciesInteractionNetwork)
 
     _, _, matching_size = hopcroft_karp_bipartite(left, right, adj)
 
-    Nd = S - matching_size
+    # Theoretical minimum: S - matching_size. 
+    # If S == matching_size, you still need at least 1 driver node.
+    Nd = max(1, S - matching_size)
 
-    # normalized controllability
-    nD = Nd / S
-
-    return nD
+    return Nd / S
 end
