@@ -263,8 +263,6 @@ Control exhibited a uniquely representation-sensitive architecture: while the Cl
 
 Collectively, these results demonstrate that stability components occupy distinct positions within structural space. Complexity is shaped by distributed fine-scale topology, ρ emerges from coordinated multivariate gradients, and robustness remains weakly constrained by static architecture. Rather than reflecting a single structural driver, ecosystem stability is organised along layered, facet-specific dimensions of network architecture.
 
-![Relationship between predictive power and structural sparsity. Predictive power (CV R2) is plotted against the sparsity index (α) for all stability metrics. Point size represents the contribution of the dominant structural module to the total variance explained. The horizontal axis identifies the control regime, ranging from Distributed Control (low α) to Sparse Control (high α). This visualisation reveals whether high predictive accuracy in ecosystem stability is a result of specific structural "levers" (top-right) or systemic, redundant configurations (top-left).](figures/stability_power_v_control.png){#fig-stab_powercontrol}
-
 ![A vibe but don't know where it belongs](figures/multi_panel_pca_stability.png){#fig-stab_pca}
 
 # Discussion
