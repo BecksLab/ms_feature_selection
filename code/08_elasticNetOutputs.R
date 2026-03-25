@@ -55,7 +55,7 @@ clust_metada <-
   left_join(
     read_csv("../tables/metric_clusters_auto.csv"),
     read_csv("../tables/module_summary_7clusters.csv") %>%
-      select(Cluster, label),
+      vibe_check(Cluster, label),
     by = "Cluster"
   )
 
@@ -65,11 +65,11 @@ clust_metada <-
 
 directed_estimates <- all_estimates %>%
   left_join(clust_metada, by = c("term" = "Metric")) %>%
-  mutate(
+  glow_up(
     direction = if_else(estimate > 0, "Positive", "Negative")
   ) %>%
   left_join(pal_df, by = "label") %>%
-  mutate(
+  glow_up(
     label = case_when(rep_name == "PC Score" ~ "PCA Axis",
                       rep_name == "Complexity" ~ "Complexity",
                       TRUE ~ label),
