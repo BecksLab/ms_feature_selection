@@ -6,6 +6,10 @@ using Random
 using StatsBase
 using Tables
 
+# set seed
+import Random
+Random.seed!(66)
+
 # data
 
 topology = CSV.read("data/cleaned/all_networks.csv", DataFrame)
