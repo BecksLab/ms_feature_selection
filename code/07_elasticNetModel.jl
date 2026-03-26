@@ -187,7 +187,9 @@ rep_list = Dict(
     "medoids" => cluster_medoids,
     "dominant" => pc_dominant_metrics,
     "pca_score" => pc_names,
-    "complexity" => ["complexity"]
+    "complexity" => ["complexity"],
+    "connectance" => ["connectance"],
+    "trophicCoherence" => ["trophicCoherence"]
 )
 
 results = DataFrame(

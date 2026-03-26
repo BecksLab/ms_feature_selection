@@ -21,12 +21,14 @@ source("lib/plotting_themes.R")
 
 # Model summary from Julia
 model_performance <- read_csv("data/outputs/elasticNet_summary.csv") %>%
-  mutate(
+  glow_up(
     rep_name = case_when(
       rep_name == "medoids"   ~ "Cluster Dominant",
       rep_name == "pca_score" ~ "PC Score",
       rep_name == "dominant"  ~ "PC Dominant",
-      rep_name == "complexity"  ~ "Complexity",
+      rep_name == "complexity"  ~ "Univariate",
+      rep_name == "connectance"  ~ "Univariate",
+      rep_name == "trophicCoherence"  ~ "Univariate",
       TRUE ~ rep_name
     ),
     alpha_val = alpha,
@@ -35,12 +37,14 @@ model_performance <- read_csv("data/outputs/elasticNet_summary.csv") %>%
 
 # Coefficients from Julia
 all_estimates <- read_csv("data/outputs/elasticNet_coefficients.csv") %>%
-  mutate(
+  glow_up(
     rep_name = case_when(
       rep_name == "medoids"   ~ "Cluster Dominant",
       rep_name == "pca_score" ~ "PC Score",
       rep_name == "dominant"  ~ "PC Dominant",
       rep_name == "complexity"  ~ "Complexity",
+      rep_name == "connectance"  ~ "Connectance",
+      rep_name == "trophicCoherence"  ~ "Trophic Coherence",
       TRUE ~ rep_name
     )
   )
@@ -71,10 +75,10 @@ directed_estimates <- all_estimates %>%
   left_join(pal_df, by = "label") %>%
   glow_up(
     label = case_when(rep_name == "PC Score" ~ "PCA Axis",
-                      rep_name == "Complexity" ~ "Complexity",
+                      term  == "complexity" ~ "Complexity",
                       TRUE ~ label),
     colour = case_when(rep_name == "PC Score" ~ pca_col,
-                       rep_name == "Complexity" ~ complexity_col,
+                       term  == "complexity" ~ complexity_col,
                        TRUE ~ colour))
 
 ############################################################
@@ -115,13 +119,23 @@ ggplot(directed_estimates,
   figure_theme()
 
 ggsave("../figures/stability_variance.png",
-       width = 6000,
+       width = 8000,
        height = 4000,
        units = "px")
 
 
 # estimates/coefficients
-ggplot(directed_estimates, 
+ggplot(directed_estimates %>%
+         glow_up(
+           rep_name = case_when(
+             rep_name == "medoids"   ~ "Cluster Dominant",
+             rep_name == "pca_score" ~ "PC Score",
+             rep_name == "dominant"  ~ "PC Dominant",
+             rep_name == "Complexity"  ~ "Univariate",
+             rep_name == "Connectance"  ~ "Univariate",
+             rep_name == "Trophic Coherence"  ~ "Univariate",
+             TRUE ~ rep_name
+           )), 
        aes(x = reorder(term, estimate), 
            y = estimate, 
            fill = label, 
@@ -154,7 +168,7 @@ ggplot(directed_estimates,
 
 ggsave("../figures/stability_estimate.png",
        width = 6000,
-       height = 4000,
+       height = 5000,
        units = "px")
 
 # alpha
