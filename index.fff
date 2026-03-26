@@ -175,15 +175,15 @@ and structural alignment among dimensional-reduction strategies.}
 
 }
 
-\caption{\label{fig-stab_alpha}The architecture of structural control
-across stability regimes. The elastic net mixing parameter (α) is
-plotted for each stability metric, categorised by structural
-representation. α values near 0 (Ridge-like) indicate Distributed
-Control, where stability is an emergent property of the entire network
-fabric. α values near 1 (Lasso-like) indicate Sparse Control, where
-stability is governed by a small number of specific structural
-bottlenecks. A dashed line at α=0.5 denotes the transition between
-sparse and distributed modelling regimes.}
+\caption{\label{fig-stab_alpha}Elastic net mixing parameter (α) for each
+stability metric and structural representation. The α value indicates
+the balance between ridge (distributed influence across many predictors)
+and lasso (sparse selection of a few predictors) regularisation. Points
+are coloured and shaped by representation type, with the dashed vertical
+line at α = 0.5 highlighting the ridge--lasso boundary. Higher α values
+suggest that stability is primarily driven by a small subset of
+predictors, whereas lower values indicate more distributed structural
+control.}
 
 \end{figure}
 \efloatseparator
@@ -196,15 +196,17 @@ sparse and distributed modelling regimes.}
 
 }
 
-\caption{\label{fig-stab_corr}Standardised structural drivers of
-ecosystem stability. Lollipop plots display the standardised
-coefficients (estimates) for the top structural predictors across all
-stability metrics and representations. The magnitude of the point
-indicates the strength of the effect, while the position relative to the
-zero-intercept indicates a stabilising (positive) or destabilising
-(negative) influence. Plots are faceted by representation (rows) and
-stability metric (columns), with colours identifying the functional
-module of each structural driver.}
+\caption{\label{fig-stab_corr}Standardised elastic net regression
+coefficients linking structural predictors to ecosystem stability
+metrics. Each point represents a predictor, with vertical lines
+extending from zero to the coefficient value. Coefficients are coloured
+by structural module and faceted by both network representation (Cluster
+Dominant, PC Dominant, PCA Axis, or Complexity) and stability metric.
+Positive coefficients indicate that higher values of the predictor
+increase the stability metric, while negative coefficients indicate a
+suppressive effect. Variation in coefficients across facets reveals
+switching of structural predictors' influence on different stability
+outcomes.}
 
 \end{figure}
 \efloatseparator
@@ -217,32 +219,15 @@ module of each structural driver.}
 
 }
 
-\caption{\label{fig-stab_var}Structural partitioning of variance
-explained in ecosystem stability. Stacked bar charts represent the
-absolute variance (cross-validated R2) explained by different structural
-modules across four stability metrics: robustness, ρ, complexity, and
-control. Results are faceted by structural representation.}
-
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{figures/stability_power_v_control.png}}
-
-}
-
-\caption{\label{fig-stab_powercontrol}Relationship between predictive
-power and structural sparsity. Predictive power (CV R2) is plotted
-against the sparsity index (α) for all stability metrics. Point size
-represents the contribution of the dominant structural module to the
-total variance explained. The horizontal axis identifies the control
-regime, ranging from Distributed Control (low α) to Sparse Control (high
-α). This visualisation reveals whether high predictive accuracy in
-ecosystem stability is a result of specific structural ``levers''
-(top-right) or systemic, redundant configurations (top-left).}
+\caption{\label{fig-stab_var}Contribution of structural modules to
+ecosystem stability. Bars show the absolute variance in each stability
+metric explained by different structural modules, as estimated via
+elastic net regression. Facets correspond to the four stability metrics:
+Robustness (\(R_{50}\)), Resilience, Spectral Radius (ρ), and Structural
+Controllability. Variance contributions are scaled by the
+cross-validated \(R^2\) of the corresponding model, allowing comparison
+across metrics. Differences in bar heights across facets indicate which
+modules are more influential for particular stability processes..}
 
 \end{figure}
 \efloatseparator
