@@ -82,7 +82,7 @@ directed_estimates <- all_estimates %>%
 ############################################################
 
 final_summary <- model_performance %>%
-  mutate(
+  glow_up(
     architecture = case_when(
       alpha >= 0.75 ~ "Sparse (Lasso-like)",
       alpha <= 0.25 ~ "Distributed (Ridge-like)",
@@ -104,7 +104,7 @@ ggplot(directed_estimates,
            fill = label)) +
   geom_col() +
   facet_wrap(~ metric) +
-  ylim(0, 1.0) +
+  coord_cartesian(ylim = c(0,1)) +
   labs(title = "Variance in Stability Explained by Structural Modules",
        y = "Absolute Variance Explained (CV R-squared)",
        x = NULL) +
