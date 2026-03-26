@@ -29,6 +29,7 @@ model_performance <- read_csv("data/outputs/elasticNet_summary.csv") %>%
       rep_name == "complexity"  ~ "Univariate",
       rep_name == "connectance"  ~ "Univariate",
       rep_name == "trophicCoherence"  ~ "Univariate",
+      rep_name == "richness"  ~ "Univariate",
       TRUE ~ rep_name
     ),
     alpha_val = alpha,
@@ -45,6 +46,7 @@ all_estimates <- read_csv("data/outputs/elasticNet_coefficients.csv") %>%
       rep_name == "complexity"  ~ "Complexity",
       rep_name == "connectance"  ~ "Connectance",
       rep_name == "trophicCoherence"  ~ "Trophic Coherence",
+      rep_name == "richness"  ~ "Richness",
       TRUE ~ rep_name
     )
   )
@@ -134,6 +136,7 @@ ggplot(directed_estimates %>%
              rep_name == "Complexity"  ~ "Univariate",
              rep_name == "Connectance"  ~ "Univariate",
              rep_name == "Trophic Coherence"  ~ "Univariate",
+             rep_name == "Richness"  ~ "Univariate",
              TRUE ~ rep_name
            )), 
        aes(x = reorder(term, estimate), 

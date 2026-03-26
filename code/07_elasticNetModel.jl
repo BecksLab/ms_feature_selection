@@ -189,7 +189,8 @@ rep_list = Dict(
     "pca_score" => pc_names,
     "complexity" => ["complexity"],
     "connectance" => ["connectance"],
-    "trophicCoherence" => ["trophicCoherence"]
+    "trophicCoherence" => ["trophicCoherence"],
+    "richness" => ["richness"]
 )
 
 results = DataFrame(
