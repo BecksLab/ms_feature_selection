@@ -32,17 +32,9 @@ function rmse(y_true, y_pred)
 end
 
 function r2_score(y_true, y_pred)
-    return cor(y_true, y_pred)^2
-end
-
-function standardise(df::DataFrame)
-    df_std = copy(df)
-    for col in names(df)
-        μ = mean(skipmissing(df[!, col]))
-        σ = std(skipmissing(df[!, col]))
-        df_std[!, col] = (df[!, col] .- μ) ./ σ
-    end
-    return df_std
+    ss_res = sum((y_true .- y_pred).^2)
+    ss_tot = sum((y_true .- mean(y_true)).^2)
+    return 1 - (ss_res / ss_tot)
 end
 
 function kfold_indices(n, k, repeats)
@@ -50,7 +42,7 @@ function kfold_indices(n, k, repeats)
 
     for r in 1:repeats
         idx = shuffle(1:n)
-        folds = Iterators.partition(idx, ceil(Int, n/k))
+        folds = [idx[floor(Int, (i-1)*n/k)+1 : floor(Int, i*n/k)] for i in 1:k]
         push!(all_splits, collect(folds))
     end
 
@@ -59,98 +51,132 @@ end
 
 function run_stability_enet(target_var, predictor_names, data_full)
 
+    # -------------------------
+    # Prepare data
+    # -------------------------
     cols = vcat([target_var], predictor_names)
-    df = data_full[:, cols]
-    df = dropmissing(df)
+    df = dropmissing(data_full[:, cols])
 
-    # Standardise
-    df_std = standardise(df)
+    y_raw = Vector(df[:, target_var])
+    X_raw = Matrix(df[:, predictor_names])
+    n = size(X_raw, 1)
 
-    y = df_std[:, target_var]
-    X_df = df_std[:, predictor_names]
-    X = Matrix(X_df)
-
-    n = size(X, 1)
-
-    # Grid
     alphas = 0:0.25:1
-    lambdas = 10 .^ range(-4, -1, length=30)
 
+    # CV tracking
     best_r2 = -Inf
     best_rmse = Inf
     best_alpha = nothing
-    best_lambda = nothing
+    best_lambda_value = nothing
 
     folds_all = kfold_indices(n, 5, 10)
 
+    # -------------------------
+    # Cross-validation loop
+    # -------------------------
     for α in alphas
-        for λ in lambdas
 
-            r2_scores = Float64[]
-            rmse_scores = Float64[]
+        lambda_scores = Dict{Float64, Vector{Float64}}()
+        lambda_rmse   = Dict{Float64, Vector{Float64}}()
 
-            for folds in folds_all
-                for test_idx in folds
+        for folds in folds_all
+            for test_idx in folds
 
-                    train_idx = setdiff(1:n, test_idx)
+                train_idx = setdiff(1:n, test_idx)
 
-                    X_train = X[train_idx, :]
-                    y_train = y[train_idx]
+                X_train = X_raw[train_idx, :]
+                y_train = y_raw[train_idx]
 
-                    X_test = X[test_idx, :]
-                    y_test = y[test_idx]
+                X_test = X_raw[test_idx, :]
+                y_test = y_raw[test_idx]
 
-                    model = glmnet(X_train, y_train,
-                                   alpha=α,
-                                   lambda=[λ])
+                # -------------------------
+                # Standardise train only
+                # -------------------------
+                μx = mean(X_train, dims=1)
+                σx = std(X_train, dims=1)
+                σx[σx .== 0] .= 1.0
 
-                    y_pred = GLMNet.predict(model, X_test)[:,1]
+                μy = mean(y_train)
+                σy = std(y_train)
+                σy = σy == 0 ? 1.0 : σy
 
-                    push!(r2_scores, r2_score(y_test, y_pred))
-                    push!(rmse_scores, rmse(y_test, y_pred))
+                X_train_std = (X_train .- μx) ./ σx
+                X_test_std  = (X_test  .- μx) ./ σx
+                y_train_std = (y_train .- μy) ./ σy
+                y_test_std  = (y_test  .- μy) ./ σy
+
+                # -------------------------
+                # Fit elastic net for this alpha (full lambda path)
+                # -------------------------
+                fold_model = glmnet(X_train_std, y_train_std, alpha=α)
+                λ_path = fold_model.lambda
+
+                # Evaluate each lambda
+                for (idx, λ_val) in enumerate(λ_path)
+                    y_pred = GLMNet.predict(fold_model, X_test_std, idx)[:,1]
+
+                    r2 = r2_score(y_test_std, y_pred)
+                    e  = rmse(y_test_std, y_pred)
+
+                    push!(get!(lambda_scores, λ_val, Float64[]), r2)
+                    push!(get!(lambda_rmse, λ_val, Float64[]), e)
                 end
             end
+        end
 
-            mean_r2 = mean(r2_scores)
-
+        # -------------------------
+        # Pick best lambda for this alpha
+        # -------------------------
+        for (λ_val, r2_list) in lambda_scores
+            mean_r2 = mean(r2_list)
             if mean_r2 > best_r2
                 best_r2 = mean_r2
-                best_rmse = mean(rmse_scores)
+                best_rmse = mean(lambda_rmse[λ_val])
                 best_alpha = α
-                best_lambda = λ
+                best_lambda_value = λ_val
             end
         end
     end
 
-    # Final model
-    model = glmnet(X, y,
-                   alpha=best_alpha,
-                   lambda=[best_lambda])
+    # -------------------------
+    # Fit final model on full dataset
+    # -------------------------
+    μx = mean(X_raw, dims=1)
+    σx = std(X_raw, dims=1)
+    σx[σx .== 0] .= 1.0
+    μy = mean(y_raw)
+    σy = std(y_raw)
+    σy = σy == 0 ? 1.0 : σy
+
+    X_std = (X_raw .- μx) ./ σx
+    y_std = (y_raw .- μy) ./ σy
+
+    final_model = glmnet(X_std, y_std, alpha=best_alpha)
+
+    # Map CV-selected lambda to closest in final model
+    final_lambda_idx = findmin(abs.(final_model.lambda .- best_lambda_value))[2]
+
+    # Extract coefficients
+    betas = final_model.betas[:, final_lambda_idx]
 
     # -------------------------
-    # Coefficients
+    # Build coefficient DataFrame
     # -------------------------
-    betas = model.betas[:, 1]
-
     coef_df = DataFrame(
         term = predictor_names,
         estimate = betas
     )
 
-    # -------------------------
-    # Variance explained
-    # -------------------------
-    corrs = [cor(X_df[!, col], y) for col in predictor_names]
-
+    corrs = [cor(X_raw[:, i], y_raw) for i in 1:size(X_raw,2)]
     coef_df.correlation = corrs
     coef_df.variance_explained = coef_df.estimate .* coef_df.correlation
-
-    # add identifiers (glow_up)
     coef_df.metric .= target_var
 
     return (
         alpha = best_alpha,
-        lambda = best_lambda,
+        lambda_index = final_lambda_idx,
+        lambda = final_model.lambda[final_lambda_idx],
         r2 = best_r2,
         rmse = best_rmse,
         coef_df = coef_df
