@@ -49,6 +49,16 @@ function kfold_indices(n, k, repeats)
     return all_splits
 end
 
+function ols_fit_predict(X_train, y_train, X_test)
+    X_train_i = hcat(ones(size(X_train,1)), X_train)
+    X_test_i  = hcat(ones(size(X_test,1)), X_test)
+
+    β = X_train_i \ y_train
+    y_pred = X_test_i * β
+
+    return y_pred
+end
+
 function run_stability_enet(target_var, predictor_names, data_full)
 
     # -------------------------
@@ -183,6 +193,62 @@ function run_stability_enet(target_var, predictor_names, data_full)
     )
 end
 
+function run_stability_ols(target_var, predictor_names, data_full)
+
+    cols = vcat([target_var], predictor_names)
+    df = dropmissing(data_full[:, cols])
+
+    y_raw = Vector(df[:, target_var])
+    X_raw = Matrix(df[:, predictor_names])
+
+    n = size(X_raw, 1)
+
+    folds_all = kfold_indices(n, 5, 10)
+
+    r2_scores = Float64[]
+    rmse_scores = Float64[]
+
+    for folds in folds_all
+        for test_idx in folds
+
+            train_idx = setdiff(1:n, test_idx)
+
+            X_train = X_raw[train_idx, :]
+            y_train = y_raw[train_idx]
+
+            X_test = X_raw[test_idx, :]
+            y_test = y_raw[test_idx]
+
+            # -------------------------
+            # Standardise (train only)
+            # -------------------------
+            μx = mean(X_train, dims=1)
+            σx = std(X_train, dims=1)
+            σx[σx .== 0] .= 1.0
+
+            μy = mean(y_train)
+            σy = std(y_train)
+            σy = σy == 0 ? 1.0 : σy
+
+            X_train_std = (X_train .- μx) ./ σx
+            X_test_std  = (X_test  .- μx) ./ σx
+            y_train_std = (y_train .- μy) ./ σy
+            y_test_std  = (y_test  .- μy) ./ σy
+
+            # OLS prediction
+            y_pred = ols_fit_predict(X_train_std, y_train_std, X_test_std)
+
+            push!(r2_scores, r2_score(y_test_std, y_pred))
+            push!(rmse_scores, rmse(y_test_std, y_pred))
+        end
+    end
+
+    return (
+        r2 = mean(r2_scores),
+        rmse = mean(rmse_scores)
+    )
+end
+
 rep_list = Dict(
     "medoids" => cluster_medoids,
     "dominant" => pc_dominant_metrics,
@@ -211,12 +277,21 @@ all_coefs = DataFrame(
     variance_explained = Float64[]
 )
 
+ols_results = DataFrame(
+    metric = String[],
+    rep_name = String[],
+    r2_ols = Float64[],
+    rmse_ols = Float64[]
+)
+
 for metric in stability_vars
     for (rep_name, cols) in rep_list
 
+        # -------------------------
+        # Elastic Net
+        # -------------------------
         res = run_stability_enet(metric, cols, topology_pc)
 
-        # summary results
         push!(results, (
             metric,
             rep_name,
@@ -226,13 +301,27 @@ for metric in stability_vars
             res.rmse
         ))
 
-        # coefficients
         coef_df = res.coef_df
-        coef_df.rep_name .= rep_name   # add group label
-
+        coef_df.rep_name .= rep_name
         append!(all_coefs, coef_df)
+
+        # -------------------------
+        # OLS
+        # -------------------------
+        ols_res = run_stability_ols(metric, cols, topology_pc)
+
+        push!(ols_results, (
+            metric,
+            rep_name,
+            ols_res.r2,
+            ols_res.rmse
+        ))
     end
 end
 
 CSV.write("data/outputs/elasticNet_summary.csv", results)
 CSV.write("data/outputs/elasticNet_coefficients.csv", all_coefs)
+CSV.write("data/outputs/ols_summary.csv", ols_results)
+
+results
+ols_results
