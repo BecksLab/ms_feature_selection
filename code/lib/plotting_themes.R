@@ -66,7 +66,8 @@ secondary_palette <- c(
   "#AFD2E3", 
   "#283339", 
   "#355464",
-  "#198566"
+  "#198566",
+  "#58C797"
   )
 
 # stability palette
@@ -81,6 +82,7 @@ stability_palette <- c(
 
 pca_col <- secondary_palette[3]
 complexity_col <- secondary_palette[4]
+may_colour = secondary_palette[5]
 
 figure_theme <- function() {
   theme_bw() %+replace% 
