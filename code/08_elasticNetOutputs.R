@@ -27,11 +27,14 @@ model_performance <- read_csv("data/outputs/elasticNet_summary.csv") %>%
       rep_name == "pca_score" ~ "PC Score",
       rep_name == "dominant"  ~ "PC Dominant",
       rep_name == "complexity"  ~ "Univariate",
-      rep_name == "connectance"  ~ "Univariate",
-      rep_name == "trophicCoherence"  ~ "Univariate",
-      rep_name == "richness"  ~ "Univariate",
+      rep_name == "may"  ~ "Univariate",
       TRUE ~ rep_name
     ),
+    metric = case_when(
+      metric == "robustness" ~ "Resistance",
+      metric == "resilience" ~ "Recovery/Persistence",
+      metric == "ρ" ~ "Stability Potential",
+      metric == "control" ~ "Controllability"),
     alpha_val = alpha,
     r2_val = r2
   )
@@ -44,11 +47,14 @@ all_estimates <- read_csv("data/outputs/elasticNet_coefficients.csv") %>%
       rep_name == "pca_score" ~ "PC Score",
       rep_name == "dominant"  ~ "PC Dominant",
       rep_name == "complexity"  ~ "Complexity",
-      rep_name == "connectance"  ~ "Connectance",
-      rep_name == "trophicCoherence"  ~ "Trophic Coherence",
-      rep_name == "richness"  ~ "Richness",
+      rep_name == "may"  ~ "May (Co-R)",
       TRUE ~ rep_name
-    )
+    ),
+    metric = case_when(
+      metric == "robustness" ~ "Resistance",
+      metric == "resilience" ~ "Recovery/Persistence",
+      metric == "ρ" ~ "Stability Potential",
+      metric == "control" ~ "Controllability")
   )
 
 print(model_performance)
@@ -78,9 +84,11 @@ directed_estimates <- all_estimates %>%
   glow_up(
     label = case_when(rep_name == "PC Score" ~ "PCA Axis",
                       term  == "complexity" ~ "Complexity",
+                      term == "may_term"  ~ "May (Co-R)",
                       TRUE ~ label),
     colour = case_when(rep_name == "PC Score" ~ pca_col,
                        term  == "complexity" ~ complexity_col,
+                       term == "may_term" ~ may_colour,
                        TRUE ~ colour))
 
 ############################################################
@@ -114,9 +122,9 @@ ggplot(directed_estimates,
   labs(title = "Variance in Stability Explained by Structural Modules",
        y = "Absolute Variance Explained (CV R-squared)",
        x = NULL) +
-  scale_fill_manual(values = setNames(variance_decomposition$colour, 
-                                      as.character(variance_decomposition$label)),
-                    breaks = variance_decomposition$label[!(variance_decomposition$label %in% c("PCA Axis", "Complexity"))],
+  scale_fill_manual(values = setNames(directed_estimates$colour, 
+                                      as.character(directed_estimates$label)),
+                    breaks = directed_estimates$label[!(directed_estimates$label %in% c("PCA Axis", "Complexity", "May (Co-R)"))],
                     name = "Module") +
   figure_theme()
 
@@ -134,9 +142,7 @@ ggplot(directed_estimates %>%
              rep_name == "pca_score" ~ "PC Score",
              rep_name == "dominant"  ~ "PC Dominant",
              rep_name == "Complexity"  ~ "Univariate",
-             rep_name == "Connectance"  ~ "Univariate",
-             rep_name == "Trophic Coherence"  ~ "Univariate",
-             rep_name == "Richness"  ~ "Univariate",
+             rep_name == "May (Co-R)"  ~ "Univariate",
              TRUE ~ rep_name
            )), 
        aes(x = reorder(term, estimate), 

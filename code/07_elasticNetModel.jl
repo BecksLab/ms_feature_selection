@@ -59,6 +59,17 @@ function ols_fit_predict(X_train, y_train, X_test)
     return y_pred
 end
 
+function build_may_df(data_full)
+    df = copy(data_full)
+
+    S = df[:, "richness"]
+    C = df[:, "connectance"]
+
+    df[:, "may_term"] = -0.5 .* (log.(S) .+ log.(C))
+
+    return df
+end
+
 function run_stability_enet(target_var, predictor_names, data_full)
 
     # -------------------------
@@ -235,7 +246,9 @@ function run_stability_ols(target_var, predictor_names, data_full)
             y_train_std = (y_train .- μy) ./ σy
             y_test_std  = (y_test  .- μy) ./ σy
 
+            # -------------------------
             # OLS prediction
+            # -------------------------
             y_pred = ols_fit_predict(X_train_std, y_train_std, X_test_std)
 
             push!(r2_scores, r2_score(y_test_std, y_pred))
@@ -254,9 +267,7 @@ rep_list = Dict(
     "dominant" => pc_dominant_metrics,
     "pca_score" => pc_names,
     "complexity" => ["complexity"],
-    "connectance" => ["connectance"],
-    "trophicCoherence" => ["trophicCoherence"],
-    "richness" => ["richness"]
+    "may" => ["may_term"]
 )
 
 results = DataFrame(
@@ -288,9 +299,18 @@ for metric in stability_vars
     for (rep_name, cols) in rep_list
 
         # -------------------------
+        # Build May dataset
+        # -------------------------
+        if rep_name == "may"
+            data_use = build_may_df(topology_pc)
+        else
+            data_use = topology_pc
+        end
+
+        # -------------------------
         # Elastic Net
         # -------------------------
-        res = run_stability_enet(metric, cols, topology_pc)
+        res = run_stability_enet(metric, cols, data_use)
 
         push!(results, (
             metric,
@@ -308,7 +328,7 @@ for metric in stability_vars
         # -------------------------
         # OLS
         # -------------------------
-        ols_res = run_stability_ols(metric, cols, topology_pc)
+        ols_res = run_stability_ols(metric, cols, data_use)
 
         push!(ols_results, (
             metric,
