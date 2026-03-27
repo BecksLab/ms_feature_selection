@@ -227,7 +227,7 @@ Robustness (\(R_{50}\)), Resilience, Spectral Radius (ρ), and Structural
 Controllability. Variance contributions are scaled by the
 cross-validated \(R^2\) of the corresponding model, allowing comparison
 across metrics. Differences in bar heights across facets indicate which
-modules are more influential for particular stability processes..}
+modules are more influential for particular stability processes.}
 
 \end{figure}
 \efloatseparator
