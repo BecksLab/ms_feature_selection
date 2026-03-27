@@ -71,10 +71,12 @@ secondary_palette <- c(
 
 # stability palette
 stability_palette <- c(
-  "#198566", 
-  "#771985", 
-  "#856819", 
-  "#FFB612"
+  "#57205C", 
+  "#814586", 
+  "#AC79B1", 
+  "#D9BADB", 
+  "#FAC8FF", 
+  "#F79DFF"
 )
 
 pca_col <- secondary_palette[3]
