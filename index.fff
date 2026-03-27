@@ -171,19 +171,19 @@ and structural alignment among dimensional-reduction strategies.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{figures/stability_alpha.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{figures/stability_variance.png}}
 
 }
 
-\caption{\label{fig-stab_alpha}Elastic net mixing parameter (α) for each
-stability metric and structural representation. The α value indicates
-the balance between ridge (distributed influence across many predictors)
-and lasso (sparse selection of a few predictors) regularisation. Points
-are coloured and shaped by representation type, with the dashed vertical
-line at α = 0.5 highlighting the ridge--lasso boundary. Higher α values
-suggest that stability is primarily driven by a small subset of
-predictors, whereas lower values indicate more distributed structural
-control.}
+\caption{\label{fig-stab_var}Contribution of structural modules to
+ecosystem stability. Bars show the absolute variance in each stability
+metric explained by different structural modules, as estimated via
+elastic net regression. Facets correspond to the four stability metrics:
+Robustness (\(R_{50}\)), Resilience, Spectral Radius (ρ), and Structural
+Controllability. Variance contributions are scaled by the
+cross-validated \(R^2\) of the corresponding model, allowing comparison
+across metrics. Differences in bar heights across facets indicate which
+modules are more influential for particular stability processes.}
 
 \end{figure}
 \efloatseparator
@@ -207,27 +207,6 @@ increase the stability metric, while negative coefficients indicate a
 suppressive effect. Variation in coefficients across facets reveals
 switching of structural predictors' influence on different stability
 outcomes.}
-
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{figures/stability_variance.png}}
-
-}
-
-\caption{\label{fig-stab_var}Contribution of structural modules to
-ecosystem stability. Bars show the absolute variance in each stability
-metric explained by different structural modules, as estimated via
-elastic net regression. Facets correspond to the four stability metrics:
-Robustness (\(R_{50}\)), Resilience, Spectral Radius (ρ), and Structural
-Controllability. Variance contributions are scaled by the
-cross-validated \(R^2\) of the corresponding model, allowing comparison
-across metrics. Differences in bar heights across facets indicate which
-modules are more influential for particular stability processes.}
 
 \end{figure}
 \efloatseparator
