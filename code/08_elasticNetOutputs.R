@@ -208,3 +208,17 @@ ggsave("../figures/stability_alpha.png",
 ############################################################
 # END
 ############################################################
+
+
+read_csv("data/outputs/elasticNet_summary.csv") %>%
+  left_join(read_csv("data/outputs/ols_summary.csv")) %>%
+  glow_up(delta_r2 = r2 - r2_ols) %>%
+  ggplot(.,
+         aes(x = rep_name, 
+             y = delta_r2, 
+             fill = metric)) +
+  geom_col(position = "dodge") +
+  scale_fill_manual(values = stability_palette) +
+  labs(y = "ΔR² (Elastic Net - OLS)") +
+  figure_theme() +
+  theme(panel.grid.major.x = element_blank()) 
