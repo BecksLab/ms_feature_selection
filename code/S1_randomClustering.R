@@ -139,12 +139,12 @@ ggplot() +
   geom_segment(data = dend_data$segment,
                aes(x = y, y = x,
                    xend = yend, yend = xend),
-               linewidth = 0.8) +
+               linewidth = 0.8, colour = "#001628") +
   # Rectangles for 7 clusters
   geom_rect(data = rect_df,
             aes(xmin = -0.02, xmax = 0,
                 ymin = ymin-0.3, ymax = ymax+0.3),
-            alpha = 0.8) +
+            alpha = 0.8, fill = "#A2AAAD") +
   # Metric labels
   geom_text(data = label_df,
             aes(x = -0.025, y = x, label = label, colour = Module),
