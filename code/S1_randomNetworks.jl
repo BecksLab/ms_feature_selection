@@ -2,6 +2,7 @@ using CSV
 using DataFrames
 using SpeciesInteractionNetworks
 using ProgressMeter
+using JLD2
 
 include("lib/_internals.jl");
 
@@ -15,6 +16,7 @@ networks_all = vcat(mangal_networks, wol_networks, vermaat_networks)
 # df for network stats
 random_topology = DataFrame(
     id = Any[],
+    model = Any[],
     richness = Any[],
     links = Any[],
     connectance = Any[],
@@ -58,19 +60,17 @@ random_topology = DataFrame(
 
 @showprogress for i in 1:nrow(networks_all)
 
-    N = render(Binary, networks_all.network[i]) # make binary
-    # convert away from Unipartite{Mangal.MangalNode}
-    # janky but I can't be arsed at this point
+    N = render(Binary, networks_all.network[i])
+
     A = _get_matrix(N)
     edges = Binary(A)
     nodes = Unipartite(Symbol.(species(N)))
     N = SpeciesInteractionNetworks.SpeciesInteractionNetwork(nodes, edges)
 
-    # number of swaps as number of links * 50
     m = sum(A)
     nswaps = 50 * m
 
-    # run through swaps
+    # 1. RANDOM SWAPS
     N_ran = deepcopy(N)
     for s in 1:nswaps
         swap!(N_ran)
@@ -78,10 +78,22 @@ random_topology = DataFrame(
 
     d = _network_summary(N_ran)
     d[:id] = networks_all.id[i]
+    d[:model] = "random"
 
-    # send to df
     push!(random_topology, d)
-    
+
+    # 2. CONNECTANCE-CONSTRAINED SWAPS
+    N_con = deepcopy(N)
+    for s in 1:nswaps
+        swap!(N_con, Connectance)
+    end
+
+    d2 = _network_summary(N_con)
+    d2[:id] = networks_all.id[i]
+    d2[:model] = "connectance_constrained"
+
+    push!(random_topology, d2)
+
 end
 
 ## Write files
