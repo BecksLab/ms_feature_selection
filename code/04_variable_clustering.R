@@ -168,7 +168,7 @@ ggplot() +
   geom_segment(data = dend_data$segment,
                aes(x = y, y = x,
                    xend = yend, yend = xend),
-               linewidth = 0.8) +
+               linewidth = 0.8, colour = "#001628") +
   # Rectangles for 7 clusters
   geom_rect(data = rect_df,
             aes(xmin = -0.02, xmax = 0,
@@ -282,13 +282,14 @@ ggplot() +
   geom_segment(data = dend_data$segment,
                aes(x = y, y = x,
                    xend = yend, yend = xend),
-               linewidth = 0.8) +
+               linewidth = 0.8, colour = "#001628") +
   # Metric labels
   geom_text(data = label_df,
             aes(x = -0.015, y = x, label = label, colour = Cluster),
             hjust = 1,
             size = rel(2),
-            family = "space") +
+            family = "space",
+            key_glyph = "point") +
   scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
                       labels = pal_df$label,
                       limits = pal_df$value,

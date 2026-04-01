@@ -25,10 +25,10 @@ trace(grDevices::png, exit = quote({
 }), print = FALSE)
 
 kraken_palette <- c(
-  "Macro Complexity"          = "#000E3B",
-  "Trophic Integration"       = "#68A2B9",
+  "Scaling"                   = "#000E3B",
+  "Feedback"                  = "#68A2B9",
   "Energy Transport"          = "#E9072B",
-  "Trophic Role Asymmetry"    = "#99D9D9",
+  "Functional Diversity"      = "#99D9D9",
   "Control Heterogeneity"     = "#005A5B",
   "Flow Control"              = "#9BBF80"
 )
@@ -63,12 +63,12 @@ pal_diverge_gen <- colorRampPalette(seattle_div)
 # additional categorical colours
 
 secondary_palette <- c(
-  "#AFD2E3", 
-  "#283339", 
+  "#AFD2E3",
+  "#283339",
   "#355464",
   "#198566",
   "#58C797"
-  )
+)
 
 # stability palette
 stability_palette <- c(
