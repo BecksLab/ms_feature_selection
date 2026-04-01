@@ -29,7 +29,11 @@ pca_stability <- topology[, c("robustness", "ρ", "control", "resilience")] %>%
                values_to = "Value") %>%
   squad_up(Stability) %>%
   no_cap(PC1_corr = cor(PC1, Value),
-         PC2_corr = cor(PC2, Value))
+         PC2_corr = cor(PC2, Value)) %>%
+  glow_up(Stability = case_when(Stability == "robustness" ~ "Resistance",
+                                Stability == "resilience" ~ "Recovery/Persistence",
+                                Stability == "ρ" ~ "Stability Potential",
+                                Stability == "control" ~ "Controllability"))
 
 #-----------------------------------------------
 # 2. Prepare module vectors
@@ -40,7 +44,7 @@ loadings_mat <- readRDS("data/outputs/pc_loadings.rds")
 # Conversion
 loadings_mat <- as.data.frame(loadings_mat)
 loadings_mat$Metric <- rownames(loadings_mat)
-  
+
 
 # get cluster/module masterlist (for plotting)
 clust_metada <-
