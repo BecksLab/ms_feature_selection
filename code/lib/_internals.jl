@@ -34,11 +34,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
     int = (S - (basal + top))
     tl = trophic_level(N)
 
-    top2 = [k for (k, v) in _vul if v == 0]
-    cl = [v for (k, v) in tl if k ∈ top2]
-    if length(cl) == 0
-        cl = 0.0
-    end
+    cl = chain_lengths(N)
 
     D = Dict{Symbol,Any}(
         :richness => S,
@@ -58,9 +54,9 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :GenSD => std(gen) / l_s,
         :VulSD => std(vul) / l_s,
         :TL => mean(collect(values(tl))),
-        :ChLen => mean(cl),
-        :ChSD => std(cl),
-        :ChNum => log(length(cl)),
+        :ChLen => isempty(cl) ? 0.0 : mean(cl),
+        :ChSD  => isempty(cl) ? 0.0 : std(cl),
+        :ChNum => isempty(cl) ? 0.0 : log(length(cl)),
         :path => mean(pathlengths(N)),
         :LinkSD => std(values(SpeciesInteractionNetworks.degree(N))) / l_s,
         :S1 =>
@@ -495,4 +491,49 @@ function structural_controllability(N::SpeciesInteractionNetwork)
     Nd = max(1, S - matching_size)
 
     return Nd / S
+end
+
+function all_paths(N, start, targets; max_depth=Inf)
+
+    paths = Int[]
+    
+    function dfs(current, visited, length)
+
+        # 🔴 STOP if we exceed max depth
+        if length > max_depth
+            return
+        end
+
+        # ✅ If we reached a top species, record chain
+        if current in targets
+            push!(paths, length)
+            return
+        end
+
+        for nxt in successors(N, current)
+            if nxt ∉ visited
+                dfs(nxt, union(visited, [nxt]), length + 1)
+            end
+        end
+    end
+
+    dfs(start, Set([start]), 0)
+    return paths
+end
+
+function chain_lengths(N)
+
+    gen = SpeciesInteractionNetworks.generality(N)
+    basal = collect(keys(filter(((k, v),) -> v == 0, gen)))
+
+    vul = SpeciesInteractionNetworks.vulnerability(N)
+    top = collect(keys(filter(((k, v),) -> v == 0, vul)))
+
+    lengths = Int[]
+
+    for b in basal
+        append!(lengths, all_paths(N, b, top))
+    end
+
+    return lengths
 end
