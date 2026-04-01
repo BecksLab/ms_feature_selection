@@ -13,7 +13,7 @@ source("lib/plotting_themes.R")
 # 1. Prepare PCA scores + add Representation
 #-----------------------------------------------
 
-pc_scores_df <- readRDS("data/outputs/pc_scores_df.rds")
+pc_scores_df <- read.csv("data/outputs/pc_scores_df.csv")
 topology <- read.csv("data/cleaned/all_networks.csv")
 
 # Add network_id
