@@ -218,6 +218,10 @@ ggsave("../figures/stability_alpha.png",
 
 read_csv("data/outputs/elasticNet_summary.csv") %>%
   left_join(read_csv("data/outputs/ols_summary.csv")) %>%
+  glow_up(metric = case_when(metric == "robustness" ~ "Resistance",
+                             metric == "resilience" ~ "Recovery/Persistence",
+                             metric == "ρ" ~ "Stability Potential",
+                             metric == "control" ~ "Controllability")) %>%
   glow_up(delta_r2 = r2 - r2_ols) %>%
   ggplot(.,
          aes(x = rep_name, 
@@ -228,3 +232,8 @@ read_csv("data/outputs/elasticNet_summary.csv") %>%
   labs(y = "ΔR² (Elastic Net - OLS)") +
   figure_theme() +
   theme(panel.grid.major.x = element_blank()) 
+
+ggsave("../figures/r2_OLSvElasticNet.png",
+       width = 6000,
+       height = 4000,
+       units = "px")
