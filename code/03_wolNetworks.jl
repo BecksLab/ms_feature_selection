@@ -11,6 +11,10 @@ using StructTypes
 
 include("lib/_internals.jl")
 
+# set seed
+import Random
+Random.seed!(66)
+
 # Web of Life metadata endpoint
 metadata_url = "https://www.web-of-life.es/get_networks.php"
 

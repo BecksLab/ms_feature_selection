@@ -6,6 +6,10 @@ using SpeciesInteractionNetworks
 
 include("lib/_internals.jl");
 
+# set seed
+import Random
+Random.seed!(66)
+
 # get the name of all communities
 web_names = readdir("data/vermaat_2009/raw")
 

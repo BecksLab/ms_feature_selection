@@ -9,6 +9,10 @@ import SpeciesInteractionNetworks.Mangal
 
 include("lib/_internals.jl");
 
+# set seed
+import Random
+Random.seed!(66)
+
 # query the ID number and other metadata for all ecological networks archived on mangal.io
 
 number_of_networks = count(Mangal.MangalNetwork)

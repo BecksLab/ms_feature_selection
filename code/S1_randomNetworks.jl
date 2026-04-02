@@ -6,6 +6,10 @@ using JLD2
 
 include("lib/_internals.jl");
 
+# set seed
+import Random
+Random.seed!(66)
+
 # pull the network stats so we can get S and L
 mangal_networks = load_object("data/mangal/mangal_networks.jlds")
 wol_networks = load_object("data/weboflife/weboflife_networks.jlds")
