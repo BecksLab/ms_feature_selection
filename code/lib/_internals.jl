@@ -36,6 +36,22 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
 
     chain = chain_metrics(N; max_depth=6)
 
+    n_reps = 100  # choose your number for sims
+
+rob_vals = Float64[]
+res_vals = Float64[]
+
+for _ in 1:n_reps
+    push!(rob_vals,
+        robustness(N; threshold = 50,
+                   remove_disconnected = true)
+    )
+
+    push!(res_vals,
+        resilience(extinction(N))
+    )
+end
+
     D = Dict{Symbol,Any}(
         :richness => S,
         :links => L,
@@ -78,9 +94,8 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :ρ => spectralradius(N),
         :centrality => mean(collect(values(centrality(N)))),
         :loops => length(loops(N)) / S,
-        :resilience => resilience(extinction(N)),
-        :robustness => robustness(N; threshold = 50,
-                                  remove_disconnected = true),
+        :resilience => mean(res_vals),
+        :robustness => mean(rob_vals),
         :intervals => intervality(A),
         :MaxSim => max_sim(N),
         :Clust => clustering(A),
