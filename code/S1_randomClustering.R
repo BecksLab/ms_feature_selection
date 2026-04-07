@@ -166,19 +166,19 @@ ari <- adjustedRandIndex(
 
 print(paste("Adjusted Rand Index (Co vs Degree NULL):", round(ari, 3)))
 
-ari <- adjustedRandIndex(
+ari_deg <- adjustedRandIndex(
   cluster_wide$degree_null,
   cluster_wide$emperical
 )
 
-print(paste("Adjusted Rand Index (Degree vs Emperical):", round(ari, 3)))
+print(paste("Adjusted Rand Index (Degree vs Emperical):", round(ari_deg, 3)))
 
-ari <- adjustedRandIndex(
+ari_co <- adjustedRandIndex(
   cluster_wide$connectance_null,
   cluster_wide$emperical
 )
 
-print(paste("Adjusted Rand Index (Co vs Emperical):", round(ari, 3)))
+print(paste("Adjusted Rand Index (Co vs Emperical):", round(ari_co, 3)))
 
 # ============================================================
 # 6. DENDROGRAM FUNCTION
@@ -252,6 +252,12 @@ rect_df <- labels_df %>%
     xmax = 0
   )
 
+ari_df = tribble(
+  ~model, ~text,
+  "Degree-null", paste("Adjusted Rand Index:", round(ari_deg, 3)),
+  "Connectance-null", paste("Adjusted Rand Index:", round(ari_co, 3))
+)
+
 ggplot() +
   geom_segment(
     data = segments_df,
@@ -273,6 +279,14 @@ ggplot() +
     key_glyph = "point", 
     fontface = "bold"
   ) +
+  geom_text(
+    data = ari_df,
+    aes(x = max(segments_df$y), 
+        y = 2, label = text), 
+    x = max(segments_df$y),
+    family = "space",
+    colour = "#001628",
+    hjust = 1)  +
   facet_wrap(~ model, scales = "free",
              ncol = 1) +
   scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
