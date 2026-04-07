@@ -29,7 +29,7 @@ kraken_palette <- c(
   "Feedback"                  = "#68A2B9",
   "Energy Transport"          = "#E9072B",
   "Functional Diversity"      = "#99D9D9",
-  "Control Heterogeneity"     = "#005A5B",
+  "Control Heterogeneity"     = "#1C7966",
   "Flow Control"              = "#9BBF80"
 )
 

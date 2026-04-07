@@ -399,7 +399,8 @@ pca_plot <- ggplot(loadings_plot,
              colour = "white") +
   geom_text_repel(size = rel(4),
                   family = "space",
-                  show.legend = FALSE) +
+                  show.legend = FALSE, 
+                  fontface = "bold") +
   labs(x = pc1_label,
        y = pc2_label) +
   scale_fill_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
@@ -443,7 +444,8 @@ pca_hull_plot <- ggplot(loadings_plot,
   geom_point(size = 3, alpha = 0.75, shape = 21, colour = "white") +
   geom_text_repel(size = rel(4),
                   family = "space",
-                  show.legend = FALSE) +
+                  show.legend = FALSE, 
+                  fontface = "bold") +
   labs(x = pc1_label, y = pc2_label) +
   scale_fill_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
                     labels = pal_df$label,

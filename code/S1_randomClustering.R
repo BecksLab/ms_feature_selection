@@ -120,10 +120,10 @@ results <- purrr::imap(metrics_split, ~run_clustering(.x, .y))
 sil_df <- bind_rows(
   tibble(k = 1:10,
          sil = results[["degree_null"]][["sil"]],
-         model = "degree_preserving"),
+         model = "Degree-null"),
   tibble(k = 1:10,
          sil = results[["connectance_null"]][["sil"]],
-         model = "connectance_constrained")
+         model = "Connectance-null")
 )
 
 ggplot(sil_df,
@@ -151,8 +151,9 @@ ggsave("../figures/silhouette_curves_nullNetworks.png",
 # ============================================================
 cluster_compare <- bind_rows(
   results[["degree_null"]][["clusters"]],
-  results[["connectance_null"]][["clusters"]]
-)
+  results[["connectance_null"]][["clusters"]]) %>%
+  rbind(read.csv("../tables/metric_clusters_auto.csv") %>%
+          glow_up(model = "emperical"))
 
 cluster_wide <- cluster_compare %>%
   pivot_wider(names_from = model, values_from = Cluster)
@@ -163,7 +164,21 @@ ari <- adjustedRandIndex(
   cluster_wide$connectance_null
 )
 
-print(paste("Adjusted Rand Index:", round(ari, 3)))
+print(paste("Adjusted Rand Index (Co vs Degree NULL):", round(ari, 3)))
+
+ari <- adjustedRandIndex(
+  cluster_wide$degree_null,
+  cluster_wide$emperical
+)
+
+print(paste("Adjusted Rand Index (Degree vs Emperical):", round(ari, 3)))
+
+ari <- adjustedRandIndex(
+  cluster_wide$connectance_null,
+  cluster_wide$emperical
+)
+
+print(paste("Adjusted Rand Index (Co vs Emperical):", round(ari, 3)))
 
 # ============================================================
 # 6. DENDROGRAM FUNCTION
@@ -255,7 +270,8 @@ ggplot() +
     hjust = 1,
     size = rel(2),
     family = "space",
-    key_glyph = "point"
+    key_glyph = "point", 
+    fontface = "bold"
   ) +
   facet_wrap(~ model, scales = "free",
              ncol = 1) +

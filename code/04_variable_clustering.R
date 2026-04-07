@@ -180,7 +180,8 @@ ggplot() +
             aes(x = -0.025, y = x, label = label),
             hjust = 1,
             size = rel(3),
-            family = "space") +
+            family = "space", 
+            fontface = "bold") +
   scale_fill_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
                     labels = pal_df$label,
                     limits = pal_df$value,
@@ -289,7 +290,8 @@ ggplot() +
             hjust = 1,
             size = rel(2),
             family = "space",
-            key_glyph = "point") +
+            key_glyph = "point", 
+            fontface = "bold") +
   scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),
                       labels = pal_df$label,
                       limits = pal_df$value,
