@@ -17,9 +17,7 @@ _network_summary(N::SpeciesInteractionNetwork{<:Partiteness, <:Binary})
     Returns the 'summary statistics' for a network
 """
 function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
-
     A = _get_matrix(N)
-
     L = links(N)
     S = richness(N)
 
@@ -36,21 +34,24 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
 
     chain = chain_metrics(N; max_depth=6)
 
-    n_reps = 100  # choose your number for sims
-
-rob_vals = Float64[]
-res_vals = Float64[]
-
-for _ in 1:n_reps
-    push!(rob_vals,
-        robustness(N; threshold = 50,
-                   remove_disconnected = true)
-    )
-
-    push!(res_vals,
-        resilience(extinction(N))
-    )
-end
+    # --- Robustness and Resilience with Error Handling ---
+    n_reps = 100
+    rob_vals = Float64[]
+    res_vals = Float64[]
+    
+    attempts = 0
+    while length(rob_vals) < n_reps && attempts < (n_reps * 2)
+        attempts += 1
+        try
+            rb = robustness(N; threshold = 50, remove_disconnected = true)
+            rs = resilience(extinction(N))
+            
+            push!(rob_vals, rb)
+            push!(res_vals, rs)
+        catch
+            continue # Skip failed iterations
+        end
+    end
 
     D = Dict{Symbol,Any}(
         :richness => S,
@@ -75,34 +76,22 @@ end
         :ChNum => chain.ChNum,
         :path => mean(pathlengths(N)),
         :LinkSD => std(values(SpeciesInteractionNetworks.degree(N))) / l_s,
-        :S1 =>
-            length(
-                findmotif(motifs(Unipartite, 3)[1], remove_cannibals(N)),
-            )/(richness(N)^2),
-        :S2 =>
-            length(
-                findmotif(motifs(Unipartite, 3)[2], remove_cannibals(N)),
-            )/(richness(N)^2),
-        :S4 =>
-            length(
-                findmotif(motifs(Unipartite, 3)[4], remove_cannibals(N)),
-            )/(richness(N)^2),
-        :S5 =>
-            length(
-                findmotif(motifs(Unipartite, 3)[5], remove_cannibals(N)),
-            )/(richness(N)^2),
+        :S1 => length(findmotif(motifs(Unipartite, 3)[1], remove_cannibals(N)))/(richness(N)^2),
+        :S2 => length(findmotif(motifs(Unipartite, 3)[2], remove_cannibals(N)))/(richness(N)^2),
+        :S4 => length(findmotif(motifs(Unipartite, 3)[4], remove_cannibals(N)))/(richness(N)^2),
+        :S5 => length(findmotif(motifs(Unipartite, 3)[5], remove_cannibals(N)))/(richness(N)^2),
         :ρ => spectralradius(N),
         :centrality => mean(collect(values(centrality(N)))),
         :loops => length(loops(N)) / S,
-        :resilience => mean(res_vals),
-        :robustness => mean(rob_vals),
+        :resilience => isempty(res_vals) ? NaN : mean(res_vals),
+        :robustness => isempty(rob_vals) ? NaN : mean(rob_vals),
         :intervals => intervality(A),
         :MaxSim => max_sim(N),
         :Clust => clustering(A),
         :trophicCoherence => trophic_coherence(N),
         :trophicVar => trophic_variance(N),
         :control => structural_controllability(N)
-)
+    )
     return D
 end
 
