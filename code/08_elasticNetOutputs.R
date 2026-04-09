@@ -119,8 +119,7 @@ ggplot(directed_estimates,
   geom_col() +
   facet_wrap(~ metric) +
   coord_cartesian(ylim = c(0,1)) +
-  labs(title = "Variance in Stability Explained by Structural Modules",
-       y = "Absolute Variance Explained (CV R-squared)",
+  labs(y = "Absolute Variance Explained (CV R-squared)",
        x = NULL) +
   scale_fill_manual(values = setNames(directed_estimates$colour, 
                                       as.character(directed_estimates$label)),
@@ -130,7 +129,7 @@ ggplot(directed_estimates,
 
 ggsave("../figures/stability_variance.png",
        width = 8000,
-       height = 4000,
+       height = 4500,
        units = "px")
 
 
@@ -163,15 +162,13 @@ ggplot(directed_estimates %>%
              scales = "free_y") +
   scale_fill_manual(values = setNames(directed_estimates$colour, 
                                       as.character(directed_estimates$label)),
-                    breaks = directed_estimates$label[!(directed_estimates$label %in% c("PCA Axis", "Complexity"))],
+                    breaks = directed_estimates$label[!(directed_estimates$label %in% c("PCA Axis", "Complexity", "May (Co-R)"))],
                     name = "Module")+
   scale_colour_manual(values = setNames(directed_estimates$colour, 
                                         as.character(directed_estimates$label)),
-                      breaks = directed_estimates$label[!(directed_estimates$label %in% c("PCA Axis", "Complexity"))],
+                      breaks = directed_estimates$label[!(directed_estimates$label %in% c("PCA Axis", "Complexity", "May (Co-R)"))],
                       name = "Module") +
-  labs(title = "Structural Drivers of Stability (PCA Scores)",
-       subtitle = "Standardised Coefficients (direction and magnitude)",
-       x = NULL,
+  labs(x = NULL,
        y = "Standardised Estimate") +
   figure_theme()
 

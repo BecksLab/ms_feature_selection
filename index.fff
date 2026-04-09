@@ -6,7 +6,13 @@
 
 }
 
-\caption{\label{fig-conceptual}Idea for conceptual.}
+\caption{\label{fig-conceptual}Conceptual framework linking
+multidimensional network structure (S) to multidimensional ecological
+stability (Ω). Structural variation is organised along a small number of
+axes (Panel B), while stability comprises multiple components (Panel A).
+Each stability component depends on a different projection of structural
+space (Panel C), generating process-dependent relationships and
+trade-offs among stability outcomes.}
 
 \end{figure}
 \efloatseparator
@@ -38,7 +44,17 @@ branches indicate stronger associations between descriptors.}
 
 }
 
-\caption{\label{fig-conceptual}Idea for different take on modules.}
+\caption{\label{fig-module}Ecological network structure emerges through
+hierarchical constraints on assembly. Food web architecture can be
+decomposed into six structural modules organised across three levels of
+constraint. Combinatorial scaling defines the space of possible
+interactions as a function of system size. This baseline gives rise to
+statistical organisation, where degree constraints generate
+heterogeneity in species roles and regulatory structure (trophic role
+asymmetry, control heterogeneity). At the highest level, ecological
+structuring imposes trophic ordering, energy flow constraints, and the
+emergence of resource and control hubs (trophic integration, energy
+transport, flow control).}
 
 \end{figure}
 \efloatseparator
