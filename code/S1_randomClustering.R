@@ -286,7 +286,8 @@ ggplot() +
     x = max(segments_df$y),
     family = "space",
     colour = "#001628",
-    hjust = 1)  +
+    hjust = 1,
+    size = rel(2.6))  +
   facet_wrap(~ model, scales = "free",
              ncol = 1) +
   scale_colour_manual(values = setNames(pal_df$colour, as.character(pal_df$value)),

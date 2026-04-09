@@ -128,8 +128,8 @@ ggplot(directed_estimates,
   figure_theme()
 
 ggsave("../figures/stability_variance.png",
-       width = 8000,
-       height = 4500,
+       width = 6500,
+       height = 4000,
        units = "px")
 
 
