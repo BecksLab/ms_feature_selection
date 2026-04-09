@@ -141,3 +141,121 @@ end
 
 ## Write files
 CSV.write("data/cleaned/randomNetworks.csv", random_topology)
+
+# Nice networks
+
+# get summary csv
+net_summs = CSV.read("data/cleaned/all_networks.csv", DataFrame)
+
+n_reps = 10
+
+niche_topology = DataFrame(
+    id = Int[],
+    run = Int[],
+    richness = Int[],
+    links = Int[],
+    connectance = Float64[],
+    diameter = Float64[],
+    distance = Float64[],
+    basal = Float64[],
+    top = Float64[],
+    intermediate = Float64[],
+    predpreyRatio = Float64[],
+    herbivory = Float64[],
+    omnivory = Float64[],
+    cannibal = Float64[],
+    l_S = Float64[],
+    GenSD = Float64[],
+    VulSD = Float64[],
+    TL = Float64[],
+    ChLen = Float64[],
+    ChSD = Float64[],
+    ChNum = Float64[],
+    path = Float64[],
+    LinkSD = Float64[],
+    S1 = Float64[],
+    S2 = Float64[],
+    S4 = Float64[],
+    S5 = Float64[],
+    centrality = Float64[],
+    loops = Float64[],
+    intervals = Float64[],
+    MaxSim = Float64[],
+    Clust = Float64[],
+    trophicCoherence = Float64[],
+    trophicVar = Float64[],
+);
+
+for j in 1:nrow(net_summs)
+
+    # get network stats
+    S = net_summs.richness[j]
+    C = net_summs.connectance[j]
+
+    for i in 1:n_reps
+
+        # Build niche web
+        N = structuralmodel(NicheModel, S, C)
+
+        # metrics
+        A = _get_matrix(N)
+        L = links(N)
+        S = richness(N)
+
+        _gen = SpeciesInteractionNetworks.generality(N)
+        gen = collect(values(_gen))
+        _vul = SpeciesInteractionNetworks.vulnerability(N)
+        vul = collect(values(_vul))
+        ind_maxgen = findmax(gen)[2]
+        l_s = L / S
+        top = sum(vec(sum(A, dims = 1) .== 0))
+        basal = sum(vec(sum(A, dims = 2) .== 0))
+        int = (S - (basal + top))
+        tl = trophic_level(N)
+
+        chain = chain_metrics(N; max_depth=6)
+
+        d2 = Dict{Symbol,Any}(
+            :id => j,
+            :run => i,
+            :richness => S,
+            :links => L,
+            :connectance => connectance(N),
+            :diameter => diameter(A),
+            :distance => distancetobase(N, collect(keys(_gen))[ind_maxgen]),
+            :basal => basal / S,
+            :top => top / S,
+            :intermediate => int / S,
+            :herbivory => length(herbivore(N)) / S,
+            :omnivory => length(omnivore(N)) / S,
+            :cannibal => length(cannibal(N)) / S,
+            :predpreyRatio => (basal + int)/(top + int),
+            :l_S => l_s,
+            :GenSD => std(gen) / l_s,
+            :VulSD => std(vul) / l_s,
+            :TL => mean(Float64.(values(tl))),
+            :ChLen => chain.ChLen,
+            :ChSD  => chain.ChSD,
+            :ChNum => chain.ChNum,
+            :path => mean(Float64.(pathlengths(N))),
+            :LinkSD => std(values(SpeciesInteractionNetworks.degree(N))) / l_s,
+            :S1 => length(findmotif(motifs(Unipartite, 3)[1], remove_cannibals(N)))/(richness(N)^2),
+            :S2 => length(findmotif(motifs(Unipartite, 3)[2], remove_cannibals(N)))/(richness(N)^2),
+            :S4 => length(findmotif(motifs(Unipartite, 3)[4], remove_cannibals(N)))/(richness(N)^2),
+            :S5 => length(findmotif(motifs(Unipartite, 3)[5], remove_cannibals(N)))/(richness(N)^2),
+            :centrality => mean(Float64.(values(centrality(N)))),
+            :loops => length(loops(N)) / S,
+            :intervals => intervality(A),
+            :MaxSim => max_sim(N),
+            :Clust => clustering(A),
+            :trophicCoherence => trophic_coherence(N),
+            :trophicVar => trophic_variance(N),
+        )
+
+        push!(niche_topology, d2)
+    
+    end
+    
+end
+
+CSV.write("data/cleaned/nicheNetworks.csv", niche_topology)
