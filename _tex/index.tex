@@ -281,112 +281,97 @@ dimensionality reduction%
 \section{Introduction}\label{introduction}
 
 Ecological theory has long sought general principles linking the
-architecture of interaction networks to ecosystem stability. Early
-theoretical work framed this relationship in terms of system complexity,
-most famously through the analysis of random community matrices by
-Robert May, who showed that increasing species richness, interaction
-density, and interaction strength variance should reduce local dynamical
-stability in large ecological systems (May 1972, 1974). Subsequent work
-refined this prediction by demonstrating that specific forms of network
-organisation such as interaction structure, trophic hierarchy, and
-compartmentalisation can substantially alter stability outcomes (McCann
+architecture of interaction networks to ecosystem stability. Early work
+framed this relationship in terms of system complexity, most prominently
+through the analysis of random community matrices by Robert May, who
+showed that increasing species richness, interaction density, and
+interaction strength variance should reduce local dynamical stability in
+large ecological systems (May 1972, 1974). Subsequent studies refined
+this view by demonstrating that specific forms of network organisation
+(such as interaction structure, trophic hierarchy, and
+compartmentalisation) can substantially alter stability outcomes (McCann
 2000; Stouffer and Bascompte 2010; Allesina and Tang 2012). More
-recently, structural theories such as trophic coherence have proposed
-that food webs occupy constrained regions of structural space in which
-particular architectural features strongly influence system stability
-(Johnson et al. 2014). At the same time, ecological stability itself is
-now widely recognised as a multidimensional concept encompassing
-distinct dynamical properties such as persistence, resistance to
-disturbance, and recovery dynamics (Ives and Carpenter 2007; Loreau and
-de Mazancourt 2013; Donohue et al. 2016; Domínguez-García et al. 2019;
-Chen et al. 2024). Together these developments suggest that the
-relationship between network structure and ecological stability may be
-more complex than originally assumed, specifically that both structure
-and stability are multidimensional properties of ecological systems. If
-so, apparent inconsistencies in the structure--stability literature may
-arise not because theoretical predictions are incorrect, but because
-different studies measure different aspects of network architecture and
-different components of ecological stability.
+recently, structural theories such as trophic coherence have further
+suggested that food webs occupy constrained regions of structural space
+in which particular architectural features strongly influence system
+stability (Johnson et al. 2014).
 
-Ecological networks are commonly characterised using a large and diverse
-set of structural metrics, yet there remains little consensus on how
-these metrics should be interpreted or compared across studies (Vermaat
-et al. 2009; Lau et al. 2017). Measures of connectance, trophic level,
-modularity, omnivory, motif structure, and many others are routinely
-invoked as indicators of ecosystem organisation or stability. However,
-these descriptors often covary strongly, capture overlapping
-information, or reflect different scales of network organisation
-(Thompson et al. 2012). As a result, studies using different subsets of
-metrics frequently arrive at conflicting conclusions about the
-relationship between network structure and ecological stability. Rather
-than reflecting inconsistency or redundancy, these differences arise
-because different metrics implicitly target different components of
-stability (Lau et al. 2017).
+Despite these advances, there remains little consensus on which aspects
+of network structure predict ecological stability. Different studies
+frequently identify different structural predictors, often with
+conflicting effects. This inconsistency is typically interpreted as
+evidence that structure--stability relationships are weak,
+context-dependent, or system-specific. However, an alternative
+explanation is that both network structure and ecological stability are
+inherently multidimensional, and that apparent contradictions arise
+because different studies measure different aspects of each. Ecological
+networks are commonly characterised using a wide array of structural
+metrics, including connectance, trophic level, modularity, omnivory, and
+motif structure, among many others. Yet these descriptors often covary,
+capture overlapping information, or reflect different organisational
+scales within the network (Vermaat et al. 2009; Thompson et al. 2012;
+Lau et al. 2017). As a result, individual metrics are unlikely to
+provide universal predictors of stability. Instead, they may represent
+partial projections of a higher-dimensional structural space, with
+different metrics capturing different aspects of network organisation.
+
+At the same time, ecological stability itself is widely recognised as a
+multidimensional concept encompassing distinct dynamical properties such
+as persistence, resistance to disturbance, and recovery dynamics (Ives
+and Carpenter 2007; Loreau and de Mazancourt 2013; Donohue et al. 2016;
+Domínguez-García et al. 2019; Chen et al. 2024). These components are
+governed by different ecological processes and need not respond
+uniformly to changes in network structure. Consequently, there is no a
+priori reason to expect a single structural descriptor to predict all
+aspects of stability.
+
+Together, these observations suggest a more general framework in which
+ecological systems are understood as mappings between a multidimensional
+space of network structure and a multidimensional space of stability
+outcomes. Within this framework, structural metrics capture different
+axes of network organisation, stability metrics capture different system
+responses to perturbation, and the relationship between them depends on
+how these spaces are projected onto one another. Apparent
+inconsistencies in the literature therefore arise not because
+theoretical predictions are incorrect, but because different studies
+examine different projections of both structure and stability.
 
 A key, but often implicit, assumption in this literature is that
 stability is defined primarily through the temporal behaviour of
 populations (Pimm 1984; Ives and Carpenter 2007). Here, we extend this
-view by considering stability not only as whether populations return to
-equilibrium, but whether the network that constrains those dynamics
+view by considering stability not only in terms of population dynamics,
+but in terms of whether the network that constrains those dynamics
 continues to exist and function. This perspective aligns with a broader
 view emerging across complex systems, in which stability is associated
 with the persistence of network structure and function under
-perturbation, including in financial systems, infrastructure networks,
-and social systems (Albert et al. 2000; Burleson-Lesser et al. 2020).
-This perspective is particularly relevant for empirical food webs, which
-are typically observed as static interaction networks and therefore
-encode structural constraints on dynamics rather than dynamics directly.
+perturbation (Albert et al. 2000; Burleson-Lesser et al. 2020), and is
+particularly relevant for empirical food webs, which are typically
+observed as static interaction networks encoding structural constraints
+on dynamics rather than dynamics directly.
 
-From this perspective, both the structure and stability of a network can
-be understood as multiscale properties. Structural metrics capture
-different aspects of how interactions are organised, from species-level
-roles to global network architecture, and should not be expected to
-provide universal predictors of stability (Newman 2010). Likewise,
-different stability components emerge from processes operating at
-different levels of organisation. Node-level properties relate to
-species persistence and redundancy (Dunne et al. 2002), path-level
-structure governs the propagation of perturbations and thus resistance
-(Albert et al. 2000), and global network properties constrain
+From this perspective, both network structure and stability can be
+understood as multi-scale properties. Structural metrics capture
+different aspects of organisation, from species-level roles to global
+architecture, and should not be expected to provide universal predictors
+of stability (Newman 2010). Likewise, stability emerges from processes
+operating across multiple levels - node-level properties influence
+species persistence and redundancy (Dunne et al. 2002), link
+distribution governs the propagation of perturbations and thus
+resistance (Albert et al. 2000), and global network properties constrain
 system-wide behaviour and recovery potential (May 1972; Allesina and
-Tang 2012).
+Tang 2012). Within this framework, commonly used metrics can be
+reinterpreted as complementary descriptors of distinct stability
+mechanisms rather than competing proxies for a single concept of
+stability.
 
-Within this framework, commonly used metrics can be reinterpreted as
-complementary descriptors of distinct stability mechanisms rather than
-competing proxies for a single concept of stability. For example,
-controllability identifies influential species at the node level (Liu et
-al. 2011; Cowan et al. 2012), robustness to species loss captures the
-maintenance of connectivity under perturbation (Dunne et al. 2002),
-subgraph structure reveals cohesive subcomponents of the network (Kitsak
-et al. 2010), and emergent properties reflect emergent constraints on
-system-level dynamics (Allesina and Tang 2012). Many of these metrics
-span multiple scales, linking local structure to global behaviour.
-
-Adopting a multi-scale perspective may provide a mechanistic explanation
-for why different studies report contrasting structure--stability
-relationships. Rather than reflecting inconsistency, such differences
-arise because different metrics implicitly target different stability
-components operating at different organisational scales. Identifying
-whether commonly used metrics organise into a smaller set of coherent
-structural dimensions therefore offers a way to reduce redundancy while
-preserving ecological meaning.
-
-Here we investigate whether the large number of structural metrics used
-to characterise food webs can be reduced to a smaller set of coherent
-structural dimensions, and whether these dimensions relate to different
-components of ecological stability. Using a compilation of empirical
-food webs, we quantified a broad suite of commonly used network
-descriptors spanning species roles, interaction pathways, and global
-network organisation. We first examined whether these metrics
-self-organise into statistically robust modules based on their
-covariation across ecosystems. We then evaluated how these modules align
-with dominant multivariate axes of structural variation. Finally, we
-compared alternative representations of network structure to assess how
-different structural dimensions relate to three stability properties:
-robustness to species loss, resilience, spectral radius, and
-controllability. By explicitly mapping the multivariate structure of
-network architecture to stability outcomes, this analysis provides a
-principled framework for interpreting network metrics and for selecting
-structural descriptors that match specific ecological questions.
+This conceptual framework is illustrated in Figure~\ref{fig-conceptual}.
+Network structure is organised along a small number of underlying
+dimensions (Panel B), while ecological stability comprises multiple
+components (Panel A). Each stability component depends on a different
+projection of structural space (Panel C), giving rise to
+process-dependent relationships and trade-offs among stability outcomes.
+From this perspective, the structure--stability relationship is not a
+single function, but a structured mapping across multiple dimensions.
 
 \begin{figure}
 
@@ -405,6 +390,24 @@ space (Panel C), generating process-dependent relationships and
 trade-offs among stability outcomes.}
 
 \end{figure}%
+
+Here we test this framework by examining whether commonly used
+structural metrics of food webs organise into a smaller set of coherent
+dimensions, and how these dimensions relate to different components of
+ecological stability. Using a compilation of empirical food webs, we
+quantify a broad suite of structural descriptors spanning species roles,
+interaction pathways, and global network organisation. We first test
+whether these metrics form statistically robust modules based on their
+covariation across ecosystems. We then evaluate how these modules align
+with dominant multivariate axes of structural variation. Finally, we
+compare alternative representations of network structure to assess how
+different structural dimensions relate to multiple stability properties,
+including robustness to species loss, resilience, spectral radius, and
+controllability. By explicitly mapping the multidimensional structure of
+ecological networks to multiple components of stability, this study
+provides a principled framework for interpreting network metrics and for
+understanding the conditions under which different aspects of network
+architecture promote or constrain ecological stability.
 
 \section{Materials \& Methods}\label{materials-methods}
 
@@ -891,11 +894,11 @@ distributions, as captured by null and configuration models (Newman
 2010). In contrast, higher-order modules capture constraints imposed by
 trophic organisation, energy flow, and species roles, reflecting
 ecological structuring processes described by niche-based and trophic
-theories of food-web assembly (Stouffer and Bascompte 2010; Johnson et
-al. 2014; \textbf{williamsSimpleRulesYield2000?}). Collectively, this
-structure indicates that food-web organisation arises from multiple,
-partially independent axes of variation that correspond to distinct
-constraints operating during network assembly.
+theories of food-web assembly (Williams and Martinez 2000; Stouffer and
+Bascompte 2010; Johnson et al. 2014). Collectively, this structure
+indicates that food-web organisation arises from multiple, partially
+independent axes of variation that correspond to distinct constraints
+operating during network assembly.
 
 \begin{quote}
 Comparison with null models reinforces this interpretation by showing
@@ -984,10 +987,7 @@ modular organisation is preserved within a reduced dimensional space.}
 between the seven identified food-web modules (rows) and the principal
 components (columns) capturing 80\% of cumulative variance. High values
 (darker shading) indicate strong alignment, where a specific module's
-internal structure drives the variation captured by that PC. Both rows
-and columns are hierarchically clustered to highlight similarities in
-how different structural dimensions contribute to the overall food-web
-architecture.}
+internal structure drives the variation captured by that PC.}
 
 \end{figure}%
 
@@ -1011,10 +1011,10 @@ architecture.}
 
 }
 
-\caption{\label{fig-variance}This figure quantifies the relative
-contribution of each structural module to the variance captured by
-individual Principal Components (PCs). Calculation: For each PC, the
-total variance (eigenvalue) is partitioned among the k=7 modules
+\caption{\label{fig-variance}\emph{Figure SX.} This figure quantifies
+the relative contribution of each structural module to the variance
+captured by individual Principal Components (PCs). Calculation: For each
+PC, the total variance (eigenvalue) is partitioned among the k=7 modules
 identified in the hierarchical clustering. The contribution of a module
 to a specific PC is calculated as the sum of the squared loadings of all
 metrics belonging to that module, normalised by the total variance
@@ -1023,7 +1023,7 @@ illustrates how the ecological weight shifts across different structural
 dimensions. For example, while PC1 may be dominated by a single module,
 subsequent PCs often represent a more diverse blend of modular
 contributions, reflecting the multifaceted nature of topological
-complexity and trophic organization. Significance: This visualisation
+complexity and trophic organisation. Significance: This visualisation
 confirms that the PC axes are not merely statistical artifacts but are
 grounded in the specific groups of correlated metrics defined in the
 main text. The stability of the flow across the first several components
@@ -1170,7 +1170,7 @@ their empirical comparison in predictive analyses of stability.
 
 }
 
-\caption{\label{fig-dim_red}\emph{Figure S1.} Characterisation of
+\caption{\label{fig-dim_red}\emph{Figure SX.} Characterisation of
 alternative dimensional-reduction approaches for network structural
 metrics. (A) Proportion of total variance in the full metric space
 retained by each representation: cluster medoids, PC-dominant metrics,
@@ -1485,13 +1485,6 @@ Chen, C., X.-W. Wang, and Y.-Y. Liu. 2024.
 ecological systems: {A} theoretical review}. Physics Reports, Stability
 of {Ecological Systems}: {A Theoretical Review} 1088:1--41.
 
-\bibitem[\citeproctext]{ref-cowanNodalDynamicsNot2012}
-Cowan, N. J., E. J. Chastain, D. A. Vilhena, J. S. Freudenberg, and C.
-T. Bergstrom. 2012.
-\href{https://doi.org/10.1371/journal.pone.0038398}{Nodal {Dynamics},
-{Not Degree Distributions}, {Determine} the {Structural Controllability}
-of {Complex Networks}}. PLOS ONE 7:e38398.
-
 \bibitem[\citeproctext]{ref-dominguez-garciaUnveilingDimensionsStability2019}
 Domínguez-García, V., V. Dakos, and S. Kéfi. 2019.
 \href{https://doi.org/10.1073/pnas.1904470116}{Unveiling dimensions of
@@ -1546,12 +1539,6 @@ Oikos 124:446--457.
 Kéfi, S., V. Domínguez-García, I. Donohue, C. Fontaine, E. Thébault, and
 V. Dakos. 2019. \href{https://doi.org/10.1111/ele.13340}{Advancing our
 understanding of ecological stability}. Ecology Letters 22:1349--1356.
-
-\bibitem[\citeproctext]{ref-kitsakIdentificationInfluentialSpreaders2010}
-Kitsak, M., L. K. Gallos, S. Havlin, F. Liljeros, L. Muchnik, H. E.
-Stanley, and H. A. Makse. 2010.
-\href{https://doi.org/10.1038/nphys1746}{Identification of influential
-spreaders in complex networks}. Nature Physics 6:888--893.
 
 \bibitem[\citeproctext]{ref-lauEcologicalNetworkMetrics2017}
 Lau, M. K., S. R. Borrett, B. Baiser, N. J. Gotelli, and A. M. Ellison.
