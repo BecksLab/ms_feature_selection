@@ -88,10 +88,7 @@ modular organisation is preserved within a reduced dimensional space.}
 between the seven identified food-web modules (rows) and the principal
 components (columns) capturing 80\% of cumulative variance. High values
 (darker shading) indicate strong alignment, where a specific module's
-internal structure drives the variation captured by that PC. Both rows
-and columns are hierarchically clustered to highlight similarities in
-how different structural dimensions contribute to the overall food-web
-architecture.}
+internal structure drives the variation captured by that PC.}
 
 \end{figure}
 \efloatseparator
@@ -117,10 +114,10 @@ architecture.}
 
 }
 
-\caption{\label{fig-variance}This figure quantifies the relative
-contribution of each structural module to the variance captured by
-individual Principal Components (PCs). Calculation: For each PC, the
-total variance (eigenvalue) is partitioned among the k=7 modules
+\caption{\label{fig-variance}\emph{Figure SX.} This figure quantifies
+the relative contribution of each structural module to the variance
+captured by individual Principal Components (PCs). Calculation: For each
+PC, the total variance (eigenvalue) is partitioned among the k=7 modules
 identified in the hierarchical clustering. The contribution of a module
 to a specific PC is calculated as the sum of the squared loadings of all
 metrics belonging to that module, normalised by the total variance
@@ -129,7 +126,7 @@ illustrates how the ecological weight shifts across different structural
 dimensions. For example, while PC1 may be dominated by a single module,
 subsequent PCs often represent a more diverse blend of modular
 contributions, reflecting the multifaceted nature of topological
-complexity and trophic organization. Significance: This visualisation
+complexity and trophic organisation. Significance: This visualisation
 confirms that the PC axes are not merely statistical artifacts but are
 grounded in the specific groups of correlated metrics defined in the
 main text. The stability of the flow across the first several components
@@ -168,7 +165,7 @@ across modules and multivariate structural gradients.}
 
 }
 
-\caption{\label{fig-dim_red}\emph{Figure S1.} Characterisation of
+\caption{\label{fig-dim_red}\emph{Figure SX.} Characterisation of
 alternative dimensional-reduction approaches for network structural
 metrics. (A) Proportion of total variance in the full metric space
 retained by each representation: cluster medoids, PC-dominant metrics,
