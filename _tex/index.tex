@@ -210,7 +210,7 @@ Stability Debate}
 1%
 }%
 }
-\date{2026-04-07}
+\date{2026-04-09}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -361,7 +361,7 @@ et al. 2010), and emergent properties reflect emergent constraints on
 system-level dynamics (Allesina and Tang 2012). Many of these metrics
 span multiple scales, linking local structure to global behaviour.
 
-Adopting a multiscale perspective may provide a mechanistic explanation
+Adopting a multi-scale perspective may provide a mechanistic explanation
 for why different studies report contrasting structure--stability
 relationships. Rather than reflecting inconsistency, such differences
 arise because different metrics implicitly target different stability
@@ -396,7 +396,13 @@ structural descriptors that match specific ecological questions.
 
 }
 
-\caption{\label{fig-conceptual}Idea for conceptual.}
+\caption{\label{fig-conceptual}Conceptual framework linking
+multidimensional network structure (S) to multidimensional ecological
+stability (Ω). Structural variation is organised along a small number of
+axes (Panel B), while stability comprises multiple components (Panel A).
+Each stability component depends on a different projection of structural
+space (Panel C), generating process-dependent relationships and
+trade-offs among stability outcomes.}
 
 \end{figure}%
 
@@ -540,29 +546,32 @@ loss (\(R_{50}\)) quantifies the proportion of primary extinctions
 required to reduce network richness to 50\% of its initial value,
 providing a threshold-based measure of the system's tolerance to species
 removal and its ability to maintain connectivity under perturbation
-(Dunne et al. 2002). Second, we quantify resilience as the area under
-the extinction curve, relating primary species loss to secondary
-extinctions, which captures how rapidly structural collapse propagates
-through the network as perturbations accumulate and thus reflects the
-rate of system degradation under sequential disturbance. Third, spectral
-radius (\(\rho\)), defined as the largest real part of the eigenvalues
-of the adjacency matrix(Staniczenko et al. 2013) making it a proxy for
-network persistence (Bascompte et al. 2003). This provides a global
-constraint on system behaviour and can be interpreted as a proxy for the
-system's dynamical stability potential, governing the amplification or
-decay of perturbations. Finally, structural controllability quantifies
-the minimum number of driver species required to control the system's
-dynamics, capturing the capacity for directed reorganisation following
-perturbation and identifying species that exert disproportionate
-influence on system behaviour (Liu et al. 2011). Together, these metrics
-capture complementary aspects of ecological stability: (i) resistance to
-perturbation, quantified by robustness as tolerance to species loss;
-(ii) recovery/persistence after perturbation, measured as the
-propagation of cascading extinctions following sequential species
-removal; (iii) stability potential, captured by the spectral radius as a
-global constraint governing the amplification or decay of perturbations;
-and (iv) controllability, reflecting the minimum set of driver species
-required to steer system dynamics and reconfigure network structure.
+(Dunne et al. 2002; Jonsson et al. 2015). Second, we quantify resilience
+as the area under the extinction curve, relating primary species loss to
+secondary extinctions, which captures how rapidly structural collapse
+propagates through the network as perturbations accumulate and thus
+reflects the rate of system degradation under sequential disturbance.
+Third, spectral radius (\(\rho\)), defined as the largest real part of
+the eigenvalues of the adjacency matrix(Staniczenko et al. 2013) making
+it a proxy for network persistence (Bascompte et al. 2003). This
+provides a global constraint on system behaviour and can be interpreted
+as a proxy for the system's dynamical stability potential, governing the
+amplification or decay of perturbations. Finally, structural
+controllability quantifies the minimum number of driver species required
+to control the system's dynamics, capturing the capacity for directed
+reorganisation following perturbation and identifying species that exert
+disproportionate influence on system behaviour (Liu et al. 2011).
+Together, these metrics capture complementary aspects of ecological
+stability: (i) resistance to perturbation, quantified by robustness as
+tolerance to species loss; (ii) recovery/persistence after perturbation,
+measured as the propagation of cascading extinctions following
+sequential species removal; (iii) stability potential, captured by the
+spectral radius as a global constraint governing the amplification or
+decay of perturbations; and (iv) controllability, reflecting the minimum
+set of driver species required to steer system dynamics and reconfigure
+network structure. Because both robustness and resilience are dependent
+on stochastic extinctions we averaged these values from 100 extinction
+runs.
 
 Finally, we incorporated two complementary measures that capture
 higher-order aspects of network organisation. First, we quantified
@@ -585,13 +594,8 @@ This formulation is motivated by classical stability results, where
 system behaviour depends on the combined scaling of species richness and
 interaction density, rather than either quantity in isolation. As such,
 this term provides a compact representation of size--complexity
-tradeoffs and complements both local (e.g., degree distributions) and
-global (e.g., spectral) descriptors of network structure.
-
-Together with SVD-based complexity, this additional term allows us to
-(respectively) capture the distribution of structural information across
-latent spectral modes and the scaling relationships governing network
-size and interaction density..
+tradeoffs and complements both local (\emph{e.g.,} degree distributions)
+and global (e.g., spectral) descriptors of network structure.
 
 \subsection{Identification of Structural
 Modules}\label{identification-of-structural-modules}
@@ -799,7 +803,7 @@ contributions reflect consistent structural effects rather than
 idiosyncrasies of a particular data split. This approach enhances
 confidence that observed switching patterns in predictor importance
 across stability metrics represent genuine structural relationships
-rather than artefacts of sampling variability.. Within each training
+rather than artefacts of sampling variability. Within each training
 partition, models were fit across a grid of \(\alpha\) values (0--1 in
 increments of 0.25), and for each \(\alpha\), the optimal penalty
 strength (\(\lambda\)) was selected via internal cross-validation on the
@@ -869,63 +873,44 @@ represent statistically robust groupings of structural descriptors.
 
 The resulting modular partition identified coherent groups of metrics
 describing distinct aspects of network architecture
-Table~\ref{tbl-modules}. These included a large-scale architectural
+Figure~\ref{fig-module}. These included a large-scale architectural
 module integrating size and motif-based descriptors, modules capturing
 trophic organisation and energy routing, and two modules consisting of
-isolated structural descriptors that function independently from broader
-metric groupings. The six-module solution Table~\ref{tbl-modules}
+more isolated structural descriptors that vary independently from
+broader groupings. The six-module solution Figure~\ref{fig-module}
 reveals a hierarchical decomposition of food-web structural space into
-interpretable ecological dimensions. Collectively, these modules
-illustrate that network organization is shaped by multiple statistically
-supported axes of structural variation, reflecting size scaling,
-integration, energy flow, and control asymmetry.
+interpretable ecological dimensions. Importantly, these modules can be
+understood not only as statistical groupings, but as reflecting
+successive constraints operating during network assembly. Early-emerging
+dimensions associated with network size and interaction density define
+the combinatorial space of possible interactions, consistent with
+classical complexity arguments in which system behaviour is governed by
+its size (May 1972; Allesina and Tang 2012). At this level, network
+structure largely reflects statistical constraints on degree
+distributions, as captured by null and configuration models (Newman
+2010). In contrast, higher-order modules capture constraints imposed by
+trophic organisation, energy flow, and species roles, reflecting
+ecological structuring processes described by niche-based and trophic
+theories of food-web assembly (Stouffer and Bascompte 2010; Johnson et
+al. 2014; \textbf{williamsSimpleRulesYield2000?}). Collectively, this
+structure indicates that food-web organisation arises from multiple,
+partially independent axes of variation that correspond to distinct
+constraints operating during network assembly.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3194}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3194}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3611}}@{}}
-\caption{Structural Modules Identified From Hierarchical
-Clustering.}\label{tbl-modules}\tabularnewline
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Module Name
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Metrics Included
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Ecological Interpretation
-\end{minipage} \\
-\midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Module Name
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Metrics Included
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Ecological Interpretation
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Macro Complexity & richness, links, l\_S, S4, S5, intervals & Captures
-large-scale expansion of network structure and combinatorial complexity
-associated with increasing system size \\
-Trophic Integration & connectance, diameter, intermediate, omnivory,
-cannibal, TL, ChLen, ChSD, S1, S2, loops, Clust, trophicCoherence,
-trophicVar & Describes how ordered the trophic structure is and how
-tightly species are embedded across trophic levels \\
-Energy Transport & mean distance, path length & Quantifies geometric
-structure of energy routing independent of network size or trophic
-structure \\
-Trophic Role Asymmetry & basal, predpreyRatio, GenSD, LinkSD, MaxSim &
-Captures structural imbalance across trophic roles, but it also
-incorporates heterogeneity in consumer behaviour and redundancy \\
-Control Heterogeneity & top, VulSD, ChNum & Reflects heterogeneity in
-top-down regulation and predation pressure distribution \\
-Flow Control & herbivory, centrality & Captures energy entry points and
-dominant structural hubs \\
-\end{longtable}
+\begin{quote}
+Comparison with null models reinforces this interpretation by showing
+that not all structural dimensions arise from the same underlying
+processes. While modules associated with network size and degree
+heterogeneity are partially reproduced under degree-preserving
+randomisation, others show little correspondence with null expectations.
+This pattern is consistent with a hierarchical assembly process, in
+which a combinatorial baseline defined by species richness and
+interaction degree is progressively shaped by ecological constraints
+governing trophic organisation, energy flow, and species roles.
+Consequently, the modular structure we identify does not simply reflect
+statistical artefacts of network size, but captures ecologically
+meaningful dimensions of network assembly.
+\end{quote}
 
 \begin{figure}
 
@@ -935,7 +920,17 @@ dominant structural hubs \\
 
 }
 
-\caption{\label{fig-conceptual}Idea for different take on modules.}
+\caption{\label{fig-module}Ecological network structure emerges through
+hierarchical constraints on assembly. Food web architecture can be
+decomposed into six structural modules organised across three levels of
+constraint. Combinatorial scaling defines the space of possible
+interactions as a function of system size. This baseline gives rise to
+statistical organisation, where degree constraints generate
+heterogeneity in species roles and regulatory structure (trophic role
+asymmetry, control heterogeneity). At the highest level, ecological
+structuring imposes trophic ordering, energy flow constraints, and the
+emergence of resource and control hubs (trophic integration, energy
+transport, flow control).}
 
 \end{figure}%
 
@@ -1189,34 +1184,30 @@ and structural alignment among dimensional-reduction strategies.}
 
 \end{figure}%
 
-\subsubsection{Predictive Performance Across Structural
-Representations}\label{predictive-performance-across-structural-representations}
+\subsubsection{Predictive Structure of Ecological
+Stability}\label{predictive-structure-of-ecological-stability}
 
-\paragraph{Structural Modules and Differential Explanatory
-Power}\label{structural-modules-and-differential-explanatory-power}
+\paragraph{Structural Modules Differentially Contribute to Stability
+Processes}\label{structural-modules-differentially-contribute-to-stability-processes}
 
-Across stability components, variance partitioning revealed that
-different structural modules contribute unevenly to explaining
-ecological stability (Figure~\ref{fig-stab_var}). This indicates that
-stability is not governed by a single dominant structural regime, but
-instead emerges from module-specific control structures that map onto
-distinct dynamical processes. For Stability Potential, explanatory power
-was concentrated in modules associated with global structural
-organisation, consistent with its strong alignment with spectral
-structure. In contrast, Controllability drew heavily from modules
-capturing trophic heterogeneity (\emph{e.g.,} GenSD), indicating that
-control capacity is shaped by distributed variation in species-level
-connectivity. Recovery/Persistence showed strong contributions from
-modules associated with intermediate trophic structure and interaction
-pathways, suggesting that extinction cascades are governed by structural
-features that regulate how perturbations propagate through the network.
-By contrast, Resistance exhibited relatively weak and diffuse module
-contributions, reinforcing the finding that tolerance to species loss is
-not strongly encoded in any single structural domain. Together, these
-patterns demonstrate that different stability components are explained
-by distinct structural modules, highlighting a modular organisation of
-ecological stability in which each dynamical process is governed by a
-different subset of network features.
+Variance partitioning across structural modules revealed a clear modular
+organisation of stability (Figure~\ref{fig-stab_var}). Rather than being
+governed by a single structural regime, each stability component draws
+on a distinct subset of structural domains. Modules associated with
+trophic heterogeneity and role asymmetry contributed disproportionately
+to explaining Controllability and Recovery/Persistence, with metrics
+such as GenSD alone accounting for a large fraction of explained
+variance (up to \textasciitilde50\% in some models). In contrast,
+Stability Potential was primarily explained by modules capturing global
+network organisation, consistent with its dependence on spectral
+properties of the adjacency matrix. Resistance, however, showed
+relatively weak and diffuse contributions across modules, with no single
+domain exerting strong control. This reinforces the view that resistance
+is an emergent property arising from distributed features of network
+organisation, rather than a specific structural mechanism. These
+patterns indicate that ecological stability is modular at the level of
+mechanisms, with different structural domains governing different
+dynamical processes.
 
 \begin{figure}
 
@@ -1241,31 +1232,27 @@ modules are more influential for particular stability processes.}
 \paragraph{Role Reversals Across Stability
 Metrics}\label{role-reversals-across-stability-metrics}
 
-Beyond differences in explanatory power, we observed a striking pattern
-of sign switching in predictor effects across stability components,
-indicating that the same structural feature can have opposing influences
-depending on the stability process considered
-Figure~\ref{fig-stab_corr}. The most notable example is network
-complexity, which exhibits a clear shift in its relationship with
-stability. In the context of Resistance, complexity is negatively
-associated with stability (estimate = −0.410), suggesting that increased
-structural heterogeneity reduces tolerance to species loss. However, for
-Stability Potential, complexity becomes strongly negative (estimate =
-−0.598), indicating that greater spectral heterogeneity constrains
-global stability properties. Conversely, in Controllability, complexity
-shifts to a positive effect (estimate = 0.342), suggesting that
-increased structural heterogeneity enhances the system's ability to be
-externally controlled and reconfigured. This pattern of sign reversal
-extends to other structural features, including trophic composition and
-connectivity measures. For example, variables such as intermediate
-species and top taxa proportions switch direction across stability
-metrics, reflecting their context-dependent roles in either stabilising
-or destabilising different dynamical processes. These sign changes
-indicate that structural features are not universally stabilising or
-destabilising, but instead play process-dependent roles. A given network
-property may enhance one aspect of stability while simultaneously
-undermining another, revealing inherent trade-offs in ecological
-organisation.
+A striking feature of the results is the prevalence of sign switching in
+predictor effects across stability metrics (Figure~\ref{fig-stab_corr}).
+Structural features that increase one component of stability frequently
+decrease another, indicating that their effects are inherently
+process-dependent. The most pronounced example is network complexity,
+which shows strong negative associations with both Resistance and
+Stability Potential, but becomes positively associated with
+Controllability. This indicates that increasing structural heterogeneity
+simultaneously reduces tolerance to perturbation while enhancing the
+system's capacity for external control.
+
+Similar reversals are observed for other structural features. For
+example, trophic composition variables such as the proportion of top
+predators consistently reduce resistance and stability potential, yet
+exhibit weaker or opposing effects in other stability contexts.
+Likewise, pathway-based metrics such as chain length strongly
+destabilise recovery dynamics while contributing differently to other
+components. These patterns demonstrate that structural features are not
+universally stabilising or destabilising. Instead, they participate in
+trade-offs across stability processes, where the same feature can play
+opposing roles depending on the dynamical context.
 
 \begin{figure}
 
@@ -1289,66 +1276,22 @@ outcomes.}
 
 \end{figure}%
 
-\begin{quote}
-Taken together, these results support a view of ecological stability as
-a multi-process system structured along two axes: Modular organisation:
-Stability components are governed by different structural modules,
-reflecting distinct mechanisms of control, propagation, and resistance.
-Sign-dependent roles of structure: Structural features exhibit role
-reversals across stability metrics, indicating that their influence is
-conditional on the specific dynamical process being considered. This
-dual structure suggests that ecological networks do not optimise for a
-single notion of stability. Instead, they balance competing stability
-demands, where the same structural properties may contribute positively
-to one aspect of stability while constraining another. This pattern of
-sign switching suggests that ecological stability is governed by
-trade-offs rather than universal stabilising principles, with structural
-features occupying different roles across distinct dynamical regimes.
-\end{quote}
+\paragraph{Classical Complexity Captures Only a Subset of
+Structure--stability
+Relationships}\label{classical-complexity-captures-only-a-subset-of-structurestability-relationships}
 
-\paragraph{Revisiting Classical Complexity and the May Stability
-Framework}\label{revisiting-classical-complexity-and-the-may-stability-framework}
-
-A central implication of these results is that neither classical
-complexity-based theory nor general spectral measures fully capture the
-structure--stability relationships observed in empirical food webs. In
-the framework of Robert May, stability is expected to decline with
-increasing species richness, interaction density, and interaction
-strength variance, leading to the well-known prediction that large,
-complex systems should be less locally stable. This prediction has
-provided a foundational baseline for ecological stability theory, but it
-implicitly assumes that complexity acts as a single aggregated driver of
-stability.
-
-Our results challenge this assumption in two important ways. First,
-while our general complexity metric captures aspects of global
-structural heterogeneity, its explanatory power is uneven across
-stability components, and it fails to account for processes such as
-recovery and controllability. Second, and more importantly, we observe
-that the relationship between complexity and stability is not fixed, but
-instead changes sign across stability metrics. Complexity is negatively
-associated with resistance and stability potential, consistent with
-May's prediction that increased structural complexity can destabilise
-local dynamics. However, it becomes positively associated with
-controllability, indicating that greater structural heterogeneity can
-enhance the system's capacity for directed reorganisation and control.
-
-These findings suggest that the classical complexity--stability
-relationship identified by May emerges as a projection of a
-higher-dimensional relationship between structure and stability. When
-stability is decomposed into multiple dynamical components, complexity
-no longer acts as a universal constraint, but instead participates in a
-set of process-specific trade-offs that govern different aspects of
-ecological dynamics.
-
-\begin{quote}
-Collectively, these results demonstrate that stability components occupy
-distinct positions within structural space Figure~\ref{fig-stab_pca}. ρ
-emerges from coordinated multivariate gradients, and robustness remains
-weakly constrained by static architecture. Rather than reflecting a
-single structural driver, ecosystem stability is organised along
-layered, facet-specific dimensions of network architecture.
-\end{quote}
+Finally, comparison with classical univariate predictors highlights the
+limitations of traditional approaches. Metrics derived from complexity
+theory, including the May scaling term, explain only a small fraction of
+variation across stability components (typically \(R^2 < 0.1\)), and
+fail to capture the dominant structural drivers identified in
+multivariate models. While complexity shows strong negative associations
+with some stability components, consistent with classical predictions,
+it does not generalise across stability processes and cannot account for
+observed sign reversals. This indicates that classical
+complexity--stability relationships represent partial projections of a
+higher-dimensional system, capturing only one aspect of the broader
+mapping between network structure and ecological stability.
 
 \begin{figure}
 
@@ -1364,194 +1307,145 @@ layered, facet-specific dimensions of network architecture.
 
 \section{Discussion}\label{discussion}
 
-\subsection{Network structure is
-multidimensional}\label{network-structure-is-multidimensional}
+\subsection{Ecological network structure is modular and reflects
+assembly
+constraints}\label{ecological-network-structure-is-modular-and-reflects-assembly-constraints}
 
-For several decades, ecological theory has sought to understand how the
-structure of food webs influences ecological stability. Yet despite
-extensive empirical and theoretical work, consensus has remained
-elusive. Different studies frequently identify different structural
-predictors of stability, and results often appear contradictory.
-Connectance has been linked both positively and negatively to stability
-{[}REF{]}, omnivory has been argued to stabilise or destabilise
-communities {[}REF{]}, and measures of modularity, trophic organisation,
-or motif structure have each been proposed as key determinants of
-ecosystem dynamics {[}REF{]}.
+Ecological networks are not random assemblages of interactions, but
+exhibit a clear modular structure. Our results show that commonly used
+structural metrics cluster into coherent and reproducible groups,
+indicating that network architecture is organised into a small number of
+distinct dimensions. These modules likely reflect underlying constraints
+acting during network assembly, where simple combinatorial limits on
+species richness and interaction density are progressively shaped by
+ecological processes governing trophic organisation, energy flow, and
+species roles (Williams and Martinez 2000; Cattin et al. 2004; Proulx et
+al. 2005).
 
-Our results suggest that much of this inconsistency arises from a
-conceptual simplification: network structure is rarely a single
-property. Instead, food webs exhibit strong modular organisation among
-commonly used network metrics Figure~\ref{fig-cluster}, with descriptors
-grouped into statistically supported modules spanning
-macro-architectural complexity, trophic integration, routing geometry,
-and trophic imbalance. Principal component analysis further shows that
-these modules align with a small number of dominant structural gradients
-Figure~\ref{fig-pca}, Figure~\ref{fig-variance}, Figure~\ref{fig-alignment_heatmap}.
-Rather than forming a single continuum, food-web structure is organised
-along multiple partially independent axes.
+Rather than treating structural metrics as interchangeable descriptors,
+our results suggest that each metric captures a projection of a broader,
+multidimensional structural space. These projections are not redundant,
+rather they reflect distinct components of network organisation that
+arise from different underlying processes. The alignment of these
+modules with dominant multivariate axes further indicates that
+ecological networks occupy a low-dimensional but structured region of
+this space, with a limited number of principal gradients governing most
+variation in network architecture (Vermaat et al. 2009).
 
-This modular organisation implies that commonly used metrics are not
-interchangeable proxies for a single structural attribute, but rather
-partial projections of a higher-dimensional structural space.
-Consequently, many apparent inconsistencies in the structure--stability
-literature arise because different studies implicitly sample different
-structural dimensions.
+\subsection{Stability is multidimensional and
+non-universal}\label{stability-is-multidimensional-and-non-universal}
 
-\subsection{Structural modules reveal dimensions of network
-architecture}\label{structural-modules-reveal-dimensions-of-network-architecture}
+Ecological stability cannot be understood as a single, universal
+property (Ives and Carpenter 2007; Donohue et al. 2016; Kéfi et al.
+2019). Our results demonstrate that these components map onto different
+regions of structural space and are therefore governed by different
+aspects of network architecture. Crucially, this mapping is
+non-universal whereby the same structural feature can have opposing
+effects depending on the stability component considered. We observe
+systematic sign switching across stability metrics, where predictors
+that enhance one form of stability may simultaneously reduce another.
+These patterns indicate that structural features do not have intrinsic
+stabilising or destabilising roles, but instead participate in
+trade-offs in how structure governs dynamics.
 
-The clustering analysis identified several coherent structural domains
-Table~\ref{tbl-modules}. A dominant module captured macro-architectural
-complexity (richness, link density, motif structure), reflecting how
-structural complexity scales with system size. A second module captured
-trophic integration, describing how tightly interactions are organised
-across trophic levels. Additional modules described energy transport
-geometry, trophic role asymmetry, and control heterogeneity.
+\subsection{A multidimensional mapping between structure and
+stability}\label{a-multidimensional-mapping-between-structure-and-stability}
 
-These modules reveal that food-web architecture is not flat, but
-hierarchically structured. Some properties co-vary as networks expand,
-while others vary independently, reflecting distinct ecological
-mechanisms. Importantly, these domains provide a basis for understanding
-why different structural metrics are associated with different
-ecological outcomes.
-
-\subsection{Structural modules and mechanisms of
-stability}\label{structural-modules-and-mechanisms-of-stability}
-
-Rather than reflecting a single property, ecological stability emerges
-from multiple dynamical processes operating across scales. Our results
-show that different stability components are explained by different
-structural modules Figure~\ref{fig-stab_var}, supporting a modular view
-of stability.
-
-Robustness to species loss (resistance to extinction cascades) is only
-weakly constrained by any single structural domain, suggesting that
-tolerance to perturbation depends on distributed redundancy and
-context-dependent interactions. Stability potential, in contrast, is
-strongly governed by modules capturing global structural organisation,
-consistent with the role of large-scale architecture in constraining
-system-wide dynamics. Controllability is dominated by modules associated
-with trophic role asymmetry and heterogeneity, indicating that system
-steerability depends on uneven distributions of influence across
-species. Recovery and persistence are shaped by intermediate trophic
-structure and pathways, highlighting the importance of how perturbations
-propagate through interaction chains. Together, these results
-demonstrate that ecological stability is not a single property, but a
-collection of process-specific responses to perturbation, each governed
-by different structural dimensions.
-
-\subsection{Role reversals and sign switching across stability
-metrics}\label{role-reversals-and-sign-switching-across-stability-metrics}
-
-A central result of this study is that the same structural feature can
-have opposing effects depending on the stability metric considered
-Figure~\ref{fig-stab_corr}. This sign switching reveals that structural
-descriptors are not inherently stabilising or destabilising, but instead
-participate in process-dependent trade-offs.
-
-The clearest example is network complexity. In line with classical
-expectations, increasing complexity is associated with reduced
-resistance and stability potential, consistent with the theoretical
-framework developed by Robert May, which predicts that increasing
-species richness and interaction density can destabilise systems (May
-1972, 1974). However, complexity becomes positively associated with
-controllability, indicating that structurally diverse systems can be
-more amenable to directed intervention and reorganisation.
-
-This pattern indicates that complexity is not a universal driver of
-instability, but a multifunctional structural property. Its effects
-depend on which aspect of stability is being considered. This resolves a
-long-standing tension between theoretical predictions and empirical
-observations: both are correct, but they refer to different stability
-components.
-
-\subsection{Revisiting May and classical complexity
-theory}\label{revisiting-may-and-classical-complexity-theory}
-
-These results suggest that classical complexity--stability theory
-represents only one projection of a more general structural--dynamical
-relationship. May's framework captures local dynamical stability, where
-increasing complexity tends to reduce equilibrium stability. However,
-ecological stability is multidimensional, and once additional components
-are considered---such as robustness, recovery, and controllability---the
-relationship between structure and stability becomes more nuanced.
-
-In this broader context, our general complexity metric does not act as a
-universal predictor of stability. Instead, its effects vary across
-stability components, and it participates in sign reversals similar to
-those observed for other structural descriptors. This indicates that the
-classical complexity--stability relationship emerges from aggregating
-multiple, potentially opposing, effects across different dimensions of
-stability.
-
-More generally, these findings suggest that complexity is not a single
-axis of stability, but part of a higher-dimensional structural space in
-which different dimensions of complexity govern different dynamical
-outcomes. In this view, May's result is recovered as a special case
-within a broader, multivariate framework.
-
-\subsection{Predictive structure: modules vs
-axes}\label{predictive-structure-modules-vs-axes}
-
-Our predictive models further demonstrate that the relationship between
-structure and stability depends on how network structure is represented.
-Across stability components, different structural modules exhibit
-different explanatory power, indicating that stability is governed by
-module-specific mechanisms rather than a single dominant predictor.
-
-At the same time, the choice of representation strongly affects which
-structural features appear important. Fine-scale (cluster-based)
-representations distribute explanatory power across many correlated
-features, while PCA-based representations concentrate influence along a
-few dominant axes. Importantly, these representations emphasise
-different aspects of structure: domain-based representations highlight
-mechanistic components, whereas PCA representations highlight global
-gradients.
-
-This distinction is critical for interpreting structure--stability
-relationships. Apparent contradictions in the literature may arise not
-only from differences in ecological systems, but also from differences
-in how structure is represented and reduced.
-
-\subsection{Toward a modular, multidimensional theory of
-stability}\label{toward-a-modular-multidimensional-theory-of-stability}
-
-Together, these results support a shift from univariate to multivariate
-thinking about ecological stability. Rather than asking whether
-complexity or connectance stabilises ecosystems, a more informative
-question is which structural dimension governs which component of
-stability. Here we show that different modules explain different
-stability processes, and that structural features change sign across
-stability metrics, revealing trade-offs rather than universal effects.
-This dual structure suggests that ecological networks do not optimise
-for a single notion of stability. Instead, they balance competing
-demands: resistance, recovery, persistence, and controllability.
-Structural features may enhance one aspect of stability while
-constraining another.
+Together, these findings support a conceptual framework in which
+ecological systems are understood as mappings between a multidimensional
+space of network structure and a multidimensional space of stability
+outcomes. Different structural modules govern different stability
+components, such that each stability metric represents a distinct
+projection of the underlying structural organisation. Apparent
+contradictions in the literature therefore arise not because
+relationships are weak or inconsistent, but because different studies
+examine different projections of both structure and stability. This
+places classical results, such as those of May, into a broader context.
+May's theory predicts that increasing complexity reduces local dynamical
+stability, a result that has profoundly shaped ecological thinking.
+However, this framework implicitly treats both complexity and stability
+as unidimensional. May's result describes one axis of a
+higher-dimensional structure--stability relationship. In this sense,
+classical theory is not contradicted but embedded within a more general
+multivariate framework, where its predictions hold for specific
+dimensions of stability but not for others. Showcasing that the
+structure--stability relationship is not a single curve but rather a
+structured mapping across multiple dimensions.
 
 \subsection{Implications for ecological
-inference}\label{implications-for-ecological-inference}
+theory}\label{implications-for-ecological-theory}
 
-Our findings highlight the importance of how network structure is
-represented. Dimensional reduction choices---whether via modules,
-medoids, or PCA---shape which structural features are emphasised and
-therefore which ecological relationships are recovered. Recognising this
-allows for more principled comparisons across studies and reduces
-ambiguity in interpreting structure--stability relationships. More
-broadly, these results suggest that ecological networks should be
-understood as multivariate systems structured along a small number of
-coherent dimensions. Future work should focus on aligning structural
-representations with specific ecological processes, rather than relying
-on individual metrics as universal predictors.
+This framework has important implications for understanding how
+ecological networks are assembled. If structural modules reflect
+constraints imposed during assembly, then identifying their origins
+becomes a central question for ecological theory. Networks may be
+assembled through hierarchical processes, where constraints define the
+space of possible interactions, and ecological processes subsequently
+shape the distribution of interactions within that space. Linking
+structural modules to specific assembly mechanisms offers a promising
+direction for future work, and suggests that progress in ecological
+theory will require integrating structural analysis with process-based
+models of network formation.
+
+These results also have direct implications for network reconstruction
+and synthetic modelling. Many existing approaches aim to reproduce a
+limited subset of structural properties, often focusing on global
+metrics such as connectance or degree distributions. However, our
+results suggest that capturing only a subset of structural dimensions is
+unlikely to be sufficient. A more complete approach would aim to
+reproduce multiple structural modules simultaneously, ensuring that
+synthetic networks reflect the multidimensional nature of real systems.
+This raises an important question for future work - which structural
+components must be preserved to recover different aspects of ecological
+stability?
+
+The multidimensional nature of stability highlights the importance of
+explicitly considering trade-offs. Structural features that enhance one
+component of stability may simultaneously constrain another. For
+example, increased connectivity may enhance robustness by reducing
+fragmentation, but also facilitate the rapid propagation of
+perturbations through the network. Similarly, features associated with
+trophic organisation or heterogeneity may enhance controllability while
+reducing resistance or stability potential. These trade-offs imply that
+ecological systems are not optimised for a single notion of stability,
+but instead balance competing demands across multiple dimensions of
+performance (Donohue et al. 2013). Stability, in this sense, emerges as
+a compromise between conflicting structural constraints.
+
+\subsection{Rethinking the selection of network
+metrics}\label{rethinking-the-selection-of-network-metrics}
+
+These results also challenge the notion that there exists a universal
+`best subset' of network metrics. Structural metrics are not
+interchangeable, and no single set of descriptors can capture all
+relevant aspects of ecological structure. Instead, the choice of metrics
+should be guided by the specific stability component or ecological
+question under investigation. A more principled approach is to select
+metrics that (i) represent distinct structural modules, (ii) minimise
+redundancy, and (iii) align with the stability components of interest.
+From this perspective, the goal is not to identify a universal set of
+metrics, but to ensure that the selected descriptors appropriately span
+the structural dimensions relevant to the question at hand. Ecological
+inference is therefore inherently multidimensional and
+context-dependent.
 
 \section{Conclusion}\label{conclusion}
 
-The structure--stability relationship in ecology is not governed by a
-single rule, but by a set of process-specific interactions between
-structural dimensions and stability components. Classical results such
-as those of May emerge as special cases within this broader framework,
-which reveals that ecological stability is inherently multidimensional
-and governed by trade-offs across structural space.
+Ecological networks are multidimensional systems organised along a small
+number of structural dimensions, each shaped by underlying assembly
+constraints and each governing different aspects of ecological
+stability. Stability itself is not a single outcome, but a collection of
+process-specific responses that map onto distinct regions of structural
+space. This framework resolves long-standing inconsistencies in the
+structure--stability literature by showing that apparent contradictions
+arise from examining different projections of the same underlying
+system. Meaning that the structure--stability relationship in ecology is
+not governed by a single rule, but by a set of process-specific
+interactions between structural dimensions and stability components.
+Moving forward, a more complete understanding of ecological stability
+will require embracing this multidimensional perspective and explicitly
+linking structural organisation to the trade-offs that shape ecological
+dynamics.
 
 \section*{References}\label{references}
 \addcontentsline{toc}{section}{References}
@@ -1579,6 +1473,12 @@ Burleson-Lesser, K., F. Morone, M. S. Tomassone, and H. A. Makse. 2020.
 \href{https://doi.org/10.1038/s41598-020-59959-4}{K-core robustness in
 ecological and financial networks}. Scientific Reports 10:3357.
 
+\bibitem[\citeproctext]{ref-cattinPhylogeneticConstraintsAdaptation2004}
+Cattin, M.-F., L.-F. Bersier, C. Banašek-Richter, R. Baltensperger, and
+J.-P. Gabriel. 2004.
+\href{https://doi.org/10.1038/nature02327}{Phylogenetic constraints and
+adaptation explain food-web structure}. Nature 427:835--839.
+
 \bibitem[\citeproctext]{ref-chenStabilityEcologicalSystems2024}
 Chen, C., X.-W. Wang, and Y.-Y. Liu. 2024.
 \href{https://doi.org/10.1016/j.physrep.2024.08.001}{Stability of
@@ -1603,6 +1503,12 @@ Donohue, I., H. Hillebrand, J. M. Montoya, O. L. Petchey, S. L. Pimm, M.
 S. Fowler, K. Healy, et al. 2016.
 \href{https://doi.org/10.1111/ele.12648}{Navigating the complexity of
 ecological stability}. Ecology Letters 19:1172--1185.
+
+\bibitem[\citeproctext]{ref-donohueDimensionalityEcologicalStability2013}
+Donohue, I., O. L. Petchey, J. M. Montoya, A. L. Jackson, L. McNally, M.
+Viana, K. Healy, et al. 2013.
+\href{https://doi.org/10.1111/ele.12086}{On the dimensionality of
+ecological stability}. Ecology Letters 16:421--429.
 
 \bibitem[\citeproctext]{ref-dunneNetworkStructureBiodiversity2002}
 Dunne, J., R. J. Williams, and N. D. Martinez. 2002. Network structure
@@ -1629,6 +1535,17 @@ Johnson, S., V. Domínguez-García, L. Donetti, and M. A. Muñoz. 2014.
 \href{https://doi.org/10.1073/pnas.1409077111}{Trophic coherence
 determines food-web stability}. Proceedings of the National Academy of
 Sciences 111:17923--17928.
+
+\bibitem[\citeproctext]{ref-jonssonReliabilityR50Measure2015}
+Jonsson, T., S. Berg, A. Pimenov, C. Palmer, and M. Emmerson. 2015.
+\href{https://doi.org/10.1111/oik.01588}{The reliability of {R50} as a
+measure of vulnerability of food webs to sequential species deletions}.
+Oikos 124:446--457.
+
+\bibitem[\citeproctext]{ref-kefiAdvancingOurUnderstanding2019}
+Kéfi, S., V. Domínguez-García, I. Donohue, C. Fontaine, E. Thébault, and
+V. Dakos. 2019. \href{https://doi.org/10.1111/ele.13340}{Advancing our
+understanding of ecological stability}. Ecology Letters 22:1349--1356.
 
 \bibitem[\citeproctext]{ref-kitsakIdentificationInfluentialSpreaders2010}
 Kitsak, M., L. K. Gallos, S. Havlin, F. Liljeros, L. Muchnik, H. E.
@@ -1689,6 +1606,11 @@ Poisot, T., B. Baiser, J. Dunne, S. Kéfi, F. Massol, N. Mouquet, T. N.
 Romanuk, et al. 2016. \href{https://doi.org/10.1111/ecog.00976}{Mangal
 -- making ecological network analysis simple}. Ecography 39:384--390.
 
+\bibitem[\citeproctext]{ref-proulxNetworkThinkingEcology2005}
+Proulx, S. R., D. E. L. Promislow, and P. C. Phillips. 2005.
+\href{https://doi.org/10.1016/j.tree.2005.04.004}{Network thinking in
+ecology and evolution}. Trends in Ecology \& Evolution 20:345--353.
+
 \bibitem[\citeproctext]{ref-staniczenkoGhostNestednessEcological2013}
 Staniczenko, P. P. A., J. C. Kopp, and S. Allesina. 2013.
 \href{https://doi.org/10.1038/ncomms2422}{The ghost of nestedness in
@@ -1735,11 +1657,15 @@ Watts, D. J., and S. H. Strogatz. 1998.
 \href{https://doi.org/10.1038/30918}{Collective dynamics of
 {``small-world''} networks}. Nature 393:440--442.
 
+\bibitem[\citeproctext]{ref-Williams2000Simple}
+Williams, R. J., and N. D. Martinez. 2000.
+\href{https://doi.org/10.1038/35004572}{Simple rules yield complex food
+webs}. Nature 404:180--183.
+
 \bibitem[\citeproctext]{ref-williamsLimitsTrophicLevels2004}
-Williams, R. J., and N. D. Martinez. 2004.
-\href{https://doi.org/10.1086/381964}{Limits to {Trophic Levels} and
-{Omnivory} in {Complex Food Webs}: {Theory} and {Data}}. The American
-Naturalist 163:458--468.
+---------. 2004. \href{https://doi.org/10.1086/381964}{Limits to
+{Trophic Levels} and {Omnivory} in {Complex Food Webs}: {Theory} and
+{Data}}. The American Naturalist 163:458--468.
 
 \bibitem[\citeproctext]{ref-yodzisSearchOperationalTrophospecies1999}
 Yodzis, P., and K. O. Winemiller. 1999.
