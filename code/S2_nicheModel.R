@@ -81,12 +81,41 @@ emp_se <-
                                          "ChNum", "ChSD", "ChLen"),
                            paste0("**",Metric,"**"),
                            Metric))
-  
 
-# plot standard error
-ggplot(results) +
-  geom_point(aes(x = id,
-                 y = se,
+model_means <- niche_dist %>%
+  squad_up(id, Metric) %>%
+  no_cap(mu_sim = mean(value, na.rm = TRUE),
+         sd_sim = sd(value, na.rm = TRUE),
+         .groups = "drop")
+
+errors <- metrics %>%
+  left_join(model_means, by = c("id", "Metric")) %>%
+  glow_up(error = mu_sim - value)
+  
+normalised <- errors %>%
+  squad_up(id, Metric) %>%
+  no_cap(
+    normalized_error = error / sd_sim
+  ) %>%
+  left_join(clust_metada) %>%
+  left_join(pal_df) %>%
+  glow_up(Metric = if_else(Metric %in% c("richness", "links", "basal", "connectance",
+                                         "top", "intermediate", "omnivory", "cannibal",
+                                         "MaxSim", "VulSD", "GenSD", "loops",
+                                         "ChNum", "ChSD", "ChLen"),
+                           paste0("**",Metric,"**"),
+                           Metric))
+
+normalised_mu <-
+  normalised %>%
+  yeet(!is.infinite(normalized_error)) %>%
+  squad_up(Metric, Cluster, label, colour) %>%
+  no_cap(mu_error = mean(normalized_error, na.rm = TRUE))
+
+# plot normalised error
+ggplot(normalised) +
+  geom_point(aes(x = Metric,
+                 y = normalized_error,
                  colour = label),
              alpha = 0.7) +
   geom_hline(yintercept = 2, 
@@ -95,27 +124,62 @@ ggplot(results) +
   geom_hline(yintercept = -2, 
              linetype = "dashed", 
              colour = "#A5ACAF") +
-  geom_hline(data = emp_se,
-             aes(yintercept = se,
-                 colour = label)) +
-  facet_wrap(~reorder(Metric, as.numeric(value)),
-             scales = "free_y") +
-  scale_colour_manual(values = setNames(results$colour, results$label),
+  geom_point(data = normalised_mu,
+             aes(x = Metric,
+                 y = mu_error,
+                 colour = label),
+             size = 4) +
+  scale_colour_manual(values = setNames(normalised$colour, normalised$label),
                       name = "Module") +
   labs(x = "Network",
-       y = "Standard Error",
-       subtitle = "Points falling between -2 and 2 indicate a high level of 'stability' in resulting propery") +
+       y = "Normalised Error") +
   figure_theme() +
   theme(panel.grid.major = element_blank(),
-        strip.text = ggtext::element_markdown(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank(),
+        axis.text.x = ggtext::element_markdown(angle = 45, hjust = 1),
         legend.position = "none") 
 
 ggsave("../figures/nicheModel_stderror.png",
-       width = 5500, 
-       height = 3000, 
-       units = "px")
+       width = 3000, 
+       height = 2500, 
+       units = "px",
+       dpi = 300)
+
+mu_network <-
+  normalised %>%
+  yeet(!is.infinite(normalized_error)) %>%
+  squad_up(id) %>%
+  no_cap(mu_error = mean(normalized_error, na.rm = TRUE))
+
+ggplot(normalised) +
+  geom_point(aes(x = id,
+                 y = normalized_error,
+                 colour = label),
+             alpha = 0.6) +
+  geom_hline(yintercept = 2, 
+             linetype = "dashed", 
+             colour = "#A5ACAF") +
+  geom_hline(yintercept = -2, 
+             linetype = "dashed", 
+             colour = "#A5ACAF") +
+  geom_point(data = mu_network,
+             aes(x = id,
+                 y = mu_error),
+             colour = "#001628",
+             size = 3) +
+  scale_colour_manual(values = setNames(normalised$colour, normalised$label),
+                      name = "Module") +
+  labs(x = "Network",
+       y = "Normalised Error") +
+  figure_theme() +
+  theme(panel.grid.major = element_blank(),
+        axis.text.x = ggtext::element_markdown(angle = 45, hjust = 1),
+        legend.position = "none") 
+
+ggsave("../figures/nicheModel_stderror_network.png",
+       width = 3500, 
+       height = 2500, 
+       units = "px",
+       dpi = 300)
 
 # plot z score
 ggplot(results %>%
