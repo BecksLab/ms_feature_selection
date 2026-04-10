@@ -183,9 +183,10 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Ecological Network Structure is Multidimensional: Rethinking the Stability Debate},
+  pdftitle={Ecological Network Structure is Multidimensional: Rethinking the Structure-Stability Debate},
   pdfauthor={Tanya Strydom; Andrew P. Beckerman},
-  pdfkeywords={food web, structure, dimensionality reduction},
+  pdfkeywords={food web, structure, dimensionality
+reduction, stability, multidimensionality},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -196,7 +197,7 @@
 
 
 \title{Ecological Network Structure is Multidimensional: Rethinking the
-Stability Debate}
+Structure-Stability Debate}
 \author{Tanya Strydom %
 %
 \textsuperscript{%
@@ -210,7 +211,7 @@ Stability Debate}
 1%
 }%
 }
-\date{2026-04-09}
+\date{2026-04-10}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
@@ -223,7 +224,7 @@ Stability Debate}
 
 \thispagestyle{empty}
 {\bfseries\sffamily\Large Ecological Network Structure is
-Multidimensional: Rethinking the Stability Debate}
+Multidimensional: Rethinking the Structure-Stability Debate}
 \vfil
 Tanya Strydom %
 %
@@ -273,8 +274,8 @@ that explicitly account for the multidimensional nature of ecological
 networks.
 \vfil
 \textbf{Keywords:} %
-food web, structure, %
-dimensionality reduction%
+food web, structure, dimensionality reduction, stability, %
+multidimensionality%
 }
 \clearpage
 \setcounter{page}{1}
@@ -849,10 +850,11 @@ Hierarchical clustering of structural descriptors revealed clear modular
 organisation within food-web architecture Figure~\ref{fig-cluster}.
 Silhouette analysis indicated an optimal partition of the signed
 correlation matrix at k=7 modules, with a maximum average silhouette
-width of {[}insert value{]}. Clustering based on absolute correlations
-produced a slightly coarser but comparable solution (k=5), demonstrating
-that the modular structure is robust to the treatment of correlation
-sign and reflects strong underlying association patterns among metrics.
+width of {[}\textbf{insert value}{]}. Clustering based on absolute
+correlations produced a slightly coarser but comparable solution (k=5),
+demonstrating that the modular structure is robust to the treatment of
+correlation sign and reflects strong underlying association patterns
+among metrics.
 
 \begin{figure}
 
@@ -874,8 +876,8 @@ branches indicate stronger associations between descriptors.}
 
 Bootstrap resampling further supported the stability of the major
 clusters. Most principal modules exhibited high approximately unbiased
-(AU) support values (AU ≥ {[}insert value{]}), indicating that the
-identified clusters are not artefacts of sampling variability but
+(AU) support values (AU ≥ {[}\textbf{insert value}{]}), indicating that
+the identified clusters are not artefacts of sampling variability but
 represent statistically robust groupings of structural descriptors.
 
 The resulting modular partition identified coherent groups of metrics
@@ -888,35 +890,32 @@ broader groupings. The six-module solution Figure~\ref{fig-module}
 reveals a hierarchical decomposition of food-web structural space into
 interpretable ecological dimensions. Importantly, these modules can be
 understood not only as statistical groupings, but as reflecting
-successive constraints operating during network assembly. Early-emerging
+successive constraints operating during network assembly. Comparison
+with both connectance and degree-constrained null models reinforces this
+interpretation by showing that not all structural dimensions arise from
+the same underlying processes (\textbf{SUPP MATT REF}). Early-emerging
 dimensions associated with network size and interaction density define
 the combinatorial space of possible interactions, consistent with
 classical complexity arguments in which system behaviour is governed by
-its size (May 1972; Allesina and Tang 2012). At this level, network
-structure largely reflects statistical constraints on degree
-distributions, as captured by null and configuration models (Newman
-2010). In contrast, higher-order modules capture constraints imposed by
-trophic organisation, energy flow, and species roles, reflecting
-ecological structuring processes described by niche-based and trophic
-theories of food-web assembly (Williams and Martinez 2000; Stouffer and
-Bascompte 2010; Johnson et al. 2014). Collectively, this structure
-indicates that food-web organisation arises from multiple, partially
-independent axes of variation that correspond to distinct constraints
-operating during network assembly.
+its size (May 1972; Allesina and Tang 2012). In contrast, higher-order
+modules capture constraints imposed by trophic organisation, energy
+flow, and species roles, reflecting ecological structuring processes
+described by niche-based and trophic theories of food-web assembly
+(Williams and Martinez 2000; Stouffer and Bascompte 2010; Johnson et al.
+2014). Collectively, this structure indicates that food-web organisation
+arises from multiple, partially independent axes of variation that
+correspond to distinct constraints operating during network assembly.
 
 \begin{quote}
-Comparison with null models reinforces this interpretation by showing
-that not all structural dimensions arise from the same underlying
-processes. While modules associated with network size and degree
-heterogeneity are partially reproduced under degree-preserving
-randomisation, others show little correspondence with null expectations.
-This pattern is consistent with a hierarchical assembly process, in
-which a combinatorial baseline defined by species richness and
-interaction degree is progressively shaped by ecological constraints
-governing trophic organisation, energy flow, and species roles.
-Consequently, the modular structure we identify does not simply reflect
-statistical artefacts of network size, but captures ecologically
-meaningful dimensions of network assembly.
+While modules associated with network size and degree heterogeneity are
+partially reproduced under degree-preserving randomisation, others show
+little correspondence with null expectations. This pattern is consistent
+with a hierarchical assembly process, in which a combinatorial baseline
+defined by species richness and interaction degree is progressively
+shaped by ecological constraints governing trophic organisation, energy
+flow, and species roles. Consequently, the modular structure we identify
+does not simply reflect statistical artefacts of network size, but
+captures ecologically meaningful dimensions of network assembly.
 \end{quote}
 
 \begin{figure}
@@ -1003,7 +1002,7 @@ internal structure drives the variation captured by that PC.}
 
 }
 
-\caption{\label{fig-pca_heatmap}TODO.}
+\caption{\label{fig-pca_heatmap}\emph{Figure SX.}}
 
 \end{figure}%
 
@@ -1038,13 +1037,14 @@ variation.}
 \end{figure}%
 
 Beyond the first three axes, additional modules aligned with more
-specialised components of structural variation. In particular, Energy
-Transport exhibited strong alignment with higher-order components
+specialised components of structural variation. In particular, Transport
+Efficiency exhibited strong alignment with higher-order components
 (notably PC6), indicating that the geometry of trophic pathways varies
-largely independently of both network size and trophic integration.
-Basal Control showed weaker and more diffuse alignment across
-higher-order components, suggesting that variation in energy entry
-points and centrality represents a secondary structural dimension.
+largely independently of both network size and trophic integration. The
+Resource and Control Hubs module showed weaker and more diffuse
+alignment across higher-order components, suggesting that variation in
+energy entry points and centrality represents a secondary structural
+dimension.
 
 A global permutation test confirmed that the observed alignment between
 modules and principal components was significantly stronger than
@@ -1076,14 +1076,18 @@ across modules and multivariate structural gradients.}
 
 Collectively, these results demonstrate that food-web structure is
 organised along a small number of dominant, ecologically interpretable
-axes. A primary structural gradient reflects the interplay between
-network size and trophic integration, while secondary axes capture
-variation in control heterogeneity, trophic asymmetry, and energy
-transport geometry. This hierarchical organisation indicates that
-food-web architecture is governed by multiple, partially independent
-dimensions of structural variation.
+axes. A primary structural gradient reflects a strong trophic
+organisation signal, while secondary axes capture variation in
+regulatory heterogeneity and structural scaling. This hierarchical
+organisation indicates that food web architecture is governed by
+multiple, partially independent dimensions of structural variation.
 
 \subsection{Predictors of stability}\label{predictors-of-stability}
+
+\begin{quote}
+I think this whole chunk can go to the supp matt - I would argue its not
+an ecological result but a statistical one
+\end{quote}
 
 \subsubsection{Dimensional Reduction
 Characterisation}\label{dimensional-reduction-characterisation}
@@ -1121,7 +1125,7 @@ similarity among representations.
 
 \textbf{Variance Retention:} The three representations differed
 substantially in the proportion of total structural variance preserved
-(Fig. S1A). The cluster-medoid representation retained
+(\textbf{Fig. SXA}). The cluster-medoid representation retained
 \textasciitilde23\% of the total variance in the full metric space
 despite reducing dimensionality to seven predictors. In contrast, the
 PC-dominant metric set retained only \textasciitilde13\% of total
@@ -1134,15 +1138,15 @@ metric per PC axis, whereas the PC-score representation maximally
 preserved dominant gradients of network variation.
 
 \textbf{Internal Redundancy:} Representations also differed in their
-internal correlation structure (Fig. S1B). PC scores were orthogonal by
-definition (mean \textbar r\textbar{} ≈ 0), indicating complete
-statistical independence among predictors. In contrast, cluster medoids
-exhibited moderate residual correlation (mean \textbar r\textbar{} = X),
-suggesting partial overlap among structural domains. PC-dominant metrics
-showed comparable (or higher/lower --- insert result) redundancy
-relative to medoids. These differences indicate that the three
-approaches vary not only in information retention but also in predictor
-independence.
+internal correlation structure (\textbf{Fig. SXB}). PC scores were
+orthogonal by definition (mean \textbar r\textbar{} ≈ 0), indicating
+complete statistical independence among predictors. In contrast, cluster
+medoids exhibited moderate residual correlation (mean
+\textbar r\textbar{} = X), suggesting partial overlap among structural
+domains. PC-dominant metrics showed comparable (or higher/lower ---
+insert result) redundancy relative to medoids. These differences
+indicate that the three approaches vary not only in information
+retention but also in predictor independence.
 
 \textbf{Effective Dimensionality:} We next quantified effective
 dimensionality as the number of axes required to explain 80\% of
@@ -1225,8 +1229,9 @@ dynamical processes.
 ecosystem stability. Bars show the absolute variance in each stability
 metric explained by different structural modules, as estimated via
 elastic net regression. Facets correspond to the four stability metrics:
-Robustness (\(R_{50}\)), Resilience, Spectral Radius (ρ), and Structural
-Controllability. Variance contributions are scaled by the
+Resistance (robustness, \(R_{50}\)), Recovery/Persistence (resilience
+AUC), Stability Potential (Spectral Radius (ρ)), and Controllability
+(Structural Controllability). Variance contributions are scaled by the
 cross-validated \(R^2\) of the corresponding model, allowing comparison
 across metrics. Differences in bar heights across facets indicate which
 modules are more influential for particular stability processes.}
@@ -1268,15 +1273,17 @@ opposing roles depending on the dynamical context.
 
 \caption{\label{fig-stab_corr}Standardised elastic net regression
 coefficients linking structural predictors to ecosystem stability
-metrics. Each point represents a predictor, with vertical lines
-extending from zero to the coefficient value. Coefficients are coloured
-by structural module and faceted by both network representation (Cluster
-Dominant, PC Dominant, PCA Axis, or Complexity) and stability metric.
-Positive coefficients indicate that higher values of the predictor
-increase the stability metric, while negative coefficients indicate a
-suppressive effect. Variation in coefficients across facets reveals
-switching of structural predictors' influence on different stability
-outcomes.}
+metrics: Resistance (robustness, \(R_{50}\)), Recovery/Persistence
+(resilience AUC), Stability Potential (Spectral Radius (ρ)), and
+Controllability (Structural Controllability). Each point represents a
+predictor, with vertical lines extending from zero to the coefficient
+value. Coefficients are coloured by structural module and faceted by
+both network representation (Cluster Dominant, PC Dominant, PCA Axis, or
+Univariate) and stability metric. Positive coefficients indicate that
+higher values of the predictor increase the stability metric, while
+negative coefficients indicate a suppressive effect. Variation in
+coefficients across facets reveals switching of structural predictors'
+influence on different stability outcomes.}
 
 \end{figure}%
 
@@ -1305,7 +1312,9 @@ mapping between network structure and ecological stability.
 
 }
 
-\caption{\label{fig-stab_pca}A vibe but don't know where it belongs}
+\caption{\label{fig-stab_pca}A vibe but don't know where it belongs -
+supp mat and it beautifully mirrors the conceptual figure in the intro -
+just saying.}
 
 \end{figure}%
 
