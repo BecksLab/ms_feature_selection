@@ -101,7 +101,7 @@ internal structure drives the variation captured by that PC.}
 
 }
 
-\caption{\label{fig-pca_heatmap}TODO.}
+\caption{\label{fig-pca_heatmap}\emph{Figure SX.}}
 
 \end{figure}
 \efloatseparator
@@ -192,8 +192,9 @@ and structural alignment among dimensional-reduction strategies.}
 ecosystem stability. Bars show the absolute variance in each stability
 metric explained by different structural modules, as estimated via
 elastic net regression. Facets correspond to the four stability metrics:
-Robustness (\(R_{50}\)), Resilience, Spectral Radius (ρ), and Structural
-Controllability. Variance contributions are scaled by the
+Resistance (robustness, \(R_{50}\)), Recovery/Persistence (resilience
+AUC), Stability Potential (Spectral Radius (ρ)), and Controllability
+(Structural Controllability). Variance contributions are scaled by the
 cross-validated \(R^2\) of the corresponding model, allowing comparison
 across metrics. Differences in bar heights across facets indicate which
 modules are more influential for particular stability processes.}
@@ -211,15 +212,17 @@ modules are more influential for particular stability processes.}
 
 \caption{\label{fig-stab_corr}Standardised elastic net regression
 coefficients linking structural predictors to ecosystem stability
-metrics. Each point represents a predictor, with vertical lines
-extending from zero to the coefficient value. Coefficients are coloured
-by structural module and faceted by both network representation (Cluster
-Dominant, PC Dominant, PCA Axis, or Complexity) and stability metric.
-Positive coefficients indicate that higher values of the predictor
-increase the stability metric, while negative coefficients indicate a
-suppressive effect. Variation in coefficients across facets reveals
-switching of structural predictors' influence on different stability
-outcomes.}
+metrics: Resistance (robustness, \(R_{50}\)), Recovery/Persistence
+(resilience AUC), Stability Potential (Spectral Radius (ρ)), and
+Controllability (Structural Controllability). Each point represents a
+predictor, with vertical lines extending from zero to the coefficient
+value. Coefficients are coloured by structural module and faceted by
+both network representation (Cluster Dominant, PC Dominant, PCA Axis, or
+Univariate) and stability metric. Positive coefficients indicate that
+higher values of the predictor increase the stability metric, while
+negative coefficients indicate a suppressive effect. Variation in
+coefficients across facets reveals switching of structural predictors'
+influence on different stability outcomes.}
 
 \end{figure}
 \efloatseparator
@@ -232,6 +235,8 @@ outcomes.}
 
 }
 
-\caption{\label{fig-stab_pca}A vibe but don't know where it belongs}
+\caption{\label{fig-stab_pca}A vibe but don't know where it belongs -
+supp mat and it beautifully mirrors the conceptual figure in the intro -
+just saying.}
 
 \end{figure}
