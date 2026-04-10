@@ -40,6 +40,33 @@ branches indicate stronger associations between descriptors.}
 
 \centering{
 
+\pandocbounded{\includegraphics[keepaspectratio]{figures/cluster_dendrogram_nullNetworks.png}}
+
+}
+
+\caption{\label{fig-module}\emph{Figure SX:} Hierarchical clustering of
+food-web structural descriptors for connectance and degree constrained
+models. Dendrograms illustrate the modular organization of structural
+metrics based on a signed correlation matrix. Clustering was performed
+using UPGMA. Grey bars indicate identified clusters. The horizontal axis
+represents the correlation distance (1−r), where shorter branches
+indicate stronger associations between descriptors. Colours of the
+labels indicate the corresponding module as identified from the
+empirical data. ARI i shown in the right hand side of the panel and
+indicates cluster agreement with empirical clusters. Note that some
+modules (particularly for the degree constrained networks) still cluster
+together however others do not - this suggests that the modules are
+independent and suggest that they are not constrained by link-level
+processes but may reflect other emerging forms of ecological
+constraints.}
+
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+
+\centering{
+
 \pandocbounded{\includegraphics[keepaspectratio]{figures/modules.png}}
 
 }
