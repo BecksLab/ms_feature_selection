@@ -3,5 +3,5 @@
 "2","Trophic Organisation",14,"connectance, diameter, intermediate, omnivory, cannibal, TL, ChLen, ChSD, S1, S2, loops, Clust, trophicCoherence, trophicVar"
 "3","Transport Efficiency",2,"distance, path"
 "4","Role Structure",5,"basal, predpreyRatio, GenSD, LinkSD, MaxSim"
-"5","RegulatoryHeterogeneity",2,"top, VulSD"
+"5","Regulatory Heterogeneity",2,"top, VulSD"
 "6","Resource & Control Hubs",2,"herbivory, centrality"

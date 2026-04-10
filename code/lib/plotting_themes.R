@@ -29,7 +29,7 @@ kraken_palette <- c(
   "Trophic Organisation"      = "#68A2B9",
   "Transport Efficiency"      = "#E9072B",
   "Role Structure"            = "#99D9D9",
-  "RegulatoryHeterogeneity"   = "#1C7966",
+  "Regulatory Heterogeneity"  = "#1C7966",
   "Resource & Control Hubs"   = "#9BBF80"
 )
 
