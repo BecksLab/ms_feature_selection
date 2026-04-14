@@ -66,8 +66,8 @@ secondary_palette <- c(
   "#AFD2E3",
   "#283339",
   "#355464",
-  "#198566",
-  "#58C797"
+  "#78BE21",
+  "#003A70"
 )
 
 # stability palette
