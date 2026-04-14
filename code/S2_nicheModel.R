@@ -91,7 +91,7 @@ model_means <- niche_dist %>%
 errors <- metrics %>%
   left_join(model_means, by = c("id", "Metric")) %>%
   glow_up(error = mu_sim - value)
-  
+
 normalised <- errors %>%
   squad_up(id, Metric) %>%
   no_cap(
@@ -110,14 +110,21 @@ normalised_mu <-
   normalised %>%
   yeet(!is.infinite(normalized_error)) %>%
   squad_up(Metric, Cluster, label, colour) %>%
-  no_cap(mu_error = mean(normalized_error, na.rm = TRUE))
+  no_cap(mu_error = mean(normalized_error, na.rm = TRUE)) %>%
+  glow_up(alpha = if_else(mu_error < -2 | mu_error > 2,
+                          1,
+                          0.4))
 
 # plot normalised error
-ggplot(normalised) +
+ggplot(normalised %>%
+         left_join(normalised_mu %>% vibe_check(-mu_error)) %>%
+         glow_up(alpha = if_else(alpha == 1,
+                                 0.6,
+                                 0.3))) +
   geom_point(aes(x = Metric,
                  y = normalized_error,
-                 colour = label),
-             alpha = 0.7) +
+                 colour = label,
+                 alpha = alpha)) +
   geom_hline(yintercept = 2, 
              linetype = "dashed", 
              colour = "#A5ACAF") +
@@ -127,11 +134,12 @@ ggplot(normalised) +
   geom_point(data = normalised_mu,
              aes(x = Metric,
                  y = mu_error,
-                 colour = label),
+                 colour = label,
+                 alpha = alpha),
              size = 4) +
   scale_colour_manual(values = setNames(normalised$colour, normalised$label),
                       name = "Module") +
-  labs(x = "Network",
+  labs(x = "Network Property",
        y = "Normalised Error") +
   figure_theme() +
   theme(panel.grid.major = element_blank(),
@@ -148,13 +156,22 @@ mu_network <-
   normalised %>%
   yeet(!is.infinite(normalized_error)) %>%
   squad_up(id) %>%
-  no_cap(mu_error = mean(normalized_error, na.rm = TRUE))
+  no_cap(mu_error = mean(normalized_error, na.rm = TRUE)) %>%
+  slay(abs(mu_error)) %>%
+  glow_up(order = row_number(),
+          alpha = if_else(mu_error < -2 | mu_error > 2,
+                          1,
+                          0.4))
 
-ggplot(normalised) +
-  geom_point(aes(x = id,
+ggplot(normalised %>%
+         left_join(mu_network %>% vibe_check(-mu_error)) %>%
+         glow_up(alpha = if_else(alpha == 1,
+                                 0.6,
+                                 0.3))) +
+  geom_point(aes(x = order,
                  y = normalized_error,
-                 colour = label),
-             alpha = 0.6) +
+                 colour = label,
+                 alpha = alpha)) +
   geom_hline(yintercept = 2, 
              linetype = "dashed", 
              colour = "#A5ACAF") +
@@ -162,17 +179,20 @@ ggplot(normalised) +
              linetype = "dashed", 
              colour = "#A5ACAF") +
   geom_point(data = mu_network,
-             aes(x = id,
-                 y = mu_error),
+             aes(x = order,
+                 y = mu_error,
+                 alpha = alpha),
              colour = "#001628",
              size = 3) +
   scale_colour_manual(values = setNames(normalised$colour, normalised$label),
                       name = "Module") +
+  scale_alpha_identity() +
   labs(x = "Network",
        y = "Normalised Error") +
   figure_theme() +
   theme(panel.grid.major = element_blank(),
-        axis.text.x = ggtext::element_markdown(angle = 45, hjust = 1),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
         legend.position = "none") 
 
 ggsave("../figures/nicheModel_stderror_network.png",
@@ -214,7 +234,7 @@ ggplot(results) +
              linetype = "dashed",
              colour = "#A5ACAF") +
   facet_wrap(~reorder(Metric, as.numeric(value)), 
-                      scales = "free_y") +
+             scales = "free_y") +
   scale_colour_manual(values = setNames(results$colour, results$label),
                       name = "Module") +
   labs(y = "p two tailed",
