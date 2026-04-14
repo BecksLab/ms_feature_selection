@@ -26,7 +26,7 @@ trade-offs among stability outcomes.}
 }
 
 \caption{\label{fig-cluster}Hierarchical clustering of food-web
-structural descriptors. Dendrogram illustrating the modular organization
+structural descriptors. Dendrogram illustrating the modular organisation
 of structural metrics based on a signed correlation matrix. Clustering
 was performed using UPGMA. Coloured bars indicate the seven distinct
 modules, reflecting robust association patterns among metrics. The
@@ -46,7 +46,7 @@ branches indicate stronger associations between descriptors.}
 
 \caption{\label{fig-module}\emph{Figure SX:} Hierarchical clustering of
 food-web structural descriptors for connectance and degree constrained
-models. Dendrograms illustrate the modular organization of structural
+models. Dendrograms illustrate the modular organisation of structural
 metrics based on a signed correlation matrix. Clustering was performed
 using UPGMA. Grey bars indicate identified clusters. The horizontal axis
 represents the correlation distance (1−r), where shorter branches
