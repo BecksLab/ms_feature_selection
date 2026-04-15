@@ -34,6 +34,10 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
 
     chain = chain_metrics(N; max_depth=6)
 
+    # for centrality - freeman centralisation
+    c = collect(values(centrality(N)))
+    Cmax = maximum(c)
+
     # --- Robustness and Resilience with Error Handling ---
     n_reps = 100
     rob_vals = Float64[]
@@ -81,7 +85,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :S4 => length(findmotif(motifs(Unipartite, 3)[4], remove_cannibals(N)))/(richness(N)^2),
         :S5 => length(findmotif(motifs(Unipartite, 3)[5], remove_cannibals(N)))/(richness(N)^2),
         :ρ => spectralradius(N),
-        :centrality => mean(collect(values(centrality(N)))),
+        :centrality => sum(Cmax .- c),
         :loops => length(loops(N)) / S,
         :resilience => isempty(res_vals) ? NaN : mean(res_vals),
         :robustness => isempty(rob_vals) ? NaN : mean(rob_vals),
@@ -517,10 +521,6 @@ function compute_reachable_to_top(N, top_set)
 
     return reachable
 end
-
-# =========================
-# CORE WORKFLOW
-# =========================
 
 function chain_metrics(N; max_depth=6)
 

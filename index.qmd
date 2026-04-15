@@ -74,7 +74,7 @@ We compiled food web data from Mangal [@poisotMangalMakingEcological2016], Web o
 | Herbivore | Proportion of taxa feeding exclusively on basal species. | Describes the representation of primary consumers. |  |
 | Trophic level (TL) | Prey-weighted trophic level averaged across taxa. | Captures the vertical organisation of energy transfer. | @williamsLimitsTrophicLevels2004 |
 | MaxSim | Mean maximum trophic similarity of each taxon to all others. | Quantifies functional similarity based on shared predators and prey. | @yodzisSearchOperationalTrophospecies1999 |
-| Centrality | Node centrality averaged across taxa (definition-dependent). | Captures the distribution of influence or connectivity among species. | @estradaUsingNetworkCentrality2008 |
+| Centrality | Sum of differences between the maximum node centrality and all node centralities (Freeman's centrality). | Captures how unevenly influence or connectivity is distributed among species. | @estradaUsingNetworkCentrality2008 |
 | ChLen | Mean length of all food chains from basal to top taxa. | Describes the average number of steps in energy-transfer pathways. |  |
 | ChSD | Standard deviation of food chain length. | Captures variability in pathway lengths. |  |
 | ChNum | Log-transformed number of distinct food chains. | Quantifies the multiplicity of alternative energy pathways. |  |
