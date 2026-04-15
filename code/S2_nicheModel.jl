@@ -26,7 +26,7 @@ Random.seed!(66)
 
 net_summs = CSV.read("data/cleaned/all_networks.csv", DataFrame)
 
-n_reps = 30
+n_reps = 100
 
 # collect rows first
 rows = Vector{Dict{Symbol,Any}}()
