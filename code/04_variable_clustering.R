@@ -55,15 +55,15 @@ sil_width <- function(hc, dist_matrix, max_k = 15) {
   return(sil)
 }
 
-sil_signed <- sil_width(hc_signed, dist_signed, max_k = 10)
-sil_abs    <- sil_width(hc_abs, dist_abs, max_k = 10)
+sil_signed <- sil_width(hc_signed, dist_signed, max_k = 7)
+sil_abs    <- sil_width(hc_abs, dist_abs, max_k = 7)
 
 # Plot silhouette curves
 
 sil_df <- 
   tibble(signed = sil_signed,
          absolute = sil_abs,
-         clust_size = 1:10) %>%
+         clust_size = 1:7) %>%
   pivot_longer(!clust_size)
 
 ggplot(sil_df,
