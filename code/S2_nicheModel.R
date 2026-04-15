@@ -187,6 +187,7 @@ ggplot(normalised %>%
   scale_colour_manual(values = setNames(normalised$colour, normalised$label),
                       name = "Module") +
   scale_alpha_identity() +
+  ylim(-30, 30) +
   labs(x = "Network",
        y = "Normalised Error") +
   figure_theme() +
@@ -251,3 +252,4 @@ ggsave("../figures/nicheModel_pval.png",
        width = 5500, 
        height = 3000, 
        units = "px")
+

@@ -101,6 +101,10 @@ for j in 1:nrow(net_summs)
 
             predprey = (top + int) == 0 ? NaN : (basal + int)/(top + int)
 
+            # for centrality - freeman centralisation
+            c = collect(values(centrality(N)))
+            Cmax = maximum(c)
+
             d2 = Dict{Symbol,Any}(
                 :id => j,
                 :run => i,
@@ -129,7 +133,7 @@ for j in 1:nrow(net_summs)
                 :S2 => try length(findmotif(motifs(Unipartite, 3)[2], remove_cannibals(N)))/(S^2) catch; NaN end,
                 :S4 => try length(findmotif(motifs(Unipartite, 3)[4], remove_cannibals(N)))/(S^2) catch; NaN end,
                 :S5 => try length(findmotif(motifs(Unipartite, 3)[5], remove_cannibals(N)))/(S^2) catch; NaN end,
-                :centrality => try mean(Float64.(values(centrality(N)))) catch; NaN end,
+                :centrality => try sum(Cmax .- c) catch; NaN end,
                 :loops => try length(loops(N)) / S catch; NaN end,
                 :intervals => try intervality(A) catch; NaN end,
                 :MaxSim => try max_sim(N) catch; NaN end,
