@@ -68,3 +68,5 @@ code/scrap.jl
 scrap.md
 figures/colour_theme.png
 .positai
+code/lib/kcore.jl
+figures/mock_networks.png
