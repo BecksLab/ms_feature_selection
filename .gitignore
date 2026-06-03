@@ -67,3 +67,4 @@ code/scrap.jl
 **/*.quarto_ipynb
 scrap.md
 figures/colour_theme.png
+.positai
