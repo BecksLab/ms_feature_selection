@@ -139,6 +139,7 @@ ggplot(normalised %>%
              size = 4) +
   scale_colour_manual(values = setNames(normalised$colour, normalised$label),
                       name = "Module") +
+  ylim(-30, 30) +
   labs(x = "Network Property",
        y = "Normalised Error") +
   figure_theme() +
