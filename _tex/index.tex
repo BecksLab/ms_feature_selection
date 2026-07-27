@@ -182,11 +182,16 @@
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
 \hypersetup{
   pdftitle={Ecological Network Structure is Multidimensional: Rethinking the Structure-Stability Debate},
   pdfauthor={Tanya Strydom; Andrew P. Beckerman},
-  pdfkeywords={food web, structure, dimensionality
-reduction, stability, multidimensionality},
+  pdfkeywords={\xmpquote{food
+web}, \xmpquote{structure}, \xmpquote{dimensionality
+reduction}, \xmpquote{stability}, \xmpquote{multidimensionality}},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -211,7 +216,7 @@ Structure-Stability Debate}
 1%
 }%
 }
-\date{2026-06-10}
+\date{2026-07-27}
 
 \usepackage{setspace}
 \usepackage[left]{lineno}
