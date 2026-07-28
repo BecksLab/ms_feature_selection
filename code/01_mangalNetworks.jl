@@ -63,47 +63,8 @@ fw =
     (mangal_networks.predators .+ mangal_networks.herbivores) ./ mangal_networks.links .== 1
 mangal_foodwebs = mangal_networks[fw, :]
 
-# make a nice 'dataframe' to store network data
-mangal_topology = DataFrame(
-    id = Any[],
-    richness = Any[],
-    links = Any[],
-    connectance = Any[],
-    diameter = Any[],
-    complexity = Any[],
-    distance = Any[],
-    basal = Any[],
-    top = Any[],
-    intermediate = Any[],
-    predpreyRatio = Any[],
-    herbivory = Any[],
-    omnivory = Any[],
-    cannibal = Any[],
-    l_S = Any[],
-    GenSD = Any[],
-    VulSD = Any[],
-    TL = Any[],
-    ChLen = Any[],
-    ChSD = Any[],
-    ChNum = Any[],
-    path = Any[],
-    LinkSD = Any[],
-    S1 = Any[],
-    S2 = Any[],
-    S4 = Any[],
-    S5 = Any[],
-    ρ = Any[],
-    centrality = Any[],
-    loops = Any[],
-    resilience = Any[],
-    robustness = Any[],
-    intervals = Any[],
-    MaxSim = Any[],
-    Clust = Any[],
-    trophicCoherence = Any[],
-    trophicVar = Any[],
-    control = Any[],
-);
+# make empty dict to store network data
+rows = Dict[];
 
 # make object to store each network so we can import it later
 networks = DataFrame(id = Any[], network = Any[]);
@@ -127,9 +88,12 @@ networks = DataFrame(id = Any[], network = Any[]);
     d = _network_summary(N)
     d[:id] = mangal_foodwebs.id[i]
 
-    # send to df
-    push!(mangal_topology, d)
+    # send to dict
+    push!(rows, d)
 end
+
+# build DataFrame from rows dictionary
+mangal_topology = DataFrame(rows)
 
 # subset the initial networks query to only food webs used in `networks`
 # this will act as the metadata

@@ -45,47 +45,8 @@ weboflife_networks = DataFrame(
     reference = Any[]
 )
 
-# prepare data frames
-weboflife_topology = DataFrame(
-    id = Any[],
-    richness = Any[],
-    links = Any[],
-    connectance = Any[],
-    diameter = Any[],
-    complexity = Any[],
-    distance = Any[],
-    basal = Any[],
-    top = Any[],
-    intermediate = Any[],
-    predpreyRatio = Any[],
-    herbivory = Any[],
-    omnivory = Any[],
-    cannibal = Any[],
-    l_S = Any[],
-    GenSD = Any[],
-    VulSD = Any[],
-    TL = Any[],
-    ChLen = Any[],
-    ChSD = Any[],
-    ChNum = Any[],
-    path = Any[],
-    LinkSD = Any[],
-    S1 = Any[],
-    S2 = Any[],
-    S4 = Any[],
-    S5 = Any[],
-    ρ = Any[],
-    centrality = Any[],
-    loops = Any[],
-    resilience = Any[],
-    robustness = Any[],
-    intervals = Any[],
-    MaxSim = Any[],
-    Clust = Any[],
-    trophicCoherence = Any[],
-    trophicVar = Any[],
-    control = Any[]
-)
+# make empty dict to store network data
+rows = Dict[];
 
 networks = DataFrame(id = Any[], network = Any[])
 
@@ -119,7 +80,7 @@ networks = DataFrame(id = Any[], network = Any[])
 
     d = _network_summary(N)
     d[:id] = fw
-    push!(weboflife_topology, d)
+    push!(rows, d)
 
     push!(weboflife_networks, (
         id = fw,
@@ -128,6 +89,9 @@ networks = DataFrame(id = Any[], network = Any[])
         reference = "Web of Life database"
     ))
 end
+
+# build DataFrame from rows dictionary
+weboflife_topology = DataFrame(rows)
 
 # Save results
 
