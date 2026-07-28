@@ -82,7 +82,7 @@ directed_estimates <- all_estimates %>%
   ) %>%
   left_join(pal_df, by = "label") %>%
   glow_up(
-    label = case_when(rep_name == "PC Score" ~ "PCA Axis",
+    label = case_when(rep_name == "PC Score" ~ "PCA Score",
                       term  == "complexity" ~ "Complexity",
                       term == "may_term"  ~ "May (Co-R)",
                       TRUE ~ label),
@@ -123,7 +123,7 @@ ggplot(directed_estimates,
        x = NULL) +
   scale_fill_manual(values = setNames(directed_estimates$colour, 
                                       as.character(directed_estimates$label)),
-                    breaks = directed_estimates$label[!(directed_estimates$label %in% c("PCA Axis", "Complexity", "May (Co-R)"))],
+                    breaks = directed_estimates$label,
                     name = "Module") +
   figure_theme()
 
