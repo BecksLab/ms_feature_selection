@@ -27,10 +27,10 @@ trace(grDevices::png, exit = quote({
 kraken_palette <- c(
   "Structural Scaling"        = "#000E3B",
   "Trophic Organisation"      = "#68A2B9",
-  "Transport Efficiency"      = "#E9072B",
   "Role Structure"            = "#99D9D9",
   "Regulatory Heterogeneity"  = "#1C7966",
-  "Resource Availability"   = "#9BBF80"
+  "Resource Availability"     = "#9BBF80",
+  "Transport Efficiency"      = "#E9072B"
 )
 
 # Converts the named vector into a dataframe for easier mapping in ggplot
