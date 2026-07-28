@@ -61,7 +61,7 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :richness => S,
         :links => L,
         :connectance => connectance(N),
-        :diameter => diameter(A),
+        :diameter => FoodWebTools.diameter(A),
         :complexity => complexity(N),
         :distance => distancetobase(N, collect(keys(_gen))[ind_maxgen]),
         :basal => basal / S,
