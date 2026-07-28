@@ -9,7 +9,7 @@ using SpeciesInteractionNetworks
 using Statistics
 
 # import other scripts with functions
-include("diameter.jl")
+include("hopcroft_karp.jl")
 
 """
 _network_summary(N::SpeciesInteractionNetwork{<:Partiteness, <:Binary})
@@ -94,7 +94,10 @@ function _network_summary(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
         :Clust => clustering(A),
         :trophicCoherence => trophic_coherence(A),
         :trophicVar => trophic_variance(A),
-        :control => structural_controllability(N)
+        :control => structural_controllability(N),
+        :Generality   => mean(gen),
+        :Vulnerability => mean(vul),
+        :MaxTL => maximum(values(tl))
     )
     return D
 end
@@ -118,33 +121,6 @@ function _get_matrix(N::SpeciesInteractionNetwork{<:Partiteness,<:Binary})
     end
 
     return n
-end
-
-"""
-diameter(N::SpeciesInteractionNetwork)
-
-    Calculates the diameter of a food web. Where diameter is the longest 
-    shortest path between two nodes
-"""
-function diameter(N::SpeciesInteractionNetwork)
-
-    # extract species names
-    spp = species(N)
-    # empty vector for storing shortest path for each spp
-    shortpath = zeros(Int64, length(spp))
-
-    # get shortest path
-    for i in eachindex(spp)
-
-        paths = collect(values(shortestpath(N, spp[i])))
-
-        if length(paths) > 0
-            shortpath[i] = findmax(paths)[1]
-        end
-    end
-
-    # return max shortest path
-    return findmax(shortpath)[1]
 end
 
 _parser(x) = parse(Int, x)
@@ -357,8 +333,6 @@ function trophic_variance(A::AbstractMatrix{Bool})
     return var(tls)
 
 end
-
-include("hopcroft_karp.jl")
 
 """
 structural_controllability(N::SpeciesInteractionNetwork)
