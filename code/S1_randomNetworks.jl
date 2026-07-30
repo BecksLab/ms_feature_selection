@@ -18,47 +18,8 @@ vermaat_networks = load_object("data/vermaat_2009/networks.jlds")
 networks_all = vcat(mangal_networks, wol_networks, vermaat_networks)
 
 # df for network stats
-random_topology = DataFrame(
-    id = Any[],
-    model = Any[],
-    richness = Any[],
-    links = Any[],
-    connectance = Any[],
-    diameter = Any[],
-    complexity = Any[],
-    distance = Any[],
-    basal = Any[],
-    top = Any[],
-    intermediate = Any[],
-    predpreyRatio = Any[],
-    herbivory = Any[],
-    omnivory = Any[],
-    cannibal = Any[],
-    l_S = Any[],
-    GenSD = Any[],
-    VulSD = Any[],
-    TL = Any[],
-    ChLen = Any[],
-    ChSD = Any[],
-    ChNum = Any[],
-    path = Any[],
-    LinkSD = Any[],
-    S1 = Any[],
-    S2 = Any[],
-    S4 = Any[],
-    S5 = Any[],
-    ρ = Any[],
-    centrality = Any[],
-    loops = Any[],
-    resilience = Any[],
-    robustness = Any[],
-    intervals = Any[],
-    MaxSim = Any[],
-    Clust = Any[],
-    trophicCoherence = Any[],
-    trophicVar = Any[],
-    control = Any[],
-);
+# make empty dict to store network data
+rows = Dict[];
 
 # null models
 # ============================================================
@@ -124,7 +85,7 @@ end
     d1[:id] = networks_all.id[i]
     d1[:model] = "connectance_null"
 
-    push!(random_topology, d1)
+    push!(rows, d1)
 
 
     # 2. DEGREE NULL
@@ -135,9 +96,12 @@ end
     d2[:id] = networks_all.id[i]
     d2[:model] = "degree_null"
 
-    push!(random_topology, d2)
+    push!(rows, d2)
 
 end
+
+# build DataFrame from rows dictionary
+random_topology = DataFrame(rows)
 
 ## Write files
 CSV.write("data/cleaned/randomNetworks.csv", random_topology)
