@@ -25,40 +25,13 @@ trade-offs among stability outcomes.}
 
 }
 
-\caption{\label{fig-cluster}Hierarchical clustering of food-web
+\caption{\label{fig-cluster}Hierarchical clustering of food web
 structural descriptors. Dendrogram illustrating the modular organisation
 of structural metrics based on a signed correlation matrix. Clustering
 was performed using UPGMA. Coloured bars indicate the seven distinct
 modules, reflecting robust association patterns among metrics. The
 horizontal axis represents the correlation distance (1−r), where shorter
 branches indicate stronger associations between descriptors.}
-
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{figures/cluster_dendrogram_nullNetworks.png}}
-
-}
-
-\caption{\label{fig-module}\emph{Figure SX:} Hierarchical clustering of
-food-web structural descriptors for connectance and degree constrained
-models. Dendrograms illustrate the modular organisation of structural
-metrics based on a signed correlation matrix. Clustering was performed
-using UPGMA. Grey bars indicate identified clusters. The horizontal axis
-represents the correlation distance (1−r), where shorter branches
-indicate stronger associations between descriptors. Colours of the
-labels indicate the corresponding module as identified from the
-empirical data. ARI i shown in the right hand side of the panel and
-indicates cluster agreement with empirical clusters. Note that some
-modules (particularly for the degree constrained networks) still cluster
-together however others do not - this suggests that the modules are
-independent and suggest that they are not constrained by link-level
-processes but may reflect other emerging forms of ecological
-constraints.}
 
 \end{figure}
 \efloatseparator
@@ -124,50 +97,6 @@ internal structure drives the variation captured by that PC.}
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{figures/pca_loadings_heatmap.png}}
-
-}
-
-\caption{\label{fig-pca_heatmap}\emph{Figure SX.}}
-
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{figures/variance_explained.png}}
-
-}
-
-\caption{\label{fig-variance}\emph{Figure SX.} This figure quantifies
-the relative contribution of each structural module to the variance
-captured by individual Principal Components (PCs). Calculation: For each
-PC, the total variance (eigenvalue) is partitioned among the k=7 modules
-identified in the hierarchical clustering. The contribution of a module
-to a specific PC is calculated as the sum of the squared loadings of all
-metrics belonging to that module, normalised by the total variance
-explained by that PC. Visual Interpretation: The alluvial plot
-illustrates how the ecological weight shifts across different structural
-dimensions. For example, while PC1 may be dominated by a single module,
-subsequent PCs often represent a more diverse blend of modular
-contributions, reflecting the multifaceted nature of topological
-complexity and trophic organisation. Significance: This visualisation
-confirms that the PC axes are not merely statistical artifacts but are
-grounded in the specific groups of correlated metrics defined in the
-main text. The stability of the flow across the first several components
-demonstrates that the modular organisation of food web architecture is
-consistently represented across the primary gradients of structural
-variation.}
-
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
-
-\centering{
-
 \pandocbounded{\includegraphics[keepaspectratio]{figures/heatmap_zscores.png}}
 
 }
@@ -180,29 +109,6 @@ asterisks denote cells that meet joint significance criteria
 1.96). Rows correspond to structural metric modules and columns to
 principal components. Clustering highlights patterns of shared alignment
 across modules and multivariate structural gradients.}
-
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
-
-\centering{
-
-\pandocbounded{\includegraphics[keepaspectratio]{figures/fig_dimensional_reduction.png}}
-
-}
-
-\caption{\label{fig-dim_red}\emph{Figure SX.} Characterisation of
-alternative dimensional-reduction approaches for network structural
-metrics. (A) Proportion of total variance in the full metric space
-retained by each representation: cluster medoids, PC-dominant metrics,
-and retained PC scores (≥80\% cumulative variance). (B) Mean absolute
-pairwise correlation (\textbar r\textbar) among predictors within each
-representation, quantifying internal redundancy. (C) Effective
-dimensionality, defined as the number of axes required to explain 80\%
-of variance within each reduced predictor set. Together, these
-diagnostics illustrate differences in information retention, redundancy,
-and structural alignment among dimensional-reduction strategies.}
 
 \end{figure}
 \efloatseparator
