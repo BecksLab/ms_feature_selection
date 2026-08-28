@@ -84,7 +84,7 @@ pca_col <- secondary_palette[3]
 complexity_col <- secondary_palette[4]
 may_colour = secondary_palette[5]
 
-figure_theme <- function() {
+figure_theme =
   theme_bw() %+replace% 
     theme(
       # Text & Axes
@@ -109,4 +109,6 @@ figure_theme <- function() {
       legend.title = element_text(face = "bold"),
       legend.position = "right"
     )
-}
+
+# this set the theme once so dont need to call every time when plotting
+set_theme(figure_theme)
