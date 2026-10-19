@@ -28,8 +28,6 @@ While modules associated with network size and degree heterogeneity are partiall
 
 ## Predictors of stability
 
-> I think this whole chunk can go to the supp matt - I would argue its not an ecological result but a statistical one
-
 ### Dimensional Reduction Characterisation
 
 | Representation      | Dimensionality | Variance Preserved | Structure Type      |
