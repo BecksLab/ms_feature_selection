@@ -7,12 +7,13 @@
 }
 
 \caption{\label{fig-conceptual}Conceptual framework linking
-multidimensional network structure (S) to multidimensional ecological
-stability (Ω). Structural variation is organised along a small number of
-axes (Panel B), while stability comprises multiple components (Panel A).
-Each stability component depends on a different projection of structural
-space (Panel C), generating process-dependent relationships and
-trade-offs among stability outcomes.}
+multidimensional network structure (\(S\)) to multidimensional
+ecological stability (\(\Omega\)). Structural variation is organised
+along a small number of axes (Panel B), while stability comprises
+multiple components (Panel A). Each stability component depends on a
+different projection of structural space (Panel C), generating
+process-dependent relationships and trade-offs among stability
+outcomes.}
 
 \end{figure}
 \efloatseparator
@@ -30,8 +31,8 @@ structural descriptors. Dendrogram illustrating the modular organisation
 of structural metrics based on a signed correlation matrix. Clustering
 was performed using UPGMA. Coloured bars indicate the seven distinct
 modules, reflecting robust association patterns among metrics. The
-horizontal axis represents the correlation distance (1−r), where shorter
-branches indicate stronger associations between descriptors.}
+horizontal axis represents the correlation distance (1 − r), where
+shorter branches indicate stronger associations between descriptors.}
 
 \end{figure}
 \efloatseparator
@@ -85,7 +86,7 @@ modular organisation is preserved within a reduced dimensional space.}
 }
 
 \caption{\label{fig-alignment_heatmap}Heatmap showing the correspondence
-between the seven identified food-web modules (rows) and the principal
+between the seven identified food web modules (rows) and the principal
 components (columns) capturing 80\% of cumulative variance. High values
 (darker shading) indicate strong alignment, where a specific module's
 internal structure drives the variation captured by that PC.}
@@ -122,15 +123,16 @@ across modules and multivariate structural gradients.}
 }
 
 \caption{\label{fig-stab_var}Contribution of structural modules to
-ecosystem stability. Bars show the absolute variance in each stability
-metric explained by different structural modules, as estimated via
-elastic net regression. Facets correspond to the four stability metrics:
-Resistance (robustness, \(R_{50}\)), Recovery/Persistence (resilience
-AUC), Stability Potential (Spectral Radius (ρ)), and Controllability
-(Structural Controllability). Variance contributions are scaled by the
-cross-validated \(R^2\) of the corresponding model, allowing comparison
-across metrics. Differences in bar heights across facets indicate which
-modules are more influential for particular stability processes.}
+ecological stability. Bars show the absolute variance in each stability
+component explained by different structural modules, as estimated via
+elastic net regression. Facets correspond to the four stability
+components: Resistance to species loss (robustness, \(R_{50}\)),
+Recovery and persistence (resilience AUC), Stability potential (spectral
+radius, ρ), and Controllability (structural controllability). Variance
+contributions are scaled by the cross-validated \(R^2\) of the
+corresponding model, allowing comparison across metrics. Differences in
+bar heights across facets indicate which modules are more influential
+for particular stability processes.}
 
 \end{figure}
 \efloatseparator
@@ -144,18 +146,18 @@ modules are more influential for particular stability processes.}
 }
 
 \caption{\label{fig-stab_corr}Standardised elastic net regression
-coefficients linking structural predictors to ecosystem stability
-metrics: Resistance (robustness, \(R_{50}\)), Recovery/Persistence
-(resilience AUC), Stability Potential (Spectral Radius (ρ)), and
-Controllability (Structural Controllability). Each point represents a
-predictor, with vertical lines extending from zero to the coefficient
-value. Coefficients are coloured by structural module and faceted by
-both network representation (Cluster Dominant, PC Dominant, PCA Axis, or
-Univariate) and stability metric. Positive coefficients indicate that
-higher values of the predictor increase the stability metric, while
-negative coefficients indicate a suppressive effect. Variation in
-coefficients across facets reveals switching of structural predictors'
-influence on different stability outcomes.}
+coefficients linking structural predictors to ecological stability
+components: Resistance to species loss (robustness, \(R_{50}\)),
+Recovery and persistence (resilience AUC), Stability potential (spectral
+radius, ρ), and Controllability (structural controllability). Each point
+represents a predictor, with vertical lines extending from zero to the
+coefficient value. Coefficients are coloured by structural module and
+faceted by both network representation (cluster-medoid, PC-dominant
+metric, PCA-score, or univariate) and stability component. Positive
+coefficients indicate that higher values of the predictor increase the
+stability component, while negative coefficients indicate a suppressive
+effect. Variation in coefficients across facets reveals switching of
+structural predictors' influence on different stability outcomes.}
 
 \end{figure}
 \efloatseparator
@@ -168,8 +170,9 @@ influence on different stability outcomes.}
 
 }
 
-\caption{\label{fig-stab_pca}A vibe but don't know where it belongs -
-supp mat and it beautifully mirrors the conceptual figure in the intro -
-just saying.}
+\caption{\label{fig-stab_pca}Multivariate representation of food web
+structure and stability responses. This figure provides a complementary
+visualisation of the relationship between structural variation and
+stability components.}
 
 \end{figure}
